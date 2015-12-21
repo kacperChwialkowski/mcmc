@@ -44,16 +44,3 @@ class MeanEmbeddingConsistanceTest:
 
 
 
-np.random.seed(42)
-
-def log_normal(x):
-    return  -np.dot(x,x)/2
-
-
-# data = np.random.randn(10000)
-# me = MeanEmbeddingConsistanceTest(data,log_normal)
-# assert me.compute_pvalue()>0.05
-
-data = np.random.randn(10000,4)
-me = MeanEmbeddingConsistanceTest(data,log_normal)
-assert me.compute_pvalue()>0.05
