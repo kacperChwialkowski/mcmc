@@ -9,11 +9,12 @@ from autograd import grad
 def log_ugly(x):
     return -(x/10.0 + np.sin(x) )**2.0/2.0
 
-# def log_ugly(x):
-#     return  -(x)**2/2
+def log_ugly(x):
+    return  -np.dot(x,x)/2
 
 grad_log_ugly_ref = grad(log_ugly)
 
+a = grad(log_ugly)
 
 
 def test_function(x,omega=0.4):

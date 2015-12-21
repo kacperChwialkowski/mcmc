@@ -10,17 +10,17 @@ def mahalanobis_distance(difference, num_random_features):
     num_samples, _ = shape(difference)
     sigma = cov(transpose(difference))
 
-    try:
-        linalg.inv(sigma)
-    except LinAlgError:
-        warn('covariance matrix is singular. Pvalue returned is 1.1')
-        raise
+
 
     mu = mean(difference, 0)
 
     if num_random_features == 1:
         stat = float(num_samples * mu ** 2) / float(sigma)
     else:
+        try:
+            linalg.inv(sigma)
+        except LinAlgError:
+            raise
         stat = num_samples * mu.dot(solve(sigma, transpose(mu)))
 
     return chi2.sf(stat, num_random_features)
