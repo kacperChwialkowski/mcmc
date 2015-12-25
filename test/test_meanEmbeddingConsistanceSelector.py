@@ -15,7 +15,7 @@ class TestMeanEmbeddingConsistanceSelector(TestCase):
                 return  -np.dot(x,x)/2
         mh_gen = mh_generator(log_density=log_normal)
 
-        m = MeanEmbeddingConsistanceSelector(mh_gen, n=10000,thinning=15, log_probability=log_normal)
+        m = MeanEmbeddingConsistanceSelector(mh_gen, n=10000,thinning=15, grad_log_prob=log_normal)
 
         data = m.points_from_stationary()
 
@@ -31,7 +31,7 @@ class TestMeanEmbeddingConsistanceSelector(TestCase):
             return -(x/10.0 + np.sin(x) )**2.0/2.0
 
         mh_gen = mh_generator(log_density=log_ugly_fake,x_start=100.0)
-        m = MeanEmbeddingConsistanceSelector(mh_gen, n=15*1000,thinning=15, log_probability=log_ugly)
+        m = MeanEmbeddingConsistanceSelector(mh_gen, n=15*1000,thinning=15, grad_log_prob=log_ugly)
 
         data = m.points_from_stationary()
 
