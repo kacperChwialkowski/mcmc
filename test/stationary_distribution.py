@@ -68,6 +68,7 @@ class MeanEmbeddingConsistanceSelector:
         indicator = 1.0
         level = 1/(indicator**2)*(1/zeta2)*self.alpha
         me = MeanEmbeddingConsistanceTest(data,self.log_probability,self.scale,self.freq)
+        print('lame',indicator)
         while me.compute_pvalue() < level or stop:
             print('lame',indicator)
             data = self.data_generator.get(self.n,self.thinning)
