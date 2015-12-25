@@ -19,7 +19,7 @@ for thining in range(1,thining_jump,2):
     pval = []
 
     for i in range(1000):
-        x= metropolis_hastings(log_normal,N=chain_size,thining=thining)
+        x= metropolis_hastings(log_normal, chain_size=chain_size, thinning=thining)
 
         me = MeanEmbeddingConsistanceTest(x,log_normal)
 

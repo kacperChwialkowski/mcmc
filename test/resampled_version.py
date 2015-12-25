@@ -7,7 +7,7 @@ def log_normal(x):
     return -np.dot(x,x)/2
 
 
-x= metropolis_hastings(log_normal,N=1000,thining=3)
+x= metropolis_hastings(log_normal, chain_size=1000, thinning=3)
 
 
 

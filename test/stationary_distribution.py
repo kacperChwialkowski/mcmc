@@ -1,4 +1,5 @@
 from multiprocessing.pool import Pool
+import warnings
 import autograd.numpy as np
 from autograd import grad
 from two_sample_test.utils import mahalanobis_distance
@@ -42,5 +43,41 @@ class MeanEmbeddingConsistanceTest:
 
         return mahalanobis_distance(normal,normal.shape[1])
 
+
+class MeanEmbeddingConsistanceSelector:
+
+
+
+    def __init__(self, data_generator, n,thinning,log_probability,alpha=0.05, scale=1,freq=np.random.randn(),max_ite=100):
+        self.data_generator = data_generator
+        self.thinning = thinning
+
+        self.log_probability = log_probability
+
+        self.scale = scale
+        self.n=n
+        self.alpha = alpha
+        self.freq = freq
+        self.max_ite = max_ite
+
+    def points_from_stationary(self):
+        stop = False
+        zeta2 = 1.645
+        data = self.data_generator.get(self.n,self.thinning)
+
+        indicator = 1.0
+        level = 1/(indicator**2)*(1/zeta2)*self.alpha
+        me = MeanEmbeddingConsistanceTest(data,self.log_probability,self.scale,self.freq)
+        while me.compute_pvalue() < level or stop:
+            print('lame',indicator)
+            data = self.data_generator.get(self.n,self.thinning)
+
+            indicator = indicator+1
+            level = 1/(indicator**2)*(1/zeta2)*self.alpha
+            me = MeanEmbeddingConsistanceTest(data,self.log_probability,self.scale,self.freq)
+            stop = indicator > self.max_ite
+        if stop:
+            warnings.warn('didnt converge')
+        return data
 
 
