@@ -1,5 +1,5 @@
 from sampplers.MetropolisHastings import metropolis_hastings
-from test.stationary_distribution import MeanEmbeddingConsistanceTest
+from test.stationary_distribution import GaussianSteinTest
 
 __author__ = 'kcx'
 import autograd.numpy as np
@@ -21,7 +21,7 @@ for thining in range(1,thining_jump,2):
     for i in range(1000):
         x= metropolis_hastings(log_normal, chain_size=chain_size, thinning=thining)
 
-        me = MeanEmbeddingConsistanceTest(x,log_normal)
+        me = GaussianSteinTest(x,log_normal)
 
         pval.append(me.compute_pvalue())
 

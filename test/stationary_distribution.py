@@ -1,43 +1,56 @@
-from multiprocessing.pool import Pool
 import warnings
 import autograd.numpy as np
-from autograd import grad
 from two_sample_test.utils import mahalanobis_distance
 
 __author__ = 'kcx'
 
 
-class MeanEmbeddingConsistanceTest:
+class GaussianSteinTest:
+
+    def __init__(self, samples, grad_log_prob,num_random_freq):
+        self.num_random_freq = num_random_freq
+        self.shape=1
+
+        if len(samples.shape)==1:
+            samples = samples[:,np.newaxis]
+
+        self.shape = samples.shape[1]
+
+        def statf(freq):
+
+            a = grad_log_prob(samples)
+            b = self.test_function(samples, freq)
+            c = self.test_function_grad(samples, freq)
+            return a * b + c
+
+        self.statf = statf
 
 
-    def test_function(self,omega):
-        def f(x):
-            arg = (x - omega)
-            return np.exp( -np.dot(arg,arg)/2.0)
-        return f
+    def test_function(self,x,omega):
+        z = x - omega
+        if len(z.shape)==1:
+            z = z[:,np.newaxis]
 
-    def __init__(self, data_x, log_probability, scale=1,freq=np.random.randn()):
-        self.data_x = scale*data_x
-        self.log_probability = log_probability
-
-        self.scale = scale
-
-        self.grad_log = grad(log_probability)
-        self.test_function = self.test_function(freq)
-        self.grad_test = grad(self.test_function)
+        z2 = np.linalg.norm(z, axis=1)**2
+        z2= np.exp(-z2/2.0)
+        return np.tile(z2,(self.shape,1)).T
 
 
+    def test_function_grad(self,x,omega):
+        arg = (x - omega)
+        test_function_val = self.test_function(x, omega)
+        return -arg* test_function_val
 
-
-    def stat(self, x):
-        grad_log = self.grad_log(x)
-        grad_test = self.grad_test(x)
-        return grad_log *self.test_function(x) + grad_test
 
 
     def compute_pvalue(self):
-        # pool = Pool(processes=4)
-        normal = np.array([self.stat(x) for x in self.data_x])
+
+        stats_for_freqs = []
+        for f in range(self.num_random_freq):
+            matrix_of_stats = self.statf(freq=np.random.randn())
+            stats_for_freqs.append(matrix_of_stats)
+
+        normal = np.hstack(stats_for_freqs)
         if len(normal.shape)==1:
             normal = normal[:,np.newaxis]
 
@@ -67,7 +80,7 @@ class MeanEmbeddingConsistanceSelector:
 
         indicator = 1.0
         level = 1/(indicator**2)*(1/zeta2)*self.alpha
-        me = MeanEmbeddingConsistanceTest(data,self.log_probability,self.scale,self.freq)
+        me = GaussianSteinTest(data,self.log_probability,self.scale,self.freq)
         print('lame',indicator)
         while me.compute_pvalue() < level or stop:
             print('lame',indicator)
@@ -75,7 +88,7 @@ class MeanEmbeddingConsistanceSelector:
 
             indicator = indicator+1
             level = 1/(indicator**2)*(1/zeta2)*self.alpha
-            me = MeanEmbeddingConsistanceTest(data,self.log_probability,self.scale,self.freq)
+            me = GaussianSteinTest(data,self.log_probability,self.scale,self.freq)
             stop = indicator > self.max_ite
         if stop:
             warnings.warn('didnt converge')

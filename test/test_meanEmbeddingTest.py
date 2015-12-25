@@ -1,27 +1,31 @@
 from unittest import TestCase
-from test.stationary_distribution import MeanEmbeddingConsistanceTest
+from test.stationary_distribution import GaussianSteinTest
 import numpy as np
+from autograd import grad
 __author__ = 'kcx'
 
 
 class TestMeanEmbeddingTest(TestCase):
+
+
     def test_on_one_dim_gaus(self):
         np.random.seed(42)
 
-        def log_normal(x):
-            return  -(x)**2/2
+        def grad_log_normal(x):
+            return  -x
+
 
         data = np.random.randn(10000)
-        me = MeanEmbeddingConsistanceTest(data,log_normal)
+        me = GaussianSteinTest(data,grad_log_normal,1)
         assert me.compute_pvalue()>0.05
 
 
     def test_on_four_dim_gaus(self):
 
         np.random.seed(42)
-        def log_normal(x):
-            return  -np.dot(x,x)/2
+        def grad_log_normal(x):
+            return  -x
 
         data = np.random.randn(10000,4)
-        me = MeanEmbeddingConsistanceTest(data,log_normal)
+        me = GaussianSteinTest(data,grad_log_normal,1)
         assert me.compute_pvalue()>0.05
