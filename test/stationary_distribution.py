@@ -7,13 +7,15 @@ __author__ = 'kcx'
 
 class GaussianSteinTest:
 
-    def __init__(self, grad_log_prob,num_random_freq):
+    def __init__(self, grad_log_prob,num_random_freq, scaling=(1.0,10.0)):
         self.number_of_random_frequencies = num_random_freq
+        self.scaling = scaling
 
         def stein_stat(random_frequency,samples):
+            random_scale = np.random.uniform(self.scaling[0],self.scaling[1])
             a = grad_log_prob(samples)
-            b = self._gaussian_test_function(samples, random_frequency)
-            c = self._test_function_grad(samples, random_frequency)
+            b = self._gaussian_test_function(samples, random_frequency,random_scale)
+            c = self._test_function_grad(samples, random_frequency,random_scale)
             return a * b + c
 
         self.stein_stat = stein_stat
@@ -24,7 +26,7 @@ class GaussianSteinTest:
             z = z[:, np.newaxis]
         return z
 
-    def _get_mean_embedding(self, random_frequency, x,scaling =2.0):
+    def _get_mean_embedding(self,  x,random_frequency,scaling =2.0):
         z = x - random_frequency
         z = np.linalg.norm(z, axis=1) ** 2
         z = np.exp(-z / scaling)
@@ -32,7 +34,7 @@ class GaussianSteinTest:
 
     def _gaussian_test_function(self,x,random_frequency,scaling =2.0):
         x = self._make_two_dimensional(x)
-        mean_embedding = self._get_mean_embedding(random_frequency, x,scaling)
+        mean_embedding = self._get_mean_embedding(x,random_frequency,scaling)
         return np.tile(mean_embedding,(self.shape,1)).T
 
 
