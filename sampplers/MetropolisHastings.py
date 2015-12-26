@@ -19,6 +19,7 @@ def metropolis_hastings(log_density, chain_size=10000, thinning=15, x_prev=np.ra
 
 
 
+
 class mh_generator:
 
     def __init__(self,log_density,x_start=np.random.randn()):
