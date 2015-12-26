@@ -8,22 +8,26 @@ __author__ = 'kcx'
 class GaussianSteinTest:
 
     def __init__(self, grad_log_prob,num_random_freq):
-        self.num_random_freq = num_random_freq
+        self.number_of_random_frequencies = num_random_freq
 
-        def statf(freq,samples):
-
+        def stein_stat(random_frequency,samples):
             a = grad_log_prob(samples)
-            b = self.test_function(samples, freq)
-            c = self.test_function_grad(samples, freq)
+            b = self.gaussian_test_function(samples, random_frequency)
+            c = self.test_function_grad(samples, random_frequency)
             return a * b + c
 
-        self.statf = statf
+        self.stein_stat = stein_stat
 
 
-    def test_function(self,x,omega):
-        z = x - omega
-        if len(z.shape)==1:
-            z = z[:,np.newaxis]
+    def make_two_dimensional(self, z):
+        if len(z.shape) == 1:
+            z = z[:, np.newaxis]
+        return z
+
+    def gaussian_test_function(self,x,random_frequency):
+        z = x - random_frequency
+
+        z = self.make_two_dimensional(z)
 
         z2 = np.linalg.norm(z, axis=1)**2
         z2= np.exp(-z2/2.0)
@@ -32,27 +36,25 @@ class GaussianSteinTest:
 
     def test_function_grad(self,x,omega):
         arg = (x - omega)
-        test_function_val = self.test_function(x, omega)
+        test_function_val = self.gaussian_test_function(x, omega)
         return -arg* test_function_val
 
 
 
     def compute_pvalue(self, sampless):
 
-        if len(sampless.shape)==1:
-            sampless = sampless[:,np.newaxis]
+        sampless = self.make_two_dimensional(sampless)
 
         self.shape = sampless.shape[1]
 
         stats_for_freqs = []
 
-        for f in range(self.num_random_freq):
-            matrix_of_stats = self.statf( freq=np.random.randn(),samples=sampless)
+        for f in range(self.number_of_random_frequencies):
+            matrix_of_stats = self.stein_stat(random_frequency=np.random.randn(),samples=sampless)
             stats_for_freqs.append(matrix_of_stats)
 
         normal = np.hstack(stats_for_freqs)
-        if len(normal.shape)==1:
-            normal = normal[:,np.newaxis]
+        normal = self.make_two_dimensional(normal)
 
         return mahalanobis_distance(normal,normal.shape[1])
 
