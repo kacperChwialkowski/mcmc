@@ -15,25 +15,37 @@ class TestMeanEmbeddingConsistanceSelector(TestCase):
                 return  -np.dot(x,x)/2
         mh_gen = mh_generator(log_density=log_normal)
 
-        m = MeanEmbeddingConsistanceSelector(mh_gen, n=10000,thinning=15, grad_log_prob=log_normal)
+        def grad_log_normal(x):
+            return  -x
 
-        data = m.points_from_stationary()
 
-        me = GaussianSteinTest(data,log_normal)
-        assert me.compute_pvalue()>0.05
+        me = GaussianSteinTest(grad_log_normal,10)
+
+
+        m = MeanEmbeddingConsistanceSelector(mh_gen, n=1000,thinning=15,tester=me)
+
+        data,_ = m.points_from_stationary()
+
+        me = GaussianSteinTest(grad_log_normal,10)
+        assert me.compute_pvalue(data)>0.05
 
     def test_on_one_dim_gaus2(self):
         np.random.seed(42)
-        def log_ugly(x):
+        k=5.0
+        def grad_log_prob(x):
+
+            return -(x/k + np.sin(x))*(1.0/k + np.cos(x))
+
+        def log_prob(x):
             return -(x/20.0 + np.sin(x) )**2.0/2.0
 
-        def log_ugly_fake(x):
-            return -(x/10.0 + np.sin(x) )**2.0/2.0
+        mh_gen = mh_generator(log_density=log_prob,x_start=1.0)
+        me = GaussianSteinTest(grad_log_prob,20)
 
-        mh_gen = mh_generator(log_density=log_ugly_fake,x_start=100.0)
-        m = MeanEmbeddingConsistanceSelector(mh_gen, n=15*1000,thinning=15, grad_log_prob=log_ugly)
 
-        data = m.points_from_stationary()
+        m = MeanEmbeddingConsistanceSelector(mh_gen, n=20000,thinning=15,tester=me,max_ite=10)
 
-        me = GaussianSteinTest(data,log_ugly)
-        assert me.compute_pvalue()>0.05
+        data,premature_stop = m.points_from_stationary()
+
+
+        assert premature_stop is True

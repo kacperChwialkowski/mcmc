@@ -61,7 +61,7 @@ class MeanEmbeddingConsistanceSelector:
 
 
 
-    def __init__(self, data_generator, n,thinning, tester,alpha=0.05 ,max_ite=100):
+    def __init__(self, data_generator, n,thinning, tester,alpha=0.05 ,max_ite=10):
         self.data_generator = data_generator
         self.thinning = thinning
         self.tester = tester
@@ -70,24 +70,27 @@ class MeanEmbeddingConsistanceSelector:
         self.max_ite = max_ite
 
     def points_from_stationary(self):
-        stop = False
+        run = True
         zeta2 = 1.645
         data = self.data_generator.get(self.n,self.thinning)
 
         indicator = 1.0
         level = 1/(indicator**2)*(1/zeta2)*self.alpha
-        me = GaussianSteinTest(data,self.grad_log_prob,self.scale,self.freq)
+
         print('lame',indicator)
-        while me.compute_pvalue() < level or stop:
+        while self.tester.compute_pvalue(data) < level and run:
             print('lame',indicator)
             data = self.data_generator.get(self.n,self.thinning)
 
             indicator = indicator+1
             level = 1/(indicator**2)*(1/zeta2)*self.alpha
-            me = GaussianSteinTest(data,self.grad_log_prob,self.scale,self.freq)
-            stop = indicator > self.max_ite
-        if stop:
+            run = indicator < self.max_ite
+            print(indicator,self.max_ite)
+
+        premature_stop = not run
+        if premature_stop:
             warnings.warn('didnt converge')
-        return data
+
+        return data,premature_stop
 
 

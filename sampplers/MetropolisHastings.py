@@ -15,7 +15,7 @@ def metropolis_hastings(log_density, chain_size=10000, thinning=15, x_prev=np.ra
             else:
                 A.append(x_prev)
         x_prev = A[-1]
-    return A[::thinning]
+    return np.array(A[::thinning])
 
 
 
