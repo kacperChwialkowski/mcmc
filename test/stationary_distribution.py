@@ -12,49 +12,51 @@ class GaussianSteinTest:
 
         def stein_stat(random_frequency,samples):
             a = grad_log_prob(samples)
-            b = self.gaussian_test_function(samples, random_frequency)
-            c = self.test_function_grad(samples, random_frequency)
+            b = self._gaussian_test_function(samples, random_frequency)
+            c = self._test_function_grad(samples, random_frequency)
             return a * b + c
 
         self.stein_stat = stein_stat
 
 
-    def make_two_dimensional(self, z):
+    def _make_two_dimensional(self, z):
         if len(z.shape) == 1:
             z = z[:, np.newaxis]
         return z
 
-    def gaussian_test_function(self,x,random_frequency):
+    def _get_mean_embedding(self, random_frequency, x):
         z = x - random_frequency
+        z = np.linalg.norm(z, axis=1) ** 2
+        z = np.exp(-z / 2.0)
+        return z
 
-        z = self.make_two_dimensional(z)
+    def _gaussian_test_function(self,x,random_frequency):
+        x = self._make_two_dimensional(x)
+        mean_embedding = self._get_mean_embedding(random_frequency, x)
+        return np.tile(mean_embedding,(self.shape,1)).T
 
-        z2 = np.linalg.norm(z, axis=1)**2
-        z2= np.exp(-z2/2.0)
-        return np.tile(z2,(self.shape,1)).T
 
-
-    def test_function_grad(self,x,omega):
+    def _test_function_grad(self,x,omega):
         arg = (x - omega)
-        test_function_val = self.gaussian_test_function(x, omega)
+        test_function_val = self._gaussian_test_function(x, omega)
         return -arg* test_function_val
 
 
 
-    def compute_pvalue(self, sampless):
+    def compute_pvalue(self, samples):
 
-        sampless = self.make_two_dimensional(sampless)
+        samples = self._make_two_dimensional(samples)
 
-        self.shape = sampless.shape[1]
+        self.shape = samples.shape[1]
 
         stats_for_freqs = []
 
         for f in range(self.number_of_random_frequencies):
-            matrix_of_stats = self.stein_stat(random_frequency=np.random.randn(),samples=sampless)
+            matrix_of_stats = self.stein_stat(random_frequency=np.random.randn(),samples=samples)
             stats_for_freqs.append(matrix_of_stats)
 
         normal = np.hstack(stats_for_freqs)
-        normal = self.make_two_dimensional(normal)
+        normal = self._make_two_dimensional(normal)
 
         return mahalanobis_distance(normal,normal.shape[1])
 
