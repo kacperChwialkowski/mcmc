@@ -6,7 +6,7 @@ import autograd.numpy as np
 __author__ = 'kcx'
 
 
-class TestMeanEmbeddingConsistanceSelector(TestCase):
+class TestSelector(TestCase):
 
 
     def test_on_one_dim_gaussian(self):
