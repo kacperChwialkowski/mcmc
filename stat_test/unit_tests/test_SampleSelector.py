@@ -1,7 +1,7 @@
 from unittest import TestCase
 from sampplers.MetropolisHastings import mh_generator
-from test.stationary_distribution import SampleSelector, GaussianSteinTest
-import autograd.numpy as np
+from stat_test.stationary_distribution import SampleSelector, GaussianSteinTest
+import numpy as np
 
 __author__ = 'kcx'
 

@@ -1,5 +1,5 @@
 from unittest import TestCase
-from test.stationary_distribution import GaussianSteinTest
+from stat_test.stationary_distribution import GaussianSteinTest
 import numpy as np
 __author__ = 'kcx'
 

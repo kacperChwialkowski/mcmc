@@ -1,12 +1,32 @@
 import warnings
+import numpy as np
+from numpy.linalg import linalg, LinAlgError
+from scipy.stats import chi2
 
-import autograd.numpy as np
-
-from two_sample_test.utils import mahalanobis_distance
 
 
 __author__ = 'kcx'
 
+
+def mahalanobis_distance(difference, num_random_features):
+    num_samples, _ = np.shape(difference)
+    sigma = np.cov(np.transpose(difference))
+
+
+
+    mu = np.mean(difference, 0)
+
+    if num_random_features == 1:
+        stat = float(num_samples * mu ** 2) / float(sigma)
+    else:
+        try:
+            linalg.inv(sigma)
+        except LinAlgError:
+            warnings.warn('covariance matrix is singular. Pvalue returned is 1.1')
+            raise
+        stat = num_samples * mu.dot(linalg.solve(sigma, np.transpose(mu)))
+
+    return chi2.sf(stat, num_random_features)
 
 class GaussianSteinTest:
     def __init__(self, grad_log_prob, num_random_freq, scaling=(1.0, 10.0)):
@@ -30,7 +50,7 @@ class GaussianSteinTest:
 
     def _get_mean_embedding(self, x, random_frequency, scaling=2.0):
         z = x - random_frequency
-        z = np.linalg.norm(z, axis=1) ** 2
+        z = linalg.norm(z, axis=1) ** 2
         z = np.exp(-z / scaling)
         return z
 

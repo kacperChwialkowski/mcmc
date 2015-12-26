@@ -1,8 +1,8 @@
 from sampplers.MetropolisHastings import metropolis_hastings
-from test.stationary_distribution import GaussianSteinTest
+from stat_test.stationary_distribution import GaussianSteinTest
 
 __author__ = 'kcx'
-import autograd.numpy as np
+import numpy as np
 
 
 
