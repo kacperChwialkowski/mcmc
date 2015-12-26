@@ -24,21 +24,21 @@ class GaussianSteinTest:
             z = z[:, np.newaxis]
         return z
 
-    def _get_mean_embedding(self, random_frequency, x):
+    def _get_mean_embedding(self, random_frequency, x,scaling =2.0):
         z = x - random_frequency
         z = np.linalg.norm(z, axis=1) ** 2
-        z = np.exp(-z / 2.0)
+        z = np.exp(-z / scaling)
         return z
 
-    def _gaussian_test_function(self,x,random_frequency):
+    def _gaussian_test_function(self,x,random_frequency,scaling =2.0):
         x = self._make_two_dimensional(x)
-        mean_embedding = self._get_mean_embedding(random_frequency, x)
+        mean_embedding = self._get_mean_embedding(random_frequency, x,scaling)
         return np.tile(mean_embedding,(self.shape,1)).T
 
 
-    def _test_function_grad(self,x,omega):
-        arg = (x - omega)
-        test_function_val = self._gaussian_test_function(x, omega)
+    def _test_function_grad(self,x,omega,scaling = 2.0):
+        arg = (x - omega)*2.0/scaling
+        test_function_val = self._gaussian_test_function(x, omega,scaling)
         return -arg* test_function_val
 
 

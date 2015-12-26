@@ -13,7 +13,6 @@ class TestMeanEmbeddingTest(TestCase):
         def grad_log_normal(x):
             return  -x
 
-
         data = np.random.randn(10000)
         me = GaussianSteinTest(grad_log_normal,1)
         assert me.compute_pvalue(data)>0.05
