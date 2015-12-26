@@ -6,61 +6,43 @@ __author__ = 'kcx'
 
 class TestMeanEmbeddingTest(TestCase):
 
+    def grad_log_normal(self,x):
+        return  -x
 
-    def test_on_one_dim_gaus(self):
+
+    def test_on_one_dim_gaussian(self):
         np.random.seed(42)
-
-        def grad_log_normal(x):
-            return  -x
-
         data = np.random.randn(10000)
-        me = GaussianSteinTest(grad_log_normal,1)
+        me = GaussianSteinTest(self.grad_log_normal,1)
         assert me.compute_pvalue(data)>0.05
 
 
-    def test_on_four_dim_gaus(self):
-
+    def test_on_four_dim_gaussian(self):
         np.random.seed(42)
-        def grad_log_normal(x):
-            return  -x
-
         data = np.random.randn(10000,4)
-        me = GaussianSteinTest(grad_log_normal,1)
+
+        me = GaussianSteinTest(self.grad_log_normal,1)
         assert me.compute_pvalue(data) > 0.05
 
-    def test_on_one_dim_gaus2(self):
+    def test_on_one_dim_gaussian_with_three_freqs(self):
         np.random.seed(42)
-
-        def grad_log_normal(x):
-            return  -x
-
-
         data = np.random.randn(10000)
-        me = GaussianSteinTest(grad_log_normal,3)
+        me = GaussianSteinTest(self.grad_log_normal,3)
         assert me.compute_pvalue(data)>0.05
 
 
-    def test_on_four_dim_gaus2(self):
-
+    def test_on_four_dim_gaussian_with_three_freqs(self):
         np.random.seed(42)
-        def grad_log_normal(x):
-            return  -x
-
         data = np.random.randn(10000,4)
-        me = GaussianSteinTest(grad_log_normal,3)
+        me = GaussianSteinTest(self.grad_log_normal,3)
         assert me.compute_pvalue(data) > 0.05
 
 
-    def test_on_four_dim_gaus2(self):
-
+    def test_power_growth(self):
         np.random.seed(42)
-        def grad_log_normal(x):
-            return  -x
-
         data = np.random.randn(10000,4)+0.01*np.random.rand()
-        me = GaussianSteinTest(grad_log_normal,10)
+        me = GaussianSteinTest(self.grad_log_normal,10)
         p1 = me.compute_pvalue(data)
-        me = GaussianSteinTest(grad_log_normal,1)
+        me = GaussianSteinTest(self.grad_log_normal,1)
         p2 = me.compute_pvalue(data)
-        print(p1,p2)
         assert p1 <p2
