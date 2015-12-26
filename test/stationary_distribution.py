@@ -51,16 +51,16 @@ class GaussianSteinTest:
 
         self.shape = samples.shape[1]
 
-        stats_for_freqs = []
+        stein_statistics = []
 
         for f in range(self.number_of_random_frequencies):
             matrix_of_stats = self.stein_stat(random_frequency=np.random.randn(),samples=samples)
-            stats_for_freqs.append(matrix_of_stats)
+            stein_statistics.append(matrix_of_stats)
 
-        normal = np.hstack(stats_for_freqs)
-        normal = self._make_two_dimensional(normal)
+        normal_under_null = np.hstack(stein_statistics)
+        normal_under_null = self._make_two_dimensional(normal_under_null)
 
-        return mahalanobis_distance(normal,normal.shape[1])
+        return mahalanobis_distance(normal_under_null,normal_under_null.shape[1])
 
 
 class MeanEmbeddingConsistanceSelector:
