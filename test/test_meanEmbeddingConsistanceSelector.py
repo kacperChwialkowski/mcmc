@@ -1,6 +1,6 @@
 from unittest import TestCase
 from sampplers.MetropolisHastings import mh_generator
-from test.stationary_distribution import MeanEmbeddingConsistanceSelector, GaussianSteinTest
+from test.stationary_distribution import SampleSelector, GaussianSteinTest
 import autograd.numpy as np
 
 __author__ = 'kcx'
@@ -22,7 +22,7 @@ class TestMeanEmbeddingConsistanceSelector(TestCase):
         me = GaussianSteinTest(grad_log_normal,10)
 
 
-        m = MeanEmbeddingConsistanceSelector(mh_gen, n=1000,thinning=15,tester=me)
+        m = SampleSelector(mh_gen, sample_size=1000,thinning=15,tester=me)
 
         data,_ = m.points_from_stationary()
 
@@ -43,7 +43,7 @@ class TestMeanEmbeddingConsistanceSelector(TestCase):
         me = GaussianSteinTest(grad_log_prob,41)
 
 
-        m = MeanEmbeddingConsistanceSelector(mh_gen, n=1000,thinning=20,tester=me,max_ite=5)
+        m = SampleSelector(mh_gen, sample_size=1000,thinning=20,tester=me, max_iterations=5)
 
         data,premature_stop = m.points_from_stationary()
 
