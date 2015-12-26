@@ -31,19 +31,19 @@ class TestMeanEmbeddingConsistanceSelector(TestCase):
 
     def test_on_one_dim_gaus2(self):
         np.random.seed(42)
-        k=5.0
+        k=2.0
         def grad_log_prob(x):
 
             return -(x/k + np.sin(x))*(1.0/k + np.cos(x))
 
         def log_prob(x):
-            return -(x/20.0 + np.sin(x) )**2.0/2.0
+            return -(x/5.0 + np.sin(x) )**2.0/2.0
 
         mh_gen = mh_generator(log_density=log_prob,x_start=1.0)
-        me = GaussianSteinTest(grad_log_prob,20)
+        me = GaussianSteinTest(grad_log_prob,41)
 
 
-        m = MeanEmbeddingConsistanceSelector(mh_gen, n=20000,thinning=15,tester=me,max_ite=10)
+        m = MeanEmbeddingConsistanceSelector(mh_gen, n=1000,thinning=20,tester=me,max_ite=5)
 
         data,premature_stop = m.points_from_stationary()
 
