@@ -91,6 +91,7 @@ class SampleSelector:
             msg = 'The sample is NOT from stationary distribution. Exceeded number of iterations until convergence.'
             warnings.warn(msg)
 
-        return data, out_of_iterations
+        converged = not out_of_iterations
+        return data, converged
 
 
