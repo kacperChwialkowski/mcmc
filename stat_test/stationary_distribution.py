@@ -3,7 +3,7 @@ import numpy as np
 from numpy.linalg import linalg, LinAlgError
 from scipy.stats import chi2
 
-
+POWER = 2.0
 
 __author__ = 'kcx'
 
@@ -22,8 +22,9 @@ def mahalanobis_distance(difference, num_random_features):
         try:
             linalg.inv(sigma)
         except LinAlgError:
+            print('hahah')
             warnings.warn('covariance matrix is singular. Pvalue returned is 1.1')
-            raise
+            return 0
         stat = num_samples * mu.dot(linalg.solve(sigma, np.transpose(mu)))
 
     return chi2.sf(stat, num_random_features)
@@ -50,7 +51,7 @@ class GaussianSteinTest:
 
     def _get_mean_embedding(self, x, random_frequency, scaling=2.0):
         z = x - random_frequency
-        z = linalg.norm(z, axis=1) ** 2
+        z = linalg.norm(z, axis=1) ** POWER
         z = np.exp(-z / scaling)
         return z
 
@@ -61,7 +62,7 @@ class GaussianSteinTest:
 
 
     def _test_function_grad(self, x, omega, scaling=2.0):
-        arg = (x - omega) * 2.0 / scaling
+        arg = (x - omega) * POWER / scaling
         test_function_val = self._gaussian_test_function(x, omega, scaling)
         return -arg * test_function_val
 
@@ -74,8 +75,10 @@ class GaussianSteinTest:
 
         stein_statistics = []
 
+
         for f in range(self.number_of_random_frequencies):
-            matrix_of_stats = self.stein_stat(random_frequency=np.random.randn(), samples=samples)
+            random_frequency = np.random.randn()
+            matrix_of_stats = self.stein_stat(random_frequency=random_frequency, samples=samples)
             stein_statistics.append(matrix_of_stats)
 
         normal_under_null = np.hstack(stein_statistics)

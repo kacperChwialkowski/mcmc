@@ -46,7 +46,7 @@ Let
 \end{align}
 $J$ is number of frequencies.
 \begin{equation}
- Z_i = ( s(X_i,T_1) , \cdots, s(X_i,T_J)  )\in \mathbf R^J.
+ Z_i = ( s(X_i,Y_1) , \cdots, s(X_i,Y_J)  )\in \mathbf R^J.
 \end{equation}
 
 We define the vector of mean empirical differences 
@@ -138,6 +138,11 @@ We will use simple Bonferroni correction to deal with type one error. Tests leve
 Type two is somehow more complicated. In general (this is my intuition from finite state Markov chains and AR processes ) chain does not converge to stationary distribution in any number of finite steps, unless it has started for the stationary distribution. As usually in testing, one has no finite sample control over type two error. We can however infer what misspecified log probability would have given similar results on the given sample. This can be done by perturbing log probability in some direction and calculating the statistic on our sample. The magnitude of perturbation will show which models appear to be indistinguishable (now talk about parameters inference and that its even more difficult )    
 
 
+\paragraph{Stupid fucked up SGLD}
+
+\begin{equation}
+ p(x, \theta) = C 0.5 \exp( -(x-\theta_1)^2/ 2\sigma_x^2 - ) + C 0.5 \exp( -(x-\theta_1 - \theta_2)^2/ 2\sigma_x^2)
+\end{equation}
 
 
 
