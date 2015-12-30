@@ -1,13 +1,10 @@
-__author__ = 'kcx'
-
 import numpy as np
 
-def sgld(log_density, chain_size=10000, thinning=15, x_prev=np.random.randn(),a=1.0,b=1.0,gamma=0.55):
+def SGLD(log_density, chain_size=10000, thinning=15, x_prev=np.random.randn()):
     A = [x_prev]
-    for t in range(chain_size*thinning-1):
+    for i in range(chain_size*thinning-1):
+        a =1
         guess = 2*np.random.randn()+x_prev
-        epsilon_t = a*(b+t)**(-gamma)
-
         old_log_lik = log_density(x_prev)
         new_log_lik = log_density(guess)
         if new_log_lik > old_log_lik:
@@ -24,7 +21,7 @@ def sgld(log_density, chain_size=10000, thinning=15, x_prev=np.random.randn(),a=
 
 
 
-class mh_generator:
+class sgld_generator:
 
     def __init__(self,log_density,x_start=np.random.randn()):
         self.log_density = log_density
