@@ -1,21 +1,29 @@
 import numpy as np
 
-def SGLD(log_density,grad_log_density,grad_log_prior, X,n,chain_size=10000, thinning=15, x_prev=np.random.randn()):
+
+#   THIS IS ULTRA SPECIFIC TO THE  PROBLEM, Dont dare to use it!!!!
+def SGLD(log_density,grad_log_density,grad_log_prior, X,n,chain_size=10000, thinning=15, x_prev=np.random.randn(2)):
     A = [x_prev]
     N = X.shape[0]
+
     for t in range(chain_size*thinning-1):
-        a = 1
-        b = 1
-        gamma = 0.55
-        epsilon_t = a*(b+t)**gamma
+        print(t)
+
+        gamma = -0.55
+        epsilon_t = 0.1*(1+t)**gamma
 
         noise = np.sqrt(epsilon_t)*np.random.randn()
 
         sub = np.random.choice(X, n)
 
-        grad = grad_log_prior(x_prev) + N/n*np.sum(grad_log_density(x_prev,sub))
+        stupid_sum=np.array([0.0,0.0])
+        for data_point in sub:
+            stupid_sum = stupid_sum+ grad_log_density(x_prev,data_point)
+
+        grad = grad_log_prior(x_prev) + (N/n)*stupid_sum
 
         grad = grad*epsilon_t/2
+        print(grad,noise,epsilon_t)
 
         guess = grad+noise
 
