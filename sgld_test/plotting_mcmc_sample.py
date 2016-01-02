@@ -1,3 +1,4 @@
+from statsmodels.tsa.stattools import acf
 from sgld_test.test import gen_X, log_probability
 import seaborn as sns;
 from sampplers.MetropolisHastings import metropolis_hastings
@@ -13,7 +14,7 @@ def vectorized_log_density(theta):
 
 sample = metropolis_hastings(vectorized_log_density, chain_size=1000, thinning=15, x_prev=np.random.randn(2))
 # #
-print(sample)
+print(acf(sample[:,1],nlags=10))
 
 with sns.axes_style("white"):
      sns.jointplot(x=sample[:,1], y=sample[:,0],kind='kde', color="k");

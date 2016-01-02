@@ -1,5 +1,6 @@
 from autograd import grad
 from numpy.testing import assert_almost_equal
+from statsmodels.tsa.stattools import acf
 from sgld_test.bimodal_SGLD import SGLD
 from sgld_test.test import gen_X, _log_lik, log_probability
 import seaborn as sns; sns.set(color_codes=True)
@@ -47,17 +48,22 @@ def vectorized_log_density(theta):
      return log_probability(theta,X)
 
 
-sample,A = SGLD(grad_the_log_density,grad_log_prior, X,1,vectorized_log_density,chain_size=10000)
 
+for i in range()
+    sample,A = SGLD(grad_the_log_density,grad_log_prior, X,n=5,log_density=vectorized_log_density,thinning=1,chain_size=500)
 
+print(acf(sample[:,1],nlags=10))
 
 plt.plot(np.convolve(A, np.ones((500,))/500, mode='valid'))
 plt.show()
 
-sample = sample[1000:]
+
+sample = sample[100:]
+
+
 
 print(sample)
 
 with sns.axes_style("white"):
-     sns.jointplot(x=sample[:,1], y=sample[:,0],kind='kde', color="k");
+     sns.jointplot(x=sample[:,1], y=sample[:,0],kind='scatter', color="k");
      sns.plt.show()
