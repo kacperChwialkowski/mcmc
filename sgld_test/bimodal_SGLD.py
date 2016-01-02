@@ -11,10 +11,7 @@ def SGLD(grad_log_density,grad_log_prior, X,n,log_density,chain_size=10000, thin
     N = X.shape[0]
     old_log_lik  = log_density(x_prev)
     for t in range(chain_size*thinning-1):
-        #
-        # gamma = -0.55
-        # TRUE_A = 0.0158
-        # epsilon_t = TRUE_A*(TRUE_B +t)**gamma
+
         epsilon_t = epsilon
 
         noise = np.sqrt(epsilon_t)*np.random.randn(2)
@@ -28,13 +25,7 @@ def SGLD(grad_log_density,grad_log_prior, X,n,log_density,chain_size=10000, thin
         grad = grad_log_prior(x_prev) + (N/n)*stupid_sum
 
         grad = grad*epsilon_t/2
-        # print(grad,noise,epsilon_t)
 
-        if t % (100*thinning) ==0:
-            # print(t)
-
-            print(np.abs(noise/grad))
-            print(grad,noise,epsilon_t)
 
         x_prev = x_prev+grad+noise
         Samples.append(x_prev)
