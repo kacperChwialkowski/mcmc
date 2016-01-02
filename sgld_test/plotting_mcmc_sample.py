@@ -6,12 +6,12 @@ sns.set(color_codes=True)
 __author__ = 'kcx'
 
 
-X = gen_X(200)
+X = gen_X(400)
 
 def vectorized_log_density(theta):
      return log_probability(theta,X)
 
-sample = metropolis_hastings(vectorized_log_density, chain_size=10000, thinning=15, x_prev=np.random.randn(2))
+sample = metropolis_hastings(vectorized_log_density, chain_size=1000, thinning=15, x_prev=np.random.randn(2))
 # #
 print(sample)
 

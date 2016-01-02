@@ -1,13 +1,12 @@
 from autograd import grad
 from numpy.testing import assert_almost_equal
 from sgld_test.bimodal_SGLD import SGLD
-from sgld_test.test import gen_X, _log_lik, log_probability
+from sgld_test.test import gen_X, log_probability, _log_lik
 import seaborn as sns; sns.set(color_codes=True)
 from scipy.stats import norm
 import autograd.numpy as np   # Thinly-wrapped version of Numpy
 
 import matplotlib.pyplot as plt
-
 
 SIGMA_x = np.sqrt(2.0)
 SIGMA_1 = np.sqrt(10)
@@ -42,22 +41,35 @@ def grad_the_log_density(theta,x):
     return np.array( [x_derivative, y_derivative])
 
 
-X = gen_X(100)
-def vectorized_log_density(theta):
-     return log_probability(theta,X)
+
+theta1 = np.arange(-2, 2 ,0.1)
+the_len = len(theta1)
+theta2 = np.arange(-2, 2, 0.1)
+theta1, theta2 = np.meshgrid(theta1, theta2)
+Dx = np.copy(theta1)
+Dy = np.copy(theta1)
+
+Xsample = gen_X(400)
 
 
-sample,A = SGLD(grad_the_log_density,grad_log_prior, X,1,vectorized_log_density,chain_size=10000)
+for i in range(the_len):
+    for j in range(the_len):
+        print(i,j)
+        th = np.array([theta1[i, j], theta2[i, j]])
+        stupid_sum=np.array([0.0,0.0])
+        sub = np.random.choice(Xsample, 4)
+
+        for data_point in sub:
+            stupid_sum = stupid_sum+ grad_the_log_density(th,data_point)
+        # grad_log_prior(th)
+        grad =  + stupid_sum
+        Dx[i,j] = grad[0]
+        Dy[i,j] = grad[1]
 
 
+plt.figure()
+CS = plt.streamplot(theta1, theta2, Dx, Dy, density=[0.5, 1])
 
-plt.plot(np.convolve(A, np.ones((500,))/500, mode='valid'))
 plt.show()
 
-sample = sample[1000:]
 
-print(sample)
-
-with sns.axes_style("white"):
-     sns.jointplot(x=sample[:,1], y=sample[:,0],kind='kde', color="k");
-     sns.plt.show()

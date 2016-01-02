@@ -2,17 +2,21 @@ import numpy as np
 
 
 #   THIS IS ULTRA SPECIFIC TO THE  PROBLEM, Dont dare to use it!!!!
-def SGLD(log_density,grad_log_density,grad_log_prior, X,n,chain_size=10000, thinning=15, x_prev=np.random.randn(2)):
-    A = [x_prev]
-    N = X.shape[0]
+TRUE_B = 2.3101
 
+
+def SGLD(grad_log_density,grad_log_prior, X,n,log_density,chain_size=10000, thinning=1, x_prev=np.array([0.0,0.0])):
+    Accpetance = []
+    Samples = [x_prev]
+    N = X.shape[0]
+    old_log_lik  = log_density(x_prev)
     for t in range(chain_size*thinning-1):
-        print(t)
 
         gamma = -0.55
-        epsilon_t = 0.1*(1+t)**gamma
+        TRUE_A = 0.0158
+        epsilon_t = TRUE_A*(TRUE_B +t)**gamma
 
-        noise = np.sqrt(epsilon_t)*np.random.randn()
+        noise = np.sqrt(epsilon_t)*np.random.randn(2)
 
         sub = np.random.choice(X, n)
 
@@ -23,33 +27,28 @@ def SGLD(log_density,grad_log_density,grad_log_prior, X,n,chain_size=10000, thin
         grad = grad_log_prior(x_prev) + (N/n)*stupid_sum
 
         grad = grad*epsilon_t/2
-        print(grad,noise,epsilon_t)
+        # print(grad,noise,epsilon_t)
 
-        guess = grad+noise
+        if t*thinning % 100 ==0:
+            print(t)
 
-        old_log_lik = log_density(x_prev)
-        new_log_lik = log_density(guess)
+            print(np.abs(noise/grad))
+            print(grad,noise,epsilon_t)
+
+        x_prev = x_prev+grad+noise
+        Samples.append(x_prev)
+        #
+        new_log_lik = log_density(x_prev)
         if new_log_lik > old_log_lik:
-            A.append(guess)
+            Accpetance.append(1.0)
+            old_log_lik = new_log_lik
         else:
             u = np.random.uniform(0.0,1.0)
             if u < np.exp(new_log_lik - old_log_lik):
-                A.append(guess)
+                Accpetance.append(1)
+                old_log_lik = new_log_lik
             else:
-                A.append(x_prev)
-        x_prev = A[-1]
-    return np.array(A[::thinning])
+                Accpetance.append(0)
 
+    return np.array(Samples[::thinning]),Accpetance
 
-
-
-class sgld_generator:
-
-    def __init__(self,log_density,x_start=np.random.randn()):
-        self.log_density = log_density
-        self.x_last = x_start
-
-    def get(self, chunk_size,thinning):
-        data = metropolis_hastings(self.log_density,chain_size=chunk_size,thinning=thinning,x_prev=self.x_last)
-        self.x_last = data[-1]
-        return data

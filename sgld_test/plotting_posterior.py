@@ -1,13 +1,13 @@
 from sgld_test.test import gen_X, log_probability, _log_probability
 
+import matplotlib.pyplot as plt
+
 __author__ = 'kcx'
 import numpy as np
 import seaborn as sns; sns.set(color_codes=True)
 
 N=200
 X = gen_X(N)
-
-import matplotlib.pyplot as plt
 theta1 = np.arange(-2, 2 ,0.25)
 the_len = len(theta1)
 theta2 = np.arange(-2, 2, 0.25)
