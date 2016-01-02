@@ -5,11 +5,10 @@ import numpy as np
 TRUE_B = 2.3101
 
 
-def SGLD(grad_log_density,grad_log_prior, X,n,log_density,chain_size=10000, thinning=1, x_prev=np.random.rand(2),epsilon=5*10.0**(-3)):
-    Accpetance = []
+def SGLD(grad_log_density,grad_log_prior, X,n,chain_size=10000, thinning=1, x_prev=np.random.rand(2),epsilon=5*10.0**(-3)):
     Samples = [x_prev]
     N = X.shape[0]
-    old_log_lik  = log_density(x_prev)
+
     for t in range(chain_size*thinning-1):
 
         epsilon_t = epsilon
@@ -31,5 +30,5 @@ def SGLD(grad_log_density,grad_log_prior, X,n,log_density,chain_size=10000, thin
         Samples.append(x_prev)
 
 
-    return np.array(Samples[::thinning]),Accpetance
+    return np.array(Samples[::thinning])
 
