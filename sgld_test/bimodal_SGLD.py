@@ -29,18 +29,7 @@ def SGLD(grad_log_density,grad_log_prior, X,n,log_density,chain_size=10000, thin
 
         x_prev = x_prev+grad+noise
         Samples.append(x_prev)
-        #
-        new_log_lik = log_density(x_prev)
-        if new_log_lik > old_log_lik:
-            Accpetance.append(1.0)
-            old_log_lik = new_log_lik
-        else:
-            u = np.random.uniform(0.0,1.0)
-            if u < np.exp(new_log_lik - old_log_lik):
-                Accpetance.append(1)
-                old_log_lik = new_log_lik
-            else:
-                Accpetance.append(0)
+
 
     return np.array(Samples[::thinning]),Accpetance
 
