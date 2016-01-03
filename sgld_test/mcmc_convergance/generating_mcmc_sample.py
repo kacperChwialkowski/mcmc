@@ -1,3 +1,4 @@
+from time import time
 from sgld_test.gradients_of_likelihood import manual_grad
 from sgld_test.test import gen_X, log_probability
 import seaborn as sns;
@@ -20,16 +21,16 @@ def grad_log_pob(theta):
         s.append( np.sum(manual_grad(t[0],t[1],X),axis=0))
     return np.array(s)
 
-me = GaussianSteinTest(grad_log_pob,1)
-
-
-size_range = range(1, 60, 4)
-num_pvals = 30
+me = GaussianSteinTest(grad_log_pob,5)
+size_range = range(5,85,5)
+num_pvals = 50
 pvals = np.zeros((len(size_range), num_pvals))
 size_number =-1
+t1 = time()
+
 for size in size_range:
 
-    size_number +=1
+    size_number += 1
     print(size_number)
 
     for pvs in range(num_pvals):
@@ -40,8 +41,11 @@ for size in size_range:
         sample = np.array(sample)
         pvals[size_number,pvs] = me.compute_pvalue(sample)
 
-np.save('pvals.npy',pvals)
 
+
+np.save('pvals.npy',pvals)
+t2 = time()
+print(t2-t1)
 
 import matplotlib.pyplot as plt
 
@@ -51,14 +55,14 @@ plt.show()
 
 # #
 # print(acf(sample[:,1],nlags=20))
-
-with sns.axes_style("white"):
-     sns.jointplot(x=sample[:,1], y=sample[:,0],kind='kde', color="k");
-     sns.plt.show()
-
-
-
-
-me = GaussianSteinTest(grad_log_pob,1)
-
-print(me.compute_pvalue(sample))
+#
+# with sns.axes_style("white"):
+#      sns.jointplot(x=sample[:,1], y=sample[:,0],kind='kde', color="k");
+#      sns.plt.show()
+#
+#
+#
+#
+# me = GaussianSteinTest(grad_log_pob,1)
+#
+# print(me.compute_pvalue(sample))

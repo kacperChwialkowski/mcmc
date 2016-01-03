@@ -1,4 +1,4 @@
-
+from time import time
 from sgld_test.bimodal_SGLD import one_sample_SGLD
 
 from sgld_test.gradients_of_likelihood import manual_grad, grad_log_prior
@@ -21,10 +21,12 @@ me = GaussianSteinTest(grad_log_pob,1)
 
 
 
-size_range = range(2, 61, 4)
-num_pvals = 30
+me = GaussianSteinTest(grad_log_pob,5)
+size_range = range(5,166,10)
+num_pvals = 50
 pvals = np.zeros((len(size_range), num_pvals))
 size_number =-1
+t1 = time()
 for size in size_range:
 
     size_number +=1
@@ -33,12 +35,14 @@ for size in size_range:
     for pvs in range(num_pvals):
         sample = []
         for i in range(400):
-            sample.append( one_sample_SGLD(manual_grad, grad_log_prior, X, n=5, chain_size=size))
+            sample.append(one_sample_SGLD(manual_grad, grad_log_prior, X, n=5, chain_size=size))
 
         sample = np.array(sample)
         pvals[size_number,pvs] = me.compute_pvalue(sample)
 
 np.save('pvals.npy',pvals)
+t2 = time()
+print(t2-t1)
 
 
 # def wrap(i):
