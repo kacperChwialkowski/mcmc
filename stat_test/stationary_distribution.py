@@ -22,7 +22,7 @@ def mahalanobis_distance(difference, num_random_features):
         try:
             linalg.inv(sigma)
         except LinAlgError:
-            print('hahah')
+            print('covariance matrix is singular. Pvalue returned is 1.1')
             warnings.warn('covariance matrix is singular. Pvalue returned is 1.1')
             return 0
         stat = num_samples * mu.dot(linalg.solve(sigma, np.transpose(mu)))

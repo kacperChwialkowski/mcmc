@@ -64,7 +64,7 @@ def slow_one_sample_SGLD(grad_log_density,grad_log_prior, X,n,chain_size=10000, 
     return theta
 
 
-def one_sample_SGLD(grad_log_density,grad_log_prior, X,n,chain_size=10000,  theta=np.random.rand(2),epsilon=5*10.0**(-3)):
+def one_sample_SGLD(grad_log_density,grad_log_prior, X,n,chain_size=10000,  theta=np.random.randn(2),epsilon=5*10.0**(-3)):
     N = X.shape[0]
     X = np.random.permutation(X)
 
