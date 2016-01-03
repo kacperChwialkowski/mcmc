@@ -1,10 +1,8 @@
+from sgld_test.constants import SIGMA_x
+
 __author__ = 'kcx'
 import autograd.numpy as np
 
-
-SIGMA_x = np.sqrt(2.0)
-SIGMA_1 = np.sqrt(10)
-SIGMA_2 = 1.
 
 
 
