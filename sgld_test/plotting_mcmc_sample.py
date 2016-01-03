@@ -25,7 +25,7 @@ me = GaussianSteinTest(grad_log_pob,1)
 
 
 pvals = []
-for size in range(10,400,10):
+for size in range(1,80,4):
     sample = []
     print(size)
     for i in range(400):

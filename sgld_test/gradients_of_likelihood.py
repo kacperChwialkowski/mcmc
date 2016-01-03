@@ -1,9 +1,10 @@
-from sgld_test.constants import SIGMA_x
+from sgld_test.constants import SIGMA_x, SIGMA_1, SIGMA_2
 
 __author__ = 'kcx'
 import autograd.numpy as np
 
-
+def grad_log_prior(theta):
+    return theta/[SIGMA_1,SIGMA_2]
 
 
 def lik_2(theta_1, theta_2, x):

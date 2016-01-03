@@ -1,7 +1,8 @@
 from unittest import TestCase
 import numpy as np
+from numpy.testing.utils import assert_almost_equal
 from sgld_test.bimodal_SGLD import one_sample_SGLD
-from sgld_test.test import log_probability
+from sgld_test.gradients_of_likelihood import manual_grad, grad_log_prior
 
 __author__ = 'kcx'
 
@@ -10,7 +11,14 @@ class TestOne_sample_SGLD(TestCase):
     def test_one_sample_SGLD(self):
         np.random.seed(0)
         X = np.array([13.])
-        def vectorized_log_density(theta):
-            return log_probability(theta,X)
+        r2 = one_sample_SGLD(manual_grad,grad_log_prior,X,n=1,chain_size=300,theta=np.array([1.,1.3]))
+        res = np.array([ 2.16361105,  6.51715066])
+        assert_almost_equal(r2,res)
 
-        # r = one_sample_SGLD(grad_the_log_density,grad_log_prior,X,n=1,chain_size=300,theta=np.array([0.,0.])))
+
+    def test_one_sample_SGLD(self):
+        np.random.seed(0)
+        X = np.array([13.])
+        r2 = one_sample_SGLD(manual_grad,grad_log_prior,X,n=1,chain_size=30,theta=np.array([1.,1.3]))
+        res = np.array(  [ 1.60282887,1.95290384])
+        assert_almost_equal(r2,res)
