@@ -1,5 +1,4 @@
-from statsmodels.tsa.stattools import acf
-from sgld_test.plotting_sgld_sample import manual_grad
+from sgld_test.gradients_of_likelihood import manual_grad
 from sgld_test.test import gen_X, log_probability
 import seaborn as sns;
 from sampplers.MetropolisHastings import metropolis_hastings
@@ -24,20 +23,31 @@ def grad_log_pob(theta):
 me = GaussianSteinTest(grad_log_pob,1)
 
 
-pvals = []
-for size in range(1,80,4):
-    sample = []
-    print(size)
-    for i in range(400):
-        sample.append(metropolis_hastings(vectorized_log_density, chain_size=size, thinning=1, x_prev=np.random.randn(2))[-1])
+size_range = range(1, 60, 4)
+num_pvals = 30
+pvals = np.zeros((len(size_range), num_pvals))
+size_number =-1
+for size in size_range:
 
-    sample = np.array(sample)
-    pvals.append(me.compute_pvalue(sample))
+    size_number +=1
+    print(size_number)
+
+    for pvs in range(num_pvals):
+        sample = []
+        for i in range(400):
+            sample.append(metropolis_hastings(vectorized_log_density, chain_size=size, thinning=1, x_prev=np.random.randn(2))[-1])
+
+        sample = np.array(sample)
+        pvals[size_number,pvs] = me.compute_pvalue(sample)
+
+np.save('pvals.npy',pvals)
+
 
 import matplotlib.pyplot as plt
 
 plt.plot(pvals)
 plt.show()
+
 
 # #
 # print(acf(sample[:,1],nlags=20))
