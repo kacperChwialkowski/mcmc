@@ -22,8 +22,7 @@ def _log_lik(theta_1, theta_2, x):
 def _log_probability(theta_1,theta_2,x):
     log_lik = _log_lik(theta_1, theta_2, x)
 
-    log_prior = np.log(norm.pdf(theta_1,0, SIGMA_1) + norm.pdf(theta_2,0, SIGMA_2))
-
+    log_prior = np.log(norm.pdf(theta_1,0, SIGMA_1)) + np.log(norm.pdf(theta_2,0, SIGMA_2))
 
     return log_lik+log_prior
 #
