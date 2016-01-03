@@ -4,7 +4,7 @@ def metropolis_hastings(log_density, chain_size=10000, thinning=15, x_prev=np.ra
     A = [x_prev]
     dimension = len(x_prev)
     for i in range(chain_size*thinning-1):
-        guess = 2*np.random.randn(dimension)+x_prev
+        guess = 0.2*np.random.randn(dimension)+x_prev
         old_log_lik = log_density(x_prev)
         new_log_lik = log_density(guess)
         if new_log_lik > old_log_lik:

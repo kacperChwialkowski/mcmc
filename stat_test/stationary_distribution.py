@@ -77,6 +77,7 @@ class GaussianSteinTest:
 
 
         for f in range(self.number_of_random_frequencies):
+            # This is a little bit of a bug , but th holds even for this choice
             random_frequency = np.random.randn()
             matrix_of_stats = self.stein_stat(random_frequency=random_frequency, samples=samples)
             stein_statistics.append(matrix_of_stats)
