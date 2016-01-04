@@ -42,6 +42,9 @@ np.save('results.npy',res)
 
 
 df = DataFrame(res)
-
-seaborn.boxplot(x=0,y=1,data=df)
+pr =seaborn.boxplot(x=0,y=1,data=df)
 seaborn.plt.show()
+
+
+fig = pr.get_figure()
+fig.savefig('../write_up/img/student.pdf')

@@ -1,7 +1,7 @@
 from sgld_test.mcmc_convergance.cosnt import CHAIN_SIZE
-
+import numpy as np
 __author__ = 'kcx'
-import  numpy as np
+
 
 samples = np.load('./samples.npy')
 
@@ -13,10 +13,8 @@ print(last)
 import seaborn as sns
 sns.set(color_codes=True)
 with sns.axes_style("white"):
-    sns.jointplot(x=last[:,0], y=last[:,1], kind="hex", color="k");
+    pr = sns.jointplot(x=last[:,0], y=last[:,1], kind="hex", color="k");
+    # fig = pr.get_figure()
+    pr.savefig('../../write_up/img/mcmc_sample.pdf')
 
-
-pr = sns.plt.show()
-pr.savefig('../../write_up/img/sgld_sample.pdf')
-
-sns.plt.show()
+    sns.plt.show()

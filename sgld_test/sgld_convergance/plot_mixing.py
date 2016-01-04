@@ -21,7 +21,7 @@ def grad_log_pob(theta):
 
 me = GaussianSteinTest(grad_log_pob,1)
 
-times_we_look_at = range(0,SGLD_CHAIN_SIZE,25)
+times_we_look_at = range(0,SGLD_CHAIN_SIZE,100)
 arr = np.empty((0,2))
 
 
@@ -38,5 +38,9 @@ for time in times_we_look_at:
 
 df = DataFrame(arr)
 
-seaborn.boxplot(x=0,y=1,data=df)
+pr =seaborn.boxplot(x=0,y=1,data=df)
 seaborn.plt.show()
+
+
+fig = pr.get_figure()
+fig.savefig('../../write_up/img/sgld_mixing.pdf')

@@ -38,5 +38,7 @@ for time in times_we_look_at:
 
 df = DataFrame(arr)
 
-seaborn.boxplot(x=0,y=1,data=df)
+pr = seaborn.boxplot(x=0,y=1,data=df)
 seaborn.plt.show()
+fig = pr.get_figure()
+fig.savefig('../../write_up/img/mcmc_mixing.pdf')
