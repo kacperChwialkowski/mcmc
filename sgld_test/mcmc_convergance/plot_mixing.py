@@ -34,10 +34,6 @@ for time in times_we_look_at:
         pval = me.compute_pvalue(chains_slice)
         arr = np.vstack((arr, np.array([time,pval])))
 
-# for validation_set in range(NUMBER_OF_TESTS):
-#     Xval = gen_X(400)
-#     pval = me.compute_pvalue(Xval)
-#     arr = np.vstack((arr, np.array([np.Inf,pval])))
 
 
 df = DataFrame(arr)

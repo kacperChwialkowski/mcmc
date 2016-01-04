@@ -2,6 +2,8 @@ __author__ = 'kcx'
 
 
 CHAIN_SIZE = 120
+SGLD_CHAIN_SIZE = 1000
+
 
 NO_OF_SAMPELS_IN_TEST = 100
 
