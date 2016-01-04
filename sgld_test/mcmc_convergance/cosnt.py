@@ -1,0 +1,8 @@
+__author__ = 'kcx'
+
+
+CHAIN_SIZE = 120
+
+NO_OF_SAMPELS_IN_TEST = 100
+
+NUMBER_OF_TESTS = 40

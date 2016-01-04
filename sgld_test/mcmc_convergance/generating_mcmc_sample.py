@@ -1,10 +1,12 @@
 from time import time
 from sgld_test.gradients_of_likelihood import manual_grad
+from sgld_test.mcmc_convergance.cosnt import NUMBER_OF_TESTS, NO_OF_SAMPELS_IN_TEST, CHAIN_SIZE
 from sgld_test.test import gen_X, log_probability
 import seaborn as sns;
 from sampplers.MetropolisHastings import metropolis_hastings
 import numpy as np
 from stat_test.stationary_distribution import GaussianSteinTest
+
 
 sns.set(color_codes=True)
 __author__ = 'kcx'
@@ -23,35 +25,50 @@ def grad_log_pob(theta):
 
 me = GaussianSteinTest(grad_log_pob,5)
 size_range = range(5,85,5)
-num_pvals = 50
+num_pvals = 5
 pvals = np.zeros((len(size_range), num_pvals))
 size_number =-1
 t1 = time()
 
-for size in size_range:
-
-    size_number += 1
-    print(size_number)
-
-    for pvs in range(num_pvals):
-        sample = []
-        for i in range(400):
-            sample.append(metropolis_hastings(vectorized_log_density, chain_size=size, thinning=1, x_prev=np.random.randn(2))[-1])
-
-        sample = np.array(sample)
-        pvals[size_number,pvs] = me.compute_pvalue(sample)
 
 
+sample = []
+no_chains = NUMBER_OF_TESTS * NO_OF_SAMPELS_IN_TEST
+for i in range(no_chains):
+    if i % 100 == 0:
+        print(i)
+        print(time()-t1)
+    sample.append(metropolis_hastings(vectorized_log_density, chain_size=CHAIN_SIZE, thinning=1, x_prev=np.random.randn(2)))
 
-np.save('pvals.npy',pvals)
+sample = np.array(sample)
+
+np.save('samples.npy',sample)
+exit(0)
+
+samples = np.array(sample)
+pval = []
+for ttime in range(85):
+    samples_time_ = samples[:, ttime, :]
+    assert samples_time_.shape[0] ==100
+    pval.append(me.compute_pvalue(samples_time_))
+
+
+
+
+# pvals[size_number,pvs] = me.compute_pvalue(sample)
+
+
+
+
 t2 = time()
 print(t2-t1)
 
 import matplotlib.pyplot as plt
 
-plt.plot(pvals)
+plt.plot(pval)
 plt.show()
 
+exit(0)
 
 # #
 # print(acf(sample[:,1],nlags=20))

@@ -12,7 +12,7 @@ def grad_log_normal(x):
 
 m=5
 
-
+N = 100*m
 
 
 dfs = range(1, 71, 5)
@@ -22,14 +22,14 @@ res = np.empty((0,2))
 for df in dfs:
     for mc in range(mc_reps):
 
-        X = np.random.standard_t(df,1500)
+        X = np.random.standard_t(df,N)
         me = GaussianSteinTest(grad_log_normal,m)
         pvalue = me.compute_pvalue(X)
         res = np.vstack((res,np.array([df, pvalue])))
 
 for mc in range(mc_reps):
 
-        X = np.random.randn(10000)
+        X = np.random.randn(N)
         me = GaussianSteinTest(grad_log_normal,m)
         pvalue = me.compute_pvalue(X)
         res = np.vstack((res,np.array([np.Inf, pvalue])))
