@@ -1,4 +1,5 @@
 from unittest import TestCase
+from sgld_test.constants import SIGMA_x
 
 from sgld_test.gradients_of_likelihood import manual_grad
 
@@ -7,16 +8,13 @@ __author__ = 'kcx'
 
 from autograd import grad
 from numpy.testing import assert_almost_equal
-from sgld_test.test import _log_lik
+from sgld_test.likelihoods import _log_lik
 import seaborn as sns;
 
 sns.set(color_codes=True)
 import autograd.numpy as np  # Thinly-wrapped version of Numpy
 
 
-SIGMA_x = np.sqrt(2.0)
-SIGMA_1 = np.sqrt(10)
-SIGMA_2 = 1.
 
 
 def scalar_log_lik(theta_1, theta_2, x):

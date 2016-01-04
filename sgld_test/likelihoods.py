@@ -1,10 +1,6 @@
 from scipy.stats import norm
 import autograd.numpy as np   # Thinly-wrapped version of Numpy
-# from sampplers.SGLD import sgld
-
-SIGMA_x = np.sqrt(2.0)
-SIGMA_1 = np.sqrt(10)
-SIGMA_2 = 1.
+from sgld_test.constants import SIGMA_x, SIGMA_1, SIGMA_2
 
 
 def log_probability(theta,x):

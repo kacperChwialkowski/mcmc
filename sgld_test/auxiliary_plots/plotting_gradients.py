@@ -1,5 +1,5 @@
 from sgld_test.gradients_of_likelihood import manual_grad
-from sgld_test.test import gen_X
+from sgld_test.likelihoods import gen_X
 import numpy as np
 import matplotlib.pyplot as plt
 

@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns;
 
-from sgld_test.test import gen_X, _log_probability
+from sgld_test.likelihoods import gen_X, _log_probability
 
 sns.set(color_codes=True)
 

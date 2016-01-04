@@ -2,7 +2,7 @@ from pandas import DataFrame
 import seaborn
 from sgld_test.gradients_of_likelihood import manual_grad
 from sgld_test.mcmc_convergance.cosnt import CHAIN_SIZE, NUMBER_OF_TESTS, NO_OF_SAMPELS_IN_TEST
-from sgld_test.test import gen_X, log_probability
+from sgld_test.likelihoods import gen_X, log_probability
 from stat_test.stationary_distribution import GaussianSteinTest
 
 __author__ = 'kcx'

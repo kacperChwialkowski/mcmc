@@ -2,7 +2,7 @@ from time import time
 from sgld_test.bimodal_SGLD import one_sample_SGLD
 
 from sgld_test.gradients_of_likelihood import manual_grad, grad_log_prior
-from sgld_test.test import gen_X
+from sgld_test.likelihoods import gen_X
 from stat_test.stationary_distribution import GaussianSteinTest
 import numpy as np
 
