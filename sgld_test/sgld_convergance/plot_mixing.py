@@ -21,7 +21,7 @@ def grad_log_pob(theta):
 
 me = GaussianSteinTest(grad_log_pob,1)
 
-times_we_look_at = range(0,SGLD_CHAIN_SIZE,100)
+times_we_look_at = range(1,SGLD_CHAIN_SIZE,999)
 arr = np.empty((0,2))
 
 

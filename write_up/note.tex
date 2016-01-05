@@ -8,6 +8,7 @@
 \usepackage{amsthm}
 \usepackage{graphicx}
 \usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{subcaption}
 \newcommand{\kacper}[1]{ \bf  { \color{Orchid}{Kc: #1}}  }
 
 \newtheorem{definition}{Definition}
@@ -27,11 +28,16 @@
 \author{}
 \date{}
 
+% TODO 
+% Wrong disitbution under null if ratio is not good
 
 
 \begin{document}
 
 \maketitle
+
+
+
 
 Let $g(x,y)$ be a characteristic, analytic kernel. Let $p$ be a probability measure on $R^d$; suppose it has a density which logarithm exists, and is differentiable. Consider the following transform of $R^d$ valued random variable $X$
 \begin{align}
@@ -40,41 +46,85 @@ Let $g(x,y)$ be a characteristic, analytic kernel. Let $p$ be a probability meas
 this transform is closely connected to Stein method and kernel mean embedding.
 
 
-TODO 
-
-Wrong disitbution under null.
-
-
-
 \section{test}
-Let 
+For some fixed location $y$ and a random variable $X$, define a random variable $s(X,y)$
 \begin{align}
- s(X,y) = \nabla \log p(X) g(X,y) -  \nabla g(X,y)
+ s(X,y) = \nabla \log p(X) g(X,y) -  \nabla g(X,y).
 \end{align}
-$J$ is number of frequencies.
+For some number of random locations $Y_1,Y_J$ and a random variable $X$ define a random vector $Z_i$
 \begin{equation}
  Z_i = ( s(X_i,Y_1) , \cdots, s(X_i,Y_J)  )\in \mathbf R^J.
 \end{equation}
 
-We define the vector of mean empirical differences 
+Let $W_n$ be a mean of $Z_i$'s
 $W_n = \frac 1  n \sum_{i=1}^n Z_i, $
-and its covariance matrix
+and $\Sigma_n$ its  covariance matrix
 $\Sigma_n = \frac 1  n Z Z^{T}$.
 The test statistic is
 \begin{equation}
  S_n = n W_n \Sigma_n^{-1} W_n.
 \end{equation}
-The computation of $S_n$ requires inversion of a $J\times J$ matrix $\Sigma_n$, but this is fast and numerically stable: $J$ will typically be small, and is less than 10 in our experiments. The next proposition demonstrates the use of $S_n$ as a two-sample test statistic.
+The computation of $S_n$ requires inversion of a $J\times J$ matrix $\Sigma_n$, but this is fast and numerically stable: $J$ will typically be small, and is less than 10 in our experiments. The next proposition demonstrates the use of $S_n$ as a one-sample test.
 \begin{proposition}[Asymptotic behavior of $S_n$]
 \label{prop:Hotelling}
- Let $d_{\mu,J}^2(P,Q)=0$ a.s. and let $\{X_i\}_{i=1}^n$ and $\{Y_i\}_{i=1}^n$  be i.i.d. samples from $P$ and $Q$ respectively. Then the statistic $S_n$ is a.s. asymptotically distributed as a $\chi^2$-random variable with $J$ degrees of freedom (as $n \to \infty$ with $d$ fixed). If $d_{\mu,J}^2(P,Q)>0$ a.s., then a.s. for any fixed $r$, $\mathbb P(S_n > r) \to 1$  as $n \to \infty$ .
+ If  $E s(X,y)=0$ for all $y$, then the statistic $S_n$ is a.s. asymptotically distributed as a $\chi^2$-random variable with $Jd$ degrees of freedom, where $d$ is $X$ dimensionality (as $n \to \infty$ with $d$ fixed). If  $E s(X,y) \neq 0$ for almost all $y$ then a.s. for any fixed $r$, $\mathbb P(S_n > r) \to 1$  as $n \to \infty$ .
 \end{proposition}
-We now apply the above proposition to obtain a statistical test. 
 
-\begin{test}[MCMC convergence]
+
+\begin{test}[One sample test]
 \label{test}
 Calculate $S_n$. Choose a threshold $r_\alpha$ corresponding to the $1-\alpha$ quantile of a  $\chi^2$ distribution with $J$ degrees of freedom, and reject the null hypothesis whenever $S_n$ is larger than $r_\alpha$. 
 \end{test}
+
+\section{Experiments}
+
+\subsection{Student t vs Normal}
+This sani
+
+In this experiment we check that one-sample test can reject a hypothesis that a sample, drawn form a t-student distribution, comes form a normal distribution. For a student t distribution with a number of degrees of freedom $k$, we draw 500 samples and calculate the p-value -- this procedure is repeated 150 times so  150 p-values are calculated and a bar plot is created. Then we vary the number of degrees of freedom in the range $1,6,\cdots,71$ and bar plots for each of $k$ are calculated. 
+
+\begin{figure}
+\includegraphics[width=0.8\textwidth]{./img/student.pdf}
+\end{figure}
+
+\subsection{MCMC diagnostic }
+Here we model used in the experiment 5.1. The model is 
+\begin{align}
+ \theta_1 \sim N(0,10) ; \theta_2 \sim N(0,1)
+ X_i \sim \frac {1}{2} N(\theta_1,4) + \frac{1}{2} N(\theta_2,4) 
+\end{align}
+400 points are drawn from this model. In the following experiment we would like to characterize the average time required for convergence for two different MCMC algorithms. In order to do so we run multiple chains and asses distribution of p-values. Under the null hypothesis p-values should have uniform distribution and, as in the previous experiment, we asses the divergence of the p-values from the uniform by bar plots. Formally for both methods plain MH and SGLD we generate $40 \times 100$ chains. We divide those chains into $40$ groups of $100$ chains and run one-sample tests for for predefined times $t_1,...,t_10$  so that for each of group we get p-values at ten different times. Then we plot those p-values jointly on plots a and b. We don't use thinning.  
+
+
+\paragraph{Metropolis Hastings with random walk}
+We use plain MH MCMC with Gaussian proposal with with standard deviation equal to  $0.2$.   
+
+\subsection{SGLD, plain }
+Stochastic gradient  Stochastic Gradient Langevin Dynamics  with schrinking step size $\epsilon_t$ is a MCMC procedure desigend for large datasets. 
+400 points are drawn from the this model with $\theta_1 = 0$ and $\theta_2= 1$. In such a setting there are two modes in the posteriori disitbiution, one at the the point $0,1$ and the other at the point $1,-1$. We run the SGLD alogrithm with a batch size of 1 and 10000 iterations through the whole dataset. The stepsizes are $\epsilon_t = a(b+t)^{.55}$ where $ a = 0.01584$ and $b=2.31$ such that $\epsilon_t$ deacreses from $0.01$ to $.
+0001$. 
+
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\textwidth]{./img/mcmc_mixing.pdf}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\textwidth]{./img/sgld_mixing.pdf}
+\end{subfigure}%
+\end{figure}
+
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\textwidth]{./img/mcmc_sample.pdf}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\textwidth]{./img/sgld_sample.pdf}
+\end{subfigure}%
+\end{figure}
+
+
 
 
 \section{Math}
@@ -145,11 +195,7 @@ We will use simple Bonferroni correction to deal with type one error. Tests leve
 Type two is somehow more complicated. In general (this is my intuition from finite state Markov chains and AR processes ) chain does not converge to stationary distribution in any number of finite steps, unless it has started for the stationary distribution. As usually in testing, one has no finite sample control over type two error. We can however infer what misspecified log probability would have given similar results on the given sample. This can be done by perturbing log probability in some direction and calculating the statistic on our sample. The magnitude of perturbation will show which models appear to be indistinguishable (now talk about parameters inference and that its even more difficult )    
 
 
-\paragraph{Stupid fucked up SGLD}
 
-\begin{equation}
- p(x, \theta) = C 0.5 \exp( -(x-\theta_1)^2/ 2\sigma_x^2 - ) + C 0.5 \exp( -(x-\theta_1 - \theta_2)^2/ 2\sigma_x^2)
-\end{equation}
 
 
 

@@ -25,7 +25,7 @@ for i in range(no_chains):
     if i % (100) == 0:
         print(float(i)*100.0/no_chains)
         print(time()-t1)
-    sample.append(evSGLD(manual_grad, grad_log_prior, X, n=5, chain_size=SGLD_CHAIN_SIZE,theta = np.random.randn(2) ) )
+    sample.append(evSGLD(manual_grad, grad_log_prior, X, n=1, chain_size=SGLD_CHAIN_SIZE,theta = np.random.randn(2) ) )
 
 sample = np.array(sample)
 
