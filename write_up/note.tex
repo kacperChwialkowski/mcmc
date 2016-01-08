@@ -43,8 +43,43 @@ Let $g(x,y)$ be a characteristic, analytic kernel. Let $p$ be a probability meas
 \begin{align}
  \mu_p(y) = E  \nabla \log p(X) g(X,y) - E \nabla g(X,y)
 \end{align}
-this transform is closely connected to Stein method and kernel mean embedding.
-
+this transform is closely connected to Stein method and kernel mean embedding. Actually, as Arthur has showed in his note this is a mean embedding. But latter I think the distance squared should be different
+\begin{align}
+&d_q(p) = \\
+&= E \langle   \frac{\partial } {\partial x_1} \log p(X_1) k(X_1,\cdot) + \frac{\partial } {\partial x_1} k(X_1,\cdot) ,  \frac{\partial }{\partial x_2} \log p(X_2) k(\cdot,X_2) +  \frac{\partial } {\partial x_2} k(\cdot,X_2) \rangle \\
+  &= E  \frac{\partial } {\partial x_1} \log p(X_1) \frac{\partial } {\partial x_2} \log p(X_2) k(X_1,X_2) +
+          \frac{\partial } {\partial x_2} p(X_2) \frac{\partial } {\partial x_1} k(X_1,X_2) \\
+  &+  \frac{\partial } {\partial x_1} \log p(X_1) \frac{\partial } {\partial x_2} k(X_1,X_2) + \frac{\partial } {\partial x_1}\frac{\partial } {\partial x_2} k(X_1,X_2)
+\end{align}
+this make more sense when we write it this way
+\begin{align}
+ E \frac{\partial } {\partial x_1} \log p(X_1) g_1(X_1,X_2) + \frac{\partial } {\partial x_1} g_1(X_1,X_2) + \\
+ E \frac{\partial } {\partial x_1} p(X_1) g_2(X_1,X_2) +  \frac{\partial } {\partial x_1}\frac{\partial } {\partial x_2} g_2(X_1,X_2)
+\end{align}
+where 
+$$
+g_1(x_1,x_2) = \frac{\partial } {\partial x_2} \log p(x_2) k(x_1,x_2)
+$$
+and
+$$
+g_2(x,x') = \frac{\partial } {\partial x_2} k(x_1,x_2)
+$$
+Now,once we condition of $X_2$,  its easy to see that the core of U-statistic is degenerate, since $g_1(x,\cdot)$ and $g_2(x,\cdot)$ are just arbitrary functions as in Stein method.  
+$$
+E \left (\frac{\partial } {\partial x_1} \log p(X_1) g_1(X_1,X_2) + \frac{\partial } {\partial x_1} g_1(X_1,X_2) \right )| X_2 = 0
+$$
+$$
+E \left ( \frac{\partial } {\partial x_1} p(X_1) g_2(X_1,X_2) 
++  \frac{\partial } {\partial x_1}\frac{\partial } {\partial x_2} g_2(X_1,X_2) \right )| X_2 = 0
+$$
+To understand the behaviour under alternative it is sufficient to notice that mean embedding is surely not zero. Suppose $X \sim q$
+\begin{align}
+ &E \frac{\partial } {\partial x_1} \log p(X_1) k(X_1,t) + \frac{\partial } {\partial x_1} k(X_1,t) =\\
+ &E  \frac{\partial } {\partial x_1} ( \log  p(X_1) + \log  q(X_1)- \log  q(X_1)  )  k(X_1,t)   + \frac{\partial } {\partial x_1} k(X_1,t) = \\
+ &E  \frac{\partial } {\partial x_1} (\log p(X_1) - \log q(X_1))k(X_1,t)   = \\
+ & \int  (\log p(x) - \log q(x) ) k(x,t) p(x) dx
+\end{align}
+The integral transform is zero is and only $\log p(x) = \log q(x)$ for a right class of kernel.
 
 \section{test}
 For some fixed location $y$ and a random variable $X$, define a random variable $s(X,y)$
@@ -78,16 +113,18 @@ Calculate $S_n$. Choose a threshold $r_\alpha$ corresponding to the $1-\alpha$ q
 
 \section{Experiments}
 
-\subsection{Student t vs Normal}
-This sani
-
-In this experiment we check that one-sample test can reject a hypothesis that a sample, drawn form a t-student distribution, comes form a normal distribution. For a student t distribution with a number of degrees of freedom $k$, we draw 500 samples and calculate the p-value -- this procedure is repeated 150 times so  150 p-values are calculated and a bar plot is created. Then we vary the number of degrees of freedom in the range $1,6,\cdots,71$ and bar plots for each of $k$ are calculated. 
+\subsection{Student's t vs Normal}
+In this  sanity check we replicate the experiment 4.1 from \cite{gorham2015measuring}. The null hypothesis is that observed samples $x_i$, for $1 \leq i \leq 500$ come from standard normal distribution. We will check the power of the one-sample test by generating samples from Student's t distributions with increasing number of degrees of freedom, and analyzing p-values. For the Student's t distribution with a number of degrees of freedom $\nu$, we draw 500 samples and calculate the p-value -- this procedure is repeated 150 times so 150 p-values are calculated and a bar plot of p-values is created. The number of degrees of freedom $\nu$ varies in the range $1,6,\cdots,71$ and bar plots for each of $\nu$ is drawn.  The results are plotted in the figure \ref{fig:studentst}. The bar plot for $\nu = inf$ is calculated for samples coming from normal distribution.
 
 \begin{figure}
+\label{fig:studentst}
 \includegraphics[width=0.8\textwidth]{./img/student.pdf}
+\caption{Distribution of p-values as a function of number of degrees of freedom.}
 \end{figure}
 
-\subsection{MCMC diagnostic }
+\subsection{MCMC diagnostic}
+This one sample test can be used for diagnostics of most of the MCMC methods. In the following experiment we will demonstrate how to verify if the samples obtained form two sampling can be assumed to come from the stationary distribution.  
+
 Here we model used in the experiment 5.1. The model is 
 \begin{align}
  \theta_1 \sim N(0,10) ; \theta_2 \sim N(0,1)
@@ -200,7 +237,8 @@ Type two is somehow more complicated. In general (this is my intuition from fini
 
 
 
-
+\bibliographystyle{plain}
+\bibliography{biblio}
 
 
 
