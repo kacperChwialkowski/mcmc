@@ -19,17 +19,17 @@ N = 300
 
 
 dfs = range(1, 71, 5)
-mc_reps = 20
+mc_reps = 100
 res = np.empty((0,2))
 
-# for df in dfs:
-#
-#     for mc in range(mc_reps):
-#         print(mc)
-#         X = np.random.standard_t(df,N)
-#         me = GaussianQuadraticTest(grad_log_normal)
-#         pvalue = me.compute_pvalue(X)
-#         res = np.vstack((res,np.array([df, pvalue])))
+for df in dfs:
+
+    for mc in range(mc_reps):
+        print(mc)
+        X = np.random.standard_t(df,N)
+        me = GaussianQuadraticTest(grad_log_normal)
+        pvalue = me.compute_pvalue(X)
+        res = np.vstack((res,np.array([df, pvalue])))
 
 for mc in range(mc_reps):
 
