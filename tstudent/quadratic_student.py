@@ -15,10 +15,10 @@ def grad_log_normal(x):
     return  -x
 
 
-N = 300
+N = 500
 
 
-dfs = range(1, 71, 5)
+dfs = range(1, 10, 2)
 mc_reps = 100
 res = np.empty((0,2))
 

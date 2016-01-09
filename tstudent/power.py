@@ -10,13 +10,13 @@ import numpy as np
 def grad_log_normal(x):
     return  -x
 
-m=5
+m=2
 
-N = 100*m
+N = 250*m
 
 
-dfs = range(1, 71, 5)
-mc_reps = 150
+dfs = range(1, 10, 2)
+mc_reps = 200
 res = np.empty((0,2))
 
 for df in dfs:
