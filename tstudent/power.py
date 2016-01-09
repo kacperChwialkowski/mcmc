@@ -1,7 +1,7 @@
 import matplotlib
 from pandas import DataFrame
 import seaborn
-from stat_test.stationary_distribution import GaussianSteinTest
+from stat_test.random_freq_test import GaussianSteinTest
 
 __author__ = 'kcx'
 import numpy as np

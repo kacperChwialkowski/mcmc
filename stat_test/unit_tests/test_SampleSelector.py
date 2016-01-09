@@ -1,12 +1,14 @@
 from unittest import TestCase
 from sampplers.MetropolisHastings import mh_generator
-from stat_test.stationary_distribution import SampleSelector, GaussianSteinTest
+from stat_test.random_freq_test import SampleSelector, GaussianSteinTest
 import numpy as np
 
 __author__ = 'kcx'
 
 
 class TestSelector(TestCase):
+
+
 
 
     def test_on_one_dim_gaussian(self):

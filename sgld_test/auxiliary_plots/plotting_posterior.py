@@ -6,7 +6,9 @@ from sgld_test.likelihoods import gen_X, _log_probability
 
 sns.set(color_codes=True)
 
-N = 500
+np.random.seed(1307)
+
+N = 200
 X = gen_X(N)
 theta1 = np.arange(-2, 2, 0.25)
 grid_size = len(theta1)

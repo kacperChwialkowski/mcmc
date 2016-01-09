@@ -1,17 +1,19 @@
 from pandas import DataFrame
 import seaborn
 from sgld_test.gradients_of_likelihood import manual_grad
-from sgld_test.mcmc_convergance.cosnt import CHAIN_SIZE, NUMBER_OF_TESTS, NO_OF_SAMPELS_IN_TEST, SGLD_CHAIN_SIZE
+from sgld_test.mcmc_convergance.cosnt import CHAIN_SIZE, NUMBER_OF_TESTS, NO_OF_SAMPELS_IN_TEST, SGLD_CHAIN_SIZE, SEED, \
+    SAMPLE_SIZE
 from sgld_test.likelihoods import gen_X, log_probability
-from stat_test.stationary_distribution import GaussianSteinTest
+from stat_test.random_freq_test import GaussianSteinTest
 
 __author__ = 'kcx'
 import  numpy as np
 
 samples = np.load('./samples.npy')
 
-np.random.seed(32)
-X = gen_X(400)
+np.random.seed(SEED)
+X = gen_X(SAMPLE_SIZE)
+
 
 def grad_log_pob(theta):
     s=[]
@@ -38,9 +40,21 @@ for time in times_we_look_at:
 
 df = DataFrame(arr)
 
-pr =seaborn.boxplot(x=0,y=1,data=df)
+pr = seaborn.boxplot(x=0,y=1,data=df)
 seaborn.plt.show()
-
-
 fig = pr.get_figure()
 fig.savefig('../../write_up/img/sgld_mixing.pdf')
+
+arr = []
+
+for time in times_we_look_at:
+    chain_at_time = samples[:,time]
+    print(time)
+    pval = me.compute_pvalue(chain_at_time)
+    arr.append(pval)
+
+import matplotlib.pyplot as plt
+
+plt.plot(arr)
+
+plt.show()

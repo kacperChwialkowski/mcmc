@@ -2,17 +2,24 @@ import numpy as np
 
 def metropolis_hastings(log_density, chain_size=10000, thinning=15, x_prev=np.random.randn()):
     A = [x_prev]
-    dimension = len(x_prev)
+
+    dimension=1
+    if hasattr(x_prev, "__len__"):
+        dimension = len(x_prev)
+
+
+    old_log_lik = log_density(x_prev)
     for i in range(chain_size*thinning-1):
-        guess = 0.2*np.random.randn(dimension)+x_prev
-        old_log_lik = log_density(x_prev)
+        guess = np.random.randn(dimension)+x_prev
         new_log_lik = log_density(guess)
         if new_log_lik > old_log_lik:
             A.append(guess)
+            old_log_lik = new_log_lik
         else:
             u = np.random.uniform(0.0,1.0)
             if u < np.exp(new_log_lik - old_log_lik):
                 A.append(guess)
+                old_log_lik = new_log_lik
             else:
                 A.append(x_prev)
         x_prev = A[-1]

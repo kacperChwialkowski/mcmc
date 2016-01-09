@@ -12,8 +12,6 @@ def mahalanobis_distance(difference, num_random_features):
     num_samples, _ = np.shape(difference)
     sigma = np.cov(np.transpose(difference))
 
-
-
     mu = np.mean(difference, 0)
 
     if num_random_features == 1:
