@@ -1,5 +1,5 @@
 from unittest import TestCase
-from stat_test.random_freq_test import GaussianSteinTest
+from stat_test.linear_time import GaussianSteinTest
 import numpy as np
 __author__ = 'kcx'
 

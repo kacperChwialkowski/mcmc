@@ -1,6 +1,6 @@
 from pandas import DataFrame
 import seaborn
-from stat_test.Ustat import GaussianQuadraticTest
+from stat_test.quadratic_time import GaussianQuadraticTest
 
 __author__ = 'kcx'
 import numpy as  np

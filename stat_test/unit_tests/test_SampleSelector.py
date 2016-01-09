@@ -1,6 +1,6 @@
 from unittest import TestCase
 from sampplers.MetropolisHastings import mh_generator
-from stat_test.random_freq_test import SampleSelector, GaussianSteinTest
+from stat_test.linear_time import SampleSelector, GaussianSteinTest
 import numpy as np
 
 __author__ = 'kcx'

@@ -81,7 +81,18 @@ To understand the behaviour under alternative it is sufficient to notice that me
 \end{align}
 The integral transform is zero is and only $\log p(x) = \log q(x)$ for a right class of kernel.
 
-\section{test}
+\section{tests}
+
+\subsection{Quadratic}
+If data is IID we use Rademacher bootstrap. If $h(x_1,x_2)$ is a a core degenerate under null, then we bootstrapped statistic
+\begin{align}
+ \sum_{i,j} \epsilon_i \epsilon_j h(X_i,X_j)
+\end{align}
+This is justified by wild bootstrap for random processes, or probably we can study eigenvalues of kernel $y_1  y_2 h(x_1,x_2)$ under this discrete- continuous distribution  (the eigenvalues for kernel $y_1  y_2$ with Rademacher distribution are two $1$'s (eigenvectors $(-1,1),(1,-1)$ )).       
+
+
+\subsection{Linear time}
+
 For some fixed location $y$ and a random variable $X$, define a random variable $s(X,y)$
 \begin{align}
  s(X,y) = \nabla \log p(X) g(X,y) -  \nabla g(X,y).
@@ -114,12 +125,19 @@ Calculate $S_n$. Choose a threshold $r_\alpha$ corresponding to the $1-\alpha$ q
 \section{Experiments}
 
 \subsection{Student's t vs Normal}
-In this  sanity check we replicate the experiment 4.1 from \cite{gorham2015measuring}. The null hypothesis is that observed samples $x_i$, for $1 \leq i \leq 500$ come from standard normal distribution. We will check the power of the one-sample test by generating samples from Student's t distributions with increasing number of degrees of freedom, and analyzing p-values. For the Student's t distribution with a number of degrees of freedom $\nu$, we draw 500 samples and calculate the p-value -- this procedure is repeated 150 times so 150 p-values are calculated and a bar plot of p-values is created. The number of degrees of freedom $\nu$ varies in the range $1,6,\cdots,71$ and bar plots for each of $\nu$ is drawn.  The results are plotted in the figure \ref{fig:studentst}. The bar plot for $\nu = inf$ is calculated for samples coming from normal distribution.
+In this  sanity check we replicate the experiment 4.1 from \cite{gorham2015measuring}. The null hypothesis is that observed samples $x_i$, for $1 \leq i \leq 500$ come from standard normal distribution. We will check the power of the one-sample test by generating samples from Student's t distributions with increasing number of degrees of freedom, and analyzing p-values. For the Student's t distribution with a number of degrees of freedom $\nu$, we draw 500 samples and calculate the p-value -- this procedure is repeated (200,100) times so (200,100) p-values are calculated and a bar plot of p-values is created. The number of degrees of freedom $\nu$ varies in the range $1,6,\cdots,71$ and bar plots for each of $\nu$ is drawn.  The results are plotted in the figure \ref{fig:studentst}. The bar plot for $\nu = inf$ is calculated for samples coming from normal distribution.
 
 \begin{figure}
 \label{fig:studentst}
 \includegraphics[width=0.8\textwidth]{./img/student.pdf}
-\caption{Distribution of p-values as a function of number of degrees of freedom.}
+\caption{Linear Time test. Distribution of p-values as a function of number of degrees of freedom.}
+\end{figure}
+
+
+\begin{figure}
+\label{fig:studentstq}
+\includegraphics[width=0.8\textwidth]{./img/qstudent.pdf}
+\caption{Quadratic time test. Distribution of p-values as a function of number of degrees of freedom.}
 \end{figure}
 
 \subsection{MCMC diagnostic}

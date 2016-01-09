@@ -1,5 +1,5 @@
 from sampplers.MetropolisHastings import metropolis_hastings
-from stat_test.random_freq_test import GaussianSteinTest
+from stat_test.linear_time import GaussianSteinTest
 
 __author__ = 'kcx'
 import numpy as np
