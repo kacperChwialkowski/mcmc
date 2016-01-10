@@ -7,7 +7,7 @@ __author__ = 'kcx'
 
 class TestGaussianQuadraticTest(TestCase):
     def grad_log_normal(self,x):
-        return  -x
+        return -x
 
 
     def test_regression_1(self):
