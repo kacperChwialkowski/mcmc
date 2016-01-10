@@ -58,6 +58,11 @@ class GaussianQuadraticTest:
         return -self.g1k(x, y)
     
     def g2k_multiple(self, X):
+        """
+        Efficient 2nd gradient computation of Gaussian kernel with multiple inputs
+        
+        Effectively does the same as calling self.g2k on all pairs of the input
+        """
         return -self.g1k_multiple(X)
 
     def gk(self, x, y):
@@ -65,9 +70,9 @@ class GaussianQuadraticTest:
 
     def gk_multiple(self, X):
         """
-        Efficient 2nd gradient computation of Gaussian kernel with multiple inputs
+        Efficient gradient computation of Gaussian kernel with multiple inputs
         
-        Effectively does the same as calling self.g2k on all pairs of the input
+        Effectively does the same as calling self.gk on all pairs of the input
         """
         assert X.ndim == 1
         
@@ -91,27 +96,12 @@ class GaussianQuadraticTest:
         stat = N * np.mean(U_matrix)
         return U_matrix, stat
     
-    def get_statistic_multiple_naive_linear_loop(self, samples):
-        log_pdf_gradients = self.grad_multiple(samples)
-        K = self.k_multiple(samples)
-        G1K = self.g1k_multiple(samples)
-        G2K = self.g2k_multiple(samples)
-        GK = self.gk_multiple(samples)
-        
-        pairwise_log_gradients = log_pdf_gradients.reshape(len(log_pdf_gradients), 1) * log_pdf_gradients.reshape(1, len(log_pdf_gradients))
-        A = pairwise_log_gradients * K
-        B = G1K
-        C = G2K
-        for i in range(len(samples)):
-            B[:, i] *= log_pdf_gradients[i]
-            C[i, :] *= log_pdf_gradients[i]
-            
-        D = GK
-        U = A + B + C + D
-        stat = len(samples) * np.mean(U) 
-        return U, stat
-
     def get_statistic_multiple(self, samples):
+        """
+        Efficient statistic computation with multiple inputs
+        
+        Effectively does the same as calling self.get_statisitc.
+        """
         log_pdf_gradients = self.grad_multiple(samples)
         K = self.k_multiple(samples)
         G1K = self.g1k_multiple(samples)
