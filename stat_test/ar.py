@@ -13,17 +13,28 @@ def simulate( nPeriod, nPath,beta):
     return sims
 
 
+
+def simulatepm(N,p_change):
+    X = np.zeros(N)-1
+    change_sign = np.random.rand(N) < p_change
+    for i in range(N):
+        if change_sign[i]:
+            X[i] = -X[i-1]
+    return X
+
+
 if __name__ == "__main__":
-    w = simulate(10000,1,0.9)
-    print(acf(np.sign(w),nlags=3))
-    print(np.dot(w.T,w)/1000)
+    w = np.sign(simulate(10000,1,0.99))
+    print(acf(w,nlags=3))
+    print(np.dot(w.T,w)/10000)
 
 
-    # import matplotlib.pyplot as plt
-    #
-    # plt.plot(w)
-    # plt.show()
-    #
+
+    import matplotlib.pyplot as plt
+
+    plt.plot(w)
+    plt.show()
+
     # w = simulate(1000,3,0.9)
     # print(acf(np.sign(w[:,1]),nlags=3))
     # print(np.dot(w.T,w)/1000)
