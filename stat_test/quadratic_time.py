@@ -118,18 +118,16 @@ class GaussianQuadraticTest:
         stat = len(samples) * np.mean(U) 
         return U, stat
 
-    def compute_pvalue(self, samples, boots=100):
+    def compute_pvalue(self, U_matrix, num_bootstrapped_stats=100):
+        N = U_matrix.shape[0]
+        bootsraped_stats = np.zeros(num_bootstrapped_stats)
 
-        N = samples.shape[0]
-        U_matrix, stat = self.get_statisitc(N, samples)
-
-
-        bootsraped_stats = np.zeros(boots)
-
-        for proc in range(100):
+        for proc in range(num_bootstrapped_stats):
             W = np.sign(np.random.randn(N))
             WW = np.outer(W, W)
             st = np.mean(U_matrix * WW)
             bootsraped_stats[proc] = N * st
 
-        return  float(np.sum(bootsraped_stats > stat)) / boots
+        stat = N*np.mean(U_matrix)
+
+        return float(np.sum(bootsraped_stats > stat)) / num_bootstrapped_stats

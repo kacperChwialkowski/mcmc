@@ -5,13 +5,17 @@ import numpy as np
 TRUE_B = 2.3101
 
 
-def SGLD(grad_log_density,grad_log_prior, X,n,chain_size=10000, thinning=1, x_prev=np.random.rand(2),epsilon=5*10.0**(-3)):
-    Samples = [x_prev]
+def SGLD(grad_log_density,grad_log_prior, X,n,chain_size=10000, thinning=1, theta=np.random.rand(2)):
+
     N = X.shape[0]
+    X = np.random.permutation(X)
 
-    for t in range(chain_size*thinning-1):
+    samples = np.zeros((chain_size,2))
+    for t in range(chain_size*thinning):
 
-        epsilon_t = epsilon
+        b=2.31
+        a = 0.01584
+        epsilon_t = a*(b+t)**(-0.55)
 
         noise = np.sqrt(epsilon_t)*np.random.randn(2)
 
@@ -19,32 +23,39 @@ def SGLD(grad_log_density,grad_log_prior, X,n,chain_size=10000, thinning=1, x_pr
 
         stupid_sum=np.array([0.0,0.0])
         for data_point in sub:
-            stupid_sum = stupid_sum+ grad_log_density(x_prev,data_point)
+            stupid_sum = stupid_sum+ grad_log_density(theta[0], theta[1],data_point)
 
-        grad = grad_log_prior(x_prev) + (N/n)*stupid_sum
+        grad = grad_log_prior(theta) + (N/n)*stupid_sum
 
         grad = grad*epsilon_t/2
 
 
-        x_prev = x_prev+grad+noise
-        Samples.append(x_prev)
+        theta = theta+grad+noise
+
+        samples[t] = theta
 
 
-    return np.array(Samples[::thinning])
+    return np.array(samples[::thinning])
 
 
 
 
+# b=2.31
+#         a = 0.01584
+#         epsilon_t = a*(b+t)**(-0.55)
+#         epsilon_t = np.max(min_epsilon,epsilon_t)
 
-def vSGLD(grad_log_density,grad_log_prior, X,n,chain_size=10000,  theta=3*np.random.randn(2),epsilon=5*10.0**(-3)):
+
+def evSGLD(grad_log_density,grad_log_prior, X,n,epsilons, theta=np.random.randn(2)):
     N = X.shape[0]
     X = np.random.permutation(X)
 
+    chain_size = len(epsilons)
     samples = np.zeros((chain_size,2))
     for t in range(chain_size):
 
-        epsilon_t = epsilon
-        noise = np.sqrt(epsilon_t)*np.random.randn(2)
+
+        noise = np.sqrt(epsilons[t])*np.random.randn(2)
 
         sub = np.random.choice(X, n)
 
@@ -52,36 +63,9 @@ def vSGLD(grad_log_density,grad_log_prior, X,n,chain_size=10000,  theta=3*np.ran
 
         grad = grad_log_prior(theta) + (N/n)*stupid_sum
 
-        grad = grad*epsilon_t/2
+        grad = grad*epsilons[t]/2
 
         theta = theta+grad+noise
         samples[t] = theta
 
-    return samples
-
-
-def evSGLD(grad_log_density,grad_log_prior, X,n,chain_size=10000,  theta=3*np.random.randn(2)):
-    N = X.shape[0]
-    X = np.random.permutation(X)
-
-    samples = np.zeros((chain_size,2))
-    for t in range(chain_size):
-
-        b=2.31
-        a = 0.01584 #originally it was 10 times smaller
-        epsilon_t = a*(b+t)**(-0.55)
-
-        noise = np.sqrt(epsilon_t)*np.random.randn(2)
-
-        sub = np.random.choice(X, n)
-
-        stupid_sum = np.sum(grad_log_density(theta[0],theta[1],sub),axis=0)
-
-        grad = grad_log_prior(theta) + (N/n)*stupid_sum
-
-        grad = grad*epsilon_t/2
-
-        theta = theta+grad+noise
-        samples[t] = theta
-
-    return samples
+    return np.array(samples)

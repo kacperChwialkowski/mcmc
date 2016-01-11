@@ -1,13 +1,7 @@
 from stat_test.quadratic_time import GaussianQuadraticTest
-
-__author__ = 'kcx'
-
-import matplotlib
 from pandas import DataFrame
 import seaborn
-from stat_test.linear_time import GaussianSteinTest
 
-__author__ = 'kcx'
 import numpy as np
 
 
@@ -28,19 +22,18 @@ for df in dfs:
         print(mc)
         X = np.random.standard_t(df,N)
         me = GaussianQuadraticTest(grad_log_normal)
-        pvalue = me.compute_pvalue(X)
-        res = np.vstack((res,np.array([df, pvalue])))
+        U_stat,_ = me.get_statistic_multiple(X)
+        pval = me.compute_pvalue(U_stat)
+        res = np.vstack((res,np.array([df, pval])))
 
 for mc in range(mc_reps):
 
         X = np.random.randn(N)
         me = GaussianQuadraticTest(grad_log_normal)
-        pvalue = me.compute_pvalue(X)
-        res = np.vstack((res,np.array([np.Inf, pvalue])))
+        U_stat,_ = me.get_statistic_multiple(X)
+        pval = me.compute_pvalue(U_stat)
+        res = np.vstack((res,np.array([np.Inf, pval])))
 
-# import matplotlib.pyplot as plt
-# plt.plot(sorted(res[:,1]))
-# plt.show()
 
 np.save('results.npy',res)
 

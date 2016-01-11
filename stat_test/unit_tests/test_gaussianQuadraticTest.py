@@ -18,14 +18,16 @@ class TestGaussianQuadraticTest(TestCase):
         np.random.seed(43)
         data = np.random.randn(100)
         me = GaussianQuadraticTest(self.grad_log_normal)
-        pval = me.compute_pvalue(data)
+        U_stat,_ = me.get_statistic_multiple(data)
+        pval = me.compute_pvalue(U_stat)
         assert pval == 0.79
 
     def test_regression_2(self):
         np.random.seed(42)
         data = np.random.randn(100) * 2.0
         me = GaussianQuadraticTest(self.grad_log_normal)
-        pval = me.compute_pvalue(data)
+        U_stat,_ = me.get_statistic_multiple(data)
+        pval = me.compute_pvalue(U_stat)
         assert pval == 0.0
 
     def test_k_multiple_equals_k_no_grad_multiple_given(self):
