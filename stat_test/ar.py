@@ -20,14 +20,19 @@ def simulatepm(N,p_change):
     for i in range(N):
         if change_sign[i]:
             X[i] = -X[i-1]
+        else:
+            X[i] = X[i-1]
     return X
 
 
 if __name__ == "__main__":
-    w = np.sign(simulate(10000,1,0.99))
+    # w = np.sign(simulate(10000,1,0.99))
+    # print(acf(w,nlags=3))
+    # print(np.dot(w.T,w)/10000)
+
+    w = simulatepm(1000,0.02)
     print(acf(w,nlags=3))
     print(np.dot(w.T,w)/10000)
-
 
 
     import matplotlib.pyplot as plt

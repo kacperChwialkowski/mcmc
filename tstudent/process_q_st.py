@@ -62,7 +62,9 @@ dfs = range(1, 4, 2)
 mc_reps = 100
 res = np.empty((0,2))
 
-
+block = N/np.log(N)
+p_change  = 1.0/block
+print(p_change)
 
 for df in dfs:
 
@@ -72,7 +74,8 @@ for df in dfs:
         X = correlatet_t(X,N)
         me = GaussianQuadraticTest(grad_log_normal)
         U_stat,_ = me.get_statistic_multiple(X)
-        pval = me.compute_pvalues_for_processes(U_stat,0.99)
+
+        pval = me.compute_pvalues_for_processes(U_stat,p_change)
         res = np.vstack((res,np.array([df, pval])))
 
 for mc in range(mc_reps):
@@ -81,7 +84,7 @@ for mc in range(mc_reps):
         X = correlatet_t(X,N)
         me = GaussianQuadraticTest(grad_log_normal)
         U_stat,_ = me.get_statistic_multiple(X)
-        pval = me.compute_pvalues_for_processes(U_stat,0.99)
+        pval = me.compute_pvalues_for_processes(U_stat,p_change)
         res = np.vstack((res,np.array([np.Inf, pval])))
 
 

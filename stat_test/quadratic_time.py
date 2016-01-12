@@ -1,7 +1,7 @@
 from scipy.spatial.distance import squareform, pdist
 
 import numpy as np
-from stat_test.ar import simulate
+from stat_test.ar import simulate, simulatepm
 
 
 __author__ = 'kcx, heiko'
@@ -133,15 +133,15 @@ class GaussianQuadraticTest:
 
         return float(np.sum(bootsraped_stats > stat)) / num_bootstrapped_stats
 
-    def compute_pvalues_for_processes(self,U_matrix,corr, num_bootstrapped_stats=100):
+    def compute_pvalues_for_processes(self,U_matrix,chane_prob, num_bootstrapped_stats=100):
         N = U_matrix.shape[0]
         bootsraped_stats = np.zeros(num_bootstrapped_stats)
 
-        orsetinW = simulate(N,num_bootstrapped_stats,corr)
+        # orsetinW = simulate(N,num_bootstrapped_stats,corr)
 
         for proc in range(num_bootstrapped_stats):
-            W = np.sign(orsetinW[:,proc])
-
+            # W = np.sign(orsetinW[:,proc])
+            W = simulatepm(N,chane_prob)
             WW = np.outer(W, W)
             st = np.mean(U_matrix * WW)
             bootsraped_stats[proc] = N * st
