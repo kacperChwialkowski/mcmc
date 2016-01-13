@@ -46,16 +46,18 @@ def SGLD(grad_log_density,grad_log_prior, X,n,chain_size=10000, thinning=1, thet
 #         epsilon_t = np.max(min_epsilon,epsilon_t)
 
 
-def evSGLD(grad_log_density,grad_log_prior, X,n,epsilons, theta=np.random.randn(2)):
+def evSGLD(grad_log_density,grad_log_prior, X,n,epsilons, theta=None,dim=2):
+    if theta is None:
+        theta=np.random.randn(dim)
     N = X.shape[0]
     X = np.random.permutation(X)
 
     chain_size = len(epsilons)
-    samples = np.zeros((chain_size,2))
+    samples = np.zeros((chain_size,dim))
     for t in range(chain_size):
 
 
-        noise = np.sqrt(epsilons[t])*np.random.randn(2)
+        noise = np.sqrt(epsilons[t])*np.random.randn(dim)
 
         sub = np.random.choice(X, n)
 
