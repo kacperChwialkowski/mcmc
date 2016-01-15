@@ -6,14 +6,14 @@ import seaborn
 import numpy as np
 
 
-SGLD_EPSILON = 0.1
+SGLD_EPSILON = 0.002
 
-P_CHANGE = 0.1
+P_CHANGE = 0.5
 
 N = 500
 
-DEGREES_OF_FREEDOM = [1,3,5,7,9]+[1000]
-MC_PVALUES_REPS = 500
+DEGREES_OF_FREEDOM = [1,3]+[1000]
+MC_PVALUES_REPS = 100
 TEST_CHAIN_SIZE = 10**6
 
 
@@ -48,20 +48,27 @@ def normal_mild_corr(N):
 # estimate size of thinning
 def get_thinning(X,nlags = 50):
     autocorrelation = acf(X, nlags=nlags, fft=True)
-    # find correlation closest to 0.5
-    thinning = np.argmin(np.abs(autocorrelation - 0.5)) + 1
-    return thinning, autocorrelation[thinning]
+    # find correlation closest to given v
+    thinning = np.argmin(np.abs(autocorrelation - 0.85)) + 1
+    return thinning, autocorrelation
 
 
 
 X = sample_sgld_t_student(TEST_CHAIN_SIZE, 5.0, SGLD_EPSILON)
-sgld_thinning, autocorr =  get_thinning(X)
-print('thinning for sgld t-student simulation ', sgld_thinning)
+sgld_thinning, autocorr =  get_thinning(X,500)
+print('thinning for sgld t-student simulation ', sgld_thinning,autocorr[sgld_thinning])
+import matplotlib.pyplot as plt
+
+
+
+
+plt.plot(np.log(autocorr))
+plt.show()
 
 
 X = normal_mild_corr(TEST_CHAIN_SIZE)
 ar_thinning, autocorr =  get_thinning(X)
-print('thinning for AR normal simulation ',ar_thinning)
+print('thinning for AR normal simulation ',ar_thinning,autocorr[ar_thinning])
 
 
 results = np.empty((0,2))
@@ -88,7 +95,7 @@ for df in DEGREES_OF_FREEDOM:
 print('Inf')
 for mc in range(MC_PVALUES_REPS):
 
-    if mc % 15 == 0:
+    if mc % 32 == 0:
             print(' ',100.0*mc/MC_PVALUES_REPS,'%')
     X = normal_mild_corr(ar_thinning*N)
     X = X[::ar_thinning]
