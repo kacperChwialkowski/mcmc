@@ -9,9 +9,14 @@ def log_probability(theta,x):
     return _log_probability(theta_1,theta_2,x)
 
 
+def _vector_of_log_likelihoods(theta_1, theta_2, x):
+    lik = np.log(0.5 * norm.pdf(x, theta_1, SIGMA_x) + 0.5 * norm.pdf(x, theta_1 + theta_2, SIGMA_x))
+    return lik
+
+
 def _log_lik(theta_1, theta_2, x):
-    lik = 0.5 * norm.pdf(x, theta_1, SIGMA_x) + 0.5 * norm.pdf(x, theta_1 + theta_2, SIGMA_x)
-    log_lik = np.sum(np.log(lik))
+    lik = _vector_of_log_likelihoods(theta_1, theta_2, x)
+    log_lik = np.sum(lik)
     return log_lik
 
 
