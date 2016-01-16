@@ -22,7 +22,7 @@ def log_density_prior(theta):
 
 
 
-sample = austerity(vectorized_log_lik,log_density_prior, X,0.01,batch_size=200,chain_size=1000, thinning=20, theta_t=np.random.randn(2))
+sample = austerity(vectorized_log_lik,log_density_prior, X,0.01,batch_size=50,chain_size=1000, thinning=20, theta_t=np.random.randn(2))
 
 import seaborn as sns
 sns.set(color_codes=True)

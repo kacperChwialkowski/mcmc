@@ -14,26 +14,21 @@ def austerity(log_lik,log_density_prior, X,epsilon,batch_size=30,chain_size=1000
     if hasattr(theta_t, "__len__"):
         dimension = len(theta_t)
 
-
     for i in range(chain_size*thinning-1):
-        print(i)
-        print(i)
 
         theta_prime = np.random.randn(dimension)+theta_t
-
-
 
         u = np.random.rand()
         mu_0 = np.log(u)+log_density_prior(theta_t) -log_density_prior(theta_prime)
         mu_0 = mu_0/N
 
-        sub = log_lik(X, theta_prime) - log_lik(X, theta_t)
-        l_hat = np.sum(sub)+ log_density_prior(theta_prime) - log_density_prior(theta_t)
-
-        fuck_me = log_probability(theta_prime, X ) - log_probability(theta_t, X )
-        print(l_hat,fuck_me)
-        print('fff',np.mean(sub))
-        assert_almost_equal( l_hat ,fuck_me)
+        # sub = log_lik(X, theta_prime) - log_lik(X, theta_t)
+        # l_hat = np.sum(sub)+ log_density_prior(theta_prime) - log_density_prior(theta_t)
+        #
+        # fuck_me = log_probability(theta_prime, X ) - log_probability(theta_t, X )
+        # print(l_hat,fuck_me)
+        # print('fff',np.mean(sub))
+        # assert_almost_equal( l_hat ,fuck_me)
 
         accept = approximate_MH_accept(mu_0, log_lik, X, batch_size, epsilon, theta_prime, theta_t, N)
         if accept:
@@ -41,16 +36,16 @@ def austerity(log_lik,log_density_prior, X,epsilon,batch_size=30,chain_size=1000
 
         A.append(theta_t)
 
-
-        if np.log(u) <fuck_me:
-            aux_accept = True
-        else:
-            aux_accept = False
-
-        huj = mu_0 <  np.mean(sub)
-        print(huj,accept)
-        assert huj == aux_accept
-        assert aux_accept == accept
+        #
+        # if np.log(u) <fuck_me:
+        #     aux_accept = True
+        # else:
+        #     aux_accept = False
+        #
+        # huj = mu_0 <  np.mean(sub)
+        # print(huj,accept)
+        # assert huj == aux_accept
+        # assert aux_accept == accept
 
 
     return np.array(A[::thinning])
@@ -73,8 +68,6 @@ def approximate_MH_accept(mu_0,log_lik,X,batch_size,epsilon,theta_prime, theta_t
         t_students_var = (l_hat - mu_0) / s
         stat = np.abs(t_students_var)
         delta  = t.sf(stat, n-1)
-        print('ff',np.mean(sub))
-        # print(t_students_var,stat,delta,epsilon)
         if delta < epsilon:
             if l_hat > mu_0:
                 return True
