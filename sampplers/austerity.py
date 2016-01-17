@@ -14,6 +14,7 @@ def austerity(log_lik,log_density_prior, X,epsilon,batch_size=30,chain_size=1000
     if hasattr(theta_t, "__len__"):
         dimension = len(theta_t)
 
+    global_evals = 0
     for i in range(chain_size*thinning-1):
 
         theta_prime = np.random.randn(dimension)+theta_t
@@ -22,13 +23,14 @@ def austerity(log_lik,log_density_prior, X,epsilon,batch_size=30,chain_size=1000
         mu_0 = np.log(u)+log_density_prior(theta_t) -log_density_prior(theta_prime)
         mu_0 = mu_0/N
 
-        accept = approximate_MH_accept(mu_0, log_lik, X, batch_size, epsilon, theta_prime, theta_t, N)
+        accept,evals = approximate_MH_accept(mu_0, log_lik, X, batch_size, epsilon, theta_prime, theta_t, N)
+        global_evals += evals
         if accept:
            theta_t = theta_prime
 
         A.append(theta_t)
 
-    return np.array(A[::thinning])
+    return np.array(A[::thinning]),global_evals
 
 
 def approximate_MH_accept(mu_0,log_lik,X,batch_size,epsilon,theta_prime, theta_t,N):
@@ -50,5 +52,5 @@ def approximate_MH_accept(mu_0,log_lik,X,batch_size,epsilon,theta_prime, theta_t
         delta  = t.sf(stat, n-1)
         if delta < epsilon:
             if l_hat > mu_0:
-                return True
-            return False
+                return True,n
+            return False,n

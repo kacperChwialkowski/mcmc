@@ -27,5 +27,5 @@ class TestAusterity(TestCase):
             return np.log(norm.pdf(theta[0],0, SIGMA_1)) + np.log(norm.pdf(theta[1],0, SIGMA_2))
 
 
-        sample = austerity(vectorized_log_lik,log_density_prior, X,0.01,batch_size=50,chain_size=10, thinning=1, theta_t=np.random.randn(2))
+        sample,_ = austerity(vectorized_log_lik,log_density_prior, X,0.01,batch_size=50,chain_size=10, thinning=1, theta_t=np.random.randn(2))
         assert_almost_equal(np.array([-0.2554517,  1.3805683]),sample[-1])
