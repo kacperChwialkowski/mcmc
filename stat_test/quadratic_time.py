@@ -67,6 +67,16 @@ class GaussianQuadraticTest:
         return -2.0 / self.scaling * K * differences
 
 
+    def g1k_multiple_dim(self, X,K,dim):
+
+        X_dim = X[:,dim]
+        assert X_dim.ndim == 1
+
+        differences = X_dim.reshape(len(X_dim), 1) - X_dim.reshape(1,len(X_dim))
+
+        return -2.0 / self.scaling * K * differences
+
+
 
 
     def g2k(self, x, y):
@@ -79,6 +89,9 @@ class GaussianQuadraticTest:
         Effectively does the same as calling self.g2k on all pairs of the input
         """
         return -self.g1k_multiple(X)
+
+    def g2k_multiple_dim(self, X,K,dim):
+        return -self.g1k_multiple_dim(X,K,dim)
 
     def gk(self, x, y):
         return 2.0 * self.k(x, y) * (self.scaling - 2 * (x - y) ** 2) / self.scaling ** 2
@@ -96,6 +109,17 @@ class GaussianQuadraticTest:
         K = np.exp(-sq_differences / self.scaling)
 
         return 2.0 * K * (self.scaling - 2 * sq_differences) / self.scaling ** 2
+
+    def gk_multiple_dim(self, X,K,dim):
+        X_dim = X[:,dim]
+        assert X_dim.ndim == 1
+
+        differences = X_dim.reshape(len(X_dim), 1) - X_dim.reshape(1,len(X_dim))
+
+        sq_differences = differences ** 2
+
+        return 2.0 * K * (self.scaling - 2 * sq_differences) / self.scaling ** 2
+
 
     def get_statisitc(self, N, samples):
         U_matrix = np.zeros((N, N))
@@ -127,6 +151,27 @@ class GaussianQuadraticTest:
         return U_matrix, stat
 
 
+
+    def get_statistic_multiple_dim(self, samples,dim):
+
+        log_pdf_gradients = self.grad_multiple(samples)
+        log_pdf_gradients = log_pdf_gradients[:,dim]
+        K = self.k_multiple_dim(samples)
+        G1K = self.g1k_multiple_dim(samples,K,dim)
+        G2K = self.g2k_multiple_dim(samples,K,dim)
+        GK = self.gk_multiple_dim(samples,K,dim)
+
+        # use broadcasting to mimic the element wise looped call
+        pairwise_log_gradients = log_pdf_gradients.reshape(len(log_pdf_gradients), 1) * log_pdf_gradients.reshape(1, len(log_pdf_gradients))
+        A = pairwise_log_gradients * K
+        B = G1K * log_pdf_gradients
+        C = (G2K.T * log_pdf_gradients).T
+        D = GK
+        U = A + B + C + D
+        stat = len(samples) * np.mean(U)
+        return U, stat
+
+
     def get_statistic_multiple(self, samples):
         """
         Efficient statistic computation with multiple inputs
@@ -147,29 +192,6 @@ class GaussianQuadraticTest:
         D = GK
         U = A + B + C + D
         stat = len(samples) * np.mean(U) 
-        return U, stat
-
-
-    def get_statistic_multiple_dim(self, samples,dim    ):
-        """
-        Efficient statistic computation with multiple inputs
-
-        Effectively does the same as calling self.get_statisitc.
-        """
-        log_pdf_gradients = self.grad_multiple(samples)[dim]
-        K = self.k_multiple(samples)
-        G1K = self.g1k_multiple(samples)
-        G2K = self.g2k_multiple(samples)
-        GK = self.gk_multiple(samples)
-
-        # use broadcasting to mimic the element wise looped call
-        pairwise_log_gradients = log_pdf_gradients.reshape(len(log_pdf_gradients), 1) * log_pdf_gradients.reshape(1, len(log_pdf_gradients))
-        A = pairwise_log_gradients * K
-        B = G1K * log_pdf_gradients
-        C = (G2K.T * log_pdf_gradients).T
-        D = GK
-        U = A + B + C + D
-        stat = len(samples) * np.mean(U)
         return U, stat
 
 
