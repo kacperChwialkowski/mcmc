@@ -9,7 +9,7 @@ import numpy as np
 
 def austerity(log_lik,log_density_prior, X,epsilon,batch_size=30,chain_size=10000, thinning=15, theta_t=np.random.randn()):
     A = [theta_t]
-    N  = X.shape[0]
+    N = X.shape[0]
     dimension=1
     if hasattr(theta_t, "__len__"):
         dimension = len(theta_t)
@@ -22,31 +22,11 @@ def austerity(log_lik,log_density_prior, X,epsilon,batch_size=30,chain_size=1000
         mu_0 = np.log(u)+log_density_prior(theta_t) -log_density_prior(theta_prime)
         mu_0 = mu_0/N
 
-        # sub = log_lik(X, theta_prime) - log_lik(X, theta_t)
-        # l_hat = np.sum(sub)+ log_density_prior(theta_prime) - log_density_prior(theta_t)
-        #
-        # fuck_me = log_probability(theta_prime, X ) - log_probability(theta_t, X )
-        # print(l_hat,fuck_me)
-        # print('fff',np.mean(sub))
-        # assert_almost_equal( l_hat ,fuck_me)
-
         accept = approximate_MH_accept(mu_0, log_lik, X, batch_size, epsilon, theta_prime, theta_t, N)
         if accept:
            theta_t = theta_prime
 
         A.append(theta_t)
-
-        #
-        # if np.log(u) <fuck_me:
-        #     aux_accept = True
-        # else:
-        #     aux_accept = False
-        #
-        # huj = mu_0 <  np.mean(sub)
-        # print(huj,accept)
-        # assert huj == aux_accept
-        # assert aux_accept == accept
-
 
     return np.array(A[::thinning])
 
