@@ -40,15 +40,6 @@ class TestGaussianQuadraticTest(TestCase):
 
 
 
-    def test_two_dimensional_tests_alt(self):
-        np.random.seed(43)
-        me = GaussianQuadraticTest(self.grad_log_normal)
-        samples = np.random.randn(100,2)+1
-        U,_ = me.get_statisitc_two_dim(100,samples,1)
-        p = me.compute_pvalue(U)
-        assert p == 0
-
-
     def test_regression_1(self):
         np.random.seed(43)
         data = np.random.randn(100)

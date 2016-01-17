@@ -1,6 +1,7 @@
 from scipy.spatial.distance import squareform, pdist
 
 import numpy as np
+from statsmodels.stats.multitest import multipletests
 from stat_test.ar import simulate, simulatepm
 
 
@@ -227,13 +228,36 @@ class GaussianQuadraticTest:
         return float(np.sum(bootsraped_stats > stat)) / num_bootstrapped_stats
 
 
+class QuadraticMultiple:
+    def __init__(self,tester):
+        self.tester = tester
+
+    def is_from_null(self,alpha,samples,chane_prob):
+        dims = samples.shape[1]
+        boots = int(dims/alpha)
+        pvals = np.zeros(dims)
+        for dim in range(dims):
+            U,_ = self.tester.get_statistic_multiple_dim(samples,1)
+            p = self.tester.compute_pvalues_for_processes(U,chane_prob,boots)
+            pvals[dim] = p
+
+
+        alt_is_true, pvals_corrected,_,_ =  multipletests(pvals,alpha,method='holm')
+
+        null_is_true  = np.logical_not(alt_is_true)
+
+        return any(null_is_true),pvals_corrected
+
+
+
 if __name__ == "__main__":
 
     def gred_log_dens(x):
         return -x
 
     me = GaussianQuadraticTest(gred_log_dens)
-    samples = np.random.randn(500,2)
-    U,_ = me.get_statisitc_two_dim(500,samples,1)
-    p = me.compute_pvalue(U)
-    print(p)
+    qm = QuadraticMultiple(me)
+    X = np.random.randn(100,2)
+    accept_null,_ = qm.is_from_null(0.05, X, 0.1)
+    print(accept_null)
+
