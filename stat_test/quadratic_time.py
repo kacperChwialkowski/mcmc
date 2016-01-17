@@ -234,7 +234,7 @@ class QuadraticMultiple:
 
     def is_from_null(self,alpha,samples,chane_prob):
         dims = samples.shape[1]
-        boots = int(dims/alpha)
+        boots = 10*int(dims/alpha)
         pvals = np.zeros(dims)
         for dim in range(dims):
             U,_ = self.tester.get_statistic_multiple_dim(samples,1)
@@ -252,12 +252,13 @@ class QuadraticMultiple:
 
 if __name__ == "__main__":
 
-    def gred_log_dens(x):
+    def grad_log_dens(x):
         return -x
 
-    me = GaussianQuadraticTest(gred_log_dens)
+    me = GaussianQuadraticTest(grad_log_dens)
     qm = QuadraticMultiple(me)
-    X = np.random.randn(100,2)
-    accept_null,_ = qm.is_from_null(0.05, X, 0.1)
-    print(accept_null)
+    X = np.random.randn(100,2)+0.3
+    accept_null,p_val = qm.is_from_null(0.05, X, 0.1)
+    print(p_val)
+
 
