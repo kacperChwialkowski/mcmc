@@ -11,27 +11,6 @@ import numpy as np
 TEST_SIZE = 5* 10**5
 THINING =1
 
-SGLD_BATCH_SIZE = 1
-
-b = 2.31
-a = 0.01584
-
-EPSILON_MIN = 0.002
-t = (EPSILON_MIN /a)**(-1.0/0.55)-b
-burn_in_epsilons = a*(b+np.arange(t))**(-0.55)
-
-
-
-# cov_epsilons = np.append(burn_in_epsilons,np.ones(TEST_SIZE)*EPSILON_MIN)
-
-cov_epsilons = np.ones(TEST_SIZE)*EPSILON_MIN
-
-print(cov_epsilons)
-
-chain_size = len(cov_epsilons)
-likelihood_evals = chain_size*SGLD_BATCH_SIZE
-
-
 # np.random.seed(13)
 X = gen_X(100)
 

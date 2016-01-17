@@ -51,5 +51,4 @@ def approximate_MH_accept(mu_0,log_lik,X,batch_size,epsilon,theta_prime, theta_t
         if delta < epsilon:
             if l_hat > mu_0:
                 return True
-
             return False
