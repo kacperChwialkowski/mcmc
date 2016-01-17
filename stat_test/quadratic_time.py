@@ -23,7 +23,7 @@ class GaussianQuadraticTest:
             self.grad_multiple = grad_log_prob_multiple
             
     def k(self, x, y):
-        return np.exp(-(x - y) ** 2 / self.scaling)
+        return np.exp(-np.dot(x - y,x - y) / self.scaling)
     
     def k_multiple(self, X):
         """
@@ -37,6 +37,17 @@ class GaussianQuadraticTest:
             
         K = np.exp(-(sq_dists) / self.scaling)
         return K
+
+    def k_multiple_dim(self, X):
+
+        # check for stupid mistake
+        assert X.shape[0] > X.shape[1]
+
+        sq_dists = squareform(pdist(X, 'sqeuclidean'))
+
+        K = np.exp(-(sq_dists) / self.scaling)
+        return K
+
 
     def g1k(self, x, y):
         return -2.0 / self.scaling * self.k(x, y) * (x - y)
@@ -54,6 +65,9 @@ class GaussianQuadraticTest:
         K = np.exp(-sq_differences / self.scaling)
 
         return -2.0 / self.scaling * K * differences
+
+
+
 
     def g2k(self, x, y):
         return -self.g1k(x, y)
@@ -96,7 +110,23 @@ class GaussianQuadraticTest:
                 U_matrix[i, j] = a + b + c + d
         stat = N * np.mean(U_matrix)
         return U_matrix, stat
-    
+
+
+    def get_statisitc_two_dim(self, N, samples,dim):
+        U_matrix = np.zeros((N, N))
+        for i in range(N):
+            for j in range(N):
+                x1 = samples[i]
+                x2 = samples[j]
+                a = self.grad(x1)[dim] * self.grad(x2)[dim] * self.k(x1, x2)
+                b = self.grad(x2)[dim] * self.g1k(x1, x2)[dim]
+                c = self.grad(x1)[dim] * self.g2k(x1, x2)[dim]
+                d = self.gk(x1, x2)[dim]
+                U_matrix[i, j] = a + b + c + d
+        stat = N * np.mean(U_matrix)
+        return U_matrix, stat
+
+
     def get_statistic_multiple(self, samples):
         """
         Efficient statistic computation with multiple inputs
@@ -118,6 +148,30 @@ class GaussianQuadraticTest:
         U = A + B + C + D
         stat = len(samples) * np.mean(U) 
         return U, stat
+
+
+    def get_statistic_multiple_dim(self, samples,dim    ):
+        """
+        Efficient statistic computation with multiple inputs
+
+        Effectively does the same as calling self.get_statisitc.
+        """
+        log_pdf_gradients = self.grad_multiple(samples)[dim]
+        K = self.k_multiple(samples)
+        G1K = self.g1k_multiple(samples)
+        G2K = self.g2k_multiple(samples)
+        GK = self.gk_multiple(samples)
+
+        # use broadcasting to mimic the element wise looped call
+        pairwise_log_gradients = log_pdf_gradients.reshape(len(log_pdf_gradients), 1) * log_pdf_gradients.reshape(1, len(log_pdf_gradients))
+        A = pairwise_log_gradients * K
+        B = G1K * log_pdf_gradients
+        C = (G2K.T * log_pdf_gradients).T
+        D = GK
+        U = A + B + C + D
+        stat = len(samples) * np.mean(U)
+        return U, stat
+
 
     def compute_pvalue(self, U_matrix, num_bootstrapped_stats=100):
         N = U_matrix.shape[0]
@@ -149,3 +203,15 @@ class GaussianQuadraticTest:
         stat = N*np.mean(U_matrix)
 
         return float(np.sum(bootsraped_stats > stat)) / num_bootstrapped_stats
+
+
+if __name__ == "__main__":
+
+    def gred_log_dens(x):
+        return -x
+
+    me = GaussianQuadraticTest(gred_log_dens)
+    samples = np.random.randn(500,2)
+    U,_ = me.get_statisitc_two_dim(500,samples,1)
+    p = me.compute_pvalue(U)
+    print(p)

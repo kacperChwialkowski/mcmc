@@ -13,6 +13,23 @@ class TestGaussianQuadraticTest(TestCase):
     def grad_log_normal(self, x):
         return -x
 
+    def test_two_dimensional_tests_null(self):
+        np.random.seed(43)
+        me = GaussianQuadraticTest(self.grad_log_normal)
+        samples = np.random.randn(100,2)
+        U,_ = me.get_statisitc_two_dim(100,samples,1)
+        p = me.compute_pvalue(U)
+        assert p == 0.63
+
+
+    def test_two_dimensional_tests_alt(self):
+        np.random.seed(43)
+        me = GaussianQuadraticTest(self.grad_log_normal)
+        samples = np.random.randn(100,2)+1
+        U,_ = me.get_statisitc_two_dim(100,samples,1)
+        p = me.compute_pvalue(U)
+        assert p == 0
+
 
     def test_regression_1(self):
         np.random.seed(43)
@@ -40,7 +57,15 @@ class TestGaussianQuadraticTest(TestCase):
             for j in range(N):
                 k = me.k(X[i], X[j])
                 assert_almost_equal(K[i, j], k)
-    
+
+    def test_k_multiple_equals_k_no_dim(self):
+        N = 10
+        X = np.random.randn(N,1)
+        me = GaussianQuadraticTest(self.grad_log_normal)
+        K1 = me.k_multiple_dim(X)
+        K2  =me.k_multiple(X[:,0])
+        np.testing.assert_almost_equal(K1, K2)
+
     def test_k_multiple_equals_k_grad_multiple_given(self):
         def fun(self, X):
             return -X

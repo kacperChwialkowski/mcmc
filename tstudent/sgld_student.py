@@ -6,9 +6,9 @@ import seaborn
 import numpy as np
 
 
-SGLD_EPSILON = 0.002
+SGLD_EPSILON = 0.0878
 
-P_CHANGE = 0.5
+P_CHANGE = 0.1
 
 N = 500
 
@@ -38,7 +38,7 @@ def sample_sgld_t_student(N,degree_of_freedom,epsilon):
 def normal_mild_corr(N):
     samples = np.zeros(N)
     X_t = 0
-    a = 0.97
+    a = 0.95
     innovation_var = np.sqrt(1 - a ** 2)
     for t in range(N):
         X_t = a*X_t + innovation_var *np.random.randn()
@@ -49,7 +49,7 @@ def normal_mild_corr(N):
 def get_thinning(X,nlags = 50):
     autocorrelation = acf(X, nlags=nlags, fft=True)
     # find correlation closest to given v
-    thinning = np.argmin(np.abs(autocorrelation - 0.85)) + 1
+    thinning = np.argmin(np.abs(autocorrelation - 0.5)) + 1
     return thinning, autocorrelation
 
 
