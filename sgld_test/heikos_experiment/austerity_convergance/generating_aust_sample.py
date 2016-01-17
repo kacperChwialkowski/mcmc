@@ -22,14 +22,17 @@ def log_density_prior(theta):
 
 
 
-sample = austerity(vectorized_log_lik,log_density_prior, X,0.01,batch_size=50,chain_size=1000, thinning=20, theta_t=np.random.randn(2))
+sample = austerity(vectorized_log_lik,log_density_prior, X,0.01,batch_size=50,chain_size=20*1000, thinning=1, theta_t=np.random.randn(2))
 
-import seaborn as sns
-sns.set(color_codes=True)
-with sns.axes_style("white"):
-    pr = sns.jointplot(x=sample[:,0], y=sample[:,1], kind="kde", color="k");
+print(acf(sample[:,1],nlags=50))
 
-    # pr.savefig('../../write_up/img/mcmc_sample.pdf')
-
-    sns.plt.show()
+#
+# import seaborn as sns
+# sns.set(color_codes=True)
+# with sns.axes_style("white"):
+#     pr = sns.jointplot(x=sample[:,0], y=sample[:,1], kind="kde", color="k");
+#
+#     # pr.savefig('../../write_up/img/mcmc_sample.pdf')
+#
+#     sns.plt.show()
 
