@@ -2,7 +2,7 @@ from nose.tools import assert_almost_equal
 from unittest import TestCase
 
 import numpy as np
-from stat_test.quadratic_time import GaussianQuadraticTest
+from stat_test.quadratic_time import GaussianQuadraticTest, QuadraticMultiple
 from numpy.testing.utils import assert_allclose
 
 
@@ -29,6 +29,22 @@ class TestGaussianQuadraticTest(TestCase):
         U,_ = me.get_statisitc_two_dim(100,samples,1)
         p = me.compute_pvalue(U)
         assert p == 0
+
+    def  test_corr(self):
+        np.random.seed(43)
+        sigma = np.array([[1,0.5],[0.5,1]])
+        def grad_log_correleted(x):
+            sigmaInv = np.linalg.inv(sigma)
+            return - np.dot(sigmaInv.T + sigmaInv, x)/2.0
+
+        me = GaussianQuadraticTest(grad_log_correleted)
+        qm = QuadraticMultiple(me)
+        X =  np.random.multivariate_normal([0,0], sigma, 200)
+
+
+        reject,p_val = qm.is_from_null(0.05, X, 0.1)
+        np.testing.assert_almost_equal([0.465,  0.465],p_val)
+
 
     def test_two_dimensional_tests_agrees(self):
         np.random.seed(43)

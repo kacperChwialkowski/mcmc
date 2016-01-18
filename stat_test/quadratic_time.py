@@ -237,28 +237,32 @@ class QuadraticMultiple:
         boots = 10*int(dims/alpha)
         pvals = np.zeros(dims)
         for dim in range(dims):
-            U,_ = self.tester.get_statistic_multiple_dim(samples,1)
+            U,_ = self.tester.get_statistic_multiple_dim(samples,dim)
             p = self.tester.compute_pvalues_for_processes(U,chane_prob,boots)
             pvals[dim] = p
 
-
+        print(pvals)
         alt_is_true, pvals_corrected,_,_ =  multipletests(pvals,alpha,method='holm')
 
-        null_is_true  = np.logical_not(alt_is_true)
 
-        return any(null_is_true),pvals_corrected
+
+        return any(alt_is_true),pvals_corrected
 
 
 
 if __name__ == "__main__":
+    sigma = np.array([[1,0.2,0.1],[0.2,1,0.4],[0.1, 0.4,1]])
 
-    def grad_log_dens(x):
-        return -x
+    def grad_log_correleted(x):
+        sigmaInv = np.linalg.inv(sigma)
+        return - np.dot(sigmaInv.T + sigmaInv, x)/2.0
 
-    me = GaussianQuadraticTest(grad_log_dens)
+    me = GaussianQuadraticTest(grad_log_correleted)
     qm = QuadraticMultiple(me)
-    X = np.random.randn(100,2)
-    accept_null,p_val = qm.is_from_null(0.05, X, 0.1)
-    print(p_val)
+    X =  np.random.multivariate_normal([0,0,0], sigma, 200)
+
+
+    reject,p_val = qm.is_from_null(0.05, X, 0.1)
+    print(reject,p_val)
 
 

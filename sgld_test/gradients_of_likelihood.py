@@ -1,7 +1,7 @@
 from sgld_test.constants import SIGMA_x, SIGMA_1, SIGMA_2
 
 __author__ = 'kcx'
-import autograd.numpy as np
+import numpy as np
 
 def grad_log_prior(theta):
     return theta/[SIGMA_1,SIGMA_2]

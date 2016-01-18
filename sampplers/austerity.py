@@ -1,4 +1,3 @@
-from nose.tools import assert_almost_equal
 from scipy.stats import t
 from sgld_test.likelihoods import log_probability
 

@@ -24,19 +24,19 @@ for c in [1.0,1.3,2.0,3.0]:
 
     for i in range(23):
         print(i)
-        # x= metropolis_hastings(log_normal, chain_size=500, thinning=15,x_prev=np.random.randn(2))
-        x = np.random.randn(100,2)*np.sqrt(c)
+        x= metropolis_hastings(log_normal, chain_size=500, thinning=15,x_prev=np.random.randn(2))
+
 
 
         me = GaussianQuadraticTest(grad_log_dens)
         qm = QuadraticMultiple(me)
 
-        accept_null,p_val = qm.is_from_null(0.05, x, 0.5)
+        accept_null,p_val = qm.is_from_null(0.05, x, 0.1)
 
         arr = np.vstack((arr, np.array([c,min(p_val)])))
 
 
 
 df = DataFrame(arr)
-pr =seaborn.boxplot(x=0,y=1,data=df)
+pr = seaborn.boxplot(x=0,y=1,data=df)
 seaborn.plt.show()

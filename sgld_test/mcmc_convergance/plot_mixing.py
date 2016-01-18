@@ -54,6 +54,8 @@ for time in times_we_look_at:
     pval = me.compute_pvalue(chain_at_time)
     arr.append(pval)
 
+
+
 import matplotlib.pyplot as plt
 
 print(arr)

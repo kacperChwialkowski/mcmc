@@ -1,5 +1,5 @@
 from scipy.stats import norm
-import autograd.numpy as np   # Thinly-wrapped version of Numpy
+import numpy as np
 from sgld_test.constants import SIGMA_x, SIGMA_1, SIGMA_2
 
 
