@@ -257,7 +257,7 @@ if __name__ == "__main__":
 
     me = GaussianQuadraticTest(grad_log_dens)
     qm = QuadraticMultiple(me)
-    X = np.random.randn(100,2)+0.3
+    X = np.random.randn(100,2)
     accept_null,p_val = qm.is_from_null(0.05, X, 0.1)
     print(p_val)
 

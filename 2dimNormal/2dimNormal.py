@@ -17,15 +17,15 @@ def grad_log_dens(x):
     return -x
 
 arr = np.empty((0,2))
-for c in np.linspace(2,10,3):
+for c in [1.0,1.3,2.0,3.0]:
     print('c',c)
 
     log_normal = logg(c)
 
-    for i in range(50):
+    for i in range(23):
         print(i)
-        x= metropolis_hastings(log_normal, chain_size=500, thinning=15,x_prev=np.random.randn(2))
-
+        # x= metropolis_hastings(log_normal, chain_size=500, thinning=15,x_prev=np.random.randn(2))
+        x = np.random.randn(100,2)*np.sqrt(c)
 
 
         me = GaussianQuadraticTest(grad_log_dens)
