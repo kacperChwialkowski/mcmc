@@ -81,6 +81,18 @@ To understand the behaviour under alternative it is sufficient to notice that me
 \end{align}
 The integral transform is zero is and only $\log p(x) = \log q(x)$ for a right class of kernel.
 
+\section{multidimensional case}
+Suppose $d$ dimensional densities have logarithms and  $log(p(x))$ and $log(q(x))$ have continuous  gradients everywhere. 
+Let $v(x)$ be gradient of  $[ log(p(x)) - log(q(x)) ]$. For each dimension of this vector  
+
+$\mu_w(t) = \int_{R^2}  v(x)[0] k(x,t) dx$
+ 
+if this mean embedding is zero then the first dimension of the vector filed v is zero. Note here that even the first dimension is a function of both dimensions of the underlying plane. If the second  mean embedding is zero
+
+$\mu_w(t) = \int_{R^2}  v(x)[1] k(x,t) dx$
+
+then the whole vector filed must be zero. so the difference between logs must be constant and due to integrability conditions on p and q they must be the same.
+
 \section{tests}
 
 \subsection{Quadratic}
@@ -134,11 +146,11 @@ In this  sanity check we replicate the experiment 4.1 from \cite{gorham2015measu
 \end{figure}
 
 
-\begin{figure}
-\label{fig:studentstq}
-\includegraphics[width=0.8\textwidth]{./img/qstudent.pdf}
-\caption{Quadratic time test. Distribution of p-values as a function of number of degrees of freedom.}
-\end{figure}
+% \begin{figure}
+% \label{fig:studentstq}
+% \includegraphics[width=0.8\textwidth]{./img/qstudent.pdf}
+% \caption{Quadratic time test. Distribution of p-values as a function of number of degrees of freedom.}
+% \end{figure}
 
 \subsection{MCMC diagnostic}
 This one sample test can be used for diagnostics of most of the MCMC methods. In the following experiment we will demonstrate how to verify if the samples obtained form two sampling can be assumed to come from the stationary distribution.  
