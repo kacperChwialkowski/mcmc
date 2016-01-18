@@ -1,11 +1,11 @@
-from sgld_test.gradients_of_likelihood import manual_grad
+from sgld_test.gradients_of_likelihood import manual_grad, grad_log_prior
 from sgld_test.likelihoods import gen_X
 import numpy as np
 import matplotlib.pyplot as plt
 
 
-theta1 = np.arange(-2, 2, 0.1)
-theta2 = np.arange(-2, 2, 0.1)
+theta1 = np.arange(-2, 2, 0.025)
+theta2 = np.arange(-2, 2, 0.025)
 
 grid_dimension_size = len(theta1)
 
@@ -20,8 +20,8 @@ for i in range(grid_dimension_size):
     for j in range(grid_dimension_size):
         th = np.array([theta1[i, j], theta2[i, j]])
 
-        subsample = np.random.choice(sample, 20)
-        stoch_grad_log_lik = np.sum(manual_grad(th[0], th[1], subsample), axis=0)
+        # subsample = np.random.choice(sample, 40)
+        stoch_grad_log_lik = np.sum(manual_grad(th[0], th[1], sample), axis=0)  + grad_log_prior(th)
 
         D_theta1[i, j] = stoch_grad_log_lik[0]
         D_theta2[i, j] = stoch_grad_log_lik[1]

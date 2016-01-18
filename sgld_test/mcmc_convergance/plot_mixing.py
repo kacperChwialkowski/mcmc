@@ -1,9 +1,10 @@
 from pandas import DataFrame
 import seaborn
-from sgld_test.gradients_of_likelihood import manual_grad
+from sgld_test.gradients_of_likelihood import manual_grad, grad_log_prior
 from sgld_test.mcmc_convergance.cosnt import CHAIN_SIZE, NUMBER_OF_TESTS, NO_OF_SAMPELS_IN_TEST, SEED, SAMPLE_SIZE
 from sgld_test.likelihoods import gen_X, log_probability
 from stat_test.linear_time import GaussianSteinTest
+from stat_test.quadratic_time import GaussianQuadraticTest, QuadraticMultiple
 
 __author__ = 'kcx'
 import  numpy as np
@@ -50,16 +51,30 @@ me = GaussianSteinTest(grad_log_pob,1)
 
 for time in times_we_look_at:
     chain_at_time = samples[:,time]
-    print(time)
-    pval = me.compute_pvalue(chain_at_time)
-    arr.append(pval)
+    # print(time)
+    # pval = me.compute_pvalue(chain_at_time)
+    # arr.append(pval)
+    def grad_log_pob(t):
+        a = np.sum(manual_grad(t[0],t[1],X),axis=0) + grad_log_prior(t)
+        return a
+
+
+    P_CHANGE =0.1
+
+    me = GaussianQuadraticTest(grad_log_pob)
+    qm = QuadraticMultiple(me)
 
 
 
-import matplotlib.pyplot as plt
+    reject, p = qm.is_from_null(0.05, chain_at_time, 0.1)
 
-print(arr)
 
-plt.plot(arr)
+    print(reject)
 
-plt.show()
+# import matplotlib.pyplot as plt
+#
+# print(arr)
+#
+# plt.plot(arr)
+#
+# plt.show()

@@ -8,7 +8,7 @@ sns.set(color_codes=True)
 
 np.random.seed(1307)
 
-N = 200
+N = 400
 X = gen_X(N)
 theta1 = np.arange(-2, 2, 0.25)
 grid_size = len(theta1)

@@ -4,7 +4,7 @@ __author__ = 'kcx'
 import numpy as np
 
 def grad_log_prior(theta):
-    return theta/[SIGMA_1,SIGMA_2]
+    return -theta/[SIGMA_1,SIGMA_2]
 
 
 def lik_2(theta_1, theta_2, x):

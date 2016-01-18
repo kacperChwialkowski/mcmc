@@ -6,7 +6,7 @@ from sampplers.austerity import austerity
 from sgld_test.bimodal_SGLD import evSGLD
 from sgld_test.constants import SIGMA_1, SIGMA_2
 from sgld_test.gradients_of_likelihood import manual_grad, grad_log_prior
-from sgld_test.likelihoods import gen_X, _vector_of_log_likelihoods, log_probability
+from sgld_test.likelihoods import gen_X, _vector_of_log_likelihoods, log_probability, _log_lik
 from stat_test.linear_time import GaussianSteinTest
 from stat_test.quadratic_time import GaussianQuadraticTest, QuadraticMultiple
 
@@ -47,17 +47,17 @@ def log_density_prior(theta):
 # print('the thinning ',thinning)
 # print('autocorr', autocorr)
 
-thinning=51
+thinning = 51
 
 TEST_SIZE = 500
 
 
-sample, evals = austerity(vectorized_log_lik,log_density_prior, X,0.001,batch_size=50,chain_size=TEST_SIZE + MAGIC_BURNIN_NUMBER, thinning=thinning, theta_t=np.random.randn(2))
+# sample, evals = austerity(vectorized_log_lik,log_density_prior, X,0.001,batch_size=50,chain_size=TEST_SIZE + MAGIC_BURNIN_NUMBER, thinning=thinning, theta_t=np.random.randn(2))
 
-# def vectorized_log_density(theta):
-#      return log_probability(theta,X)
-#
-# sample = metropolis_hastings(vectorized_log_density, chain_size=TEST_SIZE+MAGIC_BURNIN_NUMBER, thinning=thinning, x_prev=np.random.randn(2))
+def vectorized_log_lik(theta):
+     return _log_lik(theta[0], theta[1], X) + log_density_prior(theta)
+
+sample = metropolis_hastings(vectorized_log_lik, chain_size=TEST_SIZE+MAGIC_BURNIN_NUMBER, thinning=thinning, x_prev=np.random.randn(2))
 
 sample = sample[MAGIC_BURNIN_NUMBER:]
 
@@ -76,36 +76,21 @@ print(autocorr)
 # sns.plt.show()
 
 
-def grad_log_pob(t):
-    a = np.sum(manual_grad(t[0],t[1],X),axis=0) + grad_log_prior(t)
+def grad_log_lik(t):
+    a = np.sum(manual_grad(t[0],t[1],X),axis=0)  - t[1]/SIGMA_2 -t[0]/SIGMA_1
     return a
 
-def grad_log_pob_1(t):
-    return grad_log_pob(t)[1]
 
 P_CHANGE =0.1
 
-me = GaussianQuadraticTest(grad_log_pob)
+me = GaussianQuadraticTest(grad_log_lik)
 qm = QuadraticMultiple(me)
 
-me.get_statisitc()
 
 
 reject, p = qm.is_from_null(0.05, sample, 0.1)
 print('====     p-value',p)
 print('====     reject',reject)
-
-def grad_log_pob_v(theta):
-    s=[]
-    for t in theta:
-        s.append( np.sum(manual_grad(t[0],t[1],X),axis=0))
-    return np.array(s)
-
-me = GaussianSteinTest(grad_log_pob_v,1)
-
-
-pval = me.compute_pvalue(sample)
-print('====     p-value',pval)
 
 
 
