@@ -15,8 +15,8 @@ def austerity(log_lik,log_density_prior, X,epsilon,batch_size=30,chain_size=1000
 
     global_evals = 0
     for i in range(chain_size*thinning-1):
-        if i % 1000 ==0:
-            print( 100.0*i/(chain_size*thinning), ' %')
+        # if i % 1000 ==0:
+        #     print( 100.0*i/(chain_size*thinning), ' %')
         theta_prime = np.random.randn(dimension)+theta_t
 
         u = np.random.rand()

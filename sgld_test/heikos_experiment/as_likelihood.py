@@ -12,6 +12,8 @@ from stat_test.quadratic_time import GaussianQuadraticTest, QuadraticMultiple
 
 MAGIC_BURNIN_NUMBER = 200
 
+P_CHANGE =0.1
+
 __author__ = 'kcx'
 import numpy as np
 
@@ -27,60 +29,56 @@ def vectorized_log_lik(X,theta):
 def log_density_prior(theta):
     return np.log(norm.pdf(theta[0],0, SIGMA_1)) + np.log(norm.pdf(theta[1],0, SIGMA_2))
 
+def get_thinning(X,nlags = 50):
+    autocorrelation = acf(X, nlags=nlags, fft=True)
+    thinning = np.argmin(np.abs(autocorrelation - 0.5)) + 1
+    return thinning, autocorrelation
+
+def grad_log_lik(t):
+    a = np.sum(manual_grad(t[0],t[1],X),axis=0)  - t[1]/SIGMA_2 -t[0]/SIGMA_1
+    return a
+
 pvals = []
 no_evals = []
-for epsilon in np.logspace(-4,0,50):
+for epsilon in np.linspace(0.001, 0.2,25):
     THINNING_ESTIMAE = 10**4
 
     sample,evals = austerity(vectorized_log_lik,log_density_prior, X,epsilon,batch_size=50, chain_size=THINNING_ESTIMAE, thinning=1, theta_t=np.random.randn(2))
 
 
-
-    def get_thinning(X,nlags = 50):
-        autocorrelation = acf(X, nlags=nlags, fft=True)
-        thinning = np.argmin(np.abs(autocorrelation - 0.5)) + 1
-        return thinning, autocorrelation
-
-
     thinning, autocorr =  get_thinning(sample[:,0])
 
 
-    print('the thinning ',thinning)
-
-
+    print(' - thinning for epsilon:',thinning,epsilon)
 
     TEST_SIZE = 1000
 
-
-    sample, evals = austerity(vectorized_log_lik,log_density_prior, X,epsilon,batch_size=50,chain_size=TEST_SIZE + MAGIC_BURNIN_NUMBER, thinning=thinning, theta_t=np.random.randn(2))
-
-
-    sample = sample[MAGIC_BURNIN_NUMBER:]
-
-    assert sample.shape[0] == TEST_SIZE
-
-    np.save('./data/sample'+str(epsilon), sample)
+    e_pvals = []
+    e_no_evals = []
+    for mc_reps in range(10):
+        print(mc_reps)
+        sample, evals = austerity(vectorized_log_lik,log_density_prior, X,epsilon,batch_size=50,chain_size=TEST_SIZE + MAGIC_BURNIN_NUMBER, thinning=thinning, theta_t=np.random.randn(2))
 
 
+        sample = sample[MAGIC_BURNIN_NUMBER:]
+
+        assert sample.shape[0] == TEST_SIZE
+
+        np.save('./data/sample'+str(epsilon), sample)
 
 
-    def grad_log_lik(t):
-        a = np.sum(manual_grad(t[0],t[1],X),axis=0)  - t[1]/SIGMA_2 -t[0]/SIGMA_1
-        return a
+        me = GaussianQuadraticTest(grad_log_lik)
+        qm = QuadraticMultiple(me)
 
+        reject, p = qm.is_from_null(0.05, sample, 0.1)
+        print('evals ', evals)
+        print('====     p-value',p)
+        print('====     reject',reject)
+        e_no_evals.append(evals)
+        e_pvals.append(p)
 
-    P_CHANGE =0.1
-
-    me = GaussianQuadraticTest(grad_log_lik)
-    qm = QuadraticMultiple(me)
-
-    reject, p = qm.is_from_null(0.05, sample, 0.1)
-    print('evals ', evals)
-    print('====     p-value',p)
-    print('====     reject',reject)
-    no_evals.append(evals)
-    pvals.append(p)
-
+    no_evals.append(e_no_evals)
+    pvals.append(e_pvals)
 
 
 np.save('no_evals',no_evals)
