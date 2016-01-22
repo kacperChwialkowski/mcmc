@@ -1,9 +1,9 @@
 import os
 
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
+from tools.latex_plot_init import plt
 
 
 fname = "increasing_features_fixed_test.txt"
@@ -27,6 +27,7 @@ conditions = kwargs_gen(
 
 # x-axis of plot
 x_field = 'm'
+x_field_values = [5, 10, 50, 100, 500, 1000]
 
 df = pd.read_csv(fname, index_col=0)
 
@@ -35,14 +36,23 @@ for field in fields:
     
     # filter out desired entries
     mask = (df[field] == df[field])
-    for k,v in conditions.items():
+    for k, v in conditions.items():
         mask &= (df[k] == v)
     current = df.loc[mask]
+    
+    # only use desired values of x_fields
+    current = current.loc[[True if x in x_field_values else False for x in current[x_field]]]
 
+    # use ints on x-axis
+    current[x_field] = current[x_field].astype(int)
+
+    sns.set_style("whitegrid")
     sns.boxplot(x=x_field, y=field, data=current.sort(x_field))
 
     plt.xlabel(field_plot_names[x_field])
     plt.ylabel(field_plot_names[field])
+    
+    plt.tight_layout()
 
     fname_base = os.path.splitext(fname)[0]
     plt.savefig(fname_base + ".png")

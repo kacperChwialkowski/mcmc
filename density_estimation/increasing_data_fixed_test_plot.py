@@ -1,9 +1,9 @@
 import os
 
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
+from tools.latex_plot_init import plt
 
 
 fname = "increasing_data_fixed_test.txt"
@@ -26,6 +26,7 @@ conditions = kwargs_gen(
 
 # x-axis of plot
 x_field = 'N'
+x_field_values = [50, 100, 500, 1000, 2000, 5000]
 
 df = pd.read_csv(fname, index_col=0)
 
@@ -38,6 +39,13 @@ for field in fields:
         mask &= (df[k] == v)
     current = df.loc[mask]
     
+    # only use desired values of x_fields
+    current = current.loc[[True if x in x_field_values else False for x in current[x_field]]]
+    
+    # use ints on x-axis
+    current[x_field] = current[x_field].astype(int)
+    
+    sns.set_style("whitegrid")
     sns.boxplot(x=x_field, y=field, data=current.sort(x_field))
 
     plt.xlabel(field_plot_names[x_field])
