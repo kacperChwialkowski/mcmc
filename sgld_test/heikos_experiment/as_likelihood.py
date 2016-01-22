@@ -55,7 +55,7 @@ for epsilon in np.linspace(0.001, 0.2,25):
 
     e_pvals = []
     e_no_evals = []
-    for mc_reps in range(10):
+    for mc_reps in range(50):
         print(mc_reps)
         sample, evals = austerity(vectorized_log_lik,log_density_prior, X,epsilon,batch_size=50,chain_size=TEST_SIZE + MAGIC_BURNIN_NUMBER, thinning=thinning, theta_t=np.random.randn(2))
 
