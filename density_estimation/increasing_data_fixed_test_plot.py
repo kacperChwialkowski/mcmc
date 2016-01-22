@@ -52,8 +52,8 @@ for field in fields:
     plt.ylabel(field_plot_names[field])
 
     fname_base = os.path.splitext(fname)[0]
-    plt.savefig(fname_base + ".png")
-    plt.savefig(fname_base + ".eps")
+    plt.savefig(fname_base + ".png", bbox_inches='tight')
+    plt.savefig(fname_base + ".eps", bbox_inches='tight')
     
     # print info on number of trials
     print(field)
