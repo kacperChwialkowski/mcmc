@@ -195,6 +195,26 @@ class GaussianQuadraticTest:
         stat = len(samples) * np.mean(U) 
         return U, stat
 
+    def get_statistic_multiple_custom_gradient(self, samples, log_pdf_gradients):
+        """
+        Implements the statistic for multiple samples, each from a different
+        density whose gradient at the sample is passed
+        
+        """
+        K = self.k_multiple(samples)
+        G1K = self.g1k_multiple(samples)
+        G2K = self.g2k_multiple(samples)
+        GK = self.gk_multiple(samples)
+        
+        # use broadcasting to mimic the element wise looped call
+        pairwise_log_gradients = log_pdf_gradients.reshape(len(log_pdf_gradients), 1) * log_pdf_gradients.reshape(1, len(log_pdf_gradients))
+        A = pairwise_log_gradients * K
+        B = G1K * log_pdf_gradients
+        C = (G2K.T * log_pdf_gradients).T
+        D = GK
+        U = A + B + C + D
+        stat = len(samples) * np.mean(U) 
+        return U, stat
 
     def compute_pvalue(self, U_matrix, num_bootstrapped_stats=100):
         N = U_matrix.shape[0]
