@@ -27,7 +27,7 @@ conditions = kwargs_gen(
 
 # x-axis of plot
 x_field = 'm'
-x_field_values = [5, 10, 50, 100, 500, 1000]
+x_field_values = [5, 10, 50, 100, 500, 2000, 5000]
 
 df = pd.read_csv(fname, index_col=0)
 
