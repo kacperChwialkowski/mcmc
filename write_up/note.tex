@@ -207,43 +207,39 @@ otherwise (b) is utter nonsense. To make (b) even more confusing we add an subsc
 % then the whole vector filed must be zero. so the difference between logs must be constant and due to integrability conditions on p and q they must be the same.
 
 \section{tests}
-We suppose that sequence is weak mixing which is sufficient for most application. E.g. geometrically ergodic  markov chains are in other words alpha mixing gemoetrically fast which in turn implies by wild kernels paper appendix that chain is tau mixing!  
+We suppose that sequence is weak mixing which is sufficient for most application. E.g. geometrically ergodic  markov chains are in other words alpha mixing gemoetrically fast which in turn implies by wild kernels paper appendix that chain is tau mixing!   Not his includes iid data. Note the iid case is no easier without bootstrap.
+
+
+
+TODO it is copy paste, I'm afraid !
+ $\tau$-mixing \cite{dedecker2007weak}, 
+%\vspace{-4mm}
+Let $\{Z_t,\mathcal{F}_t\}_{t \in \mathbb{N}}$  be a stationary sequence of integrable random variables, defined on a probability space $\Omega$ with a probability measure $P$ and a natural filtration $\mathcal{F}_t$. The process  is called $\tau$-dependent if 
+\begin{align*}
+\tau(r) &= \sup_{l \in \mathbb{N}} \frac 1 l \sup_{ r \leq i_1 \leq ... \leq i_l} \tau( \mathcal F_0,(Z_{i_1},...,Z_{i_l}) )  \overset{r \to \infty}{\longrightarrow} 0,\;\text{where} \\
+\tau(\mathcal{M},X) &=  E \left( \sup_{g \in \Lambda} \left| \int g(t) P_{X|\mathcal{M}}(dt) - \int g(t) P_X(dt) \right| \right)
+\end{align*}
+and $\Lambda$ is the set of all one-Lipschitz continuous real-valued functions on the domain of $X$. 
+
+We will study two versions of the bootstrapped $V$-statistics  
+\begin{align}
+ V_{b1}(h,Z) = \frac{1}{n^m} \sum_{i,j} \nolimits W_{i_1,n} W_{i_2,n} l(X_i,X_j), \label{Vb1}\\ 
+\end{align}
+where $\{W_{t,n}\}_{1 \leq t \leq n }$ is an auxiliary wild bootstrap process and $\tilde W_{t,n} = W_{t,n} - \frac 1 n \sum_{j=1}^n W_{j,n}$. This auxiliary process, proposed by \cite{Shao2010,leucht_dependent_2013}, satisfies the following assumption:
+
+\emph{Bootstrap assumption:} $\{W_{t,n}\}_{1 \leq t \leq n }$ is a row-wise strictly stationary triangular array independent of all $Z_t$ such that $E W_{t,n}=0$ and $\sup_{n} E|W_{t,n}^{2+\sigma}| < \infty$ for some $\sigma > 0$. The autocovariance of the process is given by $E W_{s,n} W_{t,n}=\rho(|s-t|/l_n)$ for some function $\rho$, such that $\lim_{u \to 0} \rho(u) = 1$ and $\sum_{r=1}^{n-1} \rho(|r|/l_n)= O(l_n)$. The sequence $\left\{l_n\right\}$ is taken such that $l_n=o(n)$ but $\lim_{n \to \infty} l_n = \infty$. The variables $W_{t,n}$  are $\tau$-weakly dependent with coefficients $\tau(r) \leq C \zeta^{\frac{r} {l_n}}$ for $r=1,...,n$, $\zeta \in (0,1)$ and $C\in\mathbb R$.
+
+We will use {+1,1} bootstrap.
+
+The versions of the bootstrapped $V$-statistics in \eqref{Vb1} and \eqref{Vb2} were previously studied in \cite{leucht_dependent_2013}. 
+
 \subsection{Quadratic}
-If data is IID we use Rademacher bootstrap. If $h(x_1,x_2)$ is a a core degenerate under null, then we bootstrapped statistic
+We use wild bootstrap . If $h(x_1,x_2)$ is a a core degenerate under null, then we bootstrapped statistic
 \begin{align}
  \sum_{i,j} \epsilon_i \epsilon_j h(X_i,X_j)
 \end{align}
 
-\subsection{Linear time}
 
-For some fixed location $y$ and a random variable $X$, define a random variable $s(X,y)$
-\begin{align}
- s(X,y) = \nabla \log p(X) g(X,y) -  \nabla g(X,y).
-\end{align}
-For some number of random locations $Y_1,Y_J$ and a random variable $X$ define a random vector $Z_i$
-\begin{equation}
- Z_i = ( s(X_i,Y_1) , \cdots, s(X_i,Y_J)  )\in \mathbf R^J.
-\end{equation}
-
-Let $W_n$ be a mean of $Z_i$'s
-$W_n = \frac 1  n \sum_{i=1}^n Z_i, $
-and $\Sigma_n$ its  covariance matrix
-$\Sigma_n = \frac 1  n Z Z^{T}$.
-The test statistic is
-\begin{equation}
- S_n = n W_n \Sigma_n^{-1} W_n.
-\end{equation}
-The computation of $S_n$ requires inversion of a $J\times J$ matrix $\Sigma_n$, but this is fast and numerically stable: $J$ will typically be small, and is less than 10 in our experiments. The next proposition demonstrates the use of $S_n$ as a one-sample test.
-\begin{proposition}[Asymptotic behavior of $S_n$]
-\label{prop:Hotelling}
- If  $E s(X,y)=0$ for all $y$, then the statistic $S_n$ is a.s. asymptotically distributed as a $\chi^2$-random variable with $Jd$ degrees of freedom, where $d$ is $X$ dimensionality (as $n \to \infty$ with $d$ fixed). If  $E s(X,y) \neq 0$ for almost all $y$ then a.s. for any fixed $r$, $\mathbb P(S_n > r) \to 1$  as $n \to \infty$ .
-\end{proposition}
-
-
-\begin{test}[One sample test]
-\label{test}
-Calculate $S_n$. Choose a threshold $r_\alpha$ corresponding to the $1-\alpha$ quantile of a  $\chi^2$ distribution with $J$ degrees of freedom, and reject the null hypothesis whenever $S_n$ is larger than $r_\alpha$. 
-\end{test}
 
 \section{Experiments}
 
@@ -374,7 +370,39 @@ Type two is somehow more complicated. In general (this is my intuition from fini
 
 
 
+\appendix
 
+
+\subsection{Linear time}
+
+For some fixed location $y$ and a random variable $X$, define a random variable $s(X,y)$
+\begin{align}
+ s(X,y) = \nabla \log p(X) g(X,y) -  \nabla g(X,y).
+\end{align}
+For some number of random locations $Y_1,Y_J$ and a random variable $X$ define a random vector $Z_i$
+\begin{equation}
+ Z_i = ( s(X_i,Y_1) , \cdots, s(X_i,Y_J)  )\in \mathbf R^J.
+\end{equation}
+
+Let $W_n$ be a mean of $Z_i$'s
+$W_n = \frac 1  n \sum_{i=1}^n Z_i, $
+and $\Sigma_n$ its  covariance matrix
+$\Sigma_n = \frac 1  n Z Z^{T}$.
+The test statistic is
+\begin{equation}
+ S_n = n W_n \Sigma_n^{-1} W_n.
+\end{equation}
+The computation of $S_n$ requires inversion of a $J\times J$ matrix $\Sigma_n$, but this is fast and numerically stable: $J$ will typically be small, and is less than 10 in our experiments. The next proposition demonstrates the use of $S_n$ as a one-sample test.
+\begin{proposition}[Asymptotic behavior of $S_n$]
+\label{prop:Hotelling}
+ If  $E s(X,y)=0$ for all $y$, then the statistic $S_n$ is a.s. asymptotically distributed as a $\chi^2$-random variable with $Jd$ degrees of freedom, where $d$ is $X$ dimensionality (as $n \to \infty$ with $d$ fixed). If  $E s(X,y) \neq 0$ for almost all $y$ then a.s. for any fixed $r$, $\mathbb P(S_n > r) \to 1$  as $n \to \infty$ .
+\end{proposition}
+
+
+\begin{test}[One sample test]
+\label{test}
+Calculate $S_n$. Choose a threshold $r_\alpha$ corresponding to the $1-\alpha$ quantile of a  $\chi^2$ distribution with $J$ degrees of freedom, and reject the null hypothesis whenever $S_n$ is larger than $r_\alpha$. 
+\end{test}
 
 
 
