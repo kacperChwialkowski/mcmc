@@ -8,7 +8,7 @@ from sgld_test.constants import SIGMA_1, SIGMA_2
 from sgld_test.gradients_of_likelihood import manual_grad, grad_log_prior
 from sgld_test.likelihoods import gen_X, _vector_of_log_likelihoods, log_probability, _log_lik
 from stat_test.linear_time import GaussianSteinTest
-from stat_test.quadratic_time import GaussianQuadraticTest, QuadraticMultiple
+from stat_test.quadratic_time import GaussianQuadraticTest, QuadraticMultiple,QuadraticMultiple2
 
 MAGIC_BURNIN_NUMBER = 200
 
@@ -51,7 +51,7 @@ for epsilon in np.linspace(0.001, 0.2,25):
 
     print(' - thinning for epsilon:',thinning,epsilon)
 
-    TEST_SIZE = 1000
+    TEST_SIZE = 500
 
     e_pvals = []
     e_no_evals = []
@@ -72,7 +72,7 @@ for epsilon in np.linspace(0.001, 0.2,25):
 
         p = qm.is_from_null(0.05, sample, 0.1)
         print('evals ', evals)
-        print('====     p-value',p)
+        print('====     p-value', p)
         # print('====     reject',reject)
         e_no_evals.append(evals)
         e_pvals.append(p)
