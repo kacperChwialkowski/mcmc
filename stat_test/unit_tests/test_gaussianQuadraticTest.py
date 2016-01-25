@@ -157,12 +157,12 @@ class TestGaussianQuadraticTest(TestCase):
                 gk = me.gk(X[i], X[j])
                 assert_almost_equal(GK[i, j], gk)
     
-    def test_get_statistic_multipleequals_get_statistic(self):
+    def test_get_statistic_multiple_equals_get_statistic(self):
         N = 10
         X = np.random.randn(N)
         me = GaussianQuadraticTest(self.grad_log_normal)
-        stat_multiple, U_matrix_multiple = me.get_statistic_multiple(X)
-        stat, U_matrix = me.get_statisitc(N, X)
+        U_matrix_multiple, stat_multiple = me.get_statistic_multiple(X)
+        U_matrix, stat = me.get_statisitc(N, X)
         
         assert_allclose(stat, stat_multiple)
         assert_allclose(U_matrix_multiple, U_matrix)
