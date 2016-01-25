@@ -37,6 +37,102 @@
 \maketitle
 
 
+\section{One sample test}
+A section in which we construct a kernel goodnes of fit statistic. Let $k$ a bounded kernel and $\mathcal{H}$  RKHS associated with it.
+
+
+ll our distributions are supported on some $\mathcal{X}\subset\Re^{d}$.
+For simplicity, we make this the set $\mathcal{X}:=[-B_{i}\: B_{i}]_{i=1}^{d}$.
+
+The purpose of a goodness of fit test is to show whether a distribution
+$p$ matches some reference distribution $q$, which is in our case
+assumed to have a density wrt the Lebesgue measure, $dq(x)=q(x)dx$
+(in fact, as we will see, it makes most sense for it to be in the
+exponential family). 
+
+First, we define the Stein operator $T_{q}\::\:\mathcal{F}\rightarrow\mathbb{R}^{d}$
+such that
+\[
+T_{q}f=\nabla\log q(x)f(x)+\nabla f(x),
+\]
+where $\nabla$ denotes a gradient.
+The purpose of a goodness of fit test is to show whether a distribution
+$p$ matches some reference distribution $q$, which is in our case
+assumed to have a density wrt the Lebesgue measure, $dq(x)=q(x)dx$
+(in fact, as we will see, it makes most sense for it to be in the
+exponential family). 
+
+\begin{lemma}
+If $X \sim p$, $ E T_{q}f(X) =0$.
+\end{lemma}
+\begin{proof}
+First we show that $qf$ vanishes at infinity. The density function $q$ vanishes at infinity, by which we mean that for all dimensions $i$
+\[
+ \lim_{x_i \to \infty} q(x_1,\cdots,x_d)f(x_1,\cdots,x_d)=0.
+\]
+The function $f$ is bounded, which is implied by  Cauchy-Schwarz inequality  $\left|f(x)\right|\le\left\Vert f\right\Vert \sqrt{k(x,x)}$ and boundedness of the kernel $k$. This implies that the function $qf$ vanishes at infinity. To show the expected value $E T_{q}f(X)$ is zero,  we do integration by parts with respect to individual dimensions.
+\begin{align*}
+\mathbb{E}_{q}T_{q}f & =\int_{R_d} \left[ \frac{\partial \log q(x)}{ \partial x_i} f(x)+\frac{\partial f(x)}{ \partial x_i} \right]q(x)dx\\
+ & =\int_{R_d} \left[\frac{1}{q(x)}\frac{\partial q(x)}{ \partial x_i}f(x)  +\frac{\partial f(x)}{ \partial x_i} \right]q(x)dx\\
+ & =\int_{R_d} \left[\frac{\partial q(x)}{ \partial x_i} f(x)+\frac{\partial  f(x)}{ \partial x_i}q(x)\right]dx\\
+ & = \int_{R_{d-1}} \left( \lim_{R \to \infty} q(x)f(x) \bigg|_{x_i=-R}^{x_i=R} \right) dx_1 dx_{i-1} \cdots dx_{i+1} d{x_d} \\
+ & = \int_{R_{d-1}} 0 dx_1 dx_{i-1} \cdots dx_{i+1} d{x_d} \\
+ & =0.
+\end{align*}
+
+\end{proof}
+Consider a vector filed 
+\begin{align}
+d_{q}(p) & =\sup_{\|f\|\le1}\mathbb{E}_{p}T_{q}f\\
+\end{align}
+\begin{lemma}
+ $d_{q}$ can be written is a closed form as ...
+
+
+\end{lemma}
+
+\begin{proof}
+ \begin{align*}
+d_{f}(p) & =\sup_{\|f\|\le1}\mathbb{E} \left[\nabla \log q(X)f(X)+\nabla f(X)\right]\\
+ & \overset{(a)}{=}\sup_{\|f\|\le1}\left[\mathbb{E} \left\langle f, \nabla \log q(X) k(X,\cdot)+\nabla k(X,\cdot)\right\rangle \right]\\
+ & \overset{(b)}{=}\sup_{\|f\|\le1}\left\langle f,\mathbb{E} \left[ \nabla \log q(X) k(X,\cdot)+\nabla k(X,\cdot)\right]\right\rangle \\
+ & =\left\Vert \xi\right\Vert 
+\end{align*}
+where
+\[
+\xi:=E \left[\nabla \log q(X) k(X,\cdot)+\nabla k(X,\cdot)\right] \in\mathcal{F},
+\]
+and in (a) we use the proof on p. 132 of \cite[Corollary 4.36]{SteChr08}
+that each entry of $\nabla k(x,\cdot)\in\mathcal{F}$ and $\left(\nabla f(x)\right)_{i}=\left\langle f,\frac{\partial}{\partial x_{i}}k(x,\cdot)\right\rangle $.
+In (b) we use the Bochner integrability (\cite[Definition A.5.20]{SteChr08}) of coefficients of $\xi$, to take the expectation inside the integral. The latter property requires
+two conditions,
+\[
+\mathbb{E} \left\Vert \frac{\partial \log q(X) }{\partial x_i} k(X,\cdot)\right\Vert^2 = \mathbb{E} \left( \frac{\partial \log q(X) }{\partial x_i} k(X,X) \right)^2 <\infty,
+\]
+and
+\[
+\mathbb{E} \left\Vert \frac{\partial k(X,\cdot)}{\partial x}\right\Vert^2 =\mathbb{E} \left(\frac{\partial^{2} k(X,X) }{dx_1 dx_2}\right)^2<\infty.
+\]
+An unbiased empirical estimate of $d_{q}^{2}(p)$ is.
+
+\begin{align*}
+&d_f(p)^2  \\
+& = \langle E \left[\nabla \log q(X) k(X,\cdot)+\nabla k(X,\cdot)\right] ,E \left[\nabla \log q(X) k(X,\cdot)+\nabla k(X,\cdot)\right] \rangle \\
+&= E \langle   \nabla \log p(X_1) k(X_1,\cdot) + \nabla k(X_1,\cdot) , \nabla \log p(X_2) k(\cdot,X_2) + \nabla1 k(\cdot,X_2) \rangle \\
+  &= E  \frac{\partial } {\partial x_1} \log p(X_1) \frac{\partial } {\partial x_2} \log p(X_2) k(X_1,X_2) +
+          \frac{\partial } {\partial x_2} p(X_2) \frac{\partial } {\partial x_1} k(X_1,X_2) \\
+  &+  \frac{\partial } {\partial x_1} \log p(X_1) \frac{\partial } {\partial x_2} k(X_1,X_2) + \frac{\partial } {\partial x_1}\frac{\partial } {\partial x_2} k(X_1,X_2)
+\end{align*}
+\end{proof}
+
+
+
+Next, we define a measure of goodness of fit, by analogy with the
+MMD. This will address only the univariate case, $\mathcal{X}\in\mathbb{R}$
+(we should discuss the multivariate case, since it's not as obvious
+to me).
+
+
 
 
 Let $g(x,y)$ be a characteristic, analytic kernel. Let $p$ be a probability measure on $R^d$; suppose it has a density which logarithm exists, and is differentiable. Consider the following transform of $R^d$ valued random variable $X$
@@ -44,13 +140,7 @@ Let $g(x,y)$ be a characteristic, analytic kernel. Let $p$ be a probability meas
  \mu_p(y) = E  \nabla \log p(X) g(X,y) - E \nabla g(X,y)
 \end{align}
 this transform is closely connected to Stein method and kernel mean embedding. Actually, as Arthur has showed in his note this is a mean embedding. But latter I think the distance squared should be different
-\begin{align}
-&d_q(p) = \\
-&= E \langle   \frac{\partial } {\partial x_1} \log p(X_1) k(X_1,\cdot) + \frac{\partial } {\partial x_1} k(X_1,\cdot) ,  \frac{\partial }{\partial x_2} \log p(X_2) k(\cdot,X_2) +  \frac{\partial } {\partial x_2} k(\cdot,X_2) \rangle \\
-  &= E  \frac{\partial } {\partial x_1} \log p(X_1) \frac{\partial } {\partial x_2} \log p(X_2) k(X_1,X_2) +
-          \frac{\partial } {\partial x_2} p(X_2) \frac{\partial } {\partial x_1} k(X_1,X_2) \\
-  &+  \frac{\partial } {\partial x_1} \log p(X_1) \frac{\partial } {\partial x_2} k(X_1,X_2) + \frac{\partial } {\partial x_1}\frac{\partial } {\partial x_2} k(X_1,X_2)
-\end{align}
+
 this make more sense when we write it this way
 \begin{align}
  E \frac{\partial } {\partial x_1} \log p(X_1) g_1(X_1,X_2) + \frac{\partial } {\partial x_1} g_1(X_1,X_2) + \\

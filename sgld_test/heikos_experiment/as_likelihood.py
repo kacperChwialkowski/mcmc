@@ -68,12 +68,12 @@ for epsilon in np.linspace(0.001, 0.2,25):
 
 
         me = GaussianQuadraticTest(grad_log_lik)
-        qm = QuadraticMultiple(me)
+        qm = QuadraticMultiple2(me)
 
-        reject, p = qm.is_from_null(0.05, sample, 0.1)
+        p = qm.is_from_null(0.05, sample, 0.1)
         print('evals ', evals)
         print('====     p-value',p)
-        print('====     reject',reject)
+        # print('====     reject',reject)
         e_no_evals.append(evals)
         e_pvals.append(p)
 

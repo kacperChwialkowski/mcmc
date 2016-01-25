@@ -250,6 +250,25 @@ class QuadraticMultiple:
 
 
 
+class QuadraticMultiple2:
+    def __init__(self,tester):
+        self.tester = tester
+
+    def is_from_null(self,alpha,samples,chane_prob):
+        dims = samples.shape[1]
+        boots = 10*int(dims/alpha)
+        pvals = np.zeros(dims)
+        num_samples = samples.shape[0]
+        U = np.zeros((num_samples, num_samples))
+        for dim in range(dims):
+            U2,_ = self.tester.get_statistic_multiple_dim(samples,dim)
+            U += U2
+
+        p = self.tester.compute_pvalues_for_processes(U,chane_prob,boots)
+        return p
+
+
+
 if __name__ == "__main__":
     sigma = np.array([[1,0.2,0.1],[0.2,1,0.4],[0.1, 0.4,1]])
 
@@ -264,5 +283,14 @@ if __name__ == "__main__":
 
     reject,p_val = qm.is_from_null(0.05, X, 0.1)
     print(reject,p_val)
+
+
+
+    qm = QuadraticMultiple2(me)
+    X =  np.random.multivariate_normal([0,0,0], sigma, 200)
+
+
+    p_val = qm.is_from_null(0.05, X, 0.1)
+    print(p_val)
 
 
