@@ -23,7 +23,7 @@
 \newtheorem*{remark}{Remark}
 \newenvironment{claim}[1]{\par\noindent\underline{Claim:}\space#1}{}
 \newenvironment{claimproof}[1]{\par\noindent\underline{Proof:}\space#1}{\hfill $\blacksquare$}
-
+\newcommand{\ev}{\mathbb{E}}
 \title{Testing MCMC convergence}
 \author{}
 \date{}
@@ -36,128 +36,136 @@
 
 \maketitle
 
-
-\section{One sample test}
-A section in which we construct a kernel goodnes of fit statistic. Let $k$ a bounded kernel and $\mathcal{H}$  RKHS associated with it.
-
-
-ll our distributions are supported on some $\mathcal{X}\subset\Re^{d}$.
-For simplicity, we make this the set $\mathcal{X}:=[-B_{i}\: B_{i}]_{i=1}^{d}$.
-
 The purpose of a goodness of fit test is to show whether a distribution
 $p$ matches some reference distribution $q$, which is in our case
 assumed to have a density wrt the Lebesgue measure, $dq(x)=q(x)dx$
 (in fact, as we will see, it makes most sense for it to be in the
-exponential family). 
+exponential family).
 
-First, for a vector valued  function $f = (f_1,\cdots,f_d)$ and density $p$ we define the Joanna's operator $T_{p}$
+\section{Kernel One Sample Test}
+In the following section we derive kernel one sample test. The test is applicable to family distributions of $\mathcal{P}$, where $p \in \mathcal{P}$ satisfy two conditions : \\ 
+(i) $\ev \log p(Z)    <\infty$ for any random variable $Z$; \\
+(ii) $\ev   \| \nabla \log p(X) \|^2  $  for $X \sim p$.\\
+Let $k$ be a bounded, symmetric, cc-universal \cite{sriperumbudur2011universality}  kernel  and $\mathcal{F}$  the Reproducing Kernel Hilbert Space  associated with it. 
+
+
+\paragraph{Stein operator.}
+We proceed as similarly to \cite{mackey2015multivariate,stein1972} and use Stein operator to characterize discrepancy between measures. Following \cite{mackey2015multivariate}, we study the operator $T_p$ acting on $R^d$ valued functions $f = (f_1,\cdots,f_d)$, $f_i \in \mathcal{F}$ 
 \[
 T_{p} f=  \sum_{i=1}^{d} \left( \frac{\partial \log p(x)}{ \partial x_i} f_i(x)+\frac{\partial f_i(x)}{ \partial x_i} \right).
 \]
-The purpose of a goodness of fit test is to show whether a distribution
-$p$ matches some reference distribution $q$, which is in our case
-assumed to have a density wrt the Lebesgue measure, $dq(x)=q(x)dx$
-(in fact, as we will see, it makes most sense for it to be in the
-exponential family). 
+As in \cite{mackey2015multivariate}, we show that for all $f \in F^d, \ev (T_{q}f)(X) = 0$ (Lemma \ref{lem:easy}). Next, for any random $Z$ variable, we define Stein discrepancy 
+\[
+ S(Z,\mathcal{F},p) = \sup_{f \in F^d,\| f \|<1} \ev (T_{p}f) (Z)  = \sup_{ f \in F^d } \ev (T_{p}f)(Z) - \ev (T_{p}f) (X).
+\]
+In Theorem \ref{th2} we show that  $S(Z,\mathcal{F},p)$ defines distance-like function on space of probability measures. 
+Notice that $\ev \left(  (T_{p}f)(Z) -  (T_{p}f) (X) \right) $, looks like integral probability metrics \cite{muller1997integral} -- in fact show that is one in .  
+We prove that  $S(Y,\mathcal{F},p)$ is discrepancy in . Contrary to to \cite{mackey2015multivariate}, we don't need to approximate $S(Y,\mathcal{F},p)$ (step 2 and 3), since we can calculate it explicitly \ref{th1}. 
 
-\begin{lemma}
-If $X \sim p$, $ \mathbb{E} T_{q}f(X) =0$.
-\end{lemma}
-\begin{proof}
-First we show that $qf$ vanishes at infinity. The density function $q$ vanishes at infinity, by which we mean that for all dimensions $i$
+
+
+\begin{definition}
+For any $x \in R^d$, define a vector valued function function  $\xi: R^d \to R^d$,
 \[
- \lim_{x_i \to \infty} q(x_1,\cdots,x_d)f(x_1,\cdots,x_d)=0.
-\]
-The function $f$ is bounded, which is implied by  Cauchy-Schwarz inequality  $\left|f(x)\right|\le\left\Vert f\right\Vert \sqrt{k(x,x)}$ and boundedness of the kernel $k$. This implies that the function $qf$ vanishes at infinity. To show the expected value $E T_{q}f(X)$ is zero,  we do integration by parts with respect to individual dimensions.
-\begin{align*}
-&\mathbb{E}\left( \frac{\partial \log p(x)}{ \partial x_i} f(x)+\frac{\partial f(x)}{ \partial x_i} \right) \\
-& =\int_{R_d}   \left[ \frac{\partial \log q(x)}{ \partial x_i} f(x)+\frac{\partial f(x)}{ \partial x_i} \right]q(x)dx\\
- & =\int_{R_d} \left[\frac{1}{q(x)}\frac{\partial q(x)}{ \partial x_i}f(x)  +\frac{\partial f(x)}{ \partial x_i} \right]q(x)dx\\
- & =\int_{R_d} \left[\frac{\partial q(x)}{ \partial x_i} f(x)+\frac{\partial  f(x)}{ \partial x_i}q(x)\right]dx\\
- & = \int_{R_{d-1}} \left( \lim_{R \to \infty} q(x)f(x) \bigg|_{x_i=-R}^{x_i=R} \right) dx_1 dx_{i-1} \cdots dx_{i+1} d{x_d} \\
- & = \int_{R_{d-1}} 0 dx_1 dx_{i-1} \cdots dx_{i+1} d{x_d} \\
- & =0.
-\end{align*}
-\end{proof}
-Let 
-\[
- \xi =\mathbb{E} \left[ \nabla \log q(X) k(X,\cdot)+\nabla k(X,\cdot)\right]
-\]
+ \xi(x,t) =\left[ \nabla \log p(x) k(x,t)+\nabla_1 k(x,t)\right]
+\] 
+where $\nabla \log p(x) = \left( \frac{\partial \log p(x)}{ \partial x_1}, \cdots , \frac{\partial \log p(x)}{ \partial x_d} \right)$ and 
+$  \nabla_1 k(x,t) = \left( \frac{\partial k(x,t)}{ \partial x_1}, \cdots , \frac{\partial  k(x,t)}{ \partial x_d} \right)$. 
+\end{definition}
+
 \begin{statement}
- $\xi \in \mathcal{H}^d$.
+\label{lem:WellDefined}
+ $\xi(x,\cdot)$ is an element of RKHS $\mathcal{F}^d$.
+\end{statement}
+\begin{proof}
+ We use the proof on p. 132 of \cite[Corollary 4.36]{SteChr08} to see that for all $x \in R^d$ each entry of $\nabla_1 k(x,\cdot)\in\mathcal{F}$. $\frac{\partial \log p(x)}{ \partial x_i} k(x,t) \in\mathcal{F}$, since $k(x,t) \in\mathcal{F}$ and $\frac{\partial \log p(x)}{ \partial x_i}$ is scalar. 
+\end{proof}
+
+
+\begin{statement}
+\label{lem:BochnerInt}
+$\xi(x,\cdot)$ is Bochner integrable with respect to any probability measure.
 \end{statement}
 
 \begin{proof}
-We use the proof on p. 132 of \cite[Corollary 4.36]{SteChr08}
-that each entry of $\nabla k(x,\cdot)\in\mathcal{F}$ and $\left(\nabla f(x)\right)_{i}=\left\langle f,\frac{\partial}{\partial x_{i}}k(x,\cdot)\right\rangle $.
+It is sufficient to check that coefficients of $\xi$ are Bochner integrable  (\cite[Definition A.5.20]{SteChr08}). We check that for random any variable $Z$
+\[
+\ev \left\Vert \frac{\partial \log p(Z) }{\partial x_i} k(Z,\cdot)\right\Vert^2 = \ev \left( \frac{\partial \log p(Z) }{\partial x_i} k(Z,Z) \right)^2 <\infty,
+\]
+and
+\[
+\ev \left\Vert \frac{\partial k(Z,\cdot)}{\partial x}\right\Vert^2 =\ev \left(\frac{\partial^{2} k(Z,Z) }{dx_1 dx_2}\right)^2<\infty.
+\]
 \end{proof}
+
+\begin{corollary}
+ For any random variable $Z$, expected value of $\xi(Z)$ is is element of $H^d$.
+\end{corollary}
 
 
 \begin{statement}
-Expected value of Joana's operator coincides with inner product in $H^d$.
+For any random variable $Z$, expected value of Stein operator coincides with inner product of $f$ and expected value of $\xi(Z)$ i.e. 
 \begin{align}
-\mathbb{E} T_{p} f(X) = \sum_{i=1}^d \langle f_i, \xi^i \rangle
+\ev T_{p} f(X) = \sum_{i=1}^d \langle f_i, \ev \xi_i(Z) \rangle
 \end{align}
 \end{statement}
 
 \begin{proof}
   \begin{align*}
- \left\langle f, \xi^i \right\rangle  &= \left\langle f,\mathbb{E} \left[ \frac{\partial \log p(X)}{ \partial x_i} k(X,\cdot)+ \frac{\partial k(X,\cdot)}{ \partial x_i}\right]\right\rangle \\
-  &= \left[\mathbb{E} \left\langle f, \frac{\partial \log p(X)}{ \partial x_i} k(X,\cdot)+ \frac{\partial k(X,\cdot)}{ \partial x_i}\right\rangle \right]\\
- &=\mathbb{E} \left[ \frac{\partial \log p(X)}{ \partial x_i} f(X)+ \frac{\partial k(X,\cdot)}{ \partial x_i}\right]\\
+ \left\langle f, \ev \xi_i(Z) \right\rangle  &= \left\langle f,\ev \left[ \frac{\partial \log p(Z)}{ \partial x_i} k(Z,\cdot)+ \frac{\partial k(Z,\cdot)}{ \partial x_i}\right]\right\rangle \\
+  &= \ev \left\langle f, \frac{\partial \log p(Z)}{ \partial x_i} k(Z,\cdot)+ \frac{\partial k(Z,\cdot)}{ \partial x_i}\right\rangle \\
+ &=\ev \left[ \frac{\partial \log p(Z)}{ \partial x_i} f(Z)+ \frac{\partial k(Z,\cdot)}{ \partial x_i}\right]\\
 \end{align*}
-In the last equation we use the Bochner integrability (\cite[Definition A.5.20]{SteChr08}) of coefficients of $\xi$, to take the expectation outside the integral. The latter property requires
-two conditions,
-\[
-\mathbb{E} \left\Vert \frac{\partial \log q(X) }{\partial x_i} k(X,\cdot)\right\Vert^2 = \mathbb{E} \left( \frac{\partial \log q(X) }{\partial x_i} k(X,X) \right)^2 <\infty,
-\]
-and
-\[
-\mathbb{E} \left\Vert \frac{\partial k(X,\cdot)}{\partial x}\right\Vert^2 =\mathbb{E} \left(\frac{\partial^{2} k(X,X) }{dx_1 dx_2}\right)^2<\infty.
-\]
+The second equality follows form the fact that linear operator $\langle f , \cdot \rangle$ can be interchanged with Bochner integral and the fact that $\xi$ is Bochner integrable (Lemma \ref{lem:BochnerInt}). The last equality is application of reproducing property.    
 \end{proof}
-Define 
-\[
- d_{p} = \sup_{|f| <1} \mathbb{E} T_{p} f(X)
-\]
-We show that $d_p \neq 0$ is $X\sim q \neq p$.  
+
+\begin{corollary}
+ Supremum of $S(Y,\mathcal{F},p)$ is realized  by  $ v/\|v \|_{\mathcal{F}^d}$ for $v = \ev \xi(X)$ where $X \sim p$. Formally
+ \[
+  \arg \sup_{f \in F^d, \| f \|<1} \ev (T_{p}f) (Y) =  v/\|v \|_{\mathcal{F}^d}
+ \]
+\end{corollary}
+
+
+
 \begin{lemma}
- 
+\label{th1}
+$S(Y,\mathcal{F},p)^2$ can be written in a closed form. 
 \end{lemma}
 
 \begin{proof}
- Suppose $X \sim q$
+We use notation 
 \begin{align*}
- &E \frac{\partial } {\partial x_i} \log p(X) k(X, ) + \frac{\partial } {\partial x_i} k(X,\cdot) =\\
- &E  \frac{\partial } {\partial x_i} ( \log  p(X) + \log  q(X)- \log  q(X)  )  k(X,\cdot)   + \frac{\partial } {\partial x_i} k(X,\cdot) = \\
- &E  \frac{\partial } {\partial x_i} (\log p(X) - \log q(X))k(X,\cdot)   = \\
+ \nabla_1 k(x,y) = \left( \frac{\partial k(x,y) }{\partial x_1}, \cdots, \frac{\partial k(x,y) }{\partial x_1} \right) \\
+ \nabla_2 k(x,y) = \left( \frac{\partial k(x,y) }{\partial y_1}, \cdots, \frac{\partial k(x,y) }{\partial y_1} \right). \\ 
+\end{align*}
+and $\langle \cdot, \cdot\rangle_2 $ for inner product in $R^d$.
+\begin{align*}
+S(X,\mathcal{F},p)^2 & = \langle \xi, \xi \rangle_{\mathcal{F}^d } \\
+& = \langle \ev \left[\nabla \log p(X) k(X,\cdot)+\nabla_1 k(X,\cdot)\right] ,\ev \left[\nabla \log p(X) k(X,\cdot)+\nabla_1 k(X,\cdot)\right] \rangle_{\mathcal{F}^d } \\
+& \overset{(a)}{=} \ev \langle   \nabla \log p(X_1) k(X_1,\cdot) + \nabla_1 k(X_1,\cdot) , \nabla \log p(X_2) k(\cdot,X_2) + \nabla_2 k(\cdot,X_2) \rangle_{\mathcal{F}^d } \\
+& = \ev\langle \nabla \log p(X_1) , \nabla\log p(X_2) \rangle_{2} k(X_1,X_2) + \ev \langle \nabla p(X_2),  \nabla_1 k(X_1,X_2) \rangle_{2} \\
+  & \quad +  \ev \langle \nabla  \log p(X_1), \nabla_{2}  k(X_1,X_2) \rangle_{2} +  \ev\ \langle  \nabla_1 k(X_1,X_2), \nabla_2 k(X_1,X_2) \rangle_{2}
+\end{align*}
+
+
+
+\end{proof}
+
+\begin{Theorem}
+\label{th2}
+$S(X,\mathcal{F},p) \neq  0$ if $X \sim q \neq p$
+\end{Theorem}
+
+\begin{proof}
+ It is sufficient to show that $\ev \xi(X) \neq 0$ (as an element of $\mathcal{F}^d$).
+\begin{align*}
+ &\ev \left( \frac{\partial } {\partial x_i} \log p(X) k(X,\cdot) + \frac{\partial } {\partial x_i} k(X,\cdot)  \right) =\\
+ &\ev \left( \frac{\partial } {\partial x_i} ( \log  p(X) + \log  q(X)- \log  q(X)  )  k(X,\cdot)   + \frac{\partial } {\partial x_i} k(X,\cdot) \right) = \\
+ &\ev \left(  \frac{\partial } {\partial x_i} (\log p(X) - \log q(X))k(X,\cdot) \right)  = \\
  & \int  (\log p(x) - \log q(x) ) k(x,\cdot) p(x) dx
 \end{align*}
 We recognize mean embedding of a $C^b$ function $(\log p(x) - \log q(x) ) p(x)$, which is non-zero iff the function itself is non-zero. 
-\end{proof}
-
-
-
-\begin{lemma}
- $d_{q}$ can be written in an absolutely disgusting  closed form. 
-\end{lemma}
-
-\begin{proof}
- \begin{align*}
-d_{f}(p) & =\sum_{i=1}^d \langle \xi^i, \xi^i \rangle = \langle \xi, \xi \rangle_{H} \\
-& = \langle E \left[\nabla \log p(X) k(X,\cdot)+\nabla k(X,\cdot)\right] ,E \left[\nabla \log p(X) k(X,\cdot)+\nabla k(X,\cdot)\right] \rangle \\
-& \overset{(a)}{=} E \langle   \nabla \log p(X_1) k(X_1,\cdot) + \nabla k(X_1,\cdot) , \nabla \log p(X_2) k(\cdot,X_2) + \nabla k(\cdot,X_2) \rangle \\
-& \overset{(b)}{=} E\langle \nabla \log p(X_1) , \nabla\log p(X_2) \rangle_{2} k(X_1,X_2) + E \langle \nabla p(X_2),  \nabla_1 k(X_1,X_2) \rangle_{2} \\
-  &+  E \langle \nabla  \log p(X_1), \nabla_{2}  k(X_1,X_2) \rangle_{2} +  \langle  \nabla_1 k(X_1,X_2), \nabla_2 k(X_1,X_2) \rangle_{2}
-\end{align*}
-the change of the order of  variables in (a) is justified by symmetry of the kernel. In (b) we have use the notation $\nabla_1,\nabla_1$ which must be understood as follows 
-\begin{align*}
- \nabla_1 k(x,y) = \left( \frac{\partial k(x,y) }{\partial x_1}, \cdots, \frac{\partial k(x,y) }{\partial x_1} \right) \\
- \nabla_2 k(x,y) = \left( \frac{\partial k(x,y) }{\partial y_1}, \cdots, \frac{\partial k(x,y) }{\partial y_1} \right), \\ 
-\end{align*}
-otherwise (b) is utter nonsense. To make (b) even more confusing we add an subscript to inner product to denote the we mean plain euclidean space inner product rather then RKHS inner product.  
-
-
 \end{proof}
 
 
@@ -207,7 +215,7 @@ otherwise (b) is utter nonsense. To make (b) even more confusing we add an subsc
 % then the whole vector filed must be zero. so the difference between logs must be constant and due to integrability conditions on p and q they must be the same.
 
 \section{tests}
-We suppose that sequence is weak mixing which is sufficient for most application. E.g. geometrically ergodic  markov chains are in other words alpha mixing gemoetrically fast which in turn implies by wild kernels paper appendix that chain is tau mixing!   Not his includes iid data. Note the iid case is no easier without bootstrap.
+We suppose that sequence is weak mixing which is sufficient for most application. e.g. geometrically ergodic  markov chains are in other words alpha mixing gemoetrically fast which in turn implies by wild kernels paper appendix that chain is tau mixing!   Not his includes iid data. Note the iid case is no easier without bootstrap.
 
 
 
@@ -217,7 +225,7 @@ TODO it is copy paste, I'm afraid !
 Let $\{Z_t,\mathcal{F}_t\}_{t \in \mathbb{N}}$  be a stationary sequence of integrable random variables, defined on a probability space $\Omega$ with a probability measure $P$ and a natural filtration $\mathcal{F}_t$. The process  is called $\tau$-dependent if 
 \begin{align*}
 \tau(r) &= \sup_{l \in \mathbb{N}} \frac 1 l \sup_{ r \leq i_1 \leq ... \leq i_l} \tau( \mathcal F_0,(Z_{i_1},...,Z_{i_l}) )  \overset{r \to \infty}{\longrightarrow} 0,\;\text{where} \\
-\tau(\mathcal{M},X) &=  E \left( \sup_{g \in \Lambda} \left| \int g(t) P_{X|\mathcal{M}}(dt) - \int g(t) P_X(dt) \right| \right)
+\tau(\mathcal{M},X) &=  \ev \left( \sup_{g \in \Lambda} \left| \int g(t) P_{X|\mathcal{M}}(dt) - \int g(t) P_X(dt) \right| \right)
 \end{align*}
 and $\Lambda$ is the set of all one-Lipschitz continuous real-valued functions on the domain of $X$. 
 
@@ -227,7 +235,7 @@ We will study two versions of the bootstrapped $V$-statistics
 \end{align}
 where $\{W_{t,n}\}_{1 \leq t \leq n }$ is an auxiliary wild bootstrap process and $\tilde W_{t,n} = W_{t,n} - \frac 1 n \sum_{j=1}^n W_{j,n}$. This auxiliary process, proposed by \cite{Shao2010,leucht_dependent_2013}, satisfies the following assumption:
 
-\emph{Bootstrap assumption:} $\{W_{t,n}\}_{1 \leq t \leq n }$ is a row-wise strictly stationary triangular array independent of all $Z_t$ such that $E W_{t,n}=0$ and $\sup_{n} E|W_{t,n}^{2+\sigma}| < \infty$ for some $\sigma > 0$. The autocovariance of the process is given by $E W_{s,n} W_{t,n}=\rho(|s-t|/l_n)$ for some function $\rho$, such that $\lim_{u \to 0} \rho(u) = 1$ and $\sum_{r=1}^{n-1} \rho(|r|/l_n)= O(l_n)$. The sequence $\left\{l_n\right\}$ is taken such that $l_n=o(n)$ but $\lim_{n \to \infty} l_n = \infty$. The variables $W_{t,n}$  are $\tau$-weakly dependent with coefficients $\tau(r) \leq C \zeta^{\frac{r} {l_n}}$ for $r=1,...,n$, $\zeta \in (0,1)$ and $C\in\mathbb R$.
+\emph{Bootstrap assumption:} $\{W_{t,n}\}_{1 \leq t \leq n }$ is a row-wise strictly stationary triangular array independent of all $Z_t$ such that $\ev W_{t,n}=0$ and $\sup_{n} \ev|W_{t,n}^{2+\sigma}| < \infty$ for some $\sigma > 0$. The autocovariance of the process is given by $\ev W_{s,n} W_{t,n}=\rho(|s-t|/l_n)$ for some function $\rho$, such that $\lim_{u \to 0} \rho(u) = 1$ and $\sum_{r=1}^{n-1} \rho(|r|/l_n)= O(l_n)$. The sequence $\left\{l_n\right\}$ is taken such that $l_n=o(n)$ but $\lim_{n \to \infty} l_n = \infty$. The variables $W_{t,n}$  are $\tau$-weakly dependent with coefficients $\tau(r) \leq C \zeta^{\frac{r} {l_n}}$ for $r=1,...,n$, $\zeta \in (0,1)$ and $C\in\mathbb R$.
 
 We will use {+1,1} bootstrap.
 
@@ -372,6 +380,30 @@ Type two is somehow more complicated. In general (this is my intuition from fini
 
 \appendix
 
+\subsection{boring proofs}
+
+\begin{lemma}
+\label{lem:easy}
+If a random variable $X$ is distributed according to $p$, then for all function $f \in \mathcal{F}$ expected  value of  $T_p$ is zero, i.e. $\forall_{f \in \mathcal{F}} \ev (T_{q}f)(X) = 0$.
+\end{lemma}
+\begin{proof}
+First we show that the functions $g_i = p \cdot f_i$ vanish at infinity, by which we mean that for all dimensions $j$
+\[
+ \lim_{x_j \to \infty} g_i(x_1,\cdots,x_d) = 0. 
+\]
+The density function $p$ vanishes at infinity. The function $f$ is bounded,  which is implied by Cauchy-Schwarz inequality -- $\left|f(x)\right|\le\left\Vert f\right\Vert \sqrt{k(x,x)}$. This implies that the function $g$ vanishes at infinity. To show the expected value $\ev (T_{p})f(X)$ is zero, it is sufficient to show that for all dimensions $i$, the expected value of  $\frac{\partial \log p(X)}{ \partial x_i} f_i(X)+\frac{\partial f_i(X)}{ \partial x_i}$ is zero. 
+\begin{align*}
+&\ev\left( \frac{\partial \log p(x)}{ \partial x_i} f_i(x)+\frac{\partial f_i(x)}{ \partial x_i} \right) \\
+& =\int_{R_d}   \left[ \frac{\partial \log p(x)}{ \partial x_i} f_i(x)+\frac{\partial f_i(x)}{ \partial x_i} \right]q(x)dx\\
+ & =\int_{R_d} \left[\frac{1}{p(x)}\frac{\partial q(x)}{ \partial x_i}f(x)  +\frac{\partial f(x)}{ \partial x_i} \right]q(x)dx\\
+ & =\int_{R_d} \left[\frac{\partial p(x)}{ \partial x_i} f_i(x)+\frac{\partial  f_i(x)}{ \partial x_i}q(x)\right]dx\\
+ & \overset{(a)}{=} \int_{R_{d-1}} \left( \lim_{R \to \infty} p(x)f_i(x) \bigg|_{x_i=-R}^{x_i=R} \right) dx_1 \cdots dx_{i-1} \cdots dx_{i+1}  \cdots d{x_d} \\
+ & = \int_{R_{d-1}} 0 dx_1 \cdots dx_{i-1} \cdots dx_{i+1} \cdots d{x_d} \\
+ & =0.
+\end{align*}
+For the equation (a) we have used integration by parts and fact that $g_i$ vanishes at infinity.
+\end{proof}
+
 
 \subsection{Linear time}
 
@@ -395,7 +427,7 @@ The test statistic is
 The computation of $S_n$ requires inversion of a $J\times J$ matrix $\Sigma_n$, but this is fast and numerically stable: $J$ will typically be small, and is less than 10 in our experiments. The next proposition demonstrates the use of $S_n$ as a one-sample test.
 \begin{proposition}[Asymptotic behavior of $S_n$]
 \label{prop:Hotelling}
- If  $E s(X,y)=0$ for all $y$, then the statistic $S_n$ is a.s. asymptotically distributed as a $\chi^2$-random variable with $Jd$ degrees of freedom, where $d$ is $X$ dimensionality (as $n \to \infty$ with $d$ fixed). If  $E s(X,y) \neq 0$ for almost all $y$ then a.s. for any fixed $r$, $\mathbb P(S_n > r) \to 1$  as $n \to \infty$ .
+ If  $\ev s(X,y)=0$ for all $y$, then the statistic $S_n$ is a.s. asymptotically distributed as a $\chi^2$-random variable with $Jd$ degrees of freedom, where $d$ is $X$ dimensionality (as $n \to \infty$ with $d$ fixed). If  $\ev s(X,y) \neq 0$ for almost all $y$ then a.s. for any fixed $r$, $\mathbb P(S_n > r) \to 1$  as $n \to \infty$ .
 \end{proposition}
 
 
@@ -407,7 +439,7 @@ Calculate $S_n$. Choose a threshold $r_\alpha$ corresponding to the $1-\alpha$ q
 
 
 \bibliographystyle{plain}
-\bibliography{biblio}
+\bibliography{bib}
 
 
 

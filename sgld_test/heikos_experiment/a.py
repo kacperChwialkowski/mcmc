@@ -4,7 +4,6 @@ from pandas import DataFrame
 p_vals = np.load('pvals.npy')
 evals  = np.load('no_evals.npy')/10**6
 
-p_vals = np.min(p_vals,axis=2)
 
 epsilon = np.linspace(0.001, 0.2,25)
 
