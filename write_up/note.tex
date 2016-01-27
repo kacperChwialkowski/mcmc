@@ -43,10 +43,11 @@ assumed to have a density wrt the Lebesgue measure, $dq(x)=q(x)dx$
 exponential family).
 
 \section{Kernel One Sample Test}
-In the following section we derive kernel one sample test. The test is applicable to family distributions of $\mathcal{P}$, where $p \in \mathcal{P}$ satisfy two conditions : \\ 
+In the following section we derive kernel one sample test. The test is applicable to family distributions on Euclidean space  $\mathcal{P}$, where $p \in \mathcal{P}$ satisfy two conditions: \\ 
 (i) $\ev \log p(Z)    <\infty$ for any random variable $Z$; \\
 (ii) $\ev   \| \nabla \log p(X) \|^2  $  for $X \sim p$.\\
-Let $k$ be a bounded, symmetric, cc-universal \cite{sriperumbudur2011universality}  kernel  and $\mathcal{F}$  the Reproducing Kernel Hilbert Space  associated with it. 
+Let $k$ be a bounded, symmetric, cc-universal \cite{sriperumbudur2011universality}  kernel  and $\mathcal{F}$  the Reproducing Kernel Hilbert Space  associated with it. We assume that for any random variable $Z$ \\ 
+(iii) $\ev \left(\frac{\partial^{2} k(Z,Z) }{dx_i dx_{i+d} }\right)^2<\infty$
 
 
 \paragraph{Stein operator.}
@@ -54,13 +55,11 @@ We proceed as similarly to \cite{mackey2015multivariate,stein1972} and use Stein
 \[
 T_{p} f=  \sum_{i=1}^{d} \left( \frac{\partial \log p(x)}{ \partial x_i} f_i(x)+\frac{\partial f_i(x)}{ \partial x_i} \right).
 \]
-As in \cite{mackey2015multivariate}, we show that for all $f \in F^d, \ev (T_{q}f)(X) = 0$ (Lemma \ref{lem:easy}). Next, for any random $Z$ variable, we define Stein discrepancy 
+As in \cite{mackey2015multivariate}, we show that for all $f \in F^d, \ev (T_{q}f)(X) = 0$ (Lemma \ref{lem:easy}). Next, for any random $Z$ variable, we define Stein discrepancy between $X \sim p$ and $Z$ 
 \[
  S(Z,\mathcal{F},p) = \sup_{f \in F^d,\| f \|<1} \ev (T_{p}f) (Z)  = \sup_{ f \in F^d } \ev (T_{p}f)(Z) - \ev (T_{p}f) (X).
 \]
-In Theorem \ref{th2} we show that  $S(Z,\mathcal{F},p)$ defines distance-like function on space of probability measures. 
-Notice that $\ev \left(  (T_{p}f)(Z) -  (T_{p}f) (X) \right) $, looks like integral probability metrics \cite{muller1997integral} -- in fact show that is one in .  
-We prove that  $S(Y,\mathcal{F},p)$ is discrepancy in . Contrary to to \cite{mackey2015multivariate}, we don't need to approximate $S(Y,\mathcal{F},p)$ (step 2 and 3), since we can calculate it explicitly \ref{th1}. 
+In Theorem \ref{th2} we show that  $S(Z,\mathcal{F},p)$ captures difference between some probability measures. Contrary to to \cite{mackey2015multivariate}, we don't need to approximate $S(Y,\mathcal{F},p)$ (step 2 and 3 in section 3), since we can calculate it explicitly \ref{th1}. 
 
 
 
@@ -75,10 +74,10 @@ $  \nabla_1 k(x,t) = \left( \frac{\partial k(x,t)}{ \partial x_1}, \cdots , \fra
 
 \begin{statement}
 \label{lem:WellDefined}
- $\xi(x,\cdot)$ is an element of RKHS $\mathcal{F}^d$.
+ $\xi(x,\cdot)$ is an element of the reproducing kernel Hilbert space $\mathcal{F}^d$.
 \end{statement}
 \begin{proof}
- We use the proof on p. 132 of \cite[Corollary 4.36]{SteChr08} to see that for all $x \in R^d$ each entry of $\nabla_1 k(x,\cdot)\in\mathcal{F}$. $\frac{\partial \log p(x)}{ \partial x_i} k(x,t) \in\mathcal{F}$, since $k(x,t) \in\mathcal{F}$ and $\frac{\partial \log p(x)}{ \partial x_i}$ is scalar. 
+ We use the proof on p. 132 of \cite[Corollary 4.36]{SteChr08} to see that for all $x \in R^d$ each entry of $\nabla_1 k(x,\cdot)\in\mathcal{F}$. $\frac{\partial \log p(x)}{ \partial x_i} k(x,t) \in\mathcal{F}$, since $k(x,t) \in\mathcal{F}$ and $\frac{\partial \log p(x)}{ \partial x_i}$ is a scalar. 
 \end{proof}
 
 
@@ -88,44 +87,41 @@ $\xi(x,\cdot)$ is Bochner integrable with respect to any probability measure.
 \end{statement}
 
 \begin{proof}
-It is sufficient to check that coefficients of $\xi$ are Bochner integrable  (\cite[Definition A.5.20]{SteChr08}). We check that for random any variable $Z$
+It is sufficient to check that coefficients of $\xi$ are Bochner integrable  (\cite[Definition A.5.20]{SteChr08}). first we check that for random any variable $Z$
 \[
-\ev \left\Vert \frac{\partial \log p(Z) }{\partial x_i} k(Z,\cdot)\right\Vert^2 = \ev \left( \frac{\partial \log p(Z) }{\partial x_i} k(Z,Z) \right)^2 <\infty,
+\ev \left\Vert \frac{\partial \log p(Z) }{\partial x_i} k(Z,\cdot)\right\Vert^2 = \ev \left( \frac{\partial \log p(Z) }{\partial x_i} k(Z,Z) \right)^2 <\ev   \| \nabla \log p(X) \|^2 <\infty,
 \]
-and
+which follows form assumption (i) and boundedness of the kernel. Next we check that 
 \[
-\ev \left\Vert \frac{\partial k(Z,\cdot)}{\partial x}\right\Vert^2 =\ev \left(\frac{\partial^{2} k(Z,Z) }{dx_1 dx_2}\right)^2<\infty.
+\ev \left\Vert \frac{\partial k(Z,\cdot)}{\partial x}\right\Vert^2 =\ev \left(\frac{\partial^{2} k(Z,Z) }{dx_i dx_{i+d} }\right)^2<\infty,
 \]
+which follows from assumption (iii). 
 \end{proof}
 
 \begin{corollary}
- For any random variable $Z$, expected value of $\xi(Z)$ is is element of $H^d$.
+ For any random variable $Z$, expected value of $\xi(Z)$ is is element of $\mathcal{F}^d$.
 \end{corollary}
 
 
 \begin{statement}
 For any random variable $Z$, expected value of Stein operator coincides with inner product of $f$ and expected value of $\xi(Z)$ i.e. 
 \begin{align}
-\ev T_{p} f(X) = \sum_{i=1}^d \langle f_i, \ev \xi_i(Z) \rangle
+\ev T_{p} f(X) = \langle f ,\ev \xi(Z) \rangle_{\mathcal{F}^d}  =\sum_{i=1}^d \langle f_i, \ev \xi_i(Z) \rangle_{\mathcal{F}}
 \end{align}
 \end{statement}
 
 \begin{proof}
   \begin{align*}
- \left\langle f, \ev \xi_i(Z) \right\rangle  &= \left\langle f,\ev \left[ \frac{\partial \log p(Z)}{ \partial x_i} k(Z,\cdot)+ \frac{\partial k(Z,\cdot)}{ \partial x_i}\right]\right\rangle \\
-  &= \ev \left\langle f, \frac{\partial \log p(Z)}{ \partial x_i} k(Z,\cdot)+ \frac{\partial k(Z,\cdot)}{ \partial x_i}\right\rangle \\
- &=\ev \left[ \frac{\partial \log p(Z)}{ \partial x_i} f(Z)+ \frac{\partial k(Z,\cdot)}{ \partial x_i}\right]\\
+ \left\langle f_i, \ev \xi_i(Z) \right\rangle  &= \left\langle f_i,\ev \left[ \frac{\partial \log p(Z)}{ \partial x_i} k(Z,\cdot)+ \frac{\partial k(Z,\cdot)}{ \partial x_i}\right]\right\rangle_{\mathcal{F}} \\
+  &= \ev \left\langle f_i, \frac{\partial \log p(Z)}{ \partial x_i} k(Z,\cdot)+ \frac{\partial k(Z,\cdot)}{ \partial x_i}\right\rangle_{\mathcal{F}} \\
+ &=\ev \left[ \frac{\partial \log p(Z)}{ \partial x_i} f_i(Z)+ \frac{\partial k(Z,\cdot)}{ \partial x_i}\right]\\
 \end{align*}
-The second equality follows form the fact that linear operator $\langle f , \cdot \rangle$ can be interchanged with Bochner integral and the fact that $\xi$ is Bochner integrable (Lemma \ref{lem:BochnerInt}). The last equality is application of reproducing property.    
+The second equality follows form the fact that linear operator $\langle f_i , \cdot \rangle_{\mathcal{F}}$ can be interchanged with Bochner integral and the fact that $\xi$ is Bochner integrable (Lemma \ref{lem:BochnerInt}). The last equality is application of reproducing property.    
 \end{proof}
 
 \begin{corollary}
- Supremum of $S(Y,\mathcal{F},p)$ is realized  by  $ v/\|v \|_{\mathcal{F}^d}$ for $v = \ev \xi(X)$ where $X \sim p$. Formally
- \[
-  \arg \sup_{f \in F^d, \| f \|<1} \ev (T_{p}f) (Y) =  v/\|v \|_{\mathcal{F}^d}
- \]
+$S(Y,\mathcal{F},p)^2 = \langle \xi, \xi \rangle_{\mathcal{F}^d } $. 
 \end{corollary}
-
 
 
 \begin{lemma}
@@ -136,14 +132,14 @@ $S(Y,\mathcal{F},p)^2$ can be written in a closed form.
 \begin{proof}
 We use notation 
 \begin{align*}
- \nabla_1 k(x,y) = \left( \frac{\partial k(x,y) }{\partial x_1}, \cdots, \frac{\partial k(x,y) }{\partial x_1} \right) \\
- \nabla_2 k(x,y) = \left( \frac{\partial k(x,y) }{\partial y_1}, \cdots, \frac{\partial k(x,y) }{\partial y_1} \right). \\ 
+ \nabla_1 k(x,y) = \left( \frac{\partial k(x,y) }{\partial x_1}, \cdots, \frac{\partial k(x,y) }{\partial x_d} \right) \\
+ \nabla_2 k(x,y) = \left( \frac{\partial k(x,y) }{\partial y_1}, \cdots, \frac{\partial k(x,y) }{\partial y_d} \right). \\ 
 \end{align*}
 and $\langle \cdot, \cdot\rangle_2 $ for inner product in $R^d$.
 \begin{align*}
 S(X,\mathcal{F},p)^2 & = \langle \xi, \xi \rangle_{\mathcal{F}^d } \\
 & = \langle \ev \left[\nabla \log p(X) k(X,\cdot)+\nabla_1 k(X,\cdot)\right] ,\ev \left[\nabla \log p(X) k(X,\cdot)+\nabla_1 k(X,\cdot)\right] \rangle_{\mathcal{F}^d } \\
-& \overset{(a)}{=} \ev \langle   \nabla \log p(X_1) k(X_1,\cdot) + \nabla_1 k(X_1,\cdot) , \nabla \log p(X_2) k(\cdot,X_2) + \nabla_2 k(\cdot,X_2) \rangle_{\mathcal{F}^d } \\
+& = \ev \langle   \nabla \log p(X_1) k(X_1,\cdot) + \nabla_1 k(X_1,\cdot) , \nabla \log p(X_2) k(\cdot,X_2) + \nabla_2 k(\cdot,X_2) \rangle_{\mathcal{F}^d } \\
 & = \ev\langle \nabla \log p(X_1) , \nabla\log p(X_2) \rangle_{2} k(X_1,X_2) + \ev \langle \nabla p(X_2),  \nabla_1 k(X_1,X_2) \rangle_{2} \\
   & \quad +  \ev \langle \nabla  \log p(X_1), \nabla_{2}  k(X_1,X_2) \rangle_{2} +  \ev\ \langle  \nabla_1 k(X_1,X_2), \nabla_2 k(X_1,X_2) \rangle_{2}
 \end{align*}
@@ -154,18 +150,25 @@ S(X,\mathcal{F},p)^2 & = \langle \xi, \xi \rangle_{\mathcal{F}^d } \\
 
 \begin{Theorem}
 \label{th2}
-$S(X,\mathcal{F},p) \neq  0$ if $X \sim q \neq p$
+Suppose  $q,p \in mathcal{P}$ and $p\neq q $,  if $Y \sim q$  then $S(Y,\mathcal{F},p) \neq  0$.
 \end{Theorem}
 
 \begin{proof}
- It is sufficient to show that $\ev \xi(X) \neq 0$ (as an element of $\mathcal{F}^d$).
+For each dimension of $\ev \xi(Y)$ We add and subtract $\log q(Y)$  
 \begin{align*}
- &\ev \left( \frac{\partial } {\partial x_i} \log p(X) k(X,\cdot) + \frac{\partial } {\partial x_i} k(X,\cdot)  \right) =\\
- &\ev \left( \frac{\partial } {\partial x_i} ( \log  p(X) + \log  q(X)- \log  q(X)  )  k(X,\cdot)   + \frac{\partial } {\partial x_i} k(X,\cdot) \right) = \\
- &\ev \left(  \frac{\partial } {\partial x_i} (\log p(X) - \log q(X))k(X,\cdot) \right)  = \\
- & \int  (\log p(x) - \log q(x) ) k(x,\cdot) p(x) dx
+ &\ev \left( \frac{\partial } {\partial x_i} \log p(Y) k(Y,\cdot) + \frac{\partial } {\partial x_i} k(Y,\cdot)  \right) \\
+ &=\ev \left( \frac{\partial } {\partial x_i} ( \log  p(Y) + \log  q(Y)- \log  q(Y)  )  k(Y,\cdot)   + \frac{\partial } {\partial x_i} k(Y,\cdot) \right) = \\
+ &= \ev \left(  \frac{\partial } {\partial x_i} (\log p(Y) - \log q(Y))k(Y,\cdot) \right) 
 \end{align*}
-We recognize mean embedding of a $C^b$ function $(\log p(x) - \log q(x) ) p(x)$, which is non-zero iff the function itself is non-zero. 
+We have used Lemma \ref{lem:easy} to see that 
+\[
+\ev \left( \frac{\partial } {\partial x_i} (  \log  q(Y)  )  k(Y,\cdot)   + \frac{\partial } {\partial x_i} k(Y,\cdot) \right) =0.
+\]
+We recognize that expected value of random  $ \frac{\partial } {\partial x_i} (\log p(Y) - \log q(Y))  k(Y,\cdot)$ is mean emending of a function $g(y) =  \frac{\partial } {\partial x_i} (\log \frac{p(y)}{q(y)})$  with respect to  the measure $q$. Since kernel $k$ is cc-universal this embedding is zero if and only if $g = 0$ which implies that 
+\[
+ \nabla \log \frac{p(y)}{q(y)} = (0,\cdots ,0)
+\]
+A constant vector filed of derivatives  can be generated only by a constant functions, so $\log \frac{p(y)}{q(y)} =C$, for some $C$, which implies that  $p(y) = e^C q(y)$. Since $p$ and $q$ integrates to one $C=0$ and so $p=q$ 
 \end{proof}
 
 
