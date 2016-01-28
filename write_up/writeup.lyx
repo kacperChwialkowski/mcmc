@@ -1687,8 +1687,8 @@ name "fig:density_estimation_increasing_features"
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-bibfiles "density_estimation_experiment/biblio"
-options "density_estimation_experiment/icml2016"
+bibfiles "biblio"
+options "icml2015"
 
 \end_inset
 
