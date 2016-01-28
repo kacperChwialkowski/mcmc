@@ -1,5 +1,5 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
-\lyxformat 474
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
 \begin_document
 \begin_header
 \textclass scrartcl
@@ -21,13 +21,13 @@ theorems-sec
 \font_roman default
 \font_sans default
 \font_typewriter default
-\font_math auto
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
+
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -38,24 +38,15 @@ theorems-sec
 \use_hyperref false
 \papersize default
 \use_geometry false
-\use_package amsmath 2
-\use_package amssymb 2
-\use_package cancel 1
-\use_package esint 0
-\use_package mathdots 1
-\use_package mathtools 1
-\use_package mhchem 1
-\use_package stackrel 1
-\use_package stmaryrd 1
-\use_package undertilde 1
-\cite_engine natbib
-\cite_engine_type numerical
-\biblio_style plainnat
+\use_amsmath 2
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_numerical
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
 \suppress_date false
-\justification true
 \use_refstyle 0
 \index Index
 \shortcut idx
@@ -316,7 +307,27 @@ key "sriperumbudur2011universality"
 \begin_inset Formula $\ev\left(\frac{\partial^{2}k(Z,Z)}{dx_{i}dx_{i+d}}\right)^{2}<\infty$
 \end_inset
 
+,
+\begin_inset Newline newline
+\end_inset
 
+(iv)
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\nabla\log p(x)+\nabla k(x,y)$
+\end_inset
+
+ is Lipschitz continuous.
 \end_layout
 
 \begin_layout Paragraph
@@ -870,18 +881,8 @@ tests
 \begin_layout Standard
 
 \lang english
-We suppose that sequence is weak mixing which is sufficient for most application.
- e.g.
- geometrically ergodic markov chains are in other words alpha mixing gemoetrical
-ly fast which in turn implies by wild kernels paper appendix that chain
- is tau mixing! Not his includes iid data.
- Note the iid case is no easier without bootstrap.
-\end_layout
-
-\begin_layout Standard
-
-\lang english
-TODO it is copy paste, I'm afraid ! 
+The basic two concepts required for derivation of the kernel one sample
+ test statistic are 
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -892,21 +893,54 @@ key "dedecker2007weak"
 
 \end_inset
 
+, notion of dependence within the time series, and 
+\begin_inset Formula $V$
+\end_inset
+
+-statistics 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "serfling80"
+
+\end_inset
+
 .
- Let 
-\begin_inset Formula $\{Z_{t},\mathcal{F}_{t}\}_{t\in\mathbb{N}}$
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+We suppose that 
+\begin_inset Formula $\tau$
 \end_inset
 
- be a stationary sequence of integrable random variables, defined on a probabili
-ty space 
-\begin_inset Formula $\Omega$
+-mixing is a notion weak enough for most of applications.
+ For instance geometric ergodicity of Markov Chain implies that the chain
+ is
+\begin_inset Formula $\tau$
 \end_inset
 
- with a probability measure 
-\begin_inset Formula $P$
+-mixing (given the stationary distribution as a finite moment, see appendix
+ of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chwialkowski2014kernel"
+
 \end_inset
 
- and a natural filtration 
+).
+ Trivially, iid observations are 
+\begin_inset Formula $\tau$
+\end_inset
+
+-mixing.
+ Formally, let 
+\begin_inset Formula $\{X_{t},\mathcal{F}_{t}\}_{t\in\mathbb{N}}$
+\end_inset
+
+ be a stationary sequence of integrable random variables, with a natural
+ filtration 
 \begin_inset Formula $\mathcal{F}_{t}$
 \end_inset
 
@@ -918,7 +952,7 @@ ty space
 -dependent if 
 \begin_inset Formula 
 \begin{align*}
-\tau(r) & =\sup_{l\in\mathbb{N}}\frac{1}{l}\sup_{r\leq i_{1}\leq...\leq i_{l}}\tau(\mathcal{F}_{0},(Z_{i_{1}},...,Z_{i_{l}}))\overset{r\to\infty}{\longrightarrow}0,\;\text{where}\\
+\tau(r) & =\sup_{l\in\mathbb{N}}\frac{1}{l}\sup_{r\leq i_{1}\leq...\leq i_{l}}\tau(\mathcal{F}_{0},(X_{i_{1}},...,X_{i_{l}}))\overset{r\to\infty}{\longrightarrow}0,\;\text{where}\\
 \tau(\mathcal{M},X) & =\ev\left(\sup_{g\in\Lambda}\left|\int g(t)P_{X|\mathcal{M}}(dt)-\int g(t)P_{X}(dt)\right|\right)
 \end{align*}
 
@@ -934,32 +968,198 @@ and
 \end_inset
 
 .
+ For the observations 
+\begin_inset Formula $\{X_{t}\}_{t\in\mathbb{N}}$
+\end_inset
+
+ .
+ We will assume the following condition
+\begin_inset Formula $\sum_{t=1}^{\infty}\sqrt{\tau(t)}\leq\infty$
+\end_inset
+
+.A 
+\begin_inset Formula $V$
+\end_inset
+
+-statistic of a function 
+\begin_inset Formula $h,$
+\end_inset
+
+ taking two arguments, is defined as follows
+\begin_inset Formula 
+\[
+V(h,X)=\frac{1}{n}\sum_{i,j=1}^{n}h(X_{i},X_{j})
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+For the kernel one sample test the function 
+\begin_inset Formula $h$
+\end_inset
+
+ is 
 \end_layout
 
 \begin_layout Standard
 
 \lang english
-We will study two versions of the bootstrapped 
-\begin_inset Formula $V$
-\end_inset
-
--statistics 
 \begin_inset Formula 
-\begin{align}
-V_{b1}(h,Z)=\frac{1}{n^{m}}\sum_{i,j}\nolimits W_{i_{1},n}W_{i_{2},n}l(X_{i},X_{j}),\label{Vb1}\\
-\end{align}
+\[
+h(x,y)=\langle\nabla\log p(X_{1}),\nabla\log p(X_{2})\rangle_{2}k(X_{1},X_{2})+\langle\nabla p(X_{2}),\nabla_{1}k(X_{1},X_{2})\rangle_{2}+\langle\nabla\log p(X_{1}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}+\langle\nabla_{1}k(X_{1},X_{2}),\nabla_{2}k(X_{1},X_{2})\rangle_{2},
+\]
 
 \end_inset
 
+ quite complicated but apparently thats the way life is.
+ For the analysis of 
+\begin_inset Formula $V(h,X)$
+\end_inset
+
+ we first notice that is asymptotic distribution depends whether 
+\begin_inset Formula $X\sim p$
+\end_inset
+
+ or not.
+ This is illustrated by a simple lemma, which is a direct application of
+ the Theorem 2.1 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "leucht2012degenerate"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem
+
+\lang english
+If 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $X\sim p$
+\end_inset
+
+ then 
+\begin_inset Formula $V(h,X)$
+\end_inset
+
+ converges weakly a distribution 
+\family default
+\series bold
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\phi$
+\end_inset
+
+
+\family roman
+\series medium
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ , where 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is a distribution infinite sum of squared, correlated random variables.
+ 
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+The condition A1 is trivially stratified by the assumption 
+\begin_inset Formula $\sum_{t=1}^{\infty}\sqrt{\tau(t)}\leq\infty$
+\end_inset
+
+.
+ The condition A2 (iv), Lipschitz continuity.
+ follows form the assumption iv).
+ The positive definiteness and degeneracy follows form the proof of th the
+ Theorem 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "th2"
+
+\end_inset
+
+.
+ Indeed
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+\begin_inset Formula 
+\[
+h(x,y)=\langle\left[\nabla\log p(x)k(x,\cdot)+\nabla_{1}k(x,\cdot)\right],\left[\nabla\log p(y)k(y,\cdot)+\nabla_{1}k(y,\cdot)\right]\rangle_{\mathcal{F}^{d}}
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+so it's an inner product and hence positive definite.
+ Degeneracy follows form the fact that for ant 
+\begin_inset Formula $t$
+\end_inset
+
+, by Lemma 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "lem:easy"
+
+\end_inset
+
+,
+\begin_inset Formula $\ev\nabla\log p(x)k(x,t)+\nabla_{1}k(x,t)=0$
+\end_inset
+
+.
+ Finally the condition A2 (iii), 
+\begin_inset Formula $\ev h(X,X)\leq\infty$
+\end_inset
+
+ follows form (ii), (iii) and boundlessness of the kernel.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
 where 
 \begin_inset Formula $\{W_{t,n}\}_{1\leq t\leq n}$
 \end_inset
 
- is an auxiliary wild bootstrap process and 
-\begin_inset Formula $\tilde{W}_{t,n}=W_{t,n}-\frac{1}{n}\sum_{j=1}^{n}W_{j,n}$
-\end_inset
-
-.
+ is an auxiliary wild bootstrap process .
  This auxiliary process, proposed by 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1110,14 +1310,27 @@ We use wild bootstrap .
 \end_inset
 
  is a a core degenerate under null, then we bootstrapped statistic 
-\begin_inset Formula 
-\begin{align}
-\sum_{i,j}\epsilon_{i}\epsilon_{j}h(X_{i},X_{j})
-\end{align}
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:dupa"
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset Formula 
+\begin{align}
+\sum_{i,j}\epsilon_{i}\epsilon_{j}h(X_{i},X_{j})\label{eq:dupa}\\
+\nonumber 
+\end{align}
+
+\end_inset
+
+dd
 \end_layout
 
 \begin_layout Section
@@ -1215,7 +1428,7 @@ name "fig:studentst"
 \end_inset
 
  
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -1614,7 +1827,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 P-values for an increasing number of data 
@@ -1658,7 +1871,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 P-values for an increasing number of random features 
@@ -1962,7 +2175,7 @@ The computation of
 \begin_layout Proposition
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
