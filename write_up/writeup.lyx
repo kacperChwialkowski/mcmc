@@ -1,0 +1,2093 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass scrartcl
+\begin_preamble
+\usepackage{icml2016} 
+
+%\usepackage[accepted]{icml2016}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+theorems-sec
+\end_modules
+\maintain_unincluded_children false
+\language british
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type numerical
+\biblio_style plainnat
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn[ 
+\backslash
+icmltitle{Fancy title}
+\end_layout
+
+\begin_layout Plain Layout
+
+% It is OKAY to include author information, even for blind
+\end_layout
+
+\begin_layout Plain Layout
+
+% submissions: the style file will automatically remove it for you
+\end_layout
+
+\begin_layout Plain Layout
+
+% unless you've provided the [accepted] option to the icml2015
+\end_layout
+
+\begin_layout Plain Layout
+
+% package.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+icmlauthor{Kacper Chwialkowski$^*$}{kacper.chwialkowski@gmail.com}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+icmlauthor{Heiko Strathmann$^*$}{heiko.strathmann@gmail.com}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+icmlauthor{Arthur Gretton}{arthur.gretton@gmail.com}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+icmladdress{Gatsby Unit, University College London, United Kingdom}
+\end_layout
+
+\begin_layout Plain Layout
+
+% You may provide any keywords that you 
+\end_layout
+
+\begin_layout Plain Layout
+
+% find helpful for describing your paper; these are used to populate
+\end_layout
+
+\begin_layout Plain Layout
+
+% the "keywords" metadata in the PDF but will not be shown in the document
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+icmlkeywords{kernels, statistical testing}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+vskip 0.3in ]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+We present a kernel one-sample test.
+ Given a set of samples, the test allows to quantify how likely it is that
+ the samples have been generated from a given probability density function.
+ Our work extends recent work on using Stein operators to construct goodness-of-
+fit metrics 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gorham2015measuring"
+
+\end_inset
+
+.
+ Via phrasing the problem in the framework of Reproducing Kernel Hilbert
+ Spaces, we do not only achieve largely improved computational properties,
+ but also avoid the need for extra knowledge of the density -- our metric
+ solely depends on gradients of the log-density.
+ We analyse asymptotic properties of the metric and embed it into the statistica
+l hypothesis testing framework -- including efficient test constructions.
+ As a demonstration of the test's practicality, we apply it to quantifying
+ convergence of approximate Markov Chain Monte Carlo methods, statistical
+ model critisism, and checking estimation and approximation convergence
+ in non-parametric density estimation.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset FormulaMacro
+\newcommand{\ev}{\mathbb{E}}
+{\mathbb{E}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+Blablabla
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+The purpose of a goodness of fit test is to show whether a distribution
+ 
+\begin_inset Formula $p$
+\end_inset
+
+ matches some reference distribution 
+\begin_inset Formula $q$
+\end_inset
+
+, which is in our case assumed to have a density wrt the Lebesgue measure,
+ 
+\begin_inset Formula $dq(x)=q(x)dx$
+\end_inset
+
+ (in fact, as we will see, it makes most sense for it to be in the exponential
+ family).
+\end_layout
+
+\begin_layout Section
+
+\lang english
+Kernel One Sample Test
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+In the following section we derive kernel one sample test.
+ The test is applicable to family distributions on Euclidean space 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+, where 
+\begin_inset Formula $p\in\mathcal{P}$
+\end_inset
+
+ satisfy two conditions: 
+\begin_inset Newline newline
+\end_inset
+
+ (i) 
+\begin_inset Formula $\ev\log p(Z)<\infty$
+\end_inset
+
+ for any random variable 
+\begin_inset Formula $Z$
+\end_inset
+
+; 
+\begin_inset Newline newline
+\end_inset
+
+ (ii) 
+\begin_inset Formula $\ev\|\nabla\log p(X)\|^{2}$
+\end_inset
+
+ for 
+\begin_inset Formula $X\sim p$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+ Let 
+\begin_inset Formula $k$
+\end_inset
+
+ be a bounded, symmetric, cc-universal 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "sriperumbudur2011universality"
+
+\end_inset
+
+ kernel and 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ the Reproducing Kernel Hilbert Space associated with it.
+ We assume that for any random variable 
+\begin_inset Formula $Z$
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+ (iii) 
+\begin_inset Formula $\ev\left(\frac{\partial^{2}k(Z,Z)}{dx_{i}dx_{i+d}}\right)^{2}<\infty$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+
+\lang english
+Stein operator.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+We proceed as similarly to 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "mackey2015multivariate,stein1972"
+
+\end_inset
+
+ and use Stein operator to characterize discrepancy between measures.
+ Following 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "mackey2015multivariate"
+
+\end_inset
+
+, we study the operator 
+\begin_inset Formula $T_{p}$
+\end_inset
+
+ acting on 
+\begin_inset Formula $R^{d}$
+\end_inset
+
+ valued functions 
+\begin_inset Formula $f=(f_{1},\cdots,f_{d})$
+\end_inset
+
+, 
+\begin_inset Formula $f_{i}\in\mathcal{F}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+T_{p}f=\sum_{i=1}^{d}\left(\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right).
+\]
+
+\end_inset
+
+As in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "mackey2015multivariate"
+
+\end_inset
+
+, we show that for all 
+\begin_inset Formula $f\in F^{d},\ev(T_{q}f)(X)=0$
+\end_inset
+
+ (Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:easy"
+
+\end_inset
+
+).
+ Next, for any random 
+\begin_inset Formula $Z$
+\end_inset
+
+ variable, we define Stein discrepancy between 
+\begin_inset Formula $X\sim p$
+\end_inset
+
+ and 
+\begin_inset Formula $Z$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+S(Z,\mathcal{F},p)=\sup_{f\in F^{d},\|f\|<1}\ev(T_{p}f)(Z)=\sup_{f\in F^{d}}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X).
+\]
+
+\end_inset
+
+In Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "th2"
+
+\end_inset
+
+ we show that 
+\begin_inset Formula $S(Z,\mathcal{F},p)$
+\end_inset
+
+ captures difference between some probability measures.
+ Contrary to to 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "mackey2015multivariate"
+
+\end_inset
+
+, we don't need to approximate 
+\begin_inset Formula $S(Y,\mathcal{F},p)$
+\end_inset
+
+ (step 2 and 3 in section 3), since we can calculate it explicitly 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "th1"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition
+
+\lang english
+For any 
+\begin_inset Formula $x\in R^{d}$
+\end_inset
+
+, define a vector valued function function 
+\begin_inset Formula $\xi:R^{d}\to R^{d}$
+\end_inset
+
+, 
+\begin_inset Formula 
+\[
+\xi(x,t)=\left[\nabla\log p(x)k(x,t)+\nabla_{1}k(x,t)\right]
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\nabla\log p(x)=\left(\frac{\partial\log p(x)}{\partial x_{1}},\cdots,\frac{\partial\log p(x)}{\partial x_{d}}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\nabla_{1}k(x,t)=\left(\frac{\partial k(x,t)}{\partial x_{1}},\cdots,\frac{\partial k(x,t)}{\partial x_{d}}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Lemma
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:WellDefined"
+
+\end_inset
+
+ 
+\begin_inset Formula $\xi(x,\cdot)$
+\end_inset
+
+ is an element of the reproducing kernel Hilbert space 
+\begin_inset Formula $\mathcal{F}^{d}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+We use the proof on p.
+ 132 of 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "Corollary 4.36"
+key "SteChr08"
+
+\end_inset
+
+ to see that for all 
+\begin_inset Formula $x\in R^{d}$
+\end_inset
+
+ each entry of 
+\begin_inset Formula $\nabla_{1}k(x,\cdot)\in\mathcal{F}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\frac{\partial\log p(x)}{\partial x_{i}}k(x,t)\in\mathcal{F}$
+\end_inset
+
+, since 
+\begin_inset Formula $k(x,t)\in\mathcal{F}$
+\end_inset
+
+ and 
+\begin_inset Formula $\frac{\partial\log p(x)}{\partial x_{i}}$
+\end_inset
+
+ is a scalar.
+ 
+\end_layout
+
+\begin_layout Lemma
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:BochnerInt"
+
+\end_inset
+
+ 
+\begin_inset Formula $\xi(x,\cdot)$
+\end_inset
+
+ is Bochner integrable with respect to any probability measure.
+ 
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+It is sufficient to check that coefficients of 
+\begin_inset Formula $\xi$
+\end_inset
+
+ are Bochner integrable (
+\begin_inset CommandInset citation
+LatexCommand cite
+after "Definition A.5.20"
+key "SteChr08"
+
+\end_inset
+
+).
+ first we check that for random any variable 
+\begin_inset Formula $Z$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\ev\left\Vert \frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)\right\Vert ^{2}=\ev\left(\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,Z)\right)^{2}<\ev\|\nabla\log p(X)\|^{2}<\infty,
+\]
+
+\end_inset
+
+which follows form assumption (i) and boundedness of the kernel.
+ Next we check that 
+\begin_inset Formula 
+\[
+\ev\left\Vert \frac{\partial k(Z,\cdot)}{\partial x}\right\Vert ^{2}=\ev\left(\frac{\partial^{2}k(Z,Z)}{dx_{i}dx_{i+d}}\right)^{2}<\infty,
+\]
+
+\end_inset
+
+which follows from assumption (iii).
+ 
+\end_layout
+
+\begin_layout Corollary
+
+\lang english
+For any random variable 
+\begin_inset Formula $Z$
+\end_inset
+
+, expected value of 
+\begin_inset Formula $\xi(Z)$
+\end_inset
+
+ is is element of 
+\begin_inset Formula $\mathcal{F}^{d}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Lemma
+
+\lang english
+For any random variable 
+\begin_inset Formula $Z$
+\end_inset
+
+, expected value of Stein operator coincides with inner product of 
+\begin_inset Formula $f$
+\end_inset
+
+ and expected value of 
+\begin_inset Formula $\xi(Z)$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula 
+\begin{align}
+\ev T_{p}f(X)=\langle f,\ev\xi(Z)\rangle_{\mathcal{F}^{d}} & =\sum_{i=1}^{d}\langle f_{i},\ev\xi_{i}(Z)\rangle_{\mathcal{F}}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+We write
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+\begin_inset Formula 
+\begin{align*}
+\left\langle f_{i},\ev\xi_{i}(Z)\right\rangle  & =\left\langle f_{i},\ev\left[\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right]\right\rangle _{\mathcal{F}}\\
+ & =\ev\left\langle f_{i},\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right\rangle _{\mathcal{F}}\\
+ & =\ev\left[\frac{\partial\log p(Z)}{\partial x_{i}}f_{i}(Z)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right]\\
+\end{align*}
+
+\end_inset
+
+The second equality follows form the fact that linear operator 
+\begin_inset Formula $\langle f_{i},\cdot\rangle_{\mathcal{F}}$
+\end_inset
+
+ can be interchanged with Bochner integral and the fact that 
+\begin_inset Formula $\xi$
+\end_inset
+
+ is Bochner integrable (Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:BochnerInt"
+
+\end_inset
+
+).
+ The last equality is application of reproducing property.
+ 
+\end_layout
+
+\begin_layout Corollary
+
+\lang english
+\begin_inset Formula $S(Y,\mathcal{F},p)^{2}=\langle\xi,\xi\rangle_{\mathcal{F}^{d}}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Lemma
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "th1"
+
+\end_inset
+
+ 
+\begin_inset Formula $S(Y,\mathcal{F},p)^{2}$
+\end_inset
+
+ can be written in a closed form.
+ 
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+We use notation 
+\begin_inset Formula 
+\begin{align*}
+\nabla_{1}k(x,y)=\left(\frac{\partial k(x,y)}{\partial x_{1}},\cdots,\frac{\partial k(x,y)}{\partial x_{d}}\right)\\
+\nabla_{2}k(x,y)=\left(\frac{\partial k(x,y)}{\partial y_{1}},\cdots,\frac{\partial k(x,y)}{\partial y_{d}}\right).\\
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula $\langle\cdot,\cdot\rangle_{2}$
+\end_inset
+
+ for inner product in 
+\begin_inset Formula $R^{d}$
+\end_inset
+
+.
+ 
+\begin_inset Formula 
+\begin{align*}
+S(X,\mathcal{F},p)^{2} & =\langle\xi,\xi\rangle_{\mathcal{F}^{d}}\\
+ & =\langle\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{1}k(X,\cdot)\right],\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{1}k(X,\cdot)\right]\rangle_{\mathcal{F}^{d}}\\
+ & =\ev\langle\nabla\log p(X_{1})k(X_{1},\cdot)+\nabla_{1}k(X_{1},\cdot),\nabla\log p(X_{2})k(\cdot,X_{2})+\nabla_{2}k(\cdot,X_{2})\rangle_{\mathcal{F}^{d}}\\
+ & =\ev\langle\nabla\log p(X_{1}),\nabla\log p(X_{2})\rangle_{2}k(X_{1},X_{2})+\ev\langle\nabla p(X_{2}),\nabla_{1}k(X_{1},X_{2})\rangle_{2}\\
+ & \quad+\ev\langle\nabla\log p(X_{1}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}+\ev\ \langle\nabla_{1}k(X_{1},X_{2}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "th2"
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $q,p\in mathcal{P}$
+\end_inset
+
+ and 
+\begin_inset Formula $p\neq q$
+\end_inset
+
+, if 
+\begin_inset Formula $Y\sim q$
+\end_inset
+
+ then 
+\begin_inset Formula $S(Y,\mathcal{F},p)\neq0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+For each dimension of 
+\begin_inset Formula $\ev\xi(Y)$
+\end_inset
+
+ We add and subtract 
+\begin_inset Formula $\log q(Y)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+ & \ev\left(\frac{\partial}{\partial x_{i}}\log p(Y)k(Y,\cdot)+\frac{\partial}{\partial x_{i}}k(Y,\cdot)\right)\\
+ & =\ev\left(\frac{\partial}{\partial x_{i}}(\log p(Y)+\log q(Y)-\log q(Y))k(Y,\cdot)+\frac{\partial}{\partial x_{i}}k(Y,\cdot)\right)=\\
+ & =\ev\left(\frac{\partial}{\partial x_{i}}(\log p(Y)-\log q(Y))k(Y,\cdot)\right)
+\end{align*}
+
+\end_inset
+
+We have used Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:easy"
+
+\end_inset
+
+ to see that 
+\begin_inset Formula 
+\[
+\ev\left(\frac{\partial}{\partial x_{i}}(\log q(Y))k(Y,\cdot)+\frac{\partial}{\partial x_{i}}k(Y,\cdot)\right)=0.
+\]
+
+\end_inset
+
+We recognize that expected value of random 
+\begin_inset Formula $\frac{\partial}{\partial x_{i}}(\log p(Y)-\log q(Y))k(Y,\cdot)$
+\end_inset
+
+ is mean emending of a function 
+\begin_inset Formula $g(y)=\frac{\partial}{\partial x_{i}}(\log\frac{p(y)}{q(y)})$
+\end_inset
+
+ with respect to the measure 
+\begin_inset Formula $q$
+\end_inset
+
+.
+ Since kernel 
+\begin_inset Formula $k$
+\end_inset
+
+ is cc-universal this embedding is zero if and only if 
+\begin_inset Formula $g=0$
+\end_inset
+
+ which implies that 
+\begin_inset Formula 
+\[
+\nabla\log\frac{p(y)}{q(y)}=(0,\cdots,0)
+\]
+
+\end_inset
+
+A constant vector filed of derivatives can be generated only by a constant
+ functions, so 
+\begin_inset Formula $\log\frac{p(y)}{q(y)}=C$
+\end_inset
+
+, for some 
+\begin_inset Formula $C$
+\end_inset
+
+, which implies that 
+\begin_inset Formula $p(y)=e^{C}q(y)$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $p$
+\end_inset
+
+ and 
+\begin_inset Formula $q$
+\end_inset
+
+ integrates to one 
+\begin_inset Formula $C=0$
+\end_inset
+
+ and so 
+\begin_inset Formula $p=q$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
+
+\lang english
+tests
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+We suppose that sequence is weak mixing which is sufficient for most application.
+ e.g.
+ geometrically ergodic markov chains are in other words alpha mixing gemoetrical
+ly fast which in turn implies by wild kernels paper appendix that chain
+ is tau mixing! Not his includes iid data.
+ Note the iid case is no easier without bootstrap.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+TODO it is copy paste, I'm afraid ! 
+\begin_inset Formula $\tau$
+\end_inset
+
+-mixing 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "dedecker2007weak"
+
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\{Z_{t},\mathcal{F}_{t}\}_{t\in\mathbb{N}}$
+\end_inset
+
+ be a stationary sequence of integrable random variables, defined on a probabili
+ty space 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ with a probability measure 
+\begin_inset Formula $P$
+\end_inset
+
+ and a natural filtration 
+\begin_inset Formula $\mathcal{F}_{t}$
+\end_inset
+
+.
+ The process is called 
+\begin_inset Formula $\tau$
+\end_inset
+
+-dependent if 
+\begin_inset Formula 
+\begin{align*}
+\tau(r) & =\sup_{l\in\mathbb{N}}\frac{1}{l}\sup_{r\leq i_{1}\leq...\leq i_{l}}\tau(\mathcal{F}_{0},(Z_{i_{1}},...,Z_{i_{l}}))\overset{r\to\infty}{\longrightarrow}0,\;\text{where}\\
+\tau(\mathcal{M},X) & =\ev\left(\sup_{g\in\Lambda}\left|\int g(t)P_{X|\mathcal{M}}(dt)-\int g(t)P_{X}(dt)\right|\right)
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ is the set of all one-Lipschitz continuous real-valued functions on the
+ domain of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+We will study two versions of the bootstrapped 
+\begin_inset Formula $V$
+\end_inset
+
+-statistics 
+\begin_inset Formula 
+\begin{align}
+V_{b1}(h,Z)=\frac{1}{n^{m}}\sum_{i,j}\nolimits W_{i_{1},n}W_{i_{2},n}l(X_{i},X_{j}),\label{Vb1}\\
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $\{W_{t,n}\}_{1\leq t\leq n}$
+\end_inset
+
+ is an auxiliary wild bootstrap process and 
+\begin_inset Formula $\tilde{W}_{t,n}=W_{t,n}-\frac{1}{n}\sum_{j=1}^{n}W_{j,n}$
+\end_inset
+
+.
+ This auxiliary process, proposed by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Shao2010,leucht_dependent_2013"
+
+\end_inset
+
+, satisfies the following assumption:
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+\lang english
+Bootstrap assumption:
+\emph default
+ 
+\begin_inset Formula $\{W_{t,n}\}_{1\leq t\leq n}$
+\end_inset
+
+ is a row-wise strictly stationary triangular array independent of all 
+\begin_inset Formula $Z_{t}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\ev W_{t,n}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\sup_{n}\ev|W_{t,n}^{2+\sigma}|<\infty$
+\end_inset
+
+ for some 
+\begin_inset Formula $\sigma>0$
+\end_inset
+
+.
+ The autocovariance of the process is given by 
+\begin_inset Formula $\ev W_{s,n}W_{t,n}=\rho(|s-t|/l_{n})$
+\end_inset
+
+ for some function 
+\begin_inset Formula $\rho$
+\end_inset
+
+, such that 
+\begin_inset Formula $\lim_{u\to0}\rho(u)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum_{r=1}^{n-1}\rho(|r|/l_{n})=O(l_{n})$
+\end_inset
+
+.
+ The sequence 
+\begin_inset Formula $\left\{ l_{n}\right\} $
+\end_inset
+
+ is taken such that 
+\begin_inset Formula $l_{n}=o(n)$
+\end_inset
+
+ but 
+\begin_inset Formula $\lim_{n\to\infty}l_{n}=\infty$
+\end_inset
+
+.
+ The variables 
+\begin_inset Formula $W_{t,n}$
+\end_inset
+
+ are 
+\begin_inset Formula $\tau$
+\end_inset
+
+-weakly dependent with coefficients 
+\begin_inset Formula $\tau(r)\leq C\zeta^{\frac{r}{l_{n}}}$
+\end_inset
+
+ for 
+\begin_inset Formula $r=1,...,n$
+\end_inset
+
+, 
+\begin_inset Formula $\zeta\in(0,1)$
+\end_inset
+
+ and 
+\begin_inset Formula $C\in\mathbb{R}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+We will use 
+\begin_inset Formula ${+1,1}$
+\end_inset
+
+ bootstrap.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+The versions of the bootstrapped 
+\begin_inset Formula $V$
+\end_inset
+
+-statistics in 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "Vb1"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "Vb2"
+
+\end_inset
+
+ were previously studied in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "leucht_dependent_2013"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+
+\lang english
+Quadratic
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+We use wild bootstrap .
+ If 
+\begin_inset Formula $h(x_{1},x_{2})$
+\end_inset
+
+ is a a core degenerate under null, then we bootstrapped statistic 
+\begin_inset Formula 
+\begin{align}
+\sum_{i,j}\epsilon_{i}\epsilon_{j}h(X_{i},X_{j})
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+\lang english
+Experiments
+\end_layout
+
+\begin_layout Subsection
+
+\lang english
+Student's t vs Normal
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+In this sanity check we replicate the experiment 4.1 from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gorham2015measuring"
+
+\end_inset
+
+.
+ The null hypothesis is that observed samples 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+, for 
+\begin_inset Formula $1\leq i\leq500$
+\end_inset
+
+ come from standard normal distribution.
+ We will check the power of the one-sample test by generating samples from
+ Student's t distributions with increasing number of degrees of freedom,
+ and analyzing p-values.
+ For the Student's t distribution with a number of degrees of freedom 
+\begin_inset Formula $\nu$
+\end_inset
+
+, we draw 500 samples and calculate the p-value -- this procedure is repeated
+ (200,100) times so (200,100) p-values are calculated and a bar plot of
+ p-values is created.
+ The number of degrees of freedom 
+\begin_inset Formula $\nu$
+\end_inset
+
+ varies in the range 
+\begin_inset Formula $1,6,\cdots,71$
+\end_inset
+
+ and bar plots for each of 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is drawn.
+ The results are plotted in the figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:studentst"
+
+\end_inset
+
+.
+ The bar plot for 
+\begin_inset Formula $\nu=inf$
+\end_inset
+
+ is calculated for samples coming from normal distribution.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:studentst"
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename img/student.pdf
+	width 80text%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang english
+Linear Time test.
+ Distribution of p-values as a function of number of degrees of freedom.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\lang english
+MCMC diagnostic
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+This one sample test can be used for diagnostics of most of the MCMC methods.
+ In the following experiment we will demonstrate how to verify if the samples
+ obtained form two sampling can be assumed to come from the stationary distribut
+ion.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+Here we model used in the experiment 5.1.
+ The model is 
+\begin_inset Formula 
+\begin{align}
+\theta_{1}\sim N(0,10);\theta_{2}\sim N(0,1)X_{i}\sim\frac{1}{2}N(\theta_{1},4)+\frac{1}{2}N(\theta_{2},4)
+\end{align}
+
+\end_inset
+
+400 points are drawn from this model.
+ In the following experiment we would like to characterize the average time
+ required for convergence for two different MCMC algorithms.
+ In order to do so we run multiple chains and asses distribution of p-values.
+ Under the null hypothesis p-values should have uniform distribution and,
+ as in the previous experiment, we asses the divergence of the p-values
+ from the uniform by bar plots.
+ Formally for both methods plain MH and SGLD we generate 
+\begin_inset Formula $40\times100$
+\end_inset
+
+ chains.
+ We divide those chains into 
+\begin_inset Formula $40$
+\end_inset
+
+ groups of 
+\begin_inset Formula $100$
+\end_inset
+
+ chains and run one-sample tests for for predefined times 
+\begin_inset Formula $t_{1},...,t_{1}0$
+\end_inset
+
+ so that for each of group we get p-values at ten different times.
+ Then we plot those p-values jointly on plots a and b.
+ We don't use thinning.
+\end_layout
+
+\begin_layout Paragraph
+
+\lang english
+Metropolis Hastings with random walk
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+We use plain MH MCMC with Gaussian proposal with with standard deviation
+ equal to 
+\begin_inset Formula $0.2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+
+\lang english
+SGLD, plain 
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+Stochastic gradient Stochastic Gradient Langevin Dynamics with schrinking
+ step size 
+\begin_inset Formula $\epsilon_{t}$
+\end_inset
+
+ is a MCMC procedure desigend for large datasets.
+ 400 points are drawn from the this model with 
+\begin_inset Formula $\theta_{1}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta_{2}=1$
+\end_inset
+
+.
+ In such a setting there are two modes in the posteriori disitbiution, one
+ at the the point 
+\begin_inset Formula $0,1$
+\end_inset
+
+ and the other at the point 
+\begin_inset Formula $1,-1$
+\end_inset
+
+.
+ We run the SGLD alogrithm with a batch size of 1 and 10000 iterations through
+ the whole dataset.
+ The stepsizes are 
+\begin_inset Formula $\epsilon_{t}=a(b+t)^{.55}$
+\end_inset
+
+ where 
+\begin_inset Formula $a=0.01584$
+\end_inset
+
+ and 
+\begin_inset Formula $b=2.31$
+\end_inset
+
+ such that 
+\begin_inset Formula $\epsilon_{t}$
+\end_inset
+
+ deacreses from 
+\begin_inset Formula $0.01$
+\end_inset
+
+ to 
+\begin_inset Formula $.0001$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\lang english
+\begin_inset Graphics
+	filename img/mcmc_mixing.pdf
+	width 7cm
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+
+\lang english
+\begin_inset Graphics
+	filename img/sgld_mixing.pdf
+	width 7cm
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\lang english
+\begin_inset Graphics
+	filename img/mcmc_sample.pdf
+	width 7cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+
+\lang english
+\begin_inset Graphics
+	filename img/sgld_sample.pdf
+	width 7cm
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Experiments
+\end_layout
+
+\begin_layout Subsubsection*
+Convergence in non-parametric density estimation
+\end_layout
+
+\begin_layout Standard
+Our next experiment illustrates using the developed test to asses estimation
+ quality in the context of nonparametricdensity estimation.
+ We quantify estimation quality and approximation quality of the infinite
+ dimensional exponential family model 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "SriFukKumGreHyv14"
+
+\end_inset
+
+ and its recent random Fourier features approximation 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "strathmann2015gradient"
+
+\end_inset
+
+ respectively.
+\end_layout
+
+\begin_layout Standard
+The original model's (un-normalised) log pdf is given by 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ where 
+\begin_inset Formula $f\in{\cal H}$
+\end_inset
+
+ lies in a Reproducing Kernel Hilbert Space 
+\begin_inset Formula ${\cal H}$
+\end_inset
+
+ induced by a Gaussian kernel with bandwidth 1.
+ We fit the model to 
+\begin_inset Formula $N$
+\end_inset
+
+ standard Gaussian distributed data and perform our quadratic time test
+ on seperate test data of a fixed size 
+\begin_inset Formula $N_{\text{test}}=500$
+\end_inset
+
+.
+ We aim to identify the number of samples necessary to make model and data
+ indistinguishable for a test of a certain power.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:density_estimation_increasing_data"
+
+\end_inset
+
+ shows the distribution of p-values for this particualar test power 
+\begin_inset Formula $N_{\text{test}}$
+\end_inset
+
+ is uniform for 
+\begin_inset Formula $N=5000$
+\end_inset
+
+, but already at 
+\begin_inset Formula $N=500$
+\end_inset
+
+, the null hypothesis would very rarely be rejected.
+\end_layout
+
+\begin_layout Standard
+We now use the recent random Features approximation 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "strathmann2015gradient"
+
+\end_inset
+
+ where the log pdf is taken to be 
+\begin_inset Formula $\theta^{\top}\phi_{x}$
+\end_inset
+
+ where 
+\begin_inset Formula $\theta\in\mathbb{R}^{m}$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{x}\in\mathbb{R}^{m}$
+\end_inset
+
+ is the random Fourier feature embedding 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Rahimi2007"
+
+\end_inset
+
+.
+ The natural question when using this approximation is: 
+\begin_inset Quotes eld
+\end_inset
+
+How many random features do it I need?
+\begin_inset Quotes erd
+\end_inset
+
+ Using the same test power 
+\begin_inset Formula $N_{\text{test}}=500$
+\end_inset
+
+ as above, and a large number of available samples 
+\begin_inset Formula $N=5\cdot10^{4}$
+\end_inset
+
+, Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:density_estimation_increasing_features"
+
+\end_inset
+
+ shows the distribution of p-values for an increasing number of random features
+ 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ From about 
+\begin_inset Formula $m=50$
+\end_inset
+
+, the null hypothesis would rarely be rejected for the chosen test power.
+\end_layout
+
+\begin_layout Standard
+and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:density_estimation_increasing_features"
+
+\end_inset
+
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/increasing_data_fixed_test.eps
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+P-values for an increasing number of data 
+\begin_inset Formula $N$
+\end_inset
+
+ for the non-parametric model.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:density_estimation_increasing_data"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/increasing_features_fixed_test.eps
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+P-values for an increasing number of random features 
+\begin_inset Formula $m$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:density_estimation_increasing_features"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "biblio"
+options "icml2015"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+normalsize
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part*
+Appendix
+\end_layout
+
+\begin_layout Section
+
+\lang english
+boring proofs
+\end_layout
+
+\begin_layout Lemma
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:easy"
+
+\end_inset
+
+ If a random variable 
+\begin_inset Formula $X$
+\end_inset
+
+ is distributed according to 
+\begin_inset Formula $p$
+\end_inset
+
+, then for all function 
+\begin_inset Formula $f\in\mathcal{F}$
+\end_inset
+
+ expected value of 
+\begin_inset Formula $T_{p}$
+\end_inset
+
+ is zero, i.e.
+ 
+\begin_inset Formula $\forall_{f\in\mathcal{F}}\ev(T_{q}f)(X)=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+First we show that the functions 
+\begin_inset Formula $g_{i}=p\cdot f_{i}$
+\end_inset
+
+ vanish at infinity, by which we mean that for all dimensions 
+\begin_inset Formula $j$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\lim_{x_{j}\to\infty}g_{i}(x_{1},\cdots,x_{d})=0.
+\]
+
+\end_inset
+
+The density function 
+\begin_inset Formula $p$
+\end_inset
+
+ vanishes at infinity.
+ The function 
+\begin_inset Formula $f$
+\end_inset
+
+ is bounded, which is implied by Cauchy-Schwarz inequality -- 
+\begin_inset Formula $\left|f(x)\right|\le\left\Vert f\right\Vert \sqrt{k(x,x)}$
+\end_inset
+
+.
+ This implies that the function 
+\begin_inset Formula $g$
+\end_inset
+
+ vanishes at infinity.
+ To show the expected value 
+\begin_inset Formula $\ev(T_{p})f(X)$
+\end_inset
+
+ is zero, it is sufficient to show that for all dimensions 
+\begin_inset Formula $i$
+\end_inset
+
+, the expected value of 
+\begin_inset Formula $\frac{\partial\log p(X)}{\partial x_{i}}f_{i}(X)+\frac{\partial f_{i}(X)}{\partial x_{i}}$
+\end_inset
+
+ is zero.
+ 
+\begin_inset Formula 
+\begin{align*}
+ & \ev\left(\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right)\\
+ & =\int_{R_{d}}\left[\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right]q(x)dx\\
+ & =\int_{R_{d}}\left[\frac{1}{p(x)}\frac{\partial q(x)}{\partial x_{i}}f(x)+\frac{\partial f(x)}{\partial x_{i}}\right]q(x)dx\\
+ & =\int_{R_{d}}\left[\frac{\partial p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}q(x)\right]dx\\
+ & \overset{(a)}{=}\int_{R_{d-1}}\left(\lim_{R\to\infty}p(x)f_{i}(x)\bigg|_{x_{i}=-R}^{x_{i}=R}\right)dx_{1}\cdots dx_{i-1}\cdots dx_{i+1}\cdots d{x_{d}}\\
+ & =\int_{R_{d-1}}0dx_{1}\cdots dx_{i-1}\cdots dx_{i+1}\cdots d{x_{d}}\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+For the equation (a) we have used integration by parts and fact that 
+\begin_inset Formula $g_{i}$
+\end_inset
+
+ vanishes at infinity.
+ 
+\end_layout
+
+\begin_layout Subsection
+
+\lang english
+Linear time
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+For some fixed location 
+\begin_inset Formula $y$
+\end_inset
+
+ and a random variable 
+\begin_inset Formula $X$
+\end_inset
+
+, define a random variable 
+\begin_inset Formula $s(X,y)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align}
+s(X,y)=\nabla\log p(X)g(X,y)-\nabla g(X,y).
+\end{align}
+
+\end_inset
+
+For some number of random locations 
+\begin_inset Formula $Y_{1},Y_{J}$
+\end_inset
+
+ and a random variable 
+\begin_inset Formula $X$
+\end_inset
+
+ define a random vector 
+\begin_inset Formula $Z_{i}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{equation}
+Z_{i}=(s(X_{i},Y_{1}),\cdots,s(X_{i},Y_{J}))\in\mathbf{R}^{J}.
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+Let 
+\begin_inset Formula $W_{n}$
+\end_inset
+
+ be a mean of 
+\begin_inset Formula $Z_{i}$
+\end_inset
+
+'s 
+\begin_inset Formula $W_{n}=\frac{1}{n}\sum_{i=1}^{n}Z_{i},$
+\end_inset
+
+ and 
+\begin_inset Formula $\Sigma_{n}$
+\end_inset
+
+ its covariance matrix 
+\begin_inset Formula $\Sigma_{n}=\frac{1}{n}ZZ^{T}$
+\end_inset
+
+.
+ The test statistic is 
+\begin_inset Formula 
+\begin{equation}
+S_{n}=nW_{n}\Sigma_{n}^{-1}W_{n}.
+\end{equation}
+
+\end_inset
+
+The computation of 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+ requires inversion of a 
+\begin_inset Formula $J\times J$
+\end_inset
+
+ matrix 
+\begin_inset Formula $\Sigma_{n}$
+\end_inset
+
+, but this is fast and numerically stable: 
+\begin_inset Formula $J$
+\end_inset
+
+ will typically be small, and is less than 10 in our experiments.
+ The next proposition demonstrates the use of 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+ as a one-sample test.
+\end_layout
+
+\begin_layout Proposition
+
+\lang english
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+Asymptotic behavior of 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "prop:Hotelling"
+
+\end_inset
+
+ If 
+\begin_inset Formula $\ev s(X,y)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $y$
+\end_inset
+
+, then the statistic 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+ is a.s.
+ asymptotically distributed as a 
+\begin_inset Formula $\chi^{2}$
+\end_inset
+
+-random variable with 
+\begin_inset Formula $Jd$
+\end_inset
+
+ degrees of freedom, where 
+\begin_inset Formula $d$
+\end_inset
+
+ is 
+\begin_inset Formula $X$
+\end_inset
+
+ dimensionality (as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ with 
+\begin_inset Formula $d$
+\end_inset
+
+ fixed).
+ If 
+\begin_inset Formula $\ev s(X,y)\neq0$
+\end_inset
+
+ for almost all 
+\begin_inset Formula $y$
+\end_inset
+
+ then a.s.
+ for any fixed 
+\begin_inset Formula $r$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbb{P}(S_{n}>r)\to1$
+\end_inset
+
+ as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ .
+ 
+\end_layout
+
+\begin_layout Paragraph
+
+\lang english
+One sample test
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+Calculate 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+.
+ Choose a threshold 
+\begin_inset Formula $r_{\alpha}$
+\end_inset
+
+ corresponding to the 
+\begin_inset Formula $1-\alpha$
+\end_inset
+
+ quantile of a 
+\begin_inset Formula $\chi^{2}$
+\end_inset
+
+ distribution with 
+\begin_inset Formula $J$
+\end_inset
+
+ degrees of freedom, and reject the null hypothesis whenever 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+ is larger than 
+\begin_inset Formula $r_{\alpha}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_body
+\end_document
