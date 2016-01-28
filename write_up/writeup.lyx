@@ -152,9 +152,13 @@ icmladdress{Gatsby Unit, University College London, United Kingdom}
 \begin_layout Plain Layout
 
 % the "keywords" metadata in the PDF but will not be shown in the document
- 
+\end_layout
+
+\begin_layout Plain Layout
+
+
 \backslash
-icmlkeywords{boring formatting information, machine learning, ICML}
+icmlkeywords{kernels, statistical testing}
 \end_layout
 
 \begin_layout Plain Layout
