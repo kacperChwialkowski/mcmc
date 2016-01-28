@@ -1602,7 +1602,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename density_estimation_experiment/figures/increasing_data_fixed_test.eps
+	filename img/increasing_data_fixed_test.eps
 
 \end_inset
 
@@ -1646,7 +1646,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename density_estimation_experiment/figures/increasing_features_fixed_test.eps
+	filename img/increasing_features_fixed_test.eps
 
 \end_inset
 
