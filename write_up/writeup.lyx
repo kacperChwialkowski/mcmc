@@ -1014,7 +1014,7 @@ h(x,y)=\langle\nabla\log p(X_{1}),\nabla\log p(X_{2})\rangle_{2}k(X_{1},X_{2})+\
 
 \end_inset
 
- quite complicated but apparently thats the way life is.
+ quite complicated.
  For the analysis of 
 \begin_inset Formula $V(h,X)$
 \end_inset
@@ -1024,8 +1024,8 @@ h(x,y)=\langle\nabla\log p(X_{1}),\nabla\log p(X_{2})\rangle_{2}k(X_{1},X_{2})+\
 \end_inset
 
  or not.
- This is illustrated by a simple lemma, which is a direct application of
- the Theorem 2.1 
+ This is illustrated by the folllwing Theorem, which is a direct application
+ of the Theorem 2.1 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "leucht2012degenerate"
@@ -1038,6 +1038,12 @@ key "leucht2012degenerate"
 \begin_layout Theorem
 
 \lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "thm: null_dist"
+
+\end_inset
+
 If 
 \family roman
 \series medium
@@ -1092,34 +1098,64 @@ If
  
 \end_layout
 
-\begin_layout Proof
+\begin_layout Standard
 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
 \lang english
-The condition A1 is trivially stratified by the assumption 
-\begin_inset Formula $\sum_{t=1}^{\infty}\sqrt{\tau(t)}\leq\infty$
+We are not really concerened with an exact form of 
+\begin_inset Formula $\phi$
+\end_inset
+
+, although it can be dervied explicitly, since to our knowlegde there are
+ no methods of obtaining quintiles of this disitbution in an analytic form.
+ The common solution, is estimating quantiles by a resampling method.
+ For resampling we use wild bottstrap method 
+\family default
+\series default
+\shape default
+\size default
+\emph on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+proposed by
+\emph default
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Shao2010,leucht_dependent_2013"
+
 \end_inset
 
 .
- The condition A2 (iv), Lipschitz continuity.
- follows form the assumption iv).
- The positive definiteness and degeneracy follows form the proof of th the
- Theorem 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "th2"
-
+ 
+\emph on
+We intoduce an auxiliary wild bootstrap process 
+\begin_inset Formula $\{W_{t,n}\}_{1\leq t\leq n}$
 \end_inset
 
-.
- Indeed
+:
 \end_layout
 
-\begin_layout Proof
+\begin_layout Standard
 
 \lang english
 \begin_inset Formula 
 \[
-h(x,y)=\langle\left[\nabla\log p(x)k(x,\cdot)+\nabla_{1}k(x,\cdot)\right],\left[\nabla\log p(y)k(y,\cdot)+\nabla_{1}k(y,\cdot)\right]\rangle_{\mathcal{F}^{d}}
+\ensuremath{W_{t,n}=\mathbf{1}(U_{t}>p_{n})W_{t-1,n}-\mathbf{1}(U_{t}<p_{n})W_{t-1,n},}
 \]
 
 \end_inset
@@ -1128,58 +1164,171 @@ h(x,y)=\langle\left[\nabla\log p(x)k(x,\cdot)+\nabla_{1}k(x,\cdot)\right],\left[
 \begin_inset Newline newline
 \end_inset
 
-so it's an inner product and hence positive definite.
- Degeneracy follows form the fact that for ant 
-\begin_inset Formula $t$
+
+\emph on
+where 
+\begin_inset Formula $W_{1,n}=1$
 \end_inset
 
-, by Lemma 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "lem:easy"
-
+, 
+\begin_inset Formula $U_{t}$
 \end_inset
 
-,
-\begin_inset Formula $\ev\nabla\log p(x)k(x,t)+\nabla_{1}k(x,t)=0$
+is a series of iid uniform random variables and, 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+ is probablility of 
+\begin_inset Formula $W_{t,n}$
+\end_inset
+
+ changing sign.
+ In other words 
+\begin_inset Formula $W_{t,n}$
+\end_inset
+
+ is a simple markow chain taking values in 
+\begin_inset Formula $\{-1,1\}$
+\end_inset
+
+with symmetric probalility of changin the state, equal to 
+\begin_inset Formula $p_{n}$
 \end_inset
 
 .
- Finally the condition A2 (iii), 
-\begin_inset Formula $\ev h(X,X)\leq\infty$
+ In order to estiamte empricial integral we will study bootstrapped 
+\begin_inset Formula $V$
 \end_inset
 
- follows form (ii), (iii) and boundlessness of the kernel.
-\end_layout
-
-\begin_layout Standard
-
-\lang english
-where 
-\begin_inset Formula $\{W_{t,n}\}_{1\leq t\leq n}$
-\end_inset
-
- is an auxiliary wild bootstrap process .
- This auxiliary process, proposed by 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Shao2010,leucht_dependent_2013"
-
-\end_inset
-
-, satisfies the following assumption:
+-statistics
 \end_layout
 
 \begin_layout Standard
 
 \emph on
 \lang english
-Bootstrap assumption:
+\begin_inset Formula 
+\[
+V_{b,n}(h,X)=\frac{1}{n}\sum_{i,j}W_{i,n}W_{j,n}h(X_{i,}X_{j})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+Turns out that 
+\begin_inset Formula $V_{b,n}(h,X)$
+\end_inset
+
+ coverges in some (useflull) sence to 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\phi$
+\end_inset
+
+.
+
+\family default
+\series default
+\shape default
+\size default
 \emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\end_layout
+
+\begin_layout Theorem
+If 
+\begin_inset Formula $X\sim p$
+\end_inset
+
+
+\begin_inset Formula $V_{b,n}(h,X)$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+ ia a apprximation of 
+\begin_inset Formula $\phi$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $P(\lim_{n\to\infty}\sup_{x}|P(V_{b,n}>x|W_{t,n})-P(\phi>x)|=0)=1$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $X\sim q\neq p$
+\end_inset
+
+, 
+\begin_inset Formula $V_{b,n}(h,X)$
+\end_inset
+
+ converges to zero.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+We will not go inot details of the convergance 
+\begin_inset Formula $V_{b,n}(h,X)$
+\end_inset
+
+, we just note for clarification that 
+\begin_inset Formula $f(W_{t,n})=\sup_{x}|P(V_{b,n}>x|W_{t,n})-P(\phi>x)|$
+\end_inset
+
+ is a random variable, and all we are stating is that 
+\begin_inset Formula $f(W_{t,n})$
+\end_inset
+
+ converges to zero in probability.
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+We check bootstrap assumption:
+\emph on
  
 \begin_inset Formula $\{W_{t,n}\}_{1\leq t\leq n}$
 \end_inset
 
+
+\emph default
  is a row-wise strictly stationary triangular array independent of all 
 \begin_inset Formula $Z_{t}$
 \end_inset
@@ -1198,15 +1347,28 @@ Bootstrap assumption:
 
 .
  The autocovariance of the process is given by 
-\begin_inset Formula $\ev W_{s,n}W_{t,n}=\rho(|s-t|/l_{n})$
+\begin_inset Formula $\ev W_{s,n}W_{t,n}=(1-2p_{n})^{s-t}$
 \end_inset
 
- for some function 
-\begin_inset Formula $\rho$
+ , so the function 
+\begin_inset Formula $\rho(x)=\exp(-x)$
 \end_inset
 
-, such that 
+, and 
+\begin_inset Formula $l_{n}=\log(1-2p_{n})^{-1}$
+\end_inset
+
+.
+ we check taht 
 \begin_inset Formula $\lim_{u\to0}\rho(u)=1$
+\end_inset
+
+, 
+\begin_inset Formula $l_{n}=o(n)$
+\end_inset
+
+ , 
+\begin_inset Formula $\lim_{n\to\infty}l_{n}=\infty$
 \end_inset
 
  and 
@@ -1214,123 +1376,59 @@ Bootstrap assumption:
 \end_inset
 
 .
- The sequence 
-\begin_inset Formula $\left\{ l_{n}\right\} $
-\end_inset
-
- is taken such that 
-\begin_inset Formula $l_{n}=o(n)$
-\end_inset
-
- but 
-\begin_inset Formula $\lim_{n\to\infty}l_{n}=\infty$
-\end_inset
-
-.
- The variables 
-\begin_inset Formula $W_{t,n}$
-\end_inset
-
- are 
-\begin_inset Formula $\tau$
-\end_inset
-
--weakly dependent with coefficients 
-\begin_inset Formula $\tau(r)\leq C\zeta^{\frac{r}{l_{n}}}$
-\end_inset
-
- for 
-\begin_inset Formula $r=1,...,n$
-\end_inset
-
-, 
-\begin_inset Formula $\zeta\in(0,1)$
-\end_inset
-
- and 
-\begin_inset Formula $C\in\mathbb{R}$
-\end_inset
-
-.
+ 
 \end_layout
 
 \begin_layout Standard
-
+We are now in position to do magic and conduct our test -- we calculate
+ 
 \lang english
-We will use 
-\begin_inset Formula ${+1,1}$
+
+\begin_inset Formula $V_{n}(h,X)$
 \end_inset
 
- bootstrap.
-\end_layout
-
-\begin_layout Standard
-
+ once and calculate
+\lang british
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
 \lang english
-The versions of the bootstrapped 
+
+\begin_inset Formula $V_{b,n}(h,X)$
+\end_inset
+
+ multiplie times to etimate the 
+\begin_inset Formula $1-\alpha$
+\end_inset
+
+quantile of 
+\begin_inset Formula $V_{n}(h,X)$
+\end_inset
+
+.
+ We comapre the value of 
 \begin_inset Formula $V$
 \end_inset
 
--statistics in 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "Vb1"
-
+-statistic with the quantile and reject hypotesis that 
+\begin_inset Formula $X\sim p$
 \end_inset
 
- and 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "Vb2"
-
+ if the 
+\begin_inset Formula $V_{n}(h,X)$
 \end_inset
 
- were previously studied in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "leucht_dependent_2013"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsection
-
-\lang english
-Quadratic
-\end_layout
-
-\begin_layout Standard
-
-\lang english
-We use wild bootstrap .
- If 
-\begin_inset Formula $h(x_{1},x_{2})$
-\end_inset
-
- is a a core degenerate under null, then we bootstrapped statistic 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "eq:dupa"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\lang english
-\begin_inset Formula 
-\begin{align}
-\sum_{i,j}\epsilon_{i}\epsilon_{j}h(X_{i},X_{j})\label{eq:dupa}\\
-\nonumber 
-\end{align}
-
-\end_inset
-
-dd
+ is greater then the quantile.
+ 
 \end_layout
 
 \begin_layout Section
@@ -1956,6 +2054,72 @@ Appendix
 
 \lang english
 boring proofs
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm: null_dist"
+
+\end_inset
+
+The condition A1 is trivially stratified by the assumption 
+\begin_inset Formula $\sum_{t=1}^{\infty}\sqrt{\tau(t)}\leq\infty$
+\end_inset
+
+.
+ The condition A2 (iv), Lipschitz continuity.
+ follows form the assumption iv).
+ The positive definiteness and degeneracy follows form the proof of th the
+ Theorem 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "th2"
+
+\end_inset
+
+.
+ Indeed
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+\begin_inset Formula 
+\[
+h(x,y)=\langle\left[\nabla\log p(x)k(x,\cdot)+\nabla_{1}k(x,\cdot)\right],\left[\nabla\log p(y)k(y,\cdot)+\nabla_{1}k(y,\cdot)\right]\rangle_{\mathcal{F}^{d}}
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+so it's an inner product and hence positive definite.
+ Degeneracy follows form the fact that for ant 
+\begin_inset Formula $t$
+\end_inset
+
+, by Lemma 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "lem:easy"
+
+\end_inset
+
+,
+\begin_inset Formula $\ev\nabla\log p(x)k(x,t)+\nabla_{1}k(x,t)=0$
+\end_inset
+
+.
+ Finally the condition A2 (iii), 
+\begin_inset Formula $\ev h(X,X)\leq\infty$
+\end_inset
+
+ follows form (ii), (iii) and boundlessness of the kernel.
 \end_layout
 
 \begin_layout Lemma
