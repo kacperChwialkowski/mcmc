@@ -107,7 +107,7 @@ for mc in range(mc_reps):
         pval = me.compute_pvalues_for_processes(U_stat,p_change)
         res = np.vstack((res,np.array([np.Inf, pval])))
 
-
+np.save('results.npy',res)
 
 df = DataFrame(res)
 pr =seaborn.boxplot(x=0,y=1,data=df)

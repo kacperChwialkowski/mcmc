@@ -999,7 +999,7 @@ key "chwialkowski2014kernel"
  is defined as follows 
 \begin_inset Formula 
 \begin{align*}
-\tau(r) & =\sup_{l\in\mathbb{N}}\frac{1}{l}\sup_{r\leq i_{1}\leq...\leq i_{l}}T(\mathcal{F}_{0},(X_{i_{1}},...,X_{i_{l}}))\\
+\tau(r) & =\sup_{l\in\mathbb{N}}\frac{1}{l}\sup_{r\leq i_{1}...\leq i_{l}}T(\mathcal{F}_{0},(X_{i_{1}},...,X_{i_{l}})),\\
 T(\mathcal{M},X) & =\ev\left(\sup_{g\in\Lambda}\left|\int g(t)(dP_{X|\mathcal{M}}-dP)\right|\right)
 \end{align*}
 
@@ -1024,7 +1024,8 @@ and
 \begin_inset Formula $\sum_{t=1}^{\infty}\sqrt{\tau(t)}\leq\infty$
 \end_inset
 
-.A 
+.
+ A 
 \begin_inset Formula $V$
 \end_inset
 
@@ -1035,16 +1036,12 @@ and
  taking two arguments, is defined as follows
 \begin_inset Formula 
 \[
-V(h,X)=\frac{1}{n}\sum_{i,j=1}^{n}h(X_{i},X_{j})
+V(h,X)=\frac{1}{n}\sum_{i,j=1}^{n}h(X_{i},X_{j}).
 \]
 
 \end_inset
 
-
-\begin_inset Newline newline
-\end_inset
-
-For the kernel one sample test the function 
+For one sample test the function 
 \begin_inset Formula $h$
 \end_inset
 
@@ -1055,18 +1052,20 @@ For the kernel one sample test the function
 
 \lang english
 \begin_inset Formula 
-\[
-h(x,y)=\langle\nabla\log p(X_{1}),\nabla\log p(X_{2})\rangle_{2}k(X_{1},X_{2})+\langle\nabla p(X_{2}),\nabla_{1}k(X_{1},X_{2})\rangle_{2}+\langle\nabla\log p(X_{1}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}+\langle\nabla_{1}k(X_{1},X_{2}),\nabla_{2}k(X_{1},X_{2})\rangle_{2},
-\]
+\begin{align*}
+h(x,y) & =\langle\nabla\log p(X_{1}),\nabla\log p(X_{2})\rangle_{2}k(X_{1},X_{2})\\
+ & +\langle\nabla p(X_{2}),\nabla_{1}k(X_{1},X_{2})\rangle_{2}\\
+ & +\langle\nabla\log p(X_{1}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}\\
+ & +\langle\nabla_{1}k(X_{1},X_{2}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}.
+\end{align*}
 
 \end_inset
 
- quite complicated.
- For the analysis of 
+The distribution of 
 \begin_inset Formula $V(h,X)$
 \end_inset
 
- we first notice that is asymptotic distribution depends whether 
+ depends whether 
 \begin_inset Formula $X\sim p$
 \end_inset
 
@@ -1141,7 +1140,8 @@ If
 \begin_inset Formula $\phi$
 \end_inset
 
- is a distribution infinite sum of squared, correlated random variables.
+ is a distributed as an infinite sum of squared, correlated normal random
+ variables.
  
 \end_layout
 
@@ -1159,12 +1159,13 @@ If
 \noun off
 \color none
 \lang english
-We are not really concerened with an exact form of 
+Although it can be dervied explicitly, we are not really concerened with
+ an exact form of 
 \begin_inset Formula $\phi$
 \end_inset
 
-, although it can be dervied explicitly, since to our knowlegde there are
- no methods of obtaining quintiles of this disitbution in an analytic form.
+, since to our knowlegde there are no methods of obtaining quintiles of
+ this disitbution in an analytic form.
  The common solution, is estimating quantiles by a resampling method.
  For resampling we use wild bottstrap method 
 \family default
@@ -1738,104 +1739,10 @@ status open
 
 \begin_layout Plain Layout
 \align center
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "lem:BochnerInt"
-
-\end_inset
-
-
-\lang english
-It is sufficient to check that coefficients of 
-\begin_inset Formula $\xi$
-\end_inset
-
- are Bochner integrable (
-\begin_inset CommandInset citation
-LatexCommand cite
-after "Definition A.5.20"
-key "SteChr08"
-
-\end_inset
-
-).
- first we check that for random any variable 
-\begin_inset Formula $Z$
-\end_inset
-
- 
-\begin_inset Formula 
-\[
-\ev\left\Vert \frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)\right\Vert ^{2}=\ev\left(\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,Z)\right)^{2}<\ev\|\nabla\log p(X)\|^{2}<\infty,
-\]
-
-\end_inset
-
-which follows form assumption (i) and boundedness of the kernel.
- Next we check that 
-\begin_inset Formula 
-\[
-\ev\left\Vert \frac{\partial k(Z,\cdot)}{\partial x}\right\Vert ^{2}=\ev\left(\frac{\partial^{2}k(Z,Z)}{dx_{i}dx_{i+d}}\right)^{2}<\infty,
-\]
-
-\end_inset
-
-which follows from assumption (iii).
- 
-\begin_inset Graphics
-	filename img/mcmc_mixing.pdf
-	width 7cm
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Plain Layout
-\align center
 
 \lang english
 \begin_inset Graphics
-	filename img/sgld_mixing.pdf
-	width 7cm
-
-\end_inset
-
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\lang english
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-
-\lang english
-\begin_inset Graphics
-	filename img/mcmc_sample.pdf
-	width 7cm
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-
-\lang english
-\begin_inset Graphics
-	filename img/sgld_sample.pdf
+	filename img/Heiko.pdf
 	width 7cm
 
 \end_inset

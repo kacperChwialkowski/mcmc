@@ -4,7 +4,7 @@ from stat_test.quadratic_time import GaussianQuadraticTest
 from pandas import DataFrame
 import seaborn
 import numpy as np
-
+from tools.latex_plot_init import plt
 
 SGLD_EPSILON = 0.0878
 
@@ -12,8 +12,8 @@ P_CHANGE = 0.1
 
 N = 500
 
-DEGREES_OF_FREEDOM = [1,3]+[1000]
-MC_PVALUES_REPS = 100
+DEGREES_OF_FREEDOM = [1,3,5,7,9,11]+[1000]
+MC_PVALUES_REPS = 400
 TEST_CHAIN_SIZE = 10**6
 
 
@@ -57,10 +57,6 @@ def get_thinning(X,nlags = 50):
 X = sample_sgld_t_student(TEST_CHAIN_SIZE, 5.0, SGLD_EPSILON)
 sgld_thinning, autocorr =  get_thinning(X,500)
 print('thinning for sgld t-student simulation ', sgld_thinning,autocorr[sgld_thinning])
-import matplotlib.pyplot as plt
-
-
-
 
 plt.plot(np.log(autocorr))
 plt.show()
@@ -102,14 +98,9 @@ for mc in range(MC_PVALUES_REPS):
     pval =  get_pval(X,tester)
     results = np.vstack((results,np.array([np.Inf, pval])))
 
+np.save('results.npy',results)
 
 
-df = DataFrame(results)
-pr =seaborn.boxplot(x=0,y=1,data=df)
-seaborn.plt.show()
-
-fig = pr.get_figure()
-fig.savefig('../write_up/img/sgld_student.pdf')
 
 
 
