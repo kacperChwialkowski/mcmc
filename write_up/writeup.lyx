@@ -256,23 +256,43 @@ In the following section we derive kernel one sample test.
 \end_inset
 
  (i) 
-\begin_inset Formula $\ev\log p(Z)<\infty$
+\begin_inset Formula $\nabla\log p(x)$
 \end_inset
 
- for any random variable 
-\begin_inset Formula $Z$
-\end_inset
-
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+is Lipschitz continuous
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
 ; 
 \begin_inset Newline newline
 \end_inset
 
  (ii) 
-\begin_inset Formula $\ev\|\nabla\log p(X)\|^{2}$
+\begin_inset Formula $\ev\|\nabla\log p(Z)\|^{2}$
 \end_inset
 
- for 
-\begin_inset Formula $X\sim p$
+ for any random variable 
+\begin_inset Formula $Z$
 \end_inset
 
 .
@@ -285,8 +305,8 @@ In the following section we derive kernel one sample test.
 
  be a bounded, symmetric, cc-universal 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "sriperumbudur2011universality"
+LatexCommand citet
+key "SriFukLan11"
 
 \end_inset
 
@@ -324,7 +344,7 @@ key "sriperumbudur2011universality"
 \noun off
 \color none
 
-\begin_inset Formula $\nabla\log p(x)+\nabla k(x,y)$
+\begin_inset Formula $\nabla k(x,y)$
 \end_inset
 
  is Lipschitz continuous.
@@ -341,16 +361,16 @@ Stein operator.
 \lang english
 We proceed as similarly to 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "mackey2015multivariate,stein1972"
+LatexCommand citet
+key "stein1972,gorham2015measuring"
 
 \end_inset
 
  and use Stein operator to characterize discrepancy between measures.
  Following 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "mackey2015multivariate"
+LatexCommand citet
+key "gorham2015measuring"
 
 \end_inset
 
@@ -380,8 +400,8 @@ T_{p}f=\sum_{i=1}^{d}\left(\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\fra
 
 As in 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "mackey2015multivariate"
+LatexCommand citet
+key "gorham2015measuring"
 
 \end_inset
 
@@ -406,14 +426,11 @@ reference "lem:easy"
 \end_inset
 
  and 
-\begin_inset Formula $Z$
-\end_inset
-
- 
 \begin_inset Formula 
-\[
-S(Z,\mathcal{F},p)=\sup_{f\in F^{d},\|f\|<1}\ev(T_{p}f)(Z)=\sup_{f\in F^{d}}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X).
-\]
+\begin{alignat*}{1}
+S(Z,\mathcal{F},p) & =\sup_{f\in F^{d},\|f\|<1}\ev(T_{p}f)(Z)\\
+ & =\sup_{f\in F^{d}}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X).
+\end{alignat*}
 
 \end_inset
 
@@ -431,8 +448,8 @@ reference "th2"
  captures difference between some probability measures.
  Contrary to to 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "mackey2015multivariate"
+LatexCommand citet
+key "gorham2015measuring"
 
 \end_inset
 
@@ -440,7 +457,7 @@ key "mackey2015multivariate"
 \begin_inset Formula $S(Y,\mathcal{F},p)$
 \end_inset
 
- (step 2 and 3 in section 3), since we can calculate it explicitly 
+, since we can calculate it explicitly 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "th1"
@@ -505,10 +522,16 @@ name "lem:WellDefined"
 \begin_layout Proof
 
 \lang english
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:WellDefined"
+
+\end_inset
+
 We use the proof on p.
  132 of 
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citet
 after "Corollary 4.36"
 key "SteChr08"
 
@@ -524,11 +547,11 @@ key "SteChr08"
 
 .
  
-\begin_inset Formula $\frac{\partial\log p(x)}{\partial x_{i}}k(x,t)\in\mathcal{F}$
+\begin_inset Formula $\frac{\partial\log p(x)}{\partial x_{i}}k(x,\cdot)\in\mathcal{F}$
 \end_inset
 
 , since 
-\begin_inset Formula $k(x,t)\in\mathcal{F}$
+\begin_inset Formula $k(x,\cdot)\in\mathcal{F}$
 \end_inset
 
  and 
@@ -556,50 +579,15 @@ name "lem:BochnerInt"
  
 \end_layout
 
-\begin_layout Proof
-
-\lang english
-It is sufficient to check that coefficients of 
-\begin_inset Formula $\xi$
-\end_inset
-
- are Bochner integrable (
-\begin_inset CommandInset citation
-LatexCommand cite
-after "Definition A.5.20"
-key "SteChr08"
-
-\end_inset
-
-).
- first we check that for random any variable 
-\begin_inset Formula $Z$
-\end_inset
-
- 
-\begin_inset Formula 
-\[
-\ev\left\Vert \frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)\right\Vert ^{2}=\ev\left(\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,Z)\right)^{2}<\ev\|\nabla\log p(X)\|^{2}<\infty,
-\]
-
-\end_inset
-
-which follows form assumption (i) and boundedness of the kernel.
- Next we check that 
-\begin_inset Formula 
-\[
-\ev\left\Vert \frac{\partial k(Z,\cdot)}{\partial x}\right\Vert ^{2}=\ev\left(\frac{\partial^{2}k(Z,Z)}{dx_{i}dx_{i+d}}\right)^{2}<\infty,
-\]
-
-\end_inset
-
-which follows from assumption (iii).
- 
-\end_layout
-
 \begin_layout Corollary
 
 \lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:BochnerInt2"
+
+\end_inset
+
 For any random variable 
 \begin_inset Formula $Z$
 \end_inset
@@ -619,6 +607,12 @@ For any random variable
 \begin_layout Lemma
 
 \lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:SteinIsInner"
+
+\end_inset
+
 For any random variable 
 \begin_inset Formula $Z$
 \end_inset
@@ -634,9 +628,9 @@ For any random variable
  i.e.
  
 \begin_inset Formula 
-\begin{align}
-\ev T_{p}f(X)=\langle f,\ev\xi(Z)\rangle_{\mathcal{F}^{d}} & =\sum_{i=1}^{d}\langle f_{i},\ev\xi_{i}(Z)\rangle_{\mathcal{F}}
-\end{align}
+\begin{align*}
+\ev T_{p}f(Z)=\langle f,\ev\xi(Z)\rangle_{\mathcal{F}^{d}} & =\sum_{i=1}^{d}\langle f_{i},\ev\xi_{i}(Z)\rangle_{\mathcal{F}}
+\end{align*}
 
 \end_inset
 
@@ -647,16 +641,12 @@ For any random variable
 
 \lang english
 We write
-\end_layout
-
-\begin_layout Proof
-
-\lang english
 \begin_inset Formula 
 \begin{align*}
-\left\langle f_{i},\ev\xi_{i}(Z)\right\rangle  & =\left\langle f_{i},\ev\left[\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right]\right\rangle _{\mathcal{F}}\\
+ & \left\langle f_{i},\ev\xi_{i}(Z)\right\rangle _{\mathcal{F}}\\
+ & =\left\langle f_{i},\ev\left[\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right]\right\rangle _{\mathcal{F}}\\
  & =\ev\left\langle f_{i},\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right\rangle _{\mathcal{F}}\\
- & =\ev\left[\frac{\partial\log p(Z)}{\partial x_{i}}f_{i}(Z)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right]\\
+ & =\ev\left[\frac{\partial\log p(Z)}{\partial x_{i}}f_{i}(Z)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right].
 \end{align*}
 
 \end_inset
@@ -681,17 +671,61 @@ reference "lem:BochnerInt"
  
 \end_layout
 
-\begin_layout Corollary
+\begin_layout Lemma
 
 \lang english
-\begin_inset Formula $S(Y,\mathcal{F},p)^{2}=\langle\xi,\xi\rangle_{\mathcal{F}^{d}}$
+\begin_inset Formula $S(Y,\mathcal{F},p)^{2}=\langle\ev\xi(Z),\ev\xi(Z)\rangle$
 \end_inset
 
 .
- 
 \end_layout
 
-\begin_layout Lemma
+\begin_layout Proof
+
+\lang english
+By the Lemma 
+\lang british
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:SteinIsInner"
+
+\end_inset
+
+, 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+
+\begin_inset Formula $\ev T_{p}f(Z)=\langle f,\ev\xi(Z)\rangle$
+\end_inset
+
+, therfore 
+\begin_inset Formula $S(Y,\mathcal{F},p)$
+\end_inset
+
+ is maximized by 
+\begin_inset Formula $\frac{\ev\xi(Z)}{\|\ev\xi(Z)\|_{\mathcal{}}}$
+\end_inset
+
+.
+ The suqre is then 
+\begin_inset Formula $S(Y,\mathcal{F},p)^{2}=\langle\ev\xi(Z),\ev\xi(Z)\rangle$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem
 
 \lang english
 \begin_inset CommandInset label
@@ -706,38 +740,39 @@ name "th1"
 
  can be written in a closed form.
  
+\begin_inset Formula 
+\begin{align*}
+ & \quad\ev\langle\nabla\log p(X_{1}),\nabla\log p(X_{2})\rangle_{2}k(X_{1},X_{2})\\
+ & \quad+\ev\langle\nabla p(X_{2}),\nabla_{1}k(X_{1},X_{2})\rangle_{2}\\
+ & \quad+\ev\langle\nabla\log p(X_{1}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}\\
+ & \quad+\ev\ \langle\nabla_{1}k(X_{1},X_{2}),\nabla_{2}k(X_{1},X_{2})\rangle_{2},
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Proof
+\begin_layout Theorem
 
 \lang english
-We use notation 
-\begin_inset Formula 
-\begin{align*}
-\nabla_{1}k(x,y)=\left(\frac{\partial k(x,y)}{\partial x_{1}},\cdots,\frac{\partial k(x,y)}{\partial x_{d}}\right)\\
-\nabla_{2}k(x,y)=\left(\frac{\partial k(x,y)}{\partial y_{1}},\cdots,\frac{\partial k(x,y)}{\partial y_{d}}\right).\\
-\end{align*}
-
+where 
+\begin_inset Formula $\nabla_{2}k(x,y)=\left(\frac{\partial k(x,y)}{\partial y_{1}},\cdots,\frac{\partial k(x,y)}{\partial y_{d}}\right).$
 \end_inset
 
-and 
-\begin_inset Formula $\langle\cdot,\cdot\rangle_{2}$
-\end_inset
 
- for inner product in 
-\begin_inset Formula $R^{d}$
-\end_inset
+\end_layout
 
-.
- 
-\begin_inset Formula 
-\begin{align*}
-S(X,\mathcal{F},p)^{2} & =\langle\xi,\xi\rangle_{\mathcal{F}^{d}}\\
- & =\langle\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{1}k(X,\cdot)\right],\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{1}k(X,\cdot)\right]\rangle_{\mathcal{F}^{d}}\\
- & =\ev\langle\nabla\log p(X_{1})k(X_{1},\cdot)+\nabla_{1}k(X_{1},\cdot),\nabla\log p(X_{2})k(\cdot,X_{2})+\nabla_{2}k(\cdot,X_{2})\rangle_{\mathcal{F}^{d}}\\
- & =\ev\langle\nabla\log p(X_{1}),\nabla\log p(X_{2})\rangle_{2}k(X_{1},X_{2})+\ev\langle\nabla p(X_{2}),\nabla_{1}k(X_{1},X_{2})\rangle_{2}\\
- & \quad+\ev\langle\nabla\log p(X_{1}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}+\ev\ \langle\nabla_{1}k(X_{1},X_{2}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}
-\end{align*}
+\begin_layout Standard
+
+\lang english
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Otherwise theorems collapse to one.
+ This is stupid softwere for savages.
+\end_layout
 
 \end_inset
 
@@ -788,8 +823,8 @@ For each dimension of
 \begin_inset Formula 
 \begin{align*}
  & \ev\left(\frac{\partial}{\partial x_{i}}\log p(Y)k(Y,\cdot)+\frac{\partial}{\partial x_{i}}k(Y,\cdot)\right)\\
- & =\ev\left(\frac{\partial}{\partial x_{i}}(\log p(Y)+\log q(Y)-\log q(Y))k(Y,\cdot)+\frac{\partial}{\partial x_{i}}k(Y,\cdot)\right)=\\
- & =\ev\left(\frac{\partial}{\partial x_{i}}(\log p(Y)-\log q(Y))k(Y,\cdot)\right)
+ & =\ev\left(\frac{\partial}{\partial x_{i}}(\log q(Y))k(Y,\cdot)+\frac{\partial}{\partial x_{i}}k(Y,\cdot)\right)\\
+ & \quad+\ev\left(\frac{\partial}{\partial x_{i}}(\log p(Y)-\log q(Y))k(Y,\cdot)\right).
 \end{align*}
 
 \end_inset
@@ -814,7 +849,7 @@ We recognize that expected value of random
 \end_inset
 
  is mean emending of a function 
-\begin_inset Formula $g(y)=\frac{\partial}{\partial x_{i}}(\log\frac{p(y)}{q(y)})$
+\begin_inset Formula $g(y)=\frac{\partial}{\partial x_{i}}\left(\log\frac{p(y)}{q(y)}\right)$
 \end_inset
 
  with respect to the measure 
@@ -875,14 +910,14 @@ A constant vector filed of derivatives can be generated only by a constant
 \begin_layout Section
 
 \lang english
-tests
+Test
 \end_layout
 
 \begin_layout Standard
 
 \lang english
-The basic two concepts required for derivation of the kernel one sample
- test statistic are 
+Basic two concepts required for derivation of the kernel one sample test
+ statistic are 
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -950,10 +985,22 @@ key "chwialkowski2014kernel"
 \end_inset
 
 -dependent if 
+\begin_inset Formula $\tau(r)$
+\end_inset
+
+ converges to zero with 
+\begin_inset Formula $r$
+\end_inset
+
+ going to infinity, where 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is defined as follows 
 \begin_inset Formula 
 \begin{align*}
-\tau(r) & =\sup_{l\in\mathbb{N}}\frac{1}{l}\sup_{r\leq i_{1}\leq...\leq i_{l}}\tau(\mathcal{F}_{0},(X_{i_{1}},...,X_{i_{l}}))\overset{r\to\infty}{\longrightarrow}0,\;\text{where}\\
-\tau(\mathcal{M},X) & =\ev\left(\sup_{g\in\Lambda}\left|\int g(t)P_{X|\mathcal{M}}(dt)-\int g(t)P_{X}(dt)\right|\right)
+\tau(r) & =\sup_{l\in\mathbb{N}}\frac{1}{l}\sup_{r\leq i_{1}\leq...\leq i_{l}}T(\mathcal{F}_{0},(X_{i_{1}},...,X_{i_{l}}))\\
+T(\mathcal{M},X) & =\ev\left(\sup_{g\in\Lambda}\left|\int g(t)(dP_{X|\mathcal{M}}-dP)\right|\right)
 \end{align*}
 
 \end_inset
@@ -1691,8 +1738,50 @@ status open
 
 \begin_layout Plain Layout
 \align center
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:BochnerInt"
+
+\end_inset
+
 
 \lang english
+It is sufficient to check that coefficients of 
+\begin_inset Formula $\xi$
+\end_inset
+
+ are Bochner integrable (
+\begin_inset CommandInset citation
+LatexCommand cite
+after "Definition A.5.20"
+key "SteChr08"
+
+\end_inset
+
+).
+ first we check that for random any variable 
+\begin_inset Formula $Z$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\ev\left\Vert \frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)\right\Vert ^{2}=\ev\left(\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,Z)\right)^{2}<\ev\|\nabla\log p(X)\|^{2}<\infty,
+\]
+
+\end_inset
+
+which follows form assumption (i) and boundedness of the kernel.
+ Next we check that 
+\begin_inset Formula 
+\[
+\ev\left\Vert \frac{\partial k(Z,\cdot)}{\partial x}\right\Vert ^{2}=\ev\left(\frac{\partial^{2}k(Z,Z)}{dx_{i}dx_{i+d}}\right)^{2}<\infty,
+\]
+
+\end_inset
+
+which follows from assumption (iii).
+ 
 \begin_inset Graphics
 	filename img/mcmc_mixing.pdf
 	width 7cm
@@ -2054,6 +2143,95 @@ Appendix
 
 \lang english
 boring proofs
+\end_layout
+
+\begin_layout Proof
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:BochnerInt"
+
+\end_inset
+
+
+\lang english
+It is sufficient to check that coefficients of 
+\begin_inset Formula $\xi$
+\end_inset
+
+ are Bochner integrable (
+\begin_inset CommandInset citation
+LatexCommand cite
+after "Definition A.5.20"
+key "SteChr08"
+
+\end_inset
+
+).
+ first we check that for random any variable 
+\begin_inset Formula $Z$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\ev\left\Vert \frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)\right\Vert ^{2}=\ev\left(\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,Z)\right)^{2}<\ev\|\nabla\log p(X)\|^{2}<\infty,
+\]
+
+\end_inset
+
+which follows form assumption (i) and boundedness of the kernel.
+ Next we check that 
+\begin_inset Formula 
+\[
+\ev\left\Vert \frac{\partial k(Z,\cdot)}{\partial x}\right\Vert ^{2}=\ev\left(\frac{\partial^{2}k(Z,Z)}{dx_{i}dx_{i+d}}\right)^{2}<\infty,
+\]
+
+\end_inset
+
+which follows from assumption (iii).
+ 
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "th1"
+
+\end_inset
+
+Recall that use notation 
+\begin_inset Formula 
+\begin{align*}
+\nabla_{1}k(x,y)=\left(\frac{\partial k(x,y)}{\partial x_{1}},\cdots,\frac{\partial k(x,y)}{\partial x_{d}}\right)\\
+\nabla_{2}k(x,y)=\left(\frac{\partial k(x,y)}{\partial y_{1}},\cdots,\frac{\partial k(x,y)}{\partial y_{d}}\right).\\
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula $\langle\cdot,\cdot\rangle_{2}$
+\end_inset
+
+ for inner product in 
+\begin_inset Formula $R^{d}$
+\end_inset
+
+.
+ 
+\begin_inset Formula 
+\begin{align*}
+S(X,\mathcal{F},p)^{2} & =\langle\xi,\xi\rangle_{\mathcal{F}^{d}}\\
+ & =\langle\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{1}k(X,\cdot)\right],\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{1}k(X,\cdot)\right]\rangle_{\mathcal{F}^{d}}\\
+ & =\ev\langle\nabla\log p(X_{1})k(X_{1},\cdot)+\nabla_{1}k(X_{1},\cdot),\nabla\log p(X_{2})k(\cdot,X_{2})+\nabla_{2}k(\cdot,X_{2})\rangle_{\mathcal{F}^{d}}\\
+ & =\ev\langle\nabla\log p(X_{1}),\nabla\log p(X_{2})\rangle_{2}k(X_{1},X_{2})+\ev\langle\nabla p(X_{2}),\nabla_{1}k(X_{1},X_{2})\rangle_{2}\\
+ & \quad+\ev\langle\nabla\log p(X_{1}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}+\ev\ \langle\nabla_{1}k(X_{1},X_{2}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Proof
