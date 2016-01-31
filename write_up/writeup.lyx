@@ -1566,10 +1566,9 @@ name "fig:studentst"
 
 \end_inset
 
- 
+
 \begin_inset Graphics
-	filename img/student.pdf
-	width 80text%
+	filename img/sgld_student.pdf
 
 \end_inset
 
@@ -1742,21 +1741,23 @@ status open
 
 \lang english
 \begin_inset Graphics
-	filename img/Heiko.pdf
+	filename img/Heiko1.pdf
 	width 7cm
 
 \end_inset
 
  
-\end_layout
+\begin_inset Graphics
+	filename img/Heiko2.pdf
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout Section
-Experiments
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection*
