@@ -1,5 +1,5 @@
-#LyX 2.0 created this file. For more info see http://www.lyx.org/
-\lyxformat 413
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
 \begin_document
 \begin_header
 \textclass scrartcl
@@ -21,13 +21,13 @@ theorems-sec
 \font_roman default
 \font_sans default
 \font_typewriter default
+\font_math auto
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
-
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -38,15 +38,24 @@ theorems-sec
 \use_hyperref false
 \papersize default
 \use_geometry false
-\use_amsmath 2
-\use_esint 0
-\use_mhchem 1
-\use_mathdots 1
-\cite_engine natbib_numerical
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type numerical
+\biblio_style plainnat
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
 \suppress_date false
+\justification true
 \use_refstyle 0
 \index Index
 \shortcut idx
@@ -242,8 +251,9 @@ Kernel One Sample Test
 \begin_layout Standard
 
 \lang english
-In the following section we derive kernel one sample test.
- The test is applicable to family distributions on Euclidean space 
+In the following section we derive a kernel one sample test.
+ The test is applicable to family distributions, on real coordinate space,
+ 
 \begin_inset Formula $\mathcal{P}$
 \end_inset
 
@@ -299,23 +309,25 @@ is Lipschitz continuous
 \begin_inset Newline newline
 \end_inset
 
- Let 
+ As for the kernel, we choose kernel 
 \begin_inset Formula $k$
 \end_inset
 
- be a bounded, symmetric, cc-universal 
+ to be bounded, symmetric, cc-universal 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "SriFukLan11"
 
 \end_inset
 
- kernel and 
+.
+ We denote by 
 \begin_inset Formula $\mathcal{F}$
 \end_inset
 
  the Reproducing Kernel Hilbert Space associated with it.
- We assume that for any random variable 
+ We assume the following non-standard properties, for any random variable
+ 
 \begin_inset Formula $Z$
 \end_inset
 
@@ -709,7 +721,7 @@ reference "lem:SteinIsInner"
 \begin_inset Formula $\ev T_{p}f(Z)=\langle f,\ev\xi(Z)\rangle$
 \end_inset
 
-, therfore 
+, therefore 
 \begin_inset Formula $S(Y,\mathcal{F},p)$
 \end_inset
 
@@ -718,7 +730,7 @@ reference "lem:SteinIsInner"
 \end_inset
 
 .
- The suqre is then 
+ The sure is then 
 \begin_inset Formula $S(Y,\mathcal{F},p)^{2}=\langle\ev\xi(Z),\ev\xi(Z)\rangle$
 \end_inset
 
@@ -771,7 +783,7 @@ status open
 
 \begin_layout Plain Layout
 Otherwise theorems collapse to one.
- This is stupid softwere for savages.
+ This is stupid software for savages.
 \end_layout
 
 \end_inset
@@ -1070,7 +1082,7 @@ The distribution of
 \end_inset
 
  or not.
- This is illustrated by the folllwing Theorem, which is a direct application
+ This is illustrated by the following Theorem, which is a direct application
  of the Theorem 2.1 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -1159,13 +1171,13 @@ If
 \noun off
 \color none
 \lang english
-Although it can be dervied explicitly, we are not really concerened with
+Although it can be derived explicitly, we are not really concerned with
  an exact form of 
 \begin_inset Formula $\phi$
 \end_inset
 
-, since to our knowlegde there are no methods of obtaining quintiles of
- this disitbution in an analytic form.
+, since to our knowledge there are no methods of obtaining quintiles of
+ this distribution in an analytic form.
  The common solution, is estimating quantiles by a resampling method.
  For resampling we use wild bottstrap method 
 \family default
@@ -1191,7 +1203,7 @@ key "Shao2010,leucht_dependent_2013"
 .
  
 \emph on
-We intoduce an auxiliary wild bootstrap process 
+We introduce an auxiliary wild bootstrap process 
 \begin_inset Formula $\{W_{t,n}\}_{1\leq t\leq n}$
 \end_inset
 
@@ -1226,7 +1238,7 @@ is a series of iid uniform random variables and,
 \begin_inset Formula $p_{n}$
 \end_inset
 
- is probablility of 
+ is probability of 
 \begin_inset Formula $W_{t,n}$
 \end_inset
 
@@ -1235,16 +1247,16 @@ is a series of iid uniform random variables and,
 \begin_inset Formula $W_{t,n}$
 \end_inset
 
- is a simple markow chain taking values in 
+ is a simple marrow chain taking values in 
 \begin_inset Formula $\{-1,1\}$
 \end_inset
 
-with symmetric probalility of changin the state, equal to 
+with symmetric probability of changing the state, equal to 
 \begin_inset Formula $p_{n}$
 \end_inset
 
 .
- In order to estiamte empricial integral we will study bootstrapped 
+ In order to estimate empirical integral we will study bootstrapped 
 \begin_inset Formula $V$
 \end_inset
 
@@ -1272,7 +1284,7 @@ Turns out that
 \begin_inset Formula $V_{b,n}(h,X)$
 \end_inset
 
- coverges in some (useflull) sence to 
+ coverages in some (useful) sense to 
 \family roman
 \series medium
 \shape up
@@ -1309,7 +1321,7 @@ If
 \begin_inset Formula $X\sim p$
 \end_inset
 
-
+,
 \begin_inset Formula $V_{b,n}(h,X)$
 \end_inset
 
@@ -1326,7 +1338,7 @@ If
 \noun off
 \color none
 \lang english
- ia a apprximation of 
+ is a apprximation of 
 \begin_inset Formula $\phi$
 \end_inset
 
@@ -1351,7 +1363,7 @@ If
 \begin_layout Standard
 
 \lang english
-We will not go inot details of the convergance 
+We will not go into details of the convergence 
 \begin_inset Formula $V_{b,n}(h,X)$
 \end_inset
 
@@ -1454,7 +1466,7 @@ We are now in position to do magic and conduct our test -- we calculate
 \begin_inset Formula $V_{b,n}(h,X)$
 \end_inset
 
- multiplie times to etimate the 
+ multiple times to estimate the 
 \begin_inset Formula $1-\alpha$
 \end_inset
 
@@ -1463,11 +1475,11 @@ quantile of
 \end_inset
 
 .
- We comapre the value of 
+ We compare the value of 
 \begin_inset Formula $V$
 \end_inset
 
--statistic with the quantile and reject hypotesis that 
+-statistic with the quantile and reject hypothesis that 
 \begin_inset Formula $X\sim p$
 \end_inset
 
@@ -1573,7 +1585,7 @@ name "fig:studentst"
 \end_inset
 
  
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 
@@ -1674,12 +1686,12 @@ SGLD, plain
 \begin_layout Standard
 
 \lang english
-Stochastic gradient Stochastic Gradient Langevin Dynamics with schrinking
+Stochastic gradient Stochastic Gradient Langevin Dynamics with shrinking
  step size 
 \begin_inset Formula $\epsilon_{t}$
 \end_inset
 
- is a MCMC procedure desigend for large datasets.
+ is a MCMC procedure designed for large datasets.
  400 points are drawn from the this model with 
 \begin_inset Formula $\theta_{1}=0$
 \end_inset
@@ -1689,7 +1701,7 @@ Stochastic gradient Stochastic Gradient Langevin Dynamics with schrinking
 \end_inset
 
 .
- In such a setting there are two modes in the posteriori disitbiution, one
+ In such a setting there are two modes in the posteriori disquisition, one
  at the the point 
 \begin_inset Formula $0,1$
 \end_inset
@@ -1699,9 +1711,9 @@ Stochastic gradient Stochastic Gradient Langevin Dynamics with schrinking
 \end_inset
 
 .
- We run the SGLD alogrithm with a batch size of 1 and 10000 iterations through
+ We run the SGLD algorithm with a batch size of 1 and 10000 iterations through
  the whole dataset.
- The stepsizes are 
+ The step-sizes are 
 \begin_inset Formula $\epsilon_{t}=a(b+t)^{.55}$
 \end_inset
 
@@ -1717,7 +1729,7 @@ Stochastic gradient Stochastic Gradient Langevin Dynamics with schrinking
 \begin_inset Formula $\epsilon_{t}$
 \end_inset
 
- deacreses from 
+ decreases from 
 \begin_inset Formula $0.01$
 \end_inset
 
@@ -1922,7 +1934,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 P-values for an increasing number of data 
@@ -1966,7 +1978,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 P-values for an increasing number of random features 
@@ -2425,7 +2437,7 @@ The computation of
 \begin_layout Proposition
 
 \lang english
-\begin_inset Argument
+\begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
