@@ -1,5 +1,5 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
-\lyxformat 474
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
 \begin_document
 \begin_header
 \textclass scrartcl
@@ -21,13 +21,13 @@ theorems-sec
 \font_roman default
 \font_sans default
 \font_typewriter default
-\font_math auto
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
+
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -38,24 +38,15 @@ theorems-sec
 \use_hyperref false
 \papersize default
 \use_geometry false
-\use_package amsmath 2
-\use_package amssymb 2
-\use_package cancel 1
-\use_package esint 0
-\use_package mathdots 1
-\use_package mathtools 1
-\use_package mhchem 1
-\use_package stackrel 1
-\use_package stmaryrd 1
-\use_package undertilde 1
-\cite_engine natbib
-\cite_engine_type numerical
-\biblio_style plainnat
+\use_amsmath 2
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_numerical
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
 \suppress_date false
-\justification true
 \use_refstyle 0
 \index Index
 \shortcut idx
@@ -309,11 +300,8 @@ is Lipschitz continuous
 \begin_inset Newline newline
 \end_inset
 
- As for the kernel, we choose kernel 
-\begin_inset Formula $k$
-\end_inset
-
- to be bounded, symmetric, cc-universal 
+ The kernels considered in this work are assumed to be bounded, symmetric
+ and cc-universal 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "SriFukLan11"
@@ -326,17 +314,20 @@ key "SriFukLan11"
 \end_inset
 
  the Reproducing Kernel Hilbert Space associated with it.
- We assume the following non-standard properties, for any random variable
- 
-\begin_inset Formula $Z$
+ On top of that we assume that any kernel
+\begin_inset Formula $k$
 \end_inset
 
- 
+ must satisfy 
 \begin_inset Newline newline
 \end_inset
 
  (iii) 
 \begin_inset Formula $\ev\left(\frac{\partial^{2}k(Z,Z)}{dx_{i}dx_{i+d}}\right)^{2}<\infty$
+\end_inset
+
+, for any random variable 
+\begin_inset Formula $Z$
 \end_inset
 
 ,
@@ -371,14 +362,15 @@ Stein operator.
 \begin_layout Standard
 
 \lang english
-We proceed as similarly to 
+We proceed similarly to 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "stein1972,gorham2015measuring"
 
 \end_inset
 
- and use Stein operator to characterize discrepancy between measures.
+ and make use of Stein operator to characterize discrepancy between probability
+ measures.
  Following 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -438,11 +430,15 @@ reference "lem:easy"
 \end_inset
 
  and 
+\begin_inset Formula $Z$
+\end_inset
+
+ 
 \begin_inset Formula 
-\begin{alignat*}{1}
-S(Z,\mathcal{F},p) & =\sup_{f\in F^{d},\|f\|<1}\ev(T_{p}f)(Z)\\
- & =\sup_{f\in F^{d}}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X).
-\end{alignat*}
+\begin{alignat}{1}
+S(Z,\mathcal{F},p) & =\sup_{f\in F^{d},\|f\|<1}\ev(T_{p}f)(Z)\label{eq:Sdef}\\
+ & =\sup_{f\in F^{d}}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X).\nonumber 
+\end{alignat}
 
 \end_inset
 
@@ -457,7 +453,7 @@ reference "th2"
 \begin_inset Formula $S(Z,\mathcal{F},p)$
 \end_inset
 
- captures difference between some probability measures.
+ captures difference between probability measures.
  Contrary to to 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -469,7 +465,7 @@ key "gorham2015measuring"
 \begin_inset Formula $S(Y,\mathcal{F},p)$
 \end_inset
 
-, since we can calculate it explicitly 
+, since we can calculate it explicitly, see Theorem 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "th1"
@@ -477,6 +473,12 @@ reference "th1"
 \end_inset
 
 .
+ We start with a definition of a function 
+\begin_inset Formula $\xi$
+\end_inset
+
+, which expected can be interpreted of as mean embedding.
+ 
 \end_layout
 
 \begin_layout Definition
@@ -574,29 +576,33 @@ key "SteChr08"
  
 \end_layout
 
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Standard
+The following technical lemma shows that the expected value of 
+\begin_inset Formula $\xi$
+\end_inset
+
+ is well defined -- a property which is crucial for establishing link between
+ Stain operator 
+\begin_inset Formula $T_{p}f$
+\end_inset
+
+ and 
+\begin_inset Formula $\xi$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Lemma
 
 \lang english
 \begin_inset CommandInset label
 LatexCommand label
-name "lem:BochnerInt"
-
-\end_inset
-
- 
-\begin_inset Formula $\xi(x,\cdot)$
-\end_inset
-
- is Bochner integrable with respect to any probability measure.
- 
-\end_layout
-
-\begin_layout Corollary
-
-\lang english
-\begin_inset CommandInset label
-LatexCommand label
-name "lem:BochnerInt2"
+name "lem:BochnerInt1"
 
 \end_inset
 
@@ -610,6 +616,29 @@ For any random variable
 
  is is element of 
 \begin_inset Formula $\mathcal{F}^{d}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Standard
+Now we are ready to show that the expected value of the Stain operator is
+ a functional on the RKHS 
+\begin_inset Formula $\mathcal{F}^{d}$
+\end_inset
+
+, hence it coincidences with a inner product with some element of 
+\begin_inset Formula $\mathcal{F}^{d}$
+\end_inset
+
+.
+ This element turns out to be expected value of 
+\begin_inset Formula $\xi$
 \end_inset
 
 .
@@ -683,10 +712,83 @@ reference "lem:BochnerInt"
  
 \end_layout
 
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Standard
+This Lemma explains intuition behind mean embedding interpretation of expected
+ value of 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+
+\begin_inset Formula $\xi$
+\end_inset
+
+.
+ Recall definition of 
+\begin_inset Formula $S$
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:Sdef"
+
+\end_inset
+
+, by the construction of the Stain operator we know that for 
+\begin_inset Formula $X\sim p$
+\end_inset
+
+,
+\begin_inset Formula $\ev(T_{p}f)(X)=0$
+\end_inset
+
+, and so for any random variable 
+\begin_inset Formula $Z$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset Formula 
+\begin{align*}
+S(Z,\mathcal{F},p) & =\sup_{f\in F^{d}}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X)\\
+ & =\sup_{f\in F^{d}}\langle f,\ev\xi(Z)-\ev\xi(X)\rangle_{\mathcal{F}^{d}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Lemma
 
 \lang english
-\begin_inset Formula $S(Y,\mathcal{F},p)^{2}=\langle\ev\xi(Z),\ev\xi(Z)\rangle$
+Discrepancy 
+\begin_inset Formula $S$
+\end_inset
+
+ is maximized by an expected value of 
+\begin_inset Formula $\xi$
+\end_inset
+
+, 
+\begin_inset Formula $S(Y,\mathcal{F},p=\|\ev\xi(Z)\|$
 \end_inset
 
 .
@@ -726,15 +828,37 @@ reference "lem:SteinIsInner"
 \end_inset
 
  is maximized by 
-\begin_inset Formula $\frac{\ev\xi(Z)}{\|\ev\xi(Z)\|_{\mathcal{}}}$
+\begin_inset Formula $\frac{\ev\xi(Z)}{\|\ev\xi(Z)\|}$
 \end_inset
 
 .
- The sure is then 
-\begin_inset Formula $S(Y,\mathcal{F},p)^{2}=\langle\ev\xi(Z),\ev\xi(Z)\rangle$
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Standard
+We are ready to write down the closed form formula for 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+
+\begin_inset Formula $S(Y,\mathcal{F},p)^{2}$
 \end_inset
 
 .
+ The proof, which is mostly algebraic manipulation, is in the appendix.
+ 
 \end_layout
 
 \begin_layout Theorem
@@ -775,20 +899,30 @@ where
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout --Separator--
 
-\lang english
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Otherwise theorems collapse to one.
- This is stupid software for savages.
 \end_layout
 
+\begin_layout Standard
+Finally we prove that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+
+\begin_inset Formula $S$
 \end_inset
 
-
+ discriminates different probability measures.
+ 
 \end_layout
 
 \begin_layout Theorem
@@ -801,33 +935,54 @@ name "th2"
 \end_inset
 
  Suppose 
-\begin_inset Formula $q,p\in mathcal{P}$
+\begin_inset Formula $q,p\in\mathcal{P}$
 \end_inset
 
- and 
-\begin_inset Formula $p\neq q$
-\end_inset
-
-, if 
+ and let 
 \begin_inset Formula $Y\sim q$
 \end_inset
 
- then 
-\begin_inset Formula $S(Y,\mathcal{F},p)\neq0$
+.
+ 
+\begin_inset Formula $S(Y,\mathcal{F},p)=0$
 \end_inset
 
-.
+ if and only if 
+\begin_inset Formula $p=q$
+\end_inset
+
+ .
  
 \end_layout
 
 \begin_layout Proof
 
 \lang english
-For each dimension of 
+If 
+\begin_inset Formula $p=q$
+\end_inset
+
+ then 
+\begin_inset Formula $S(Y,\mathcal{F},p)=0$
+\end_inset
+
+ by the Lemma 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "lem:easy"
+
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula $p\neq q$
+\end_inset
+
+, for each dimension of 
 \begin_inset Formula $\ev\xi(Y)$
 \end_inset
 
- We add and subtract 
+ we add and subtract 
 \begin_inset Formula $\log q(Y)$
 \end_inset
 
@@ -929,7 +1084,7 @@ Test
 
 \lang english
 Basic two concepts required for derivation of the kernel one sample test
- statistic are 
+ statistic is 
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -940,7 +1095,7 @@ key "dedecker2007weak"
 
 \end_inset
 
-, notion of dependence within the time series, and 
+, notion of dependence within the observations, and 
 \begin_inset Formula $V$
 \end_inset
 
@@ -958,18 +1113,22 @@ key "serfling80"
 \begin_layout Standard
 
 \lang english
-We suppose that 
 \begin_inset Formula $\tau$
 \end_inset
 
--mixing is a notion weak enough for most of applications.
- For instance geometric ergodicity of Markov Chain implies that the chain
- is
+-mixing is a notion weak enough for most of practical applications.
+ Trivially, iid observations are 
 \begin_inset Formula $\tau$
 \end_inset
 
--mixing (given the stationary distribution as a finite moment, see appendix
- of 
+-mixing.
+ As for the Markov Chains, which convergance we study in experiments, the
+ property of geometric ergodicity implies 
+\begin_inset Formula $\tau$
+\end_inset
+
+-mixing (given that the stationary distribution as a finite moment, see
+ appendix B of 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "chwialkowski2014kernel"
@@ -977,12 +1136,11 @@ key "chwialkowski2014kernel"
 \end_inset
 
 ).
- Trivially, iid observations are 
+ To introduce 
 \begin_inset Formula $\tau$
 \end_inset
 
--mixing.
- Formally, let 
+-mixing formally, let 
 \begin_inset Formula $\{X_{t},\mathcal{F}_{t}\}_{t\in\mathbb{N}}$
 \end_inset
 
@@ -992,7 +1150,7 @@ key "chwialkowski2014kernel"
 \end_inset
 
 .
- The process is called 
+ The sequence is called 
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -1027,13 +1185,8 @@ and
 \end_inset
 
 .
- For the observations 
-\begin_inset Formula $\{X_{t}\}_{t\in\mathbb{N}}$
-\end_inset
-
- .
- We will assume the following condition
-\begin_inset Formula $\sum_{t=1}^{\infty}\sqrt{\tau(t)}\leq\infty$
+ For this work we will assume the following, technical condition 
+\begin_inset Formula $\tau(t)\leq O(t^{-6})$
 \end_inset
 
 .
@@ -1585,7 +1738,7 @@ name "fig:studentst"
 \end_inset
 
  
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -1934,7 +2087,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 P-values for an increasing number of data 
@@ -1978,7 +2131,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 P-values for an increasing number of random features 
@@ -2437,7 +2590,7 @@ The computation of
 \begin_layout Proposition
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
