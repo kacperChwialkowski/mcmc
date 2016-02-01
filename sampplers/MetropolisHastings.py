@@ -1,6 +1,6 @@
 import numpy as np
 
-def metropolis_hastings(log_density, chain_size=10000, thinning=15, x_prev=np.random.randn()):
+def metropolis_hastings(log_density, chain_size=10000, thinning=15, x_prev=np.random.randn(),step=1):
     A = [x_prev]
 
     dimension=1
@@ -10,7 +10,7 @@ def metropolis_hastings(log_density, chain_size=10000, thinning=15, x_prev=np.ra
 
     old_log_lik = log_density(x_prev)
     for i in range(chain_size*thinning-1):
-        guess = np.random.randn(dimension)+x_prev
+        guess = step*np.random.randn(dimension)+x_prev
         new_log_lik = log_density(guess)
         if new_log_lik > old_log_lik:
             A.append(guess)

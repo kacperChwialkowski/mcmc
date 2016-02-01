@@ -243,12 +243,12 @@ Kernel One Sample Test
 
 \lang english
 In the following section we derive a kernel one sample test.
- The test is applicable to family distributions, on real coordinate space,
- 
+ The test is applicable to family of distributions, on a real coordinate
+ space, 
 \begin_inset Formula $\mathcal{P}$
 \end_inset
 
-, where 
+, where distributions 
 \begin_inset Formula $p\in\mathcal{P}$
 \end_inset
 
@@ -289,7 +289,7 @@ is Lipschitz continuous
 \end_inset
 
  (ii) 
-\begin_inset Formula $\ev\|\nabla\log p(Z)\|^{2}$
+\begin_inset Formula $\ev\|\nabla\log p(Z)\|^{2}\leq\infty$
 \end_inset
 
  for any random variable 
@@ -303,18 +303,13 @@ is Lipschitz continuous
  The kernels considered in this work are assumed to be bounded, symmetric
  and cc-universal 
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
 key "SriFukLan11"
 
 \end_inset
 
 .
- We denote by 
-\begin_inset Formula $\mathcal{F}$
-\end_inset
-
- the Reproducing Kernel Hilbert Space associated with it.
- On top of that we assume that any kernel
+ On top of that we assume that any kernel 
 \begin_inset Formula $k$
 \end_inset
 
@@ -351,6 +346,30 @@ key "SriFukLan11"
 \end_inset
 
  is Lipschitz continuous.
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Newline newline
+\end_inset
+
+We denote by 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ the Reproducing Kernel Hilbert Space associated with the kernel 
+\begin_inset Formula $k$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Paragraph
@@ -369,8 +388,8 @@ key "stein1972,gorham2015measuring"
 
 \end_inset
 
- and make use of Stein operator to characterize discrepancy between probability
- measures.
+ and make use of a Stein operator to characterize discrepancy between probabilit
+y measures.
  Following 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -421,11 +440,11 @@ reference "lem:easy"
 \end_inset
 
 ).
- Next, for any random 
+ Next, for any random variable 
 \begin_inset Formula $Z$
 \end_inset
 
- variable, we define Stein discrepancy between 
+, we define Stein discrepancy between 
 \begin_inset Formula $X\sim p$
 \end_inset
 
@@ -453,8 +472,8 @@ reference "th2"
 \begin_inset Formula $S(Z,\mathcal{F},p)$
 \end_inset
 
- captures difference between probability measures.
- Contrary to to 
+ captures any difference between probability measures.
+ Contrary to 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "gorham2015measuring"
@@ -465,7 +484,7 @@ key "gorham2015measuring"
 \begin_inset Formula $S(Y,\mathcal{F},p)$
 \end_inset
 
-, since we can calculate it explicitly, see Theorem 
+ -- we can calculate it explicitly, as demonstrated in the Theorem 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "th1"
@@ -477,7 +496,7 @@ reference "th1"
 \begin_inset Formula $\xi$
 \end_inset
 
-, which expected can be interpreted of as mean embedding.
+, which expected value can be interpreted as a type of a mean embedding.
  
 \end_layout
 
@@ -536,12 +555,6 @@ name "lem:WellDefined"
 \begin_layout Proof
 
 \lang english
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "lem:WellDefined"
-
-\end_inset
-
 We use the proof on p.
  132 of 
 \begin_inset CommandInset citation
@@ -556,7 +569,11 @@ key "SteChr08"
 \end_inset
 
  each entry of 
-\begin_inset Formula $\nabla_{1}k(x,\cdot)\in\mathcal{F}$
+\begin_inset Formula $\nabla_{1}k(x,\cdot)$
+\end_inset
+
+ belongs to 
+\begin_inset Formula $\mathcal{F}$
 \end_inset
 
 .
@@ -585,8 +602,8 @@ The following technical lemma shows that the expected value of
 \begin_inset Formula $\xi$
 \end_inset
 
- is well defined -- a property which is crucial for establishing link between
- Stain operator 
+ is well defined -- it is needed for establishing a link between Stain operator
+ 
 \begin_inset Formula $T_{p}f$
 \end_inset
 
@@ -618,7 +635,39 @@ For any random variable
 \begin_inset Formula $\mathcal{F}^{d}$
 \end_inset
 
-.
+ (
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\xi$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ is Bochner integrable wrt measure of 
+\begin_inset Formula $Z$
+\end_inset
+
+).
  
 \end_layout
 
@@ -627,8 +676,8 @@ For any random variable
 \end_layout
 
 \begin_layout Standard
-Now we are ready to show that the expected value of the Stain operator is
- a functional on the RKHS 
+Now we can show that the expected value of the Stain operator is a functional
+ on the RKHS 
 \begin_inset Formula $\mathcal{F}^{d}$
 \end_inset
 
@@ -637,7 +686,7 @@ Now we are ready to show that the expected value of the Stain operator is
 \end_inset
 
 .
- This element turns out to be expected value of 
+ This element turns out to be the expected value of 
 \begin_inset Formula $\xi$
 \end_inset
 
@@ -703,12 +752,12 @@ The second equality follows form the fact that linear operator
  is Bochner integrable (Lemma 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "lem:BochnerInt"
+reference "lem:BochnerInt1"
 
 \end_inset
 
 ).
- The last equality is application of reproducing property.
+ The last equality is an application of reproducing property.
  
 \end_layout
 
@@ -717,8 +766,7 @@ reference "lem:BochnerInt"
 \end_layout
 
 \begin_layout Standard
-This Lemma explains intuition behind mean embedding interpretation of expected
- value of 
+
 \family roman
 \series medium
 \shape up
@@ -731,27 +779,11 @@ This Lemma explains intuition behind mean embedding interpretation of expected
 \noun off
 \color none
 \lang english
-
-\begin_inset Formula $\xi$
-\end_inset
-
-.
- Recall definition of 
-\begin_inset Formula $S$
-\end_inset
-
- 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "eq:Sdef"
-
-\end_inset
-
-, by the construction of the Stain operator we know that for 
+By the construction of the Stain operator we know that for 
 \begin_inset Formula $X\sim p$
 \end_inset
 
-,
+, 
 \begin_inset Formula $\ev(T_{p}f)(X)=0$
 \end_inset
 
@@ -767,8 +799,8 @@ reference "eq:Sdef"
 \lang english
 \begin_inset Formula 
 \begin{align*}
-S(Z,\mathcal{F},p) & =\sup_{f\in F^{d}}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X)\\
- & =\sup_{f\in F^{d}}\langle f,\ev\xi(Z)-\ev\xi(X)\rangle_{\mathcal{F}^{d}}.
+S(Y,\mathcal{F},p) & =\sup_{f\in F^{d}}\ev(T_{p}f)(Y)-\ev(T_{p}f)(X)\\
+ & =\sup_{f\in F^{d}}\langle f,\ev\xi(Y)-\ev\xi(X)\rangle_{\mathcal{F}^{d}}.
 \end{align*}
 
 \end_inset
@@ -776,11 +808,23 @@ S(Z,\mathcal{F},p) & =\sup_{f\in F^{d}}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X)\\
 
 \end_layout
 
+\begin_layout Standard
+This illustrates intuition 
+\begin_inset Formula $\ev\xi(Z)$
+\end_inset
+
+ is a type of mean embedding centred at the measure 
+\begin_inset Formula $p$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Lemma
 
 \lang english
 Discrepancy 
-\begin_inset Formula $S$
+\begin_inset Formula $S(Y,\mathcal{F},p)$
 \end_inset
 
  is maximized by an expected value of 
@@ -788,7 +832,7 @@ Discrepancy
 \end_inset
 
 , 
-\begin_inset Formula $S(Y,\mathcal{F},p=\|\ev\xi(Z)\|$
+\begin_inset Formula $S(Y,\mathcal{F},p)=\|\ev\xi(Y)\|$
 \end_inset
 
 .
@@ -820,7 +864,7 @@ reference "lem:SteinIsInner"
 \color none
 \lang english
 
-\begin_inset Formula $\ev T_{p}f(Z)=\langle f,\ev\xi(Z)\rangle$
+\begin_inset Formula $\ev T_{p}f(Y)=\langle f,\ev\xi(Y)\rangle$
 \end_inset
 
 , therefore 
@@ -828,7 +872,7 @@ reference "lem:SteinIsInner"
 \end_inset
 
  is maximized by 
-\begin_inset Formula $\frac{\ev\xi(Z)}{\|\ev\xi(Z)\|}$
+\begin_inset Formula $\frac{\ev\xi(Y)}{\|\ev\xi(Y)\|}$
 \end_inset
 
 .
@@ -857,7 +901,7 @@ We are ready to write down the closed form formula for
 \end_inset
 
 .
- The proof, which is mostly algebraic manipulation, is in the appendix.
+ The proof, which is mostly an algebraic manipulation, is in the appendix.
  
 \end_layout
 
@@ -951,7 +995,7 @@ name "th2"
 \begin_inset Formula $p=q$
 \end_inset
 
- .
+.
  
 \end_layout
 
@@ -978,7 +1022,44 @@ reference "lem:easy"
 \begin_inset Formula $p\neq q$
 \end_inset
 
-, for each dimension of 
+, but 
+\begin_inset Formula $S(Y,\mathcal{F},p)=0$
+\end_inset
+
+.
+ If 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $S(Y,\mathcal{F},p)=0$
+\end_inset
+
+ then 
+\begin_inset Formula $\ev\xi(Y)=0.$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ For each dimension of 
 \begin_inset Formula $\ev\xi(Y)$
 \end_inset
 
@@ -1083,8 +1164,7 @@ Test
 \begin_layout Standard
 
 \lang english
-Basic two concepts required for derivation of the kernel one sample test
- statistic is 
+Basic two concepts required for derivation of the test statistic is 
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -1095,7 +1175,7 @@ key "dedecker2007weak"
 
 \end_inset
 
-, notion of dependence within the observations, and 
+, and 
 \begin_inset Formula $V$
 \end_inset
 
@@ -1116,18 +1196,19 @@ key "serfling80"
 \begin_inset Formula $\tau$
 \end_inset
 
--mixing is a notion weak enough for most of practical applications.
+-mixing is a notion of dependence within the observations, weak enough for
+ most practical applications.
  Trivially, iid observations are 
 \begin_inset Formula $\tau$
 \end_inset
 
 -mixing.
- As for the Markov Chains, which convergance we study in experiments, the
- property of geometric ergodicity implies 
+ As for the Markov Chains, which convergance we study in the experiments,
+ the property of geometric ergodicity implies 
 \begin_inset Formula $\tau$
 \end_inset
 
--mixing (given that the stationary distribution as a finite moment, see
+-mixing (given that the stationary distribution has a finite moment, see
  appendix B of 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -1144,8 +1225,8 @@ key "chwialkowski2014kernel"
 \begin_inset Formula $\{X_{t},\mathcal{F}_{t}\}_{t\in\mathbb{N}}$
 \end_inset
 
- be a stationary sequence of integrable random variables, with a natural
- filtration 
+ be a stationary sequence of integrable random variables, with respect to
+ a natural filtration 
 \begin_inset Formula $\mathcal{F}_{t}$
 \end_inset
 
@@ -1185,7 +1266,7 @@ and
 \end_inset
 
 .
- For this work we will assume the following, technical condition 
+ For this work we will assume a technical condition 
 \begin_inset Formula $\tau(t)\leq O(t^{-6})$
 \end_inset
 
@@ -1198,15 +1279,15 @@ and
 \begin_inset Formula $h,$
 \end_inset
 
- taking two arguments, is defined as follows
+ is defined as follows
 \begin_inset Formula 
 \[
-V(h,X)=\frac{1}{n}\sum_{i,j=1}^{n}h(X_{i},X_{j}).
+V_{n}(h,X)=\frac{1}{n}\sum_{i,j=1}^{n}h(X_{i},X_{j}).
 \]
 
 \end_inset
 
-For one sample test the function 
+For the one sample test the function 
 \begin_inset Formula $h$
 \end_inset
 
@@ -1235,10 +1316,10 @@ The distribution of
 \end_inset
 
  or not.
- This is illustrated by the following Theorem, which is a direct application
+ This is illustrated by the following theorem, which is a direct application
  of the Theorem 2.1 
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
 key "leucht2012degenerate"
 
 \end_inset
@@ -1272,41 +1353,10 @@ If
 \end_inset
 
  then 
-\begin_inset Formula $V(h,X)$
+\begin_inset Formula $V_{n}(h,X)$
 \end_inset
 
- converges weakly a distribution 
-\family default
-\series bold
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-
-\begin_inset Formula $\phi$
-\end_inset
-
-
-\family roman
-\series medium
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
- , where 
-\begin_inset Formula $\phi$
-\end_inset
-
- is a distributed as an infinite sum of squared, correlated normal random
- variables.
+ converges weakly to some distribution.
  
 \end_layout
 
@@ -1324,15 +1374,95 @@ If
 \noun off
 \color none
 \lang english
-Although it can be derived explicitly, we are not really concerned with
- an exact form of 
-\begin_inset Formula $\phi$
+Proof, which is a simple verification of the assumptions, is in the appendix.
+ Although a formula for a limit distribution of 
+\family default
+\series bold
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $V_{n}(h,X)$
 \end_inset
 
-, since to our knowledge there are no methods of obtaining quintiles of
- this distribution in an analytic form.
+
+\family roman
+\series medium
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ can be derived explicitly ( 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+Theorem 2.1
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "leucht2012degenerate"
+
+\end_inset
+
+), we do provide it here.
+ To our knowledge there are no methods of obtaining quintiles of a limit
+ of 
+\family default
+\series bold
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $V_{n}(h,X)$
+\end_inset
+
+
+\family roman
+\series medium
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ in an analytic form.
  The common solution, is estimating quantiles by a resampling method.
- For resampling we use wild bottstrap method 
+ For resampling we use wild bootstrap 
 \family default
 \series default
 \shape default
@@ -1344,8 +1474,10 @@ Although it can be derived explicitly, we are not really concerned with
 \uwave default
 \noun default
 \color inherit
-proposed by
+method 
 \emph default
+proposed by
+\emph on
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1355,16 +1487,17 @@ key "Shao2010,leucht_dependent_2013"
 
 .
  
-\emph on
+\emph default
 We introduce an auxiliary wild bootstrap process 
 \begin_inset Formula $\{W_{t,n}\}_{1\leq t\leq n}$
 \end_inset
 
-:
+,
 \end_layout
 
 \begin_layout Standard
 
+\emph on
 \lang english
 \begin_inset Formula 
 \[
@@ -1378,7 +1511,7 @@ We introduce an auxiliary wild bootstrap process
 \end_inset
 
 
-\emph on
+\emph default
 where 
 \begin_inset Formula $W_{1,n}=1$
 \end_inset
@@ -1387,29 +1520,25 @@ where
 \begin_inset Formula $U_{t}$
 \end_inset
 
-is a series of iid uniform random variables and, 
+ is a series of iid uniform random variables 
 \begin_inset Formula $p_{n}$
 \end_inset
 
- is probability of 
+ is a probability of 
 \begin_inset Formula $W_{t,n}$
 \end_inset
 
- changing sign.
- In other words 
+ changing a sign.
+ 
 \begin_inset Formula $W_{t,n}$
 \end_inset
 
- is a simple marrow chain taking values in 
+ is a Markov chain taking values in 
 \begin_inset Formula $\{-1,1\}$
 \end_inset
 
-with symmetric probability of changing the state, equal to 
-\begin_inset Formula $p_{n}$
-\end_inset
-
-.
- In order to estimate empirical integral we will study bootstrapped 
+with symmetric probability a flip.
+ In order to estimate empirical integral we will study a bootstrapped 
 \begin_inset Formula $V$
 \end_inset
 
@@ -1431,45 +1560,6 @@ V_{b,n}(h,X)=\frac{1}{n}\sum_{i,j}W_{i,n}W_{j,n}h(X_{i,}X_{j})
 \end_layout
 
 \begin_layout Standard
-
-\lang english
-Turns out that 
-\begin_inset Formula $V_{b,n}(h,X)$
-\end_inset
-
- coverages in some (useful) sense to 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\phi$
-\end_inset
-
-.
-
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- 
-\end_layout
-
-\begin_layout Theorem
 If 
 \begin_inset Formula $X\sim p$
 \end_inset
@@ -1491,50 +1581,98 @@ If
 \noun off
 \color none
 \lang english
- is a apprximation of 
-\begin_inset Formula $\phi$
-\end_inset
-
-, i.e.
+ is a good approximation
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
  
-\begin_inset Formula $P(\lim_{n\to\infty}\sup_{x}|P(V_{b,n}>x|W_{t,n})-P(\phi>x)|=0)=1$
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+of 
+\begin_inset Formula $V_{n}(h)$
 \end_inset
 
-.
- If 
-\begin_inset Formula $X\sim q\neq p$
+, which is simple application of the Theorem 3.1 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "leucht2012degenerate"
+
 \end_inset
 
-, 
-\begin_inset Formula $V_{b,n}(h,X)$
-\end_inset
-
- converges to zero.
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Theorem
 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
 \lang english
-We will not go into details of the convergence 
-\begin_inset Formula $V_{b,n}(h,X)$
+of 
+\begin_inset Formula $V_{n}$
 \end_inset
 
-, we just note for clarification that 
-\begin_inset Formula $f(W_{t,n})=\sup_{x}|P(V_{b,n}>x|W_{t,n})-P(\phi>x)|$
+.
+ Let 
+
+\begin_inset Formula $f(W_{t,n})=\sup_{x}|P(V_{b,n}>x|W_{t,n})-P(V_{n}>x)|$
 \end_inset
 
- is a random variable, and all we are stating is that 
+ be a difference between quantiles.
+ 
 \begin_inset Formula $f(W_{t,n})$
 \end_inset
 
  converges to zero in probability.
+ 
 \end_layout
 
 \begin_layout Proof
 
 \lang english
-We check bootstrap assumption:
+We have checked the assumption A2 in the proof of the Theorem 
+\lang british
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm: null_dist"
+
+\end_inset
+
+
+\lang english
+.
+ The assumption B1 follows from our technical assumption 
+\begin_inset Formula $\tau(t)\leq O(t^{-6})$
+\end_inset
+
+.
+ Finally we check assumption B2 (bootstrap assumption):
 \emph on
  
 \begin_inset Formula $\{W_{t,n}\}_{1\leq t\leq n}$
@@ -1559,7 +1697,7 @@ We check bootstrap assumption:
 \end_inset
 
 .
- The autocovariance of the process is given by 
+ The auto-covariance of the process is given by 
 \begin_inset Formula $\ev W_{s,n}W_{t,n}=(1-2p_{n})^{s-t}$
 \end_inset
 
@@ -1572,7 +1710,7 @@ We check bootstrap assumption:
 \end_inset
 
 .
- we check taht 
+ We verify that 
 \begin_inset Formula $\lim_{u\to0}\rho(u)=1$
 \end_inset
 
@@ -1593,14 +1731,27 @@ We check bootstrap assumption:
 \end_layout
 
 \begin_layout Standard
-We are now in position to do magic and conduct our test -- we calculate
- 
+We now present the test procedure
+\end_layout
+
+\begin_layout Paragraph
+The Test Procedure
+\end_layout
+
+\begin_layout Itemize
+Calculate 
 \lang english
 
 \begin_inset Formula $V_{n}(h,X)$
 \end_inset
 
- once and calculate
+.
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+Calculate
 \lang british
  
 \family roman
@@ -1616,31 +1767,52 @@ We are now in position to do magic and conduct our test -- we calculate
 \color none
 \lang english
 
-\begin_inset Formula $V_{b,n}(h,X)$
+\begin_inset Formula $\{V_{b,n}(h,X)\}_{\{i=1\}}^{D}$
 \end_inset
 
- multiple times to estimate the 
+ 
+\begin_inset Formula $D$
+\end_inset
+
+ times and estimate 
+\begin_inset Formula $q_{1-\alpha}$
+\end_inset
+
+, the 
 \begin_inset Formula $1-\alpha$
 \end_inset
 
-quantile of 
-\begin_inset Formula $V_{n}(h,X)$
+ empirical quantile of sequence 
+\begin_inset Formula $\{V_{b,n}(h,X)\}_{\{i=1\}}^{D}$
 \end_inset
 
 .
- We compare the value of 
-\begin_inset Formula $V$
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+If 
+\begin_inset Formula $V_{n}(h,X)>q$
 \end_inset
 
--statistic with the quantile and reject hypothesis that 
+, reject hypothesis that 
 \begin_inset Formula $X\sim p$
 \end_inset
 
- if the 
-\begin_inset Formula $V_{n}(h,X)$
-\end_inset
-
- is greater then the quantile.
+.
  
 \end_layout
 

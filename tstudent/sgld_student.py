@@ -1,3 +1,5 @@
+from sampplers.MetropolisHastings import metropolis_hastings
+
 __author__ = 'kcx'
 from statsmodels.tsa.stattools import acf
 from stat_test.quadratic_time import GaussianQuadraticTest
@@ -6,21 +8,24 @@ import seaborn
 import numpy as np
 from tools.latex_plot_init import plt
 
-SGLD_EPSILON = 0.0878
+SGLD_EPSILON = 0.0478
 
-P_CHANGE = 0.1
+P_CHANGE = 0.03
 
-N = 500
+N = 650
 
-DEGREES_OF_FREEDOM = [1,3,5,7,9,11]+[1000]
-MC_PVALUES_REPS = 400
-TEST_CHAIN_SIZE = 10**6
+DEGREES_OF_FREEDOM = []
+MC_PVALUES_REPS = 100
+TEST_CHAIN_SIZE = 2*10**6
 
 
 # The null statistic is that random variables come form normal distibution, so the test statistic takes a gradient of
 # logarithm of density of standard normal.
 def grad_log_normal(x):
     return -x
+
+def log_normal(x):
+    return -x**2.0/2.0
 
 # sampling approximately from t student in sgld style
 def sample_sgld_t_student(N,degree_of_freedom,epsilon):
@@ -34,6 +39,23 @@ def sample_sgld_t_student(N,degree_of_freedom,epsilon):
     return samples
 
 
+def sample_sgld_t_student(N,degree_of_freedom,epsilon):
+    X =  np.random.standard_t(degree_of_freedom,N)
+    for i in range(2,N):
+        if np.random.rand()>epsilon:
+            X[i] = X[i-np.random.randint(1,np.min((i,5)))]
+    return X
+
+def grad_log_t_df(df):
+    def grad_log_t(x):
+        return -(df+1.0)/2.0*np.log(1+x**2/df)
+    return grad_log_t
+
+def sample_sgld_t_student(N,degree_of_freedom,epsilon):
+    grd_log = grad_log_t_df(degree_of_freedom)
+    X =  metropolis_hastings(grd_log, chain_size=N, thinning=1, x_prev=np.random.randn(), step=0.25)
+    return X
+
 # plain AR process
 def normal_mild_corr(N):
     samples = np.zeros(N)
@@ -45,26 +67,41 @@ def normal_mild_corr(N):
         samples[t] = X_t
     return samples
 
+# plain AR process
+def normal_mild_corr(N):
+    X =  np.random.randn(N)
+    for i in range(2,N):
+        if np.random.rand() > SGLD_EPSILON:
+            X[i] = X[i-np.random.randint(1,np.min((i,5)))]
+    return X
+
+def normal_mild_corr(N):
+    X =  metropolis_hastings(log_normal, chain_size=N, thinning=1, x_prev=np.random.randn(),step=0.5)
+    return X
+
+
+
 # estimate size of thinning
 def get_thinning(X,nlags = 50):
-    autocorrelation = acf(X, nlags=nlags, fft=True)
+    autocorrelation = acf(X, nlags=nlags,fft=True)
     # find correlation closest to given v
-    thinning = np.argmin(np.abs(autocorrelation - 0.5)) + 1
+    thinning = np.argmin(np.abs(autocorrelation - 0.6)) + 1
     return thinning, autocorrelation
-
-
-
-X = sample_sgld_t_student(TEST_CHAIN_SIZE, 5.0, SGLD_EPSILON)
-sgld_thinning, autocorr =  get_thinning(X,500)
-print('thinning for sgld t-student simulation ', sgld_thinning,autocorr[sgld_thinning])
-
-plt.plot(np.log(autocorr))
-plt.show()
-
 
 X = normal_mild_corr(TEST_CHAIN_SIZE)
 ar_thinning, autocorr =  get_thinning(X)
 print('thinning for AR normal simulation ',ar_thinning,autocorr[ar_thinning])
+
+
+
+X = sample_sgld_t_student(TEST_CHAIN_SIZE, 100.0, SGLD_EPSILON)
+sgld_thinning, autocorr =  get_thinning(X)
+print('thinning for sgld t-student simulation ', sgld_thinning,autocorr[sgld_thinning])
+
+
+# plt.plot(np.log(autocorr))
+# plt.show()
+
 
 
 results = np.empty((0,2))
