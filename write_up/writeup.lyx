@@ -1,5 +1,5 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
-\lyxformat 474
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
 \begin_document
 \begin_header
 \textclass scrartcl
@@ -28,13 +28,13 @@ theorems-sec
 \font_roman default
 \font_sans default
 \font_typewriter default
-\font_math auto
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
+
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -45,24 +45,15 @@ theorems-sec
 \use_hyperref false
 \papersize default
 \use_geometry false
-\use_package amsmath 2
-\use_package amssymb 2
-\use_package cancel 1
-\use_package esint 0
-\use_package mathdots 1
-\use_package mathtools 1
-\use_package mhchem 1
-\use_package stackrel 1
-\use_package stmaryrd 1
-\use_package undertilde 1
-\cite_engine natbib
-\cite_engine_type numerical
-\biblio_style plainnat
+\use_amsmath 2
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_numerical
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
 \suppress_date false
-\justification true
 \use_refstyle 0
 \index Index
 \shortcut idx
@@ -2073,7 +2064,6 @@ reference "fig:studentst"
 LatexCommand ref
 reference "fig:student_bad"
 
-
 \end_inset
 
  
@@ -2148,7 +2138,7 @@ name "fig:student_bad"
 \end_inset
 
  
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -2230,7 +2220,7 @@ We use plain MH MCMC with Gaussian proposal with with standard deviation
 \begin_layout Subsection
 
 \lang english
-SGLD, plain 
+Approximate MCMC algorithm 
 \end_layout
 
 \begin_layout Standard
@@ -2243,29 +2233,29 @@ key "korattikara2013austerity"
 
 \end_inset
 
-is a MCMC procedure designed for reducing numer of likelihood evaluation
- for large datasets.
- The paprameter that controlos time complexity is 
-\begin_inset Formula $\epsilon$
-\end_inset
-
-, which may vary in range 
-\begin_inset Formula $[0,1]$
-\end_inset
-
-.
- The idea behind number Austerity MCMC is to look just at the subset of
- the data and make a decsion based on this subes with which migh be wrong
- wi probability proportional to 
-\begin_inset Formula $\epsilon$
+is a Monte Carlo procedure designed to reduce number of likelihood evaluation
+ in the acceptance step of the Metropolis-Hastings algorithm.
+ The crux of algorithm is to look just at a subset of the data and make
+ a acceptance/rejection decision based on this subset.
+ The probability of which making a wrong decision is proportional to 
+\begin_inset Formula $\epsilon\in[0,1]$
 \end_inset
 
 .
- We simluate 400 
-\begin_inset Formula $X$
+ Not surprisingly parameter 
+\begin_inset Formula $\epsilon$
 \end_inset
 
- points the model with 
+ influences time complexity of Austerity MCMC, the larger 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+, hence toleration for a mistake, the lower computational cost, on average.
+ We simulate 
+\begin_inset Formula $\{X_{i}\}_{\{1\leq i\leq400\}}$
+\end_inset
+
+ points from the model with 
 \begin_inset Formula $\theta_{1}=0$
 \end_inset
 
@@ -2274,7 +2264,7 @@ is a MCMC procedure designed for reducing numer of likelihood evaluation
 \end_inset
 
 .
- In such a setting there are two modes in the posteriori disquisition, one
+ In such a setting there are two modes in the posteriori distribution, one
  at the the point 
 \begin_inset Formula $0,1$
 \end_inset
@@ -2288,11 +2278,86 @@ is a MCMC procedure designed for reducing numer of likelihood evaluation
 \begin_inset Formula $\epsilon$
 \end_inset
 
- varying in range 
+ varying in a range 
 \begin_inset Formula $[0.001,0.2]$
 \end_inset
 
- .
+.
+ For each 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ we calculate individual thinning factor such that correlation between consecuti
+ve elements of samples form the chains is smaller than 
+\begin_inset Formula $0.5$
+\end_inset
+
+ (greater 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ require usually more less thinning).
+ For each 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ we then sample 
+\begin_inset Formula $\{\theta_{i}\}_{1\leq i\leq500}$
+\end_inset
+
+ and calculate a p-value using present one sample test.
+ This way we generate 100 p-values for each 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ ,the Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "p-values"
+
+\end_inset
+
+shows distribution of those p-values as a function of 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ -- 
+\begin_inset Formula $\epsilon=0.04$
+\end_inset
+
+ gives a good approximation of true stationary distribution.
+ We also collect statistics about average number of likelihood evaluations,
+ these are presented in the figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lik-evals"
+
+\end_inset
+
+ (y-axis is in millions of evaluations).
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+When 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\epsilon=0.001$
+\end_inset
+
+the number of evaluatiosn
 \end_layout
 
 \begin_layout Standard
@@ -2307,8 +2372,22 @@ status open
 \align center
 
 \lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "p-values"
+
+\end_inset
+
+
 \begin_inset Graphics
 	filename img/Heiko1.pdf
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "lik-evals"
 
 \end_inset
 
@@ -2488,7 +2567,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 P-values for an increasing number of data 
@@ -2532,7 +2611,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 P-values for an increasing number of random features 
@@ -2992,7 +3071,7 @@ The computation of
 \begin_layout Proposition
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
