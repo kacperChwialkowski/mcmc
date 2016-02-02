@@ -2124,7 +2124,38 @@ name "fig:studentst"
 
 \end_inset
 
+ 
+\begin_inset Caption
 
+\begin_layout Plain Layout
+
+\lang english
+Large auto covariance, and suitable bootstrap.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:student_bad"
@@ -2137,14 +2168,58 @@ name "fig:student_bad"
 
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 
 \lang english
-Linear Time test.
- Distribution of p-values as a function of number of degrees of freedom.
+Large auto covariance, and bootstrap that ignores auto covariance structure.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:thinning"
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename img/sgld_student_opt.pdf
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+Thinned sample, and suitable bootstrap.
 \end_layout
 
 \end_inset
@@ -2185,9 +2260,10 @@ key "gorham2015measuring,welling2011bayesian"
 .
  The model is 
 \begin_inset Formula 
-\begin{align}
-\theta_{1}\sim N(0,10);\theta_{2}\sim N(0,1)X_{i}\sim\frac{1}{2}N(\theta_{1},4)+\frac{1}{2}N(\theta_{2},4)
-\end{align}
+\begin{align*}
+\theta_{1}\sim N(0,10);\theta_{2}\sim N(0,1)\\
+X_{i}\sim\frac{1}{2}N(\theta_{1},4)+\frac{1}{2}N(\theta_{2},4)
+\end{align*}
 
 \end_inset
 
@@ -2336,28 +2412,6 @@ reference "lik-evals"
 
  (y-axis is in millions of evaluations).
  
-\end_layout
-
-\begin_layout Standard
-
-\lang english
-When 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\epsilon=0.001$
-\end_inset
-
-the number of evaluatiosn
 \end_layout
 
 \begin_layout Standard
