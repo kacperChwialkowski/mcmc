@@ -8,12 +8,13 @@ import seaborn
 import numpy as np
 from tools.latex_plot_init import plt
 
-SGLD_EPSILON = 0.0478
+import itertools
 
+SGLD_EPSILON = 0.0478
 
 N = 1000
 
-DEGREES_OF_FREEDOM = [1,np.Inf]
+DEGREES_OF_FREEDOM = [1, np.Inf]
 MC_PVALUES_REPS = 10
 TEST_CHAIN_SIZE = 2 * 10 ** 6
 
@@ -35,13 +36,12 @@ def grad_log_t_df(df):
     return grad_log_t
 
 
-
-
-def gen(N,df, thinning=1):
-    log_den =  log_normal
-    if df <np.Inf:
+def gen(N, df, thinning=1):
+    log_den = log_normal
+    if df < np.Inf:
         log_den = grad_log_t_df(df)
-    return  metropolis_hastings(log_den, chain_size=N, thinning=thinning, x_prev=np.random.randn(), step=0.5)
+    return metropolis_hastings(log_den, chain_size=N, thinning=thinning, x_prev=np.random.randn(), step=0.5)
+
 
 # estimate size of thinning
 def get_thinning(X, nlags=50):
@@ -54,42 +54,33 @@ X = gen(TEST_CHAIN_SIZE, np.Inf)
 thinning, autocorr = get_thinning(X)
 print('thinning for AR normal simulation ', thinning, autocorr[thinning])
 
-
-
-
 tester = GaussianQuadraticTest(grad_log_normal)
 
-# This stupid function takes global argument
-def get_pval(X, tester,p_change):
+
+def get_pval(X, tester, p_change):
     U_stat, _ = tester.get_statistic_multiple(X)
     return tester.compute_pvalues_for_processes(U_stat, p_change)
 
 
+def get_pair(sample_size, df, thinning, tester, p_change):
+    X = gen(sample_size, df, thinning)
+    pval = get_pval(X, tester, p_change)
+    return [df, pval]
+
+
 P_CHANGE = 0.5
 results = []
-for df in DEGREES_OF_FREEDOM:
-    print(df)
-    for mc in range(MC_PVALUES_REPS):
-        if mc % 32 == 0:
-            print(' ', 100.0 * mc / MC_PVALUES_REPS, '%')
-        X = gen(thinning * N, df,thinning)
-        pval = get_pval(X, tester, P_CHANGE)
-        results.append([df, pval])
 
+for (df, _) in itertools.product(*[DEGREES_OF_FREEDOM, range(MC_PVALUES_REPS)]):
+    pair = get_pair(N * thinning, df, thinning, tester, P_CHANGE)
+    results.append(pair)
 
 np.save('results_bad.npy', results)
 
-
 P_CHANGE = 0.02
 results = []
-for df in DEGREES_OF_FREEDOM:
-    print(df)
-    for mc in range(MC_PVALUES_REPS):
-        if mc % 32 == 0:
-            print(' ', 100.0 * mc / MC_PVALUES_REPS, '%')
-        X = gen(thinning * N, df)
-        pval = get_pval(X, tester, P_CHANGE)
-        results.append([df, pval])
-
+for (df, _) in itertools.product(*[DEGREES_OF_FREEDOM, range(MC_PVALUES_REPS)]):
+    pair = get_pair(N * thinning, df, thinning, tester, P_CHANGE)
+    results.append(pair)
 
 np.save('results_good.npy', results)
