@@ -14,6 +14,7 @@ seaborn.boxplot(x=0, y=1, data=df)
 
 plt.tight_layout()
 plt.ylabel('p values')
+plt.ylim([0,1])
 plt.xlabel('degrees of freedom')
 plt.savefig('../write_up/img/sgld_student.pdf')
 
@@ -27,5 +28,21 @@ seaborn.boxplot(x=0, y=1, data=df)
 
 plt.tight_layout()
 plt.ylabel('p values')
+plt.ylim([0,1])
 plt.xlabel('degrees of freedom')
 plt.savefig('../write_up/img/sgld_student_bad.pdf')
+
+
+results = np.load('results_thinning.npy')
+df = DataFrame(results)
+
+plt.figure()
+
+seaborn.set_style("whitegrid")
+seaborn.boxplot(x=0, y=1, data=df)
+
+plt.tight_layout()
+plt.ylabel('p values')
+plt.ylim([0,1])
+plt.xlabel('degrees of freedom')
+plt.savefig('../write_up/img/results_thinning.pdf')

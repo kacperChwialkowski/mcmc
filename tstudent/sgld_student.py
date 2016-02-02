@@ -1,9 +1,4 @@
-from multiprocessing.pool import Pool
-from time import time
-
 from sampplers.MetropolisHastings import metropolis_hastings
-
-THINNING = 2
 
 __author__ = 'kcx'
 from statsmodels.tsa.stattools import acf
@@ -13,15 +8,14 @@ import seaborn
 import numpy as np
 from tools.latex_plot_init import plt
 
+import itertools
 
 
-SGLD_EPSILON = 0.0478
+N = 1250
 
-N = 1000
-
-DEGREES_OF_FREEDOM = [1, np.Inf]
-MC_PVALUES_REPS = 32
-
+DEGREES_OF_FREEDOM = [1, 5,np.Inf]
+MC_PVALUES_REPS = 100
+TEST_CHAIN_SIZE = 2 * 10 ** 6
 
 
 # The null statistic is that random variables come form normal distibution, so the test statistic takes a gradient of
@@ -54,48 +48,49 @@ def get_thinning(X, nlags=50):
     thinning = np.argmin(np.abs(autocorrelation - 0.95)) + 1
     return thinning, autocorrelation
 
-
+#
 # X = gen(TEST_CHAIN_SIZE, np.Inf)
 # thinning, autocorr = get_thinning(X)
 # print('thinning for AR normal simulation ', thinning, autocorr[thinning])
 
+thinning = 1
+tester = GaussianQuadraticTest(grad_log_normal)
 
 
-
-def get_pval(X, p_change):
-    tester = GaussianQuadraticTest(grad_log_normal)
+def get_pval(X, tester, p_change):
     U_stat, _ = tester.get_statistic_multiple(X)
     return tester.compute_pvalues_for_processes(U_stat, p_change)
 
 
-def get_pair(df):
-    X = gen(N * THINNING, df, thinning=THINNING)
-    pval = get_pval(X, p_change=P_CHANGE)
+def get_pair(sample_size, df, thinning, tester, p_change):
+    X = gen(sample_size, df, thinning)
+    pval = get_pval(X, tester, p_change)
     return [df, pval]
 
 
-# def map_wrap(sample_size,thinning,tester, p_change):
-#     def f(df):
-#          return get_pair(sample_size, df, thinning, tester, p_change)
-#     return f
-
-
-
 P_CHANGE = 0.5
+results = []
 
+for df in DEGREES_OF_FREEDOM*MC_PVALUES_REPS:
+    pair = get_pair(N * thinning, df, thinning, tester, P_CHANGE)
+    results.append(pair)
 
-
-
-results = map(get_pair, DEGREES_OF_FREEDOM * MC_PVALUES_REPS)
-
-
-np.save('results_bad.npy', list(results))
+np.save('results_bad.npy', results)
 
 P_CHANGE = 0.02
+results = []
+for df in DEGREES_OF_FREEDOM*MC_PVALUES_REPS:
+    pair = get_pair(N * thinning, df, thinning, tester, P_CHANGE)
+    results.append(pair)
+
+np.save('results_good.npy', results)
 
 
+P_CHANGE = 0.1
+results = []
+thinning = 20
+for df in DEGREES_OF_FREEDOM*MC_PVALUES_REPS:
+    pair = get_pair(N * thinning, df, thinning, tester, P_CHANGE)
+    results.append(pair)
 
-results = map(get_pair, DEGREES_OF_FREEDOM * MC_PVALUES_REPS)
-
-
-np.save('results_good.npy', list(results))
+np.save('results_thinning.npy', results)

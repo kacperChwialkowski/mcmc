@@ -2035,7 +2035,11 @@ key "gorham2015measuring"
 , we draw 500 samples and calculate the p-value -- this procedure is repeated
  400 times so 400 p-values are calculated and a bar plot of p-values is
  created.
- 
+ The bar plot for 
+\begin_inset Formula $\nu=inf$
+\end_inset
+
+ is calculated for samples coming from normal distribution.
 \end_layout
 
 \begin_layout Standard
@@ -2050,53 +2054,61 @@ key "gorham2015measuring"
 
  is that our samples have temporal dependency.
  The observations are generated using Metropolis–Hastings algorithm, with
- Gaussian random walk.
- 
-\end_layout
-
-\begin_layout Standard
-
-\lang english
-The results are plotted in the figure 
+ Gaussian random walk (variance equal to 0.5).
+ We emphasize the need for appropriate choice of bootstrap process, namely
+ the probability of a sign flip.
+ In the figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:studentst"
 
 \end_inset
 
+ we plot p-values for the probability of flip 
+\begin_inset Formula $p_{n}=0.02$
+\end_inset
+
+, while in the 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:student_bad"
+
+
+\end_inset
+
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $p_{n}=0.5$
+\end_inset
+
 .
- The bar plot for 
-\begin_inset Formula $\nu=inf$
+ 
+\begin_inset Formula $p_{n}=0.5$
 \end_inset
 
- is calculated for samples coming from normal distribution.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Decay of the auto correlation function
-\end_layout
-
+, which would be suitable for iid observations, is way too conservative
+ for temporally dependent observations.
+ The solution we recommend is a mixture of thinning and adjusting 
+\begin_inset Formula $p_{n},$
 \end_inset
 
-
-\end_layout
-
+ as presented in the last figure, where we have used thinned observations
+ by 20 and set 
+\begin_inset Formula $p_{n}=0.1$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
@@ -2119,6 +2131,19 @@ name "fig:studentst"
 
 \begin_inset Graphics
 	filename img/sgld_student.pdf
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:student_bad"
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename img/sgld_student_bad.pdf
 
 \end_inset
 
@@ -2160,7 +2185,14 @@ ion.
 \begin_layout Standard
 
 \lang english
-Here we model used in the experiment 5.1.
+Here we multi modal ilustrative model used before in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "gorham2015measuring,welling2011bayesian"
+
+\end_inset
+
+.
  The model is 
 \begin_inset Formula 
 \begin{align}
@@ -2170,32 +2202,12 @@ Here we model used in the experiment 5.1.
 \end_inset
 
 400 points are drawn from this model.
- In the following experiment we would like to characterize the average time
- required for convergence for two different MCMC algorithms.
- In order to do so we run multiple chains and asses distribution of p-values.
- Under the null hypothesis p-values should have uniform distribution and,
- as in the previous experiment, we asses the divergence of the p-values
- from the uniform by bar plots.
- Formally for both methods plain MH and SGLD we generate 
-\begin_inset Formula $40\times100$
+ The task is to estimate a posteriori distribution of 
+\begin_inset Formula $\theta$
 \end_inset
 
- chains.
- We divide those chains into 
-\begin_inset Formula $40$
-\end_inset
-
- groups of 
-\begin_inset Formula $100$
-\end_inset
-
- chains and run one-sample tests for for predefined times 
-\begin_inset Formula $t_{1},...,t_{1}0$
-\end_inset
-
- so that for each of group we get p-values at ten different times.
- Then we plot those p-values jointly on plots a and b.
- We don't use thinning.
+.
+ 
 \end_layout
 
 \begin_layout Paragraph
@@ -2224,13 +2236,36 @@ SGLD, plain
 \begin_layout Standard
 
 \lang english
-Stochastic gradient Stochastic Gradient Langevin Dynamics with shrinking
- step size 
-\begin_inset Formula $\epsilon_{t}$
+Austerity MCMC 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "korattikara2013austerity"
+
 \end_inset
 
- is a MCMC procedure designed for large datasets.
- 400 points are drawn from the this model with 
+is a MCMC procedure designed for reducing numer of likelihood evaluation
+ for large datasets.
+ The paprameter that controlos time complexity is 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+, which may vary in range 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+.
+ The idea behind number Austerity MCMC is to look just at the subset of
+ the data and make a decsion based on this subes with which migh be wrong
+ wi probability proportional to 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+.
+ We simluate 400 
+\begin_inset Formula $X$
+\end_inset
+
+ points the model with 
 \begin_inset Formula $\theta_{1}=0$
 \end_inset
 
@@ -2249,33 +2284,15 @@ Stochastic gradient Stochastic Gradient Langevin Dynamics with shrinking
 \end_inset
 
 .
- We run the SGLD algorithm with a batch size of 1 and 10000 iterations through
- the whole dataset.
- The step-sizes are 
-\begin_inset Formula $\epsilon_{t}=a(b+t)^{.55}$
+ We run the Austerity algorithm with 
+\begin_inset Formula $\epsilon$
 \end_inset
 
- where 
-\begin_inset Formula $a=0.01584$
+ varying in range 
+\begin_inset Formula $[0.001,0.2]$
 \end_inset
 
- and 
-\begin_inset Formula $b=2.31$
-\end_inset
-
- such that 
-\begin_inset Formula $\epsilon_{t}$
-\end_inset
-
- decreases from 
-\begin_inset Formula $0.01$
-\end_inset
-
- to 
-\begin_inset Formula $.0001$
-\end_inset
-
-.
+ .
 \end_layout
 
 \begin_layout Standard
@@ -2292,7 +2309,6 @@ status open
 \lang english
 \begin_inset Graphics
 	filename img/Heiko1.pdf
-	width 7cm
 
 \end_inset
 
@@ -2547,6 +2563,7 @@ name "fig:density_estimation_increasing_features"
 \end_layout
 
 \begin_layout Standard
+git 
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "biblio"
