@@ -1,5 +1,5 @@
-#LyX 2.0 created this file. For more info see http://www.lyx.org/
-\lyxformat 413
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
 \begin_document
 \begin_header
 \textclass scrartcl
@@ -7,6 +7,13 @@
 \usepackage{icml2016} 
 
 %\usepackage[accepted]{icml2016}
+
+
+\newcommand{\heiko}[1]{   {\bf \color{blue}{HS: #1}}  }
+\newcommand{\kacper}[1]{   {\bf \color{red}{K: #1}}  }
+\newcommand{\arthur}[1]{   {\bf \color{magenta}{AG: #1}}  }
+
+%\newcommand{\heiko}[1]{}
 \end_preamble
 \use_default_options true
 \begin_modules
@@ -21,13 +28,13 @@ theorems-sec
 \font_roman default
 \font_sans default
 \font_typewriter default
+\font_math auto
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
-
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -38,15 +45,24 @@ theorems-sec
 \use_hyperref false
 \papersize default
 \use_geometry false
-\use_amsmath 2
-\use_esint 0
-\use_mhchem 1
-\use_mathdots 1
-\cite_engine natbib_numerical
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type numerical
+\biblio_style plainnat
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
 \suppress_date false
+\justification true
 \use_refstyle 0
 \index Index
 \shortcut idx
@@ -79,7 +95,7 @@ status open
 \backslash
 twocolumn[ 
 \backslash
-icmltitle{Fancy title}
+icmltitle{Goodness of Fit Testing with Kernel-Stein}
 \end_layout
 
 \begin_layout Plain Layout
@@ -149,7 +165,8 @@ icmladdress{Gatsby Unit, University College London, United Kingdom}
 
 
 \backslash
-icmlkeywords{kernels, statistical testing}
+icmlkeywords{kernel methods, goodness-of-fit, Stein's method, statistical
+ testing}
 \end_layout
 
 \begin_layout Plain Layout
@@ -169,23 +186,16 @@ vskip 0.3in ]
 \end_layout
 
 \begin_layout Abstract
-We present a kernel one-sample test.
+We present a nonparametric goodness-of-fit test.
  Given a set of samples, the test allows to quantify how likely it is that
  the samples have been generated from a given probability density function.
  Our work extends recent work on using Stein operators to construct goodness-of-
-fit metrics 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "gorham2015measuring"
-
-\end_inset
-
-.
+fit metrics.
  Via phrasing the problem in the framework of Reproducing Kernel Hilbert
- Spaces, we do not only achieve largely improved computational properties,
- but also avoid the need for extra knowledge of the density -- our metric
- solely depends on gradients of the log-density.
- We analyse asymptotic properties of the metric and embed it into the statistica
+ Spaces, we do not only achieve a largely simplified form and improved computati
+onal properties, but we also avoid the need for extra knowledge of the density
+ -- our metric solely depends on the log-gradients.
+ We analyse asymptotic properties of our metric and embed it into the statistica
 l hypothesis testing framework -- including efficient test constructions.
  As a demonstration of the test's practicality, we apply it to quantifying
  convergence of approximate Markov Chain Monte Carlo methods, statistical
@@ -209,14 +219,34 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-Blablabla
+Goodness-of-it testing, or measure sampliung quality, is a fundamental tool
+ in statistical analysis 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+heiko{reference}
 \end_layout
 
-\begin_layout Standard
+\end_inset
 
-\lang english
-The purpose of a goodness of fit test is to show whether a distribution
- 
+.
+ Given a set of random realisation 
+\begin_inset Formula $\{x_{i}\}_{i=1}^{n}$
+\end_inset
+
+ of a random variable 
+\begin_inset Formula $X\sim p$
+\end_inset
+
+ with distribution 
+\begin_inset Formula $p$
+\end_inset
+
+, researchers are often interested in the question whether 
 \begin_inset Formula $p$
 \end_inset
 
@@ -224,13 +254,60 @@ The purpose of a goodness of fit test is to show whether a distribution
 \begin_inset Formula $q$
 \end_inset
 
+
+\lang english
 , which is in our case assumed to have a density wrt the Lebesgue measure,
  
 \begin_inset Formula $dq(x)=q(x)dx$
 \end_inset
 
- (in fact, as we will see, it makes most sense for it to be in the exponential
- family).
+, and which we assume to be known up to the normalisation constant.
+ While the problem is well studied for certain parametric families, e.g.
+ Gaussian 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+heiko{reference, also add more examples}
+\end_layout
+
+\end_inset
+
+, it is more challenging in the nonparametric context.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+Recently, 
+\lang british
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "gorham2015measuring"
+
+\end_inset
+
+ proposed a construction to measure sample quality with Stein's method.
+ Their metric quantifies the maximum discrepancy between sample expectations
+ 
+\begin_inset Formula $\ev_{X}[h(X)]=\sum_{i=1}^{n}p(x_{i})h(x_{i})$
+\end_inset
+
+ and target expectations 
+\begin_inset Formula $\int q(x)h(x)dx$
+\end_inset
+
+ for a large class of test functions 
+\begin_inset Formula $h$
+\end_inset
+
+.
+ Computation is based on solving a linear program that is constructed from
+ so called graph Stein discrepancies.
 \end_layout
 
 \begin_layout Section
@@ -1639,7 +1716,6 @@ of
 
 .
  Let 
-
 \begin_inset Formula $f(W_{t,n})=\sup_{x}|P(V_{b,n}>x|W_{t,n})-P(V_{n}>x)|$
 \end_inset
 
@@ -1905,7 +1981,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Decay of the auto correlation function
@@ -1945,7 +2021,7 @@ name "fig:studentst"
 \end_inset
 
  
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 
@@ -2294,7 +2370,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 P-values for an increasing number of data 
@@ -2338,7 +2414,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 P-values for an increasing number of random features 
@@ -2797,7 +2873,7 @@ The computation of
 \begin_layout Proposition
 
 \lang english
-\begin_inset Argument
+\begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
