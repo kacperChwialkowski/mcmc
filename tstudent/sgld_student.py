@@ -75,20 +75,11 @@ for df in DEGREES_OF_FREEDOM:
     for mc in range(MC_PVALUES_REPS):
         if mc % 32 == 0:
             print(' ', 100.0 * mc / MC_PVALUES_REPS, '%')
-        X = mh_student(sgld_thinning * N, df)
+        X = gen(sgld_thinning * N, df)
         X = X[::sgld_thinning]
         pval = get_pval(X, tester)
         results.append([df, pval])
 
-print('Inf')
-for mc in range(MC_PVALUES_REPS):
-
-    if mc % 32 == 0:
-        print(' ', 100.0 * mc / MC_PVALUES_REPS, '%')
-    X = mh_normal(ar_thinning * N)
-    X = X[::ar_thinning]
-    pval = get_pval(X, tester)
-    results.append([np.Inf, pval])
 
 np.save('results_bad.npy', results)
 
@@ -100,19 +91,10 @@ for df in DEGREES_OF_FREEDOM:
     for mc in range(MC_PVALUES_REPS):
         if mc % 32 == 0:
             print(' ', 100.0 * mc / MC_PVALUES_REPS, '%')
-        X = mh_student(sgld_thinning * N, df)
+        X = gen(sgld_thinning * N, df)
         X = X[::sgld_thinning]
         pval = get_pval(X, tester)
         results = np.vstack((results, np.array([df, pval])))
 
-print('Inf')
-for mc in range(MC_PVALUES_REPS):
-
-    if mc % 32 == 0:
-        print(' ', 100.0 * mc / MC_PVALUES_REPS, '%')
-    X = mh_normal(ar_thinning * N)
-    X = X[::ar_thinning]
-    pval = get_pval(X, tester)
-    results = np.vstack((results, np.array([np.Inf, pval])))
 
 np.save('results_good.npy', results)
