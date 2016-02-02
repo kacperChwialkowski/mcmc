@@ -1831,7 +1831,7 @@ Student's t vs Normal
 \begin_layout Standard
 
 \lang english
-In this sanity check we replicate the experiment 4.1 from 
+In this sanity check we modify the experiment 4.1 from 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "gorham2015measuring"
@@ -1847,7 +1847,7 @@ key "gorham2015measuring"
 \begin_inset Formula $1\leq i\leq500$
 \end_inset
 
- come from standard normal distribution.
+, come from standard normal distribution.
  We will check the power of the one-sample test by generating samples from
  Student's t distributions with increasing number of degrees of freedom,
  and analyzing p-values.
@@ -1856,22 +1856,30 @@ key "gorham2015measuring"
 \end_inset
 
 , we draw 500 samples and calculate the p-value -- this procedure is repeated
- (200,100) times so (200,100) p-values are calculated and a bar plot of
- p-values is created.
- The number of degrees of freedom 
-\begin_inset Formula $\nu$
+ 400 times so 400 p-values are calculated and a bar plot of p-values is
+ created.
+ 
+\end_layout
+
+\begin_layout Standard
+The twist to 
+\lang english
+experiment 4.1 from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gorham2015measuring"
+
 \end_inset
 
- varies in the range 
-\begin_inset Formula $1,6,\cdots,71$
-\end_inset
+ is that our samples have temporal dependency.
+ The observations are generated using Metropolis–Hastings algorithm, with
+ Gaussian 
+\end_layout
 
- and bar plots for each of 
-\begin_inset Formula $\nu$
-\end_inset
+\begin_layout Standard
 
- is drawn.
- The results are plotted in the figure 
+\lang english
+The results are plotted in the figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:studentst"
@@ -1884,6 +1892,33 @@ reference "fig:studentst"
 \end_inset
 
  is calculated for samples coming from normal distribution.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Decay of the auto correlation function
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
