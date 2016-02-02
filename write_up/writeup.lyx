@@ -365,6 +365,52 @@ rward to estimate from data.
  on the gradients on the log-density, and that is extremely simple to compute.
 \end_layout
 
+\begin_layout Standard
+A highly interesting application of goodness-of-fit tests is in approximate
+ Markov Chain Monte Carlo (MCMC) 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Korattikara2014,Welling2011,Bardenet2014"
+
+\end_inset
+
+.
+ With the hope to increase the overall efficiency, these methods use modificatio
+ns to Markov transition kernels that improve mixing speed at the cost of
+ introducing an asymptotic bias.
+ Such bias-variance trade-offs can usually be tuned with paramters of the
+ sampling algorithms.
+ It is therefore an important question whether for a particular parameter
+ setting and for a fixed run-time, the produced samples have increased in
+ quality or not.
+ This question cannot be answered with classical MCMC convergence statistics
+ alone -- those assume that the Markov chain reaches its equilibrium distributio
+n.
+ The described goodness-of-fit testing framework, however, fits very well
+ into this context as it exactly quantifies the asymptotic bias of approximate
+ MCMC, and furthermore only requires access to the 
+\emph on
+unnormalised
+\emph default
+ log density function.
+ Additional challenge comes from the fact that MCMC samples exhibit correlation
+ structure that has a potentially severe impact on asymptotic properties
+ of statistical tests.
+ In order to overcome such problems in our test, we apply the 
+\emph on
+wild-bootstrap
+\emph default
+ technique 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "chwialkowski2014wild,Shao2010,leucht_dependent_2013"
+
+\end_inset
+
+, which leads to correctly calibrated test asymptotics even for non iid
+ data.
+\end_layout
+
 \begin_layout Section
 
 \lang english
