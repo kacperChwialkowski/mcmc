@@ -1,0 +1,56 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: note.aux
+The style file: plain.bst
+Database file #1: bib.bib
+Warning--I didn't find a database entry for "gretton2012kernel"
+Warning--I didn't find a database entry for "gretton_kernel_2008"
+Warning--I didn't find a database entry for "sejdinovic2013kernel"
+Warning--I didn't find a database entry for "i._s._borisov_orthogonal_2009"
+Warning--I didn't find a database entry for "chwialkowski2014kernel"
+Warning--I didn't find a database entry for "Shao2010"
+Warning--I didn't find a database entry for "leucht_dependent_2013"
+Warning--I didn't find a database entry for "dudley2002real"
+Warning--I didn't find a database entry for "gorham2015measuring"
+You've used 4 entries,
+            2118 wiz_defined-function locations,
+            536 strings with 4976 characters,
+and the built_in function-call counts, 1334 in all, are:
+= -- 139
+> -- 51
+< -- 1
++ -- 21
+- -- 16
+* -- 80
+:= -- 224
+add.period$ -- 14
+call.type$ -- 4
+change.case$ -- 19
+chr.to.int$ -- 0
+cite$ -- 4
+duplicate$ -- 56
+empty$ -- 107
+format.name$ -- 16
+if$ -- 286
+int.to.chr$ -- 0
+int.to.str$ -- 4
+missing$ -- 5
+newline$ -- 23
+num.names$ -- 8
+pop$ -- 21
+preamble$ -- 1
+purify$ -- 16
+quote$ -- 0
+skip$ -- 40
+stack$ -- 0
+substring$ -- 84
+swap$ -- 13
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 14
+warning$ -- 0
+while$ -- 13
+width$ -- 5
+write$ -- 48
+(There were 9 warnings)
