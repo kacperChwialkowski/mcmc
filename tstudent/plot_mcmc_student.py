@@ -10,7 +10,7 @@ df = DataFrame(results)
 plt.figure()
 
 seaborn.set_style("whitegrid")
-seaborn.boxplot(x=0, y=1, data=df)
+seaborn.boxplot(x=0, y=1, data=df,palette="BuGn_d")
 
 plt.tight_layout()
 plt.ylabel('p values')
@@ -24,7 +24,7 @@ df = DataFrame(results)
 plt.figure()
 
 seaborn.set_style("whitegrid")
-seaborn.boxplot(x=0, y=1, data=df)
+seaborn.boxplot(x=0, y=1, data=df,palette="BuGn_d")
 
 plt.tight_layout()
 plt.ylabel('p values')
@@ -39,7 +39,7 @@ df = DataFrame(results)
 plt.figure()
 
 seaborn.set_style("whitegrid")
-seaborn.boxplot(x=0, y=1, data=df)
+seaborn.boxplot(x=0, y=1, data=df,palette="BuGn_d")
 
 plt.tight_layout()
 plt.ylabel('p values')

@@ -11,9 +11,9 @@ from tools.latex_plot_init import plt
 import itertools
 
 
-N = 1300
+N = 1400
 
-DEGREES_OF_FREEDOM = [1, 5, 10, np.Inf]
+DEGREES_OF_FREEDOM = [1, 3,6,9,11,np.Inf]
 MC_PVALUES_REPS = 100
 TEST_CHAIN_SIZE = 2 * 10 ** 6
 

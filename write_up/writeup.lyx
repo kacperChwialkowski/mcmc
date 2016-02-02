@@ -1981,13 +1981,36 @@ If
 \end_inset
 
 .
- 
+\end_layout
+
+\begin_layout Standard
+One practical consideration is choice of flip parameter for the bootstrap
+ process when dealing with non-iid data.
+ While there is no good reprice for a finite sample and unknown covariance
+ structure, in the first experiment we discuss a strategy applicable to
+ chins obtained from MCMC methods.
 \end_layout
 
 \begin_layout Section
 
 \lang english
 Experiments
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+Through all but one figure we present similar statistic -- distribution
+ of p-values as a function of some parameter of interest.
+ The general strategy for obtaining this distribution is the same throughout
+ the experiences.
+ We fix the parameter of interest, conduct one sample test some number of
+ times (e.g.
+ 100 times) on 
+\emph on
+fresh data
+\emph default
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -2012,19 +2035,19 @@ key "gorham2015measuring"
 \end_inset
 
 , for 
-\begin_inset Formula $1\leq i\leq1000$
+\begin_inset Formula $1\leq i\leq1300$
 \end_inset
 
-, come from standard normal distribution.
- We will check the power of the one-sample test by generating samples from
- Student's t distributions with increasing number of degrees of freedom,
- and analyzing p-values.
+, come from a standard normal distribution.
+ We verify power of the one-sample test by generating samples from Student's
+ t distributions with increasing number of degrees of freedom -- powerful
+ tests should low p-values for such samples .
  For the Student's t distribution with a number of degrees of freedom 
 \begin_inset Formula $\nu$
 \end_inset
 
-, we draw 500 samples and calculate the p-value -- this procedure is repeated
- 400 times so 400 p-values are calculated and a bar plot of p-values is
+, we draw 1400 samples and calculate the p-value -- this procedure is repeated
+ 100 times so 100 p-values are calculated and a bar plot of p-values is
  created.
  The bar plot for 
 \begin_inset Formula $\nu=inf$
@@ -2056,7 +2079,7 @@ reference "fig:studentst"
 \end_inset
 
  we plot p-values for the probability of flip 
-\begin_inset Formula $p_{n}=0.02$
+\begin_inset Formula $p_{n}=2\%$
 \end_inset
 
 , while in the 
@@ -2079,12 +2102,12 @@ reference "fig:student_bad"
 \noun off
 \color none
 
-\begin_inset Formula $p_{n}=0.5$
+\begin_inset Formula $p_{n}=50\%$
 \end_inset
 
 .
  
-\begin_inset Formula $p_{n}=0.5$
+\begin_inset Formula $p_{n}=50\%$
 \end_inset
 
 , which would be suitable for iid observations, is way too conservative
@@ -2095,7 +2118,7 @@ reference "fig:student_bad"
 
  as presented in the last figure, where we have used thinned observations
  by 20 and set 
-\begin_inset Formula $p_{n}=0.1$
+\begin_inset Formula $p_{n}=10\%$
 \end_inset
 
 .
