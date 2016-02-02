@@ -37,11 +37,11 @@ def grad_log_t_df(df):
 
 
 
-def gen(N,df):
+def gen(N,df, thinning=1):
     log_den =  log_normal
     if df <np.Inf:
         log_den = grad_log_t_df(df)
-    return  metropolis_hastings(log_den, chain_size=N, thinning=1, x_prev=np.random.randn(), step=0.5)
+    return  metropolis_hastings(log_den, chain_size=N, thinning=thinning, x_prev=np.random.randn(), step=0.5)
 
 # estimate size of thinning
 def get_thinning(X, nlags=50):
@@ -51,21 +51,18 @@ def get_thinning(X, nlags=50):
 
 
 X = gen(TEST_CHAIN_SIZE, np.Inf)
-ar_thinning, autocorr = get_thinning(X)
-print('thinning for AR normal simulation ', ar_thinning, autocorr[ar_thinning])
+thinning, autocorr = get_thinning(X)
+print('thinning for AR normal simulation ', thinning, autocorr[thinning])
 
-X = gen(TEST_CHAIN_SIZE,100.0)
-sgld_thinning, autocorr = get_thinning(X)
-print('thinning for sgld t-student simulation ', sgld_thinning, autocorr[sgld_thinning])
 
 
 
 tester = GaussianQuadraticTest(grad_log_normal)
 
 # This stupid function takes global argument
-def get_pval(X, tester):
+def get_pval(X, tester,p_change):
     U_stat, _ = tester.get_statistic_multiple(X)
-    return tester.compute_pvalues_for_processes(U_stat, P_CHANGE)
+    return tester.compute_pvalues_for_processes(U_stat, p_change)
 
 
 P_CHANGE = 0.5
@@ -75,9 +72,8 @@ for df in DEGREES_OF_FREEDOM:
     for mc in range(MC_PVALUES_REPS):
         if mc % 32 == 0:
             print(' ', 100.0 * mc / MC_PVALUES_REPS, '%')
-        X = gen(sgld_thinning * N, df)
-        X = X[::sgld_thinning]
-        pval = get_pval(X, tester)
+        X = gen(thinning * N, df,thinning)
+        pval = get_pval(X, tester, P_CHANGE)
         results.append([df, pval])
 
 
@@ -85,16 +81,15 @@ np.save('results_bad.npy', results)
 
 
 P_CHANGE = 0.02
-results = np.empty((0, 2))
+results = []
 for df in DEGREES_OF_FREEDOM:
     print(df)
     for mc in range(MC_PVALUES_REPS):
         if mc % 32 == 0:
             print(' ', 100.0 * mc / MC_PVALUES_REPS, '%')
-        X = gen(sgld_thinning * N, df)
-        X = X[::sgld_thinning]
-        pval = get_pval(X, tester)
-        results = np.vstack((results, np.array([df, pval])))
+        X = gen(thinning * N, df)
+        pval = get_pval(X, tester, P_CHANGE)
+        results.append([df, pval])
 
 
 np.save('results_good.npy', results)
