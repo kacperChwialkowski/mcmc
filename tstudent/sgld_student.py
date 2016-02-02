@@ -10,12 +10,11 @@ from tools.latex_plot_init import plt
 
 SGLD_EPSILON = 0.0478
 
-P_CHANGE = 0.5
 
-N = 650
+N = 200
 
-DEGREES_OF_FREEDOM = [1,3,5,8,11]
-MC_PVALUES_REPS = 50
+DEGREES_OF_FREEDOM = [1]
+MC_PVALUES_REPS = 10
 TEST_CHAIN_SIZE = 2 * 10 ** 6
 
 
@@ -50,7 +49,7 @@ def mh_normal(N):
 # estimate size of thinning
 def get_thinning(X, nlags=50):
     autocorrelation = acf(X, nlags=nlags, fft=True)
-    thinning = np.argmin(np.abs(autocorrelation - 0.7)) + 1
+    thinning = np.argmin(np.abs(autocorrelation - 0.95)) + 1
     return thinning, autocorrelation
 
 
@@ -66,13 +65,14 @@ print('thinning for sgld t-student simulation ', sgld_thinning, autocorr[sgld_th
 
 tester = GaussianQuadraticTest(grad_log_normal)
 
-results = np.empty((0, 2))
 # This stupid function takes global argument
 def get_pval(X, tester):
     U_stat, _ = tester.get_statistic_multiple(X)
     return tester.compute_pvalues_for_processes(U_stat, P_CHANGE)
 
 
+P_CHANGE = 0.5
+results = np.empty((0, 2))
 for df in DEGREES_OF_FREEDOM:
     print(df)
     for mc in range(MC_PVALUES_REPS):
@@ -96,8 +96,7 @@ for mc in range(MC_PVALUES_REPS):
 np.save('results_bad.npy', results)
 
 
-P_CHANGE = 0.03
-
+P_CHANGE = 0.02
 results = np.empty((0, 2))
 for df in DEGREES_OF_FREEDOM:
     print(df)
