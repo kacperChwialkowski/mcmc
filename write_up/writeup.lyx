@@ -291,9 +291,8 @@ key "gorham2015measuring"
 
 \end_inset
 
- proposed a construction to measure sample quality with Stein's method.
- Their metric quantifies the maximum discrepancy between sample expectations
- 
+ proposed a construction to measure sample quality by quantifying the maximum
+ discrepancy between sample expectations 
 \begin_inset Formula $\ev_{X}[h(X)]=\sum_{i=1}^{n}p(x_{i})h(x_{i})$
 \end_inset
 
@@ -306,8 +305,64 @@ key "gorham2015measuring"
 \end_inset
 
 .
- Computation is based on solving a linear program that is constructed from
- so called graph Stein discrepancies.
+ The latter can be computed from a so-called 
+\emph on
+Stein operator
+\emph default
+ on 
+\begin_inset Formula $h$
+\end_inset
+
+, whose application produces vanishing expectation under 
+\begin_inset Formula $q$
+\end_inset
+
+, and which only depends on the derivarive of the 
+\begin_inset Formula $\log q$
+\end_inset
+
+.
+ It therefore allows for construction of a discrepancy metric that can be
+ computed 
+\emph on
+without
+\emph default
+ requiring samples from 
+\begin_inset Formula $q$
+\end_inset
+
+, but only the 
+\begin_inset Formula $\{x_{i}\}_{i=1}^{n}$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+Computation of the Stein operator in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "gorham2015measuring"
+
+\end_inset
+
+ is based on solving an expensive linear program that arises from a complicated
+ construction of graph Stein discrepancies and geometric spanners.
+ In addition, their metric requires access to nontrivial lower bounds that
+ are provided for log-concave densities, but that are mostly an open problem
+ otherwise, in particular for multivariate cases.
+\end_layout
+
+\begin_layout Standard
+The key contribution of this work is two-fold.
+ First, we express the Stein operator as an inner product in a Reproducing
+ Kernel Hilbert Space (RKHS), which results in a simple form that is straight-fo
+rward to estimate from data.
+ Second, we analyse asymptotic properties of our estimator and embed it
+ into the statistical hypothesis testing framework, including tests using
+ non-iid data such as for example Markov chains.
+ The result is a nonparametric kernel one-sample test, that only relies
+ on the gradients on the log-density, and that is extremely simple to compute.
 \end_layout
 
 \begin_layout Section
