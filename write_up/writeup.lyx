@@ -2021,7 +2021,7 @@ key "gorham2015measuring"
 \end_inset
 
 , for 
-\begin_inset Formula $1\leq i\leq500$
+\begin_inset Formula $1\leq i\leq1000$
 \end_inset
 
 , come from standard normal distribution.
@@ -2050,7 +2050,8 @@ key "gorham2015measuring"
 
  is that our samples have temporal dependency.
  The observations are generated using Metropolis–Hastings algorithm, with
- Gaussian 
+ Gaussian random walk.
+ 
 \end_layout
 
 \begin_layout Standard
