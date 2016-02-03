@@ -2035,6 +2035,7 @@ One practical consideration is choice of flip parameter for the bootstrap
  While there is no good reprice for a finite sample and unknown covariance
  structure, in the first experiment we discuss a strategy applicable to
  chins obtained from MCMC methods.
+ 
 \end_layout
 
 \begin_layout Section
@@ -2046,20 +2047,17 @@ Experiments
 \begin_layout Standard
 
 \lang english
-Through all but one figure we present similar statistic -- distribution
- of p-values as a function of some parameter of interest.
- The general strategy for obtaining this distribution is the same throughout
- the experiences.
- We fix the parameter of interest, conduct one sample test some number of
- times (e.g.
- 100 times) on 
-\emph on
-fresh data
-\emph default
- 
+The proposed test can be used for the convergance diagnostics of the MCMC
+ methods.
+ In the first two experiments we demonstrate how use the test to verify
+ if the samples obtained form a MCMC sampling method can be assumed to be
+ drawn from the stationary distribution.
+ In the third experiment we
+\lang british
+ use the test for a different task -- quality check of a density estimator.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection*
 
 \lang english
 Student's t vs Normal
@@ -2070,68 +2068,116 @@ Student's t vs Normal
 \lang english
 In this sanity check we modify the experiment 4.1 from 
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citealt
 key "gorham2015measuring"
 
 \end_inset
 
 .
- The null hypothesis is that observed samples 
-\begin_inset Formula $x_{i}$
-\end_inset
-
-, for 
-\begin_inset Formula $1\leq i\leq1300$
-\end_inset
-
-, come from a standard normal distribution.
- We verify power of the one-sample test by generating samples from Student's
- t distributions with increasing number of degrees of freedom -- powerful
- tests should low p-values for such samples .
- For the Student's t distribution with a number of degrees of freedom 
-\begin_inset Formula $\nu$
-\end_inset
-
-, we draw 1400 samples and calculate the p-value -- this procedure is repeated
- 100 times so 100 p-values are calculated and a bar plot of p-values is
- created.
- The bar plot for 
-\begin_inset Formula $\nu=inf$
-\end_inset
-
- is calculated for samples coming from normal distribution.
-\end_layout
-
-\begin_layout Standard
-The twist to 
-\lang english
-experiment 4.1 from 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "gorham2015measuring"
+ The null hypothesis is that the observed samples come from a standard normal
+ distribution.
+ We study the power of the test against samples from Student's t distribution.
+ We expect to observe low p-values when testing against a Student's t distributi
+on with few degrees of freedom.
+ 1, 5, 10 or infinity are degrees of freedom that we consider in this experiment
+, where infinity is equivalent to sampling from a standard normal distribution.
+ For a fixed number of degrees of freedom we draw 1400 samples and calculate
+ the p-value.
+ This procedure is repeated one hundred times and the bar plot of p-values
+ is plotted (see Figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:student_bad"
 
 \end_inset
 
- is that our samples have temporal dependency.
- The observations are generated using Metropolis–Hastings algorithm, with
- Gaussian random walk (variance equal to 0.5).
- We emphasize the need for appropriate choice of bootstrap process, namely
- the probability of a sign flip.
- In the figure 
+,
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:studentst"
 
 \end_inset
 
- we plot p-values for the probability of flip 
-\begin_inset Formula $p_{n}=2\%$
+,
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:thinning"
+
 \end_inset
 
-, while in the 
+).
+ 
+\end_layout
+
+\begin_layout Standard
+The twist to 
+\lang english
+the experiment 4.1 by 
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "gorham2015measuring"
+
+\end_inset
+
+ is that the draws from the Student's t distribution have temporal correlation.
+ The samples are generated using Metropolis–Hastings algorithm, with a Gaussian
+ random walk (variance equal to 0.5).
+ We emphasize a need for an appropriate choice of the bootstrap process
+ parameter, 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+, the probability of a sign flip.
+ In the Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:student_bad"
+
+\end_inset
+
+ we plot p-values for 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+ beeing set to 
+\begin_inset Formula $50\%$
+\end_inset
+
+.
+ Such a high value of 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+ is 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+suitable for iid observations, but results in too conservative p-values
+ for temporally correlated observations.
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+In the Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:studentst"
 
 \end_inset
 
@@ -2148,68 +2194,31 @@ reference "fig:student_bad"
 \noun off
 \color none
 
-\begin_inset Formula $p_{n}=50\%$
+\begin_inset Formula $p_{n}=2\%$
 \end_inset
 
-.
- 
-\begin_inset Formula $p_{n}=50\%$
-\end_inset
-
-, which would be suitable for iid observations, is way too conservative
- for temporally dependent observations.
- The solution we recommend is a mixture of thinning and adjusting 
+, which gives well calibrated distribution of the p-values under the null
+ hypothesis (see box plot for an infinite number degrees of freedom), however
+ reduces the power of a the test.
+ Indeed, p-values for five degrees of freedom are already large.
+ The solution that we recommend is a mixture of thinning and adjusting 
 \begin_inset Formula $p_{n},$
 \end_inset
 
- as presented in the last figure, where we have used thinned observations
- by 20 and set 
-\begin_inset Formula $p_{n}=10\%$
+ as presented in the Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:thinning"
+
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-
-\lang english
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-
-\lang english
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:studentst"
-
+ We have thinned the observations by a factor of 20, set 
+\begin_inset Formula $p_{n}=10\%$
 \end_inset
 
-
-\begin_inset Graphics
-	filename img/sgld_student.pdf
-
-\end_inset
-
- 
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-
-\lang english
-Large auto covariance, and suitable bootstrap.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+ and managed to preserve a good power and a right calibration of p-values
+ under the null hypothesis.
 \end_layout
 
 \begin_layout Standard
@@ -2220,18 +2229,7 @@ status open
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\begin_layout Plain Layout
-
 \lang english
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:student_bad"
-
-\end_inset
-
-
 \begin_inset Graphics
 	filename img/sgld_student_bad.pdf
 
@@ -2240,8 +2238,13 @@ name "fig:student_bad"
 
 \end_layout
 
-\begin_layout Plain Layout
+<<<<<<< HEAD
+ 
 \begin_inset Caption Standard
+=======
+\begin_layout Plain Layout
+\begin_inset Caption
+>>>>>>> first experiment
 
 \begin_layout Plain Layout
 
@@ -2255,6 +2258,61 @@ Large auto covariance, and bootstrap that ignores auto covariance structure.
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:student_bad"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Graphics
+	filename img/sgld_student.pdf
+
+\end_inset
+
+
+ 
+\begin_inset Caption
+
+
+\begin_layout Plain Layout
+
+\lang english
+Large auto covariance, and suitable bootstrap.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:studentst"
+
+\end_inset
+
 
 \end_layout
 
@@ -2270,13 +2328,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:thinning"
-
-\end_inset
-
-
 \begin_inset Graphics
 	filename img/sgld_student_opt.pdf
 
@@ -2296,24 +2347,25 @@ Thinned sample, and suitable bootstrap.
 
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:thinning"
+
 \end_inset
 
 
 \end_layout
 
-\begin_layout Subsection
+\end_inset
 
-\lang english
-MCMC diagnostic
+
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 
 \lang english
-This one sample test can be used for diagnostics of most of the MCMC methods.
- In the following experiment we will demonstrate how to verify if the samples
- obtained form two sampling can be assumed to come from the stationary distribut
-ion.
+Approximate MCMC algorithm 
 \end_layout
 
 \begin_layout Standard
@@ -2360,12 +2412,6 @@ We use plain MH MCMC with Gaussian proposal with with standard deviation
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Subsection
-
-\lang english
-Approximate MCMC algorithm 
 \end_layout
 
 \begin_layout Standard
