@@ -451,14 +451,271 @@ key "chwialkowski2014wild,Shao2010,leucht_dependent_2013"
 \begin_layout Section
 
 \lang english
-Kernel One Sample Test
+A Kernel Goodness-of-fit Test
 \end_layout
 
 \begin_layout Standard
 
 \lang english
-In the following section we derive a kernel one sample test.
- The test is applicable to family of distributions, on a real coordinate
+We now give a high-level construction of our divergence metric and statistical
+ test construction.
+ While this section aims to communicate the main ideas, and is restricted
+ to the real-valued case, we provide the multivariate counterpart, details,
+ and proofs in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:details_kernel_stein"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+
+\lang english
+Stein Operator in RKHS
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+Denote by 
+\begin_inset Formula ${\cal F}$
+\end_inset
+
+ the RKHS of real-valued functions with reproducing kernel 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ Similarly to 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "stein1972,gorham2015measuring"
+
+\end_inset
+
+, we begin by defining a Stein operator 
+\begin_inset Formula $T_{p}$
+\end_inset
+
+ acting on 
+\begin_inset Formula $f\in\mathcal{F}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+T_{p}f:=\frac{\partial\log p(x)}{\partial x_{i}}f(x)+\frac{\partial f(x)}{\partial x}.
+\]
+
+\end_inset
+
+As we will see, the operator can be expressed in the RKHS by defining a
+ function that depends on gradients of the log-density and the kernel 
+\begin_inset Formula 
+\[
+\xi(x,t):=\left[\nabla\log p(x)k(x,t)+\nabla k(x,t)\right],
+\]
+
+\end_inset
+
+whose inner product with 
+\begin_inset Formula $f$
+\end_inset
+
+ exactly gives the expected value of the Stein operator, 
+\begin_inset Formula 
+\[
+\ev T_{p}f(Z)=\langle f,\ev\xi(Z)\rangle,
+\]
+
+\end_inset
+
+c.f.
+ Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:SteinIsInner"
+
+\end_inset
+
+.
+ The operator's expected value, when applied to any function 
+\begin_inset Formula $f\in{\cal F}$
+\end_inset
+
+, vanishes: 
+\begin_inset Formula $\langle f,\ev\xi(X)\rangle=0$
+\end_inset
+
+, which can be seen by integration by parts, c.f.
+ Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:easy"
+
+\end_inset
+
+.
+ We can now define a Stein discrepancy between 
+\begin_inset Formula $X\sim p$
+\end_inset
+
+ and any random variable 
+\begin_inset Formula $Z\sim q$
+\end_inset
+
+ -- and express it in the RKHS,
+\begin_inset Formula 
+\begin{align*}
+S(Z,\mathcal{F},p) & :=\sup_{f\in{\cal F}}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X)\\
+ & =\sup_{f\in{\cal F}}\langle f,\ev\xi(Z)-\ev\xi(X)\rangle\\
+ & =\|\ev\xi(Z)\|,
+\end{align*}
+
+\end_inset
+
+c.f.
+ Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:discprepancy_maximised_by_norm"
+
+\end_inset
+
+.
+ This makes it clear why 
+\begin_inset Formula $\ev(T_{q}f)(X)=0$
+\end_inset
+
+ is a desirable property: we can compute 
+\begin_inset Formula $S(Z,\mathcal{F},p)$
+\end_inset
+
+ by only computing 
+\begin_inset Formula $\|\ev\xi(Z)\|$
+\end_inset
+
+.
+ We arrive at our first main result, which states that the above discrepancy
+ can be used to distinguish two distributions 
+\begin_inset Formula $p,q$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "theorem_discrepancy_is_metric"
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $q,p\in\mathcal{P}$
+\end_inset
+
+ and let 
+\begin_inset Formula $Z\sim q$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $S(Z,\mathcal{F},p)=0$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $p=q$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:details_kernel_stein"
+
+\end_inset
+
+ contains all steps of the proof for the multivariate case and a closed
+ form expression in terms of 
+\begin_inset Formula $p$
+\end_inset
+
+ and kernel gradients in Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "th:closed_form_discrepancy"
+
+\end_inset
+
+.
+ We now proceed with constructing an estimator for 
+\begin_inset Formula $S(Z,\mathcal{F},p)$
+\end_inset
+
+, and outline its asymptotic properties.
+\end_layout
+
+\begin_layout Subsection
+Wild Bootstrap Testing
+\end_layout
+
+\begin_layout Section
+
+\lang english
+Details
+\end_layout
+
+\begin_layout Subsection
+
+\lang english
+Kernel-Stein
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:details_kernel_stein"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+heiko{I just copied the old Section 2 here.
+ This now needs thinning having the new Section 2 in mind.}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+The test is applicable to family of distributions, on a real coordinate
  space, 
 \begin_inset Formula $\mathcal{P}$
 \end_inset
@@ -580,11 +837,21 @@ We denote by
 \begin_inset Formula $\mathcal{F}$
 \end_inset
 
- the Reproducing Kernel Hilbert Space associated with the kernel 
+ the Reproducing Kernel Hilbert Space of scalar-real-valued functions associated
+ with the kernel 
 \begin_inset Formula $k$
 \end_inset
 
 .
+ Furthermore 
+\begin_inset Formula ${\cal F}^{d}$
+\end_inset
+
+ is a product space 
+\begin_inset Formula $\otimes_{i=1}^{d}{\cal F}$
+\end_inset
+
+ with a standard inner product.
 \end_layout
 
 \begin_layout Paragraph
@@ -621,7 +888,7 @@ key "gorham2015measuring"
 \end_inset
 
  valued functions 
-\begin_inset Formula $f=(f_{1},\cdots,f_{d})$
+\begin_inset Formula $f:=(f_{1},\cdots,f_{d})$
 \end_inset
 
 , 
@@ -644,7 +911,7 @@ key "gorham2015measuring"
 \end_inset
 
 , we show that for all 
-\begin_inset Formula $f\in F^{d},\ev(T_{q}f)(X)=0$
+\begin_inset Formula $f\in{\cal F}^{d},\ev(T_{q}f)(X)=0$
 \end_inset
 
  (Lemma 
@@ -667,19 +934,20 @@ reference "lem:easy"
 \begin_inset Formula $Z$
 \end_inset
 
- 
+, 
 \begin_inset Formula 
-\begin{alignat}{1}
-S(Z,\mathcal{F},p) & =\sup_{f\in F^{d},\|f\|<1}\ev(T_{p}f)(Z)\label{eq:Sdef}\\
- & =\sup_{f\in F^{d}}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X).\nonumber 
-\end{alignat}
+\begin{align}
+S(Z,\mathcal{F},p) & :=\sup_{f\in F^{d},\|f\|<1}\ev(T_{p}f)(Z)\label{eq:Sdef}\\
+ & =\sup_{f\in F^{d}}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X)\nonumber 
+\end{align}
 
 \end_inset
 
-In Theorem 
+ .
+ In Theorem 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "th2"
+reference "theorem_discrepancy_is_metric"
 
 \end_inset
 
@@ -702,7 +970,7 @@ key "gorham2015measuring"
  -- we can calculate it explicitly, as demonstrated in the Theorem 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "th1"
+reference "th:closed_form_discrepancy"
 
 \end_inset
 
@@ -718,6 +986,12 @@ reference "th1"
 \begin_layout Definition
 
 \lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "def:xi"
+
+\end_inset
+
 For any 
 \begin_inset Formula $x\in R^{d}$
 \end_inset
@@ -808,10 +1082,6 @@ key "SteChr08"
  
 \end_layout
 
-\begin_layout --Separator--
-
-\end_layout
-
 \begin_layout Standard
 The following technical lemma shows that the expected value of 
 \begin_inset Formula $\xi$
@@ -884,10 +1154,6 @@ For any random variable
 
 ).
  
-\end_layout
-
-\begin_layout --Separator--
-
 \end_layout
 
 \begin_layout Standard
@@ -976,10 +1242,6 @@ reference "lem:BochnerInt1"
  
 \end_layout
 
-\begin_layout --Separator--
-
-\end_layout
-
 \begin_layout Standard
 
 \family roman
@@ -994,7 +1256,7 @@ reference "lem:BochnerInt1"
 \noun off
 \color none
 \lang english
-By the construction of the Stain operator we know that for 
+By the construction of the Stein operator we know that for 
 \begin_inset Formula $X\sim p$
 \end_inset
 
@@ -1038,6 +1300,12 @@ This illustrates intuition
 \begin_layout Lemma
 
 \lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:discprepancy_maximised_by_norm"
+
+\end_inset
+
 Discrepancy 
 \begin_inset Formula $S(Y,\mathcal{F},p)$
 \end_inset
@@ -1093,10 +1361,6 @@ reference "lem:SteinIsInner"
 .
 \end_layout
 
-\begin_layout --Separator--
-
-\end_layout
-
 \begin_layout Standard
 We are ready to write down the closed form formula for 
 \family roman
@@ -1125,7 +1389,7 @@ We are ready to write down the closed form formula for
 \lang english
 \begin_inset CommandInset label
 LatexCommand label
-name "th1"
+name "th:closed_form_discrepancy"
 
 \end_inset
 
@@ -1158,10 +1422,6 @@ where
 
 \end_layout
 
-\begin_layout --Separator--
-
-\end_layout
-
 \begin_layout Standard
 Finally we prove that 
 \family roman
@@ -1184,39 +1444,27 @@ Finally we prove that
  
 \end_layout
 
-\begin_layout Theorem
-
-\lang english
-\begin_inset CommandInset label
-LatexCommand label
-name "th2"
-
-\end_inset
-
- Suppose 
-\begin_inset Formula $q,p\in\mathcal{P}$
-\end_inset
-
- and let 
-\begin_inset Formula $Y\sim q$
-\end_inset
-
-.
- 
-\begin_inset Formula $S(Y,\mathcal{F},p)=0$
-\end_inset
-
- if and only if 
-\begin_inset Formula $p=q$
-\end_inset
-
-.
- 
-\end_layout
-
 \begin_layout Proof
 
 \lang english
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+Proof of Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "theorem_discrepancy_is_metric"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 If 
 \begin_inset Formula $p=q$
 \end_inset
@@ -1370,10 +1618,22 @@ A constant vector filed of derivatives can be generated only by a constant
  
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 
 \lang english
 Test
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:details_testing"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2920,7 +3180,7 @@ which follows from assumption (iii).
 \lang english
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "th1"
+reference "th:closed_form_discrepancy"
 
 \end_inset
 
@@ -2977,7 +3237,7 @@ The condition A1 is trivially stratified by the assumption
  Theorem 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "th2"
+reference "theorem_discrepancy_is_metric"
 
 \end_inset
 
