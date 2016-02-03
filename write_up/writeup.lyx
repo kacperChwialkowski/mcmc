@@ -279,15 +279,26 @@ key "Bar89,Beirlant2,Gyorfi,GyVa02"
 
 \end_inset
 
-, kernel density estimation ADD, and energy distances, based on smoothed
- differences in characteristic functions 
+, In the case where the test is against a particular alternative, most commonly
+ the multivariate Normal, then bespoke tests have been developed based on
+ differences in empirical characteristic functions, with or without 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BaringhausHenze88"
+
+\end_inset
+
+ smoothing.
+ kernel density estimation ADD, and energy distances, based on smoothed
+ differences in characteristic functions (another special case which has
+ been develpoed is the Pareto distribution 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Rizzo09"
 
 \end_inset
 
-.
+).
 \end_layout
 
 \begin_layout Standard
