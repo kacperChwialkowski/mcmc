@@ -195,17 +195,16 @@ vskip 0.3in ]
 We present a nonparametric goodness-of-fit test.
  Given a set of samples, the test allows to quantify how likely it is that
  the samples have been generated from a given probability density function.
- Our work extends recent work on using Stein operators to construct goodness-of-
-fit metrics.
- Via phrasing the problem in the framework of Reproducing Kernel Hilbert
- Spaces, we do not only achieve a largely simplified form and improved computati
-onal properties, but we also avoid the need for extra knowledge of the density
- -- our metric solely depends on the log-gradients.
- We analyse asymptotic properties of our metric and embed it into the statistica
-l hypothesis testing framework -- including efficient test constructions.
+ We use Stein operators in Reproducing Kernel Hilbert Spaces to construct
+ a divergence metric that that solely depends on the log-gradients of the
+ target density.
+ The metric has a simple form and can be efficiently estimated from data.
+ We analyse the estimator's asymptotic properties, and embed it into the
+ framwork of statistical hypothesis testing -- including efficient test
+ constructions using non iid data.
  As a demonstration of the test's practicality, we apply it to quantifying
  convergence of approximate Markov Chain Monte Carlo methods, statistical
- model critisism, and checking estimation and approximation convergence
+ model critisism, and assessing estimation and approximation convergence
  in non-parametric density estimation.
 \end_layout
 
