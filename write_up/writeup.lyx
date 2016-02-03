@@ -193,21 +193,27 @@ vskip 0.3in ]
 
 \begin_layout Abstract
 We propose a nonparametric statistical test for goodness-of-fit: given a
- set of samples from some input density, the test determines how likely
- it is that these were generated from a target probability density function.
- Our measure of goodness of fit uses the largest expectation over a class
- of functions to determine the distance from the input density to the target
- density, constructed from a reproducing kernel Hilbert space via Stein's
- method.
+ set of samples from an input probability density function, the test determines
+ how likely it is that these were generated from a target density.
+ The measure of goodness of fit 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+uses the largest expectation over a class of functions to determine the
+ distance from the input density to the target density,
+\end_layout
+
+\end_inset
+
+ is an integral probability metric constructed from a reproducing kernel
+ Hilbert space via Stein's method.
  Our test statistic is an unbiased empirical estimate of this measure, taking
- the form of a U-statistic, with a straightforward expression in terms of
- the log gradients of the target.
- Given the simple form of the test statistic, statistical tests may immediately
- be derived, both for i.i.d.
+ the form of a simple U-statistic in terms of the log gradients of the target
+ and the kernel.
+ We derive a statistical test, both for i.i.d.
  and non-i.i.d.
- samples.
- The latter occur when testing the stationary distribution of Markov chains,
- where we propose a wild bootstrap procedure.
+ samples, where in the latter setting we propose a wild bootstrap procedure.
  We apply our test to quantifying convergence of approximate Markov Chain
  Monte Carlo methods, statistical model critisism, and evaluating quality
  of fit vs model complexity in nonparametric density estimation.
@@ -255,7 +261,7 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-Goodness-of-it testing, or measure sampliung quality, is a fundamental tool
+Goodness-of-it testing, or measure sampling quality, is a fundamental tool
  in statistical analysis 
 \begin_inset ERT
 status open
