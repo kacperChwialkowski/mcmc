@@ -195,7 +195,7 @@ vskip 0.3in ]
 We propose a nonparametric statistical test for goodness-of-fit: given a
  set of samples, the test determines how likely it is that these were generated
  from a target probability density function.
- The measure of goodness of fit 
+ The measure of goodness-of-fit 
 \begin_inset Note Note
 status open
 
@@ -261,22 +261,37 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-Goodness-of-it testing, or measure sampling quality, is a fundamental tool
- in statistical analysis 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-heiko{reference}
-\end_layout
+Goodness-of-it testing, or measuring sampling quality, is a fundamental
+ tool in statistical analysis, dating back to the test of Kolmogorov and
+ Smirnov 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Kolmogorov33,Smirnov48"
 
 \end_inset
 
 .
- Given a set of random realisation 
+ Recent nonparametric multivariate approaches include space paritioning
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Bar89,Beirlant2,Gyorfi,GyVa02"
+
+\end_inset
+
+, kernel density estimation ADD, and energy distances, based on smoothed
+ differences in characteristic functions 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Rizzo09"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Given a set of random realisation 
 \begin_inset Formula $\{x_{i}\}_{i=1}^{n}$
 \end_inset
 
@@ -400,6 +415,20 @@ rward and cheap to estimate from data.
  The result is a mathematically and computationally simple, nonparametric
  goodness-of-fit test, that only relies on the gradients on the log-density,
  and that can be applied to non-iid data.
+\end_layout
+
+\begin_layout Standard
+Compared with other goodness-of-fit testing approaches, the space partitioning
+ approach has been shown to perform substantially worse than RKHS-based
+ approaches even in moderate dimensions, since too few points per bin are
+ found 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "GreGyo10"
+
+\end_inset
+
+ (even when a coarse binning is used).
 \end_layout
 
 \begin_layout Standard
@@ -2498,14 +2527,9 @@ status open
 
 \end_layout
 
-<<<<<<< HEAD
+
  
 \begin_inset Caption Standard
-=======
-\begin_layout Plain Layout
-\begin_inset Caption
->>>>>>> first experiment
-
 \begin_layout Plain Layout
 
 \lang english
