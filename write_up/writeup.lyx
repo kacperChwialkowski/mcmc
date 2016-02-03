@@ -101,7 +101,7 @@ status open
 \backslash
 twocolumn[ 
 \backslash
-icmltitle{Goodness of Fit Testing with Kernel-Stein}
+icmltitle{A Kernel Test of Goodness of Fit}
 \end_layout
 
 \begin_layout Plain Layout
@@ -192,6 +192,32 @@ vskip 0.3in ]
 \end_layout
 
 \begin_layout Abstract
+We propose a nonparametric statistical test for goodness-of-fit: given a
+ set of samples from some input density, the test determines how likely
+ it is that these were generated from a target probability density function.
+ Our measure of goodness of fit uses the largest expectation over a class
+ of functions to determine the distance from the input density to the target
+ density, constructed from a reproducing kernel Hilbert space via Stein's
+ method.
+ Our test statistic is an unbiased empirical estimate of this measure, taking
+ the form of a U-statistic, with a straightforward expression in terms of
+ the log gradients of the target.
+ Given the simple form of the test statistic, statistical tests may immediately
+ be derived, both for i.i.d.
+ and non-i.i.d.
+ samples.
+ The latter occur when testing the stationary distribution of Markov chains,
+ where we propose a wild bootstrap procedure.
+ We apply our test to quantifying convergence of approximate Markov Chain
+ Monte Carlo methods, statistical model critisism, and evaluating quality
+ of fit vs model complexity in nonparametric density estimation.
+\end_layout
+
+\begin_layout Abstract
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 We present a nonparametric goodness-of-fit test.
  Given a set of samples, the test allows to quantify how likely it is that
  the samples have been generated from a given probability density function.
@@ -206,6 +232,11 @@ We present a nonparametric goodness-of-fit test.
  convergence of approximate Markov Chain Monte Carlo methods, statistical
  model critisism, and assessing estimation and approximation convergence
  in non-parametric density estimation.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
