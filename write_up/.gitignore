@@ -5,3 +5,10 @@
 *.log
 *.lyx~
 *.lyx#
+
+writeup.tex
+*.backup
+*.bib~
+*.bbl
+*.blg
+
