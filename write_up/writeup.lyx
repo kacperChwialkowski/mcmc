@@ -193,8 +193,8 @@ vskip 0.3in ]
 
 \begin_layout Abstract
 We propose a nonparametric statistical test for goodness-of-fit: given a
- set of samples from an input probability density function, the test determines
- how likely it is that these were generated from a target density.
+ set of samples, the test determines how likely it is that these were generated
+ from a target probability density function.
  The measure of goodness of fit 
 \begin_inset Note Note
 status open
