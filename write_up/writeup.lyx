@@ -2,7 +2,7 @@
 \lyxformat 413
 \begin_document
 \begin_header
-\textclass scrartcl
+\textclass article
 \begin_preamble
 % from the icml 2016 example tex file
 \usepackage{times}
@@ -46,10 +46,10 @@ theorems-sec
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize 12
+\paperfontsize default
 \spacing single
 \use_hyperref false
-\papersize default
+\papersize a4paper
 \use_geometry false
 \use_amsmath 2
 \use_esint 0
@@ -60,7 +60,7 @@ theorems-sec
 \use_indices false
 \paperorientation portrait
 \suppress_date false
-\use_refstyle 0
+\use_refstyle 1
 \index Index
 \shortcut idx
 \color #008000
@@ -2356,7 +2356,7 @@ key "gorham2015measuring"
  random walk (variance equal to 0.5).
  We emphasize a need for an appropriate choice of the bootstrap process
  parameter, 
-\begin_inset Formula $p_{n}$
+\begin_inset Formula $a_{n}$
 \end_inset
 
 , the probability of a sign flip.
@@ -2368,7 +2368,7 @@ reference "fig:student_bad"
 \end_inset
 
  we plot p-values for 
-\begin_inset Formula $p_{n}$
+\begin_inset Formula $a_{n}$
 \end_inset
 
  being set to 
@@ -2377,7 +2377,7 @@ reference "fig:student_bad"
 
 .
  Such a high value of 
-\begin_inset Formula $p_{n}$
+\begin_inset Formula $a_{n}$
 \end_inset
 
  is 
@@ -2426,7 +2426,7 @@ reference "fig:studentst"
 \noun off
 \color none
 
-\begin_inset Formula $p_{n}=2\%$
+\begin_inset Formula $a_{n}=2\%$
 \end_inset
 
 , which gives well calibrated distribution of the p-values under the null
@@ -2434,7 +2434,7 @@ reference "fig:studentst"
  reduces the power of a the test.
  Indeed, p-values for five degrees of freedom are already large.
  The solution that we recommend is a mixture of thinning and adjusting 
-\begin_inset Formula $p_{n},$
+\begin_inset Formula $a_{n},$
 \end_inset
 
  as presented in the Figure 
@@ -2446,7 +2446,7 @@ reference "fig:thinning"
 
 .
  We have thinned the observations by a factor of 20, set 
-\begin_inset Formula $p_{n}=10\%$
+\begin_inset Formula $a_{n}=10\%$
 \end_inset
 
  and managed to preserve a good power and a right calibration of p-values
@@ -2474,7 +2474,9 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-TODO
+
+\lang english
+Large auto covariance, not suitable bootstrap
 \end_layout
 
 \end_inset
@@ -2519,7 +2521,7 @@ status open
 \begin_layout Plain Layout
 
 \lang english
-Large auto covariance, and suitable bootstrap.
+Large auto covariance and suitable bootstrap.
 \end_layout
 
 \end_inset
@@ -2594,69 +2596,53 @@ Approximate MCMC algorithm
 \begin_layout Standard
 
 \lang english
-Here we multi modal ilustrative model used before in 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "gorham2015measuring,welling2011bayesian"
-
-\end_inset
-
-.
- The model is 
-\begin_inset Formula 
-\begin{align*}
-\theta_{1}\sim N(0,10);\theta_{2}\sim N(0,1)\\
-X_{i}\sim\frac{1}{2}N(\theta_{1},4)+\frac{1}{2}N(\theta_{2},4)
-\end{align*}
-
-\end_inset
-
-400 points are drawn from this model.
- The task is to estimate a posteriori distribution of 
-\begin_inset Formula $\theta$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Paragraph
-
+We show how to quantify
+\lang british
+ bias-variance trade-offs in an approximate 
 \lang english
-Metropolis Hastings with random walk
-\end_layout
-
-\begin_layout Standard
-
+MCMC algorithm
+\lang british
+ -- 
 \lang english
-We use plain MH MCMC with Gaussian proposal with with standard deviation
- equal to 
-\begin_inset Formula $0.2$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-
-\lang english
-Austerity MCMC 
+austerity MCMC 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "korattikara2013austerity"
 
 \end_inset
 
-is a Monte Carlo procedure designed to reduce number of likelihood evaluation
- in the acceptance step of the Metropolis-Hastings algorithm.
- The crux of algorithm is to look just at a subset of the data and make
- a acceptance/rejection decision based on this subset.
- The probability of which making a wrong decision is proportional to 
+
+\lang british
+.
+ 
+\lang english
+For the purpose of illustration we use a simple generative from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "gorham2015measuring,welling2011bayesian"
+
+\end_inset
+
+, 
+\begin_inset Formula 
+\begin{align*}
+\theta_{1}\sim N(0,10);\theta_{2}\sim N(0,1)\\
+X_{i}\sim\frac{1}{2}N(\theta_{1},4)+\frac{1}{2}N(\theta_{2},4) & .
+\end{align*}
+
+\end_inset
+
+Austerity MCMC is a Monte Carlo procedure designed to reduce number of likelihoo
+d evaluation in the acceptance step of the Metropolis-Hastings algorithm.
+ The crux of method is to look just at a subset of the data and make a acceptanc
+e/rejection decision based on this subset.
+ The probability of making a wrong decision is proportional to parameter
+ 
 \begin_inset Formula $\epsilon\in[0,1]$
 \end_inset
 
-.
- Not surprisingly parameter 
+ .
+ Parameter 
 \begin_inset Formula $\epsilon$
 \end_inset
 
@@ -2664,9 +2650,10 @@ is a Monte Carlo procedure designed to reduce number of likelihood evaluation
 \begin_inset Formula $\epsilon$
 \end_inset
 
-, hence toleration for a mistake, the lower computational cost, on average.
+, i.e.
+ toleration for a mistake, the lower expected computational cost.
  We simulate 
-\begin_inset Formula $\{X_{i}\}_{\{1\leq i\leq400\}}$
+\begin_inset Formula $\{X_{i}\}_{1\leq i\leq400}$
 \end_inset
 
  points from the model with 
@@ -2680,11 +2667,11 @@ is a Monte Carlo procedure designed to reduce number of likelihood evaluation
 .
  In such a setting there are two modes in the posteriori distribution, one
  at the the point 
-\begin_inset Formula $0,1$
+\begin_inset Formula $(0,1)$
 \end_inset
 
  and the other at the point 
-\begin_inset Formula $1,-1$
+\begin_inset Formula $(1,-1)$
 \end_inset
 
 .
@@ -2715,11 +2702,12 @@ ve elements of samples form the chains is smaller than
 \begin_inset Formula $\epsilon$
 \end_inset
 
- we then sample 
+ we then test a hypothesis that 
 \begin_inset Formula $\{\theta_{i}\}_{1\leq i\leq500}$
 \end_inset
 
- and calculate a p-value using present one sample test.
+ are drawn for a true stationary a posteriori distribution (using the developed
+ test).
  This way we generate 100 p-values for each 
 \begin_inset Formula $\epsilon$
 \end_inset
@@ -2735,13 +2723,14 @@ shows distribution of those p-values as a function of
 \begin_inset Formula $\epsilon$
 \end_inset
 
- -- 
+.
+ It is clear that 
 \begin_inset Formula $\epsilon=0.04$
 \end_inset
 
- gives a good approximation of true stationary distribution.
- We also collect statistics about average number of likelihood evaluations,
- these are presented in the figure 
+ yields a good approximation of true stationary distribution, while being
+ parsimonious in terms of likelihood evaluations, as presented in the Figure
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "lik-evals"
@@ -2777,6 +2766,40 @@ name "p-values"
 \end_inset
 
 
+\lang british
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+Distribution of p-values as a function of 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ in the austerity MCMC.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\lang english
 \begin_inset CommandInset label
 LatexCommand label
 name "lik-evals"
@@ -2789,6 +2812,27 @@ name "lik-evals"
 
 \end_inset
 
+
+\lang british
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+Average number of likelihood evaluations a function of 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ in the austerity MCMC
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -2935,7 +2979,6 @@ reference "fig:density_estimation_increasing_features"
 \end_layout
 
 \begin_layout Standard
-and 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:density_estimation_increasing_features"
@@ -3034,7 +3077,6 @@ name "fig:density_estimation_increasing_features"
 \end_layout
 
 \begin_layout Standard
-git 
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "biblio"
