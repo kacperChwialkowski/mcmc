@@ -2476,7 +2476,34 @@ status open
 \begin_layout Plain Layout
 
 \lang english
-Large auto covariance, not suitable bootstrap
+Large auto covariance, not a suitable bootstrap.
+ The parameter 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $a_{n}$
+\end_inset
+
+ is too large and the bootstrapped V-statistics 
+\begin_inset Formula $B_{n}$
+\end_inset
+
+ are, on average, too low.
+ Therefore it is very likely that 
+\begin_inset Formula $V_{n}>B_{n}$
+\end_inset
+
+ and the test is too conservative.
+ 
 \end_layout
 
 \end_inset
@@ -2522,6 +2549,25 @@ status open
 
 \lang english
 Large auto covariance and suitable bootstrap.
+ The parameter 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $a_{n}$
+\end_inset
+
+is chosen suitably, but due to a large auto-correlation withing the samples,
+ the power of the test is small (effective sample size is small).
+ 
 \end_layout
 
 \end_inset
@@ -2565,6 +2611,38 @@ status open
 
 \lang english
 Thinned sample, and suitable bootstrap.
+ Most of the 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+auto-correlation within the sample is canceled by thinning.
+ To guarantee that remaining auto-correlation is handled properly, the flip
+ parameter is set 
+\begin_inset Formula $10\%$
+\end_inset
+
+.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
 \end_layout
 
 \end_inset
@@ -2725,7 +2803,7 @@ shows distribution of those p-values as a function of
 
 .
  It is clear that 
-\begin_inset Formula $\epsilon=0.04$
+\begin_inset Formula $\epsilon=0.09$
 \end_inset
 
  yields a good approximation of true stationary distribution, while being
@@ -2778,6 +2856,16 @@ Distribution of p-values as a function of
 \end_inset
 
  in the austerity MCMC.
+ The null hypothesis is unlikely to be rejected for 
+\begin_inset Formula $\epsilon=0.09$
+\end_inset
+
+, however it is only for 
+\begin_inset Formula $\epsilon=0.001$
+\end_inset
+
+ that distribution of p-values resembles uniform distribution.
+ 
 \end_layout
 
 \end_inset
@@ -2824,7 +2912,41 @@ Average number of likelihood evaluations a function of
 \begin_inset Formula $\epsilon$
 \end_inset
 
- in the austerity MCMC
+ in the austerity MCMC.
+ Number of likelihood evaluations for 
+\begin_inset Formula $\epsilon=0.09$
+\end_inset
+
+ is three times smaller then for 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\epsilon=0.001$
+\end_inset
+
+.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
 \end_layout
 
 \end_inset
@@ -3255,7 +3377,7 @@ status open
 \begin_layout Plain Layout
 
 \lang english
-Proof of Theorem
+Proof of Theorem 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "th:closed_form_discrepancy"
@@ -3317,7 +3439,7 @@ Proof of
 \lang british
 proposition
 \lang english
-
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "thm: null_dist"
@@ -3401,7 +3523,7 @@ status open
 \lang english
 Proof of 
 \lang british
-proposition
+proposition 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "thm:wild_bootstrap_works"
