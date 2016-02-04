@@ -583,7 +583,19 @@ Our goal is to write the maximum discrepancy between reference distribution
 \begin_inset Formula $k$
 \end_inset
 
-.
+, and by 
+\begin_inset Formula ${\cal F}^{d}$
+\end_inset
+
+ the product RKHS consisting of elements 
+\begin_inset Formula $f:=(f_{1},\dots,f_{d})$
+\end_inset
+
+ with 
+\begin_inset Formula $f_{i}\in{\cal F}$
+\end_inset
+
+, and with standard inner product.
  Similarly to 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -596,40 +608,23 @@ key "stein1972,gorham2015measuring"
 \end_inset
 
  acting on 
-\begin_inset Formula $f\in\mathcal{F}$
+\begin_inset Formula $f\in\mathcal{F}^{d}$
 \end_inset
 
  
 \begin_inset Formula 
 \[
-T_{p}f:=\frac{\partial\log p(x)}{\partial x_{i}}f(x)+\frac{\partial f(x)}{\partial x}.
+T_{p}f:=\sum_{i=1}^{d}\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}.
 \]
 
 \end_inset
 
-As we will see, the operator can be expressed in the RKHS by defining a
- function that depends on gradients of the log-density and the kernel (with
- one argument fixed to a frequency 
-\begin_inset Formula $t$
-\end_inset
-
+As we will see, the operator can be expressed in the product RKHS by defining
+ a function that depends on gradients of the log-density and the kernel
  
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-heiko{We should say what is the deal with t}
-\end_layout
-
-\end_inset
-
-) 
 \begin_inset Formula 
 \[
-\xi(x,t):=\left[\nabla\log p(x)k(x,t)+\nabla k(x,t)\right],
+\xi(x,\cdot):=\left[\nabla\log p(x)k(x,\cdot)+\nabla k(x,\cdot)\right],
 \]
 
 \end_inset
@@ -646,7 +641,7 @@ whose inner product with
  
 \begin_inset Formula 
 \[
-\ev T_{p}f(X)=\langle f,\ev\xi(X)\rangle,
+\ev T_{p}f(X)=\langle f,\ev\xi(X)\rangle_{{\cal F}^{d}}=\sum_{i=1}^{d}\langle f_{i},\ev\xi_{i}(X)\rangle_{{\cal F}},
 \]
 
 \end_inset
@@ -684,8 +679,8 @@ reference "lem:easy"
  -- and express it in the RKHS,
 \begin_inset Formula 
 \begin{align*}
-S(Z,\mathcal{F},p) & :=\sup_{f\in{\cal F}}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X)\\
- & =\sup_{f\in{\cal F}}\langle f,\ev\xi(Z)-\ev\xi(X)\rangle\\
+S(Z) & :=\sup_{\Vert f\Vert<1}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X)\\
+ & =\sup_{\Vert f\Vert<1}\langle f,\ev\xi(Z)-\ev\xi(X)\rangle\\
  & =\|\ev\xi(Z)\|,
 \end{align*}
 
@@ -705,7 +700,7 @@ reference "lem:discprepancy_maximised_by_norm"
 \end_inset
 
  is a desirable property: we can compute 
-\begin_inset Formula $S(Z,\mathcal{F},p)$
+\begin_inset Formula $S(Z,p)$
 \end_inset
 
  by only computing 
@@ -748,7 +743,7 @@ name "theorem_discrepancy_is_metric"
 
 .
  Then 
-\begin_inset Formula $S(Z,\mathcal{F},p)=0$
+\begin_inset Formula $S(Z)=0$
 \end_inset
 
  if and only if 
@@ -767,29 +762,40 @@ reference "sec:details_kernel_stein"
 
 \end_inset
 
- contains all assumptions on 
+ contains details such as all assumptions on 
 \begin_inset Formula ${\cal P}$
 \end_inset
 
-, all steps of the proof for the multivariate case.
- Theorem 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "th:closed_form_discrepancy"
+ and proof.
+ The following theorem gives a simple closed form expression.
+\end_layout
+
+\begin_layout Theorem
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "th:closed_form_discrepancy"
 
 \end_inset
 
- gives a simple closed from expression for the squared Stein discrepancy
- 
-\begin_inset Formula $S(Z,\mathcal{F},p)^{2}$
+ Let 
+\begin_inset Formula 
+\begin{align*}
+h(x,y) & :=\nabla\log p(x)^{\top}\nabla\log p(y)k(x,y)\\
+ & \quad+\nabla\log p(y)^{\top}\nabla_{x}k(x,y)\\
+ & \quad+\nabla\log p(x){}^{\top}\nabla_{y}k(x,y)\\
+ & \quad+\nabla_{x}k(x,y)^{\top}\nabla_{y}k(x,y).
+\end{align*}
+
 \end_inset
 
-, in terms of the expected value a function 
-\begin_inset Formula $h(Z,Z')$
-\end_inset
-
-, which itself is based on the RKHS norm of 
-\begin_inset Formula $\xi$
+The 
+\lang british
+squared Stein discrepancy has
+\lang english
+ the closed form 
+\begin_inset Formula $S(Z)^{2}=\ev h(Z,Z')$
 \end_inset
 
 .
@@ -797,7 +803,7 @@ reference "th:closed_form_discrepancy"
 
 \begin_layout Standard
 We now proceed with constructing an estimator for 
-\begin_inset Formula $S(Z,\mathcal{F},p)^{2}$
+\begin_inset Formula $S(Z)^{2}$
 \end_inset
 
 , and outline its asymptotic properties.
@@ -825,7 +831,7 @@ V_{n}=\frac{1}{n^{2}}\sum_{i,j=1}^{n}h(Z_{i},Z_{j}).
 
 \end_inset
 
-The asymptotic null distribution of the normalised V-Statistic 
+ The asymptotic null distribution of the normalised V-Statistic 
 \begin_inset Formula $nV_{n}$
 \end_inset
 
@@ -1785,43 +1791,6 @@ We are ready to write down the closed form formula for
 .
  The proof, which is mostly an algebraic manipulation, is in the appendix.
  
-\end_layout
-
-\begin_layout Theorem
-
-\lang english
-\begin_inset CommandInset label
-LatexCommand label
-name "th:closed_form_discrepancy"
-
-\end_inset
-
- 
-\begin_inset Formula $S(Y,\mathcal{F},p)^{2}$
-\end_inset
-
- can be written in a closed form, given by 
-\begin_inset Formula 
-\begin{align*}
- & \quad\ev\Big[\nabla\log p(X_{1})^{\top}\nabla\log p(X_{2})k(X_{1},X_{2})\\
- & \quad+\nabla p(X_{2})^{\top}\nabla_{1}k(X_{1},X_{2})\\
- & \quad+\nabla\log p(X_{1}){}^{\top}\nabla k(X_{1},X_{2})\\
- & \quad+\nabla_{1}k(X_{1},X_{2})^{\top}\nabla_{2}k(X_{1},X_{2})\Big],
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Theorem
-
-\lang english
-where 
-\begin_inset Formula $\nabla_{2}k(x,y)=\left(\frac{\partial k(x,y)}{\partial y_{1}},\cdots,\frac{\partial k(x,y)}{\partial y_{d}}\right).$
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
