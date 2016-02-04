@@ -604,7 +604,7 @@ key "stein1972,gorham2015measuring"
 \end_inset
 
 , we begin by defining a Stein operator 
-\begin_inset Formula $T_{p}$
+\begin_inset Formula $T$
 \end_inset
 
  acting on 
@@ -614,7 +614,7 @@ key "stein1972,gorham2015measuring"
  
 \begin_inset Formula 
 \[
-T_{p}f:=\sum_{i=1}^{d}\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}.
+Tf:=\sum_{i=1}^{d}\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}.
 \]
 
 \end_inset
@@ -641,7 +641,7 @@ whose inner product with
  
 \begin_inset Formula 
 \[
-\ev T_{p}f(X)=\langle f,\ev\xi(X)\rangle_{{\cal F}^{d}}=\sum_{i=1}^{d}\langle f_{i},\ev\xi_{i}(X)\rangle_{{\cal F}},
+\ev Tf(X)=\langle f,\ev\xi(X)\rangle_{{\cal F}^{d}}=\sum_{i=1}^{d}\langle f_{i},\ev\xi_{i}(X)\rangle_{{\cal F}},
 \]
 
 \end_inset
@@ -679,7 +679,7 @@ reference "lem:easy"
  -- and express it in the RKHS,
 \begin_inset Formula 
 \begin{align*}
-S(Z) & :=\sup_{\Vert f\Vert<1}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X)\\
+S(Z) & :=\sup_{\Vert f\Vert<1}\ev(Tf)(Z)-\ev(Tf)(X)\\
  & =\sup_{\Vert f\Vert<1}\langle f,\ev\xi(Z)-\ev\xi(X)\rangle\\
  & =\|\ev\xi(Z)\|,
 \end{align*}
@@ -696,7 +696,7 @@ reference "lem:discprepancy_maximised_by_norm"
 
 .
  This makes it clear why 
-\begin_inset Formula $\ev(T_{p}f)(X)=0$
+\begin_inset Formula $\ev(Tf)(X)=0$
 \end_inset
 
  is a desirable property: we can compute 
@@ -1289,7 +1289,7 @@ key "gorham2015measuring"
 \end_inset
 
 , we study the operator 
-\begin_inset Formula $T_{p}$
+\begin_inset Formula $T$
 \end_inset
 
  acting on 
@@ -1307,7 +1307,7 @@ key "gorham2015measuring"
  
 \begin_inset Formula 
 \[
-T_{p}f=\sum_{i=1}^{d}\left(\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right).
+Tf=\sum_{i=1}^{d}\left(\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right).
 \]
 
 \end_inset
@@ -1346,8 +1346,8 @@ reference "lem:easy"
 , 
 \begin_inset Formula 
 \begin{align}
-S(Z) & :=\sup_{f\in F^{d},\|f\|<1}\ev(T_{p}f)(Z)\label{eq:Sdef}\\
- & =\sup_{f\in F^{d}}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X)\nonumber 
+S(Z) & :=\sup_{f\in F^{d},\|f\|<1}\ev(Tf)(Z)\label{eq:Sdef}\\
+ & =\sup_{f\in F^{d}}\ev(Tf)(Z)-\ev(Tf)(X)\nonumber 
 \end{align}
 
 \end_inset
@@ -1498,7 +1498,7 @@ The following technical lemma shows that the expected value of
 
  is well defined -- it is needed for establishing a link between Stain operator
  
-\begin_inset Formula $T_{p}f$
+\begin_inset Formula $Tf$
 \end_inset
 
  and 
@@ -1609,7 +1609,7 @@ For any random variable
  
 \begin_inset Formula 
 \begin{align*}
-\ev T_{p}f(Z)=\langle f,\ev\xi(Z)\rangle_{\mathcal{F}^{d}} & =\sum_{i=1}^{d}\langle f_{i},\ev\xi_{i}(Z)\rangle_{\mathcal{F}}
+\ev Tf(Z)=\langle f,\ev\xi(Z)\rangle_{\mathcal{F}^{d}} & =\sum_{i=1}^{d}\langle f_{i},\ev\xi_{i}(Z)\rangle_{\mathcal{F}}
 \end{align*}
 
 \end_inset
@@ -1670,7 +1670,7 @@ By the construction of the Stein operator we know that for
 \end_inset
 
 , 
-\begin_inset Formula $\ev(T_{p}f)(X)=0$
+\begin_inset Formula $\ev(Tf)(X)=0$
 \end_inset
 
 , and so for any random variable 
@@ -1685,7 +1685,7 @@ By the construction of the Stein operator we know that for
 \lang english
 \begin_inset Formula 
 \begin{align*}
-S(Y,\mathcal{F},p) & =\sup_{f\in F^{d}}\ev(T_{p}f)(Y)-\ev(T_{p}f)(X)\\
+S(Y,\mathcal{F},p) & =\sup_{f\in F^{d}}\ev(Tf)(Y)-\ev(Tf)(X)\\
  & =\sup_{f\in F^{d}}\langle f,\ev\xi(Y)-\ev\xi(X)\rangle_{\mathcal{F}^{d}}.
 \end{align*}
 
@@ -1756,7 +1756,7 @@ reference "lem:SteinIsInner"
 \color none
 \lang english
 
-\begin_inset Formula $\ev T_{p}f(Y)=\langle f,\ev\xi(Y)\rangle$
+\begin_inset Formula $\ev Tf(Y)=\langle f,\ev\xi(Y)\rangle$
 \end_inset
 
 , therefore 
@@ -3477,7 +3477,7 @@ name "lem:easy"
 \end_inset
 
  expected value of 
-\begin_inset Formula $T_{p}$
+\begin_inset Formula $T$
 \end_inset
 
  is zero, i.e.
@@ -3527,7 +3527,7 @@ The density function
 
  vanishes at infinity.
  To show the expected value 
-\begin_inset Formula $\ev(T_{p})f(X)$
+\begin_inset Formula $\ev(T)f(X)$
 \end_inset
 
  is zero, it is sufficient to show that for all dimensions 
