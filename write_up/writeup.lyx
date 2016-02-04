@@ -815,7 +815,7 @@ Wild Bootstrap Testing
 
 \begin_layout Standard
 It is straight forward to estimate the squared Stein discrepancy 
-\begin_inset Formula $S(Z,\mathcal{F},p)^{2}$
+\begin_inset Formula $S(Z)^{2}$
 \end_inset
 
  from samples 
@@ -1346,7 +1346,7 @@ reference "lem:easy"
 , 
 \begin_inset Formula 
 \begin{align}
-S(Z,\mathcal{F},p) & :=\sup_{f\in F^{d},\|f\|<1}\ev(T_{p}f)(Z)\label{eq:Sdef}\\
+S(Z) & :=\sup_{f\in F^{d},\|f\|<1}\ev(T_{p}f)(Z)\label{eq:Sdef}\\
  & =\sup_{f\in F^{d}}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X)\nonumber 
 \end{align}
 
@@ -1361,7 +1361,7 @@ reference "theorem_discrepancy_is_metric"
 \end_inset
 
  we show that 
-\begin_inset Formula $S(Z,\mathcal{F},p)$
+\begin_inset Formula $S(Z)$
 \end_inset
 
  captures any difference between probability measures.
