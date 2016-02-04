@@ -1250,6 +1250,133 @@ Recall that
 \end_inset
 
  with a standard inner product.
+ We first show that expected value of the Stein operator is zero on the
+ target measure.
+\end_layout
+
+\begin_layout Lemma
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:easy"
+
+\end_inset
+
+ If a random variable 
+\begin_inset Formula $X$
+\end_inset
+
+ is distributed according to 
+\begin_inset Formula $p$
+\end_inset
+
+, then for all function 
+\begin_inset Formula $f\in\mathcal{F}$
+\end_inset
+
+ expected value of 
+\begin_inset Formula $T$
+\end_inset
+
+ is zero, i.e.
+ 
+\begin_inset Formula $\forall_{f\in\mathcal{F}}\ev(T_{q}f)(X)=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+First we show that the functions 
+\begin_inset Formula $g_{i}=p\cdot f_{i}$
+\end_inset
+
+ vanish at infinity, by which we mean that for all dimensions 
+\begin_inset Formula $j$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\lim_{x_{j}\to\infty}g_{i}(x_{1},\cdots,x_{d})=0.
+\]
+
+\end_inset
+
+The density function 
+\begin_inset Formula $p$
+\end_inset
+
+ vanishes at infinity.
+ The function 
+\begin_inset Formula $f$
+\end_inset
+
+ is bounded, which is implied by Cauchy-Schwarz inequality -- 
+\begin_inset Formula $\left|f(x)\right|\le\left\Vert f\right\Vert \sqrt{k(x,x)}$
+\end_inset
+
+.
+ This implies that the function 
+\begin_inset Formula $g$
+\end_inset
+
+ vanishes at infinity.
+ To show the expected value 
+\begin_inset Formula $\ev(T)f(X)$
+\end_inset
+
+ is zero, it is sufficient to show that for all dimensions 
+\begin_inset Formula $i$
+\end_inset
+
+, the expected value of 
+\begin_inset Formula $\frac{\partial\log p(X)}{\partial x_{i}}f_{i}(X)+\frac{\partial f_{i}(X)}{\partial x_{i}}$
+\end_inset
+
+ is zero.
+ 
+\begin_inset Formula 
+\begin{align*}
+ & \ev\left(\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right)\\
+ & =\int_{R_{d}}\left[\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right]q(x)dx\\
+ & =\int_{R_{d}}\left[\frac{1}{p(x)}\frac{\partial q(x)}{\partial x_{i}}f(x)+\frac{\partial f(x)}{\partial x_{i}}\right]q(x)dx\\
+ & =\int_{R_{d}}\left[\frac{\partial p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}q(x)\right]dx\\
+ & \overset{(a)}{=}\int_{R_{d-1}}\left(\lim_{R\to\infty}p(x)f_{i}(x)\bigg|_{x_{i}=-R}^{x_{i}=R}\right)dx\\
+ & =\int_{R_{d-1}}0dx=0
+\end{align*}
+
+\end_inset
+
+For the equation (a) we have used integration by parts and fact that 
+\begin_inset Formula $g_{i}$
+\end_inset
+
+ vanishes at infinity.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+The following lemmas are useful in proving main results, Theorems 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "th:closed_form_discrepancy"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "theorem_discrepancy_is_metric"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Lemma
@@ -1624,7 +1751,7 @@ reference "lem:SteinIsInner"
 \noun off
 \color none
 \lang english
-The proof
+We are ready for the proof
 \family default
 \series default
 \shape default
@@ -1655,19 +1782,18 @@ The proof
 \end_inset
 
 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-\lang british
+\end_layout
 
+\begin_layout Proof
+
+\lang english
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+Proof of Theorem 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "th:closed_form_discrepancy"
@@ -1675,32 +1801,48 @@ reference "th:closed_form_discrepancy"
 \end_inset
 
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
-, which is mostly an algebraic manipulation, is in the appendix.
+\end_layout
+
+\end_inset
+
+ Recall that use notation 
+\begin_inset Formula 
+\begin{align*}
+\nabla_{x}k(x,y)=\left(\frac{\partial k(x,y)}{\partial x_{1}},\cdots,\frac{\partial k(x,y)}{\partial x_{d}}\right)\\
+\nabla_{y}k(x,y)=\left(\frac{\partial k(x,y)}{\partial y_{1}},\cdots,\frac{\partial k(x,y)}{\partial y_{d}}\right).
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula $\langle\cdot,\cdot\rangle_{2}$
+\end_inset
+
+ for inner product in 
+\begin_inset Formula $R^{d}$
+\end_inset
+
+.
  
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-\lang british
+\begin_inset Formula 
+\begin{align*}
+ & S(X,\mathcal{F},p)^{2}=\langle\xi,\xi\rangle_{\mathcal{F}^{d}}\\
+ & =\langle\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{x}k(X,\cdot)\right],\\
+ & \quad\quad\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{x}k(X,\cdot)\right]\rangle\\
+ & =\ev\langle\nabla\log p(X)k(X,\cdot)+\nabla_{x}k(X_{1},\cdot),\\
+ & \quad\quad\quad\nabla\log p(X)k(\cdot,X)+\nabla_{y}k(\cdot,X)\rangle\\
+ & =\ev\nabla\log p(X)^{\top}\nabla\log p(X')k(X,X')\\
+ & \quad+\ev\nabla\log p(X)\nabla_{x}k(X,X')\\
+ & \quad+\ev\nabla\log p(X){}^{\top}\nabla_{y}k(X,X')\\
+ & \quad+\ev\nabla_{x}k(X,X')^{\top}\nabla_{y}k(X,X').
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Finally we prove that 
 \family roman
 \series medium
@@ -1714,7 +1856,7 @@ Finally we prove that
 \noun off
 \color none
 \lang english
-
+discrepancy 
 \begin_inset Formula $S$
 \end_inset
 
@@ -3256,170 +3398,6 @@ Appendix
 
 \lang english
 Proofs
-\end_layout
-
-\begin_layout Lemma
-
-\lang english
-\begin_inset CommandInset label
-LatexCommand label
-name "lem:easy"
-
-\end_inset
-
- If a random variable 
-\begin_inset Formula $X$
-\end_inset
-
- is distributed according to 
-\begin_inset Formula $p$
-\end_inset
-
-, then for all function 
-\begin_inset Formula $f\in\mathcal{F}$
-\end_inset
-
- expected value of 
-\begin_inset Formula $T$
-\end_inset
-
- is zero, i.e.
- 
-\begin_inset Formula $\forall_{f\in\mathcal{F}}\ev(T_{q}f)(X)=0$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Proof
-
-\lang english
-First we show that the functions 
-\begin_inset Formula $g_{i}=p\cdot f_{i}$
-\end_inset
-
- vanish at infinity, by which we mean that for all dimensions 
-\begin_inset Formula $j$
-\end_inset
-
- 
-\begin_inset Formula 
-\[
-\lim_{x_{j}\to\infty}g_{i}(x_{1},\cdots,x_{d})=0.
-\]
-
-\end_inset
-
-The density function 
-\begin_inset Formula $p$
-\end_inset
-
- vanishes at infinity.
- The function 
-\begin_inset Formula $f$
-\end_inset
-
- is bounded, which is implied by Cauchy-Schwarz inequality -- 
-\begin_inset Formula $\left|f(x)\right|\le\left\Vert f\right\Vert \sqrt{k(x,x)}$
-\end_inset
-
-.
- This implies that the function 
-\begin_inset Formula $g$
-\end_inset
-
- vanishes at infinity.
- To show the expected value 
-\begin_inset Formula $\ev(T)f(X)$
-\end_inset
-
- is zero, it is sufficient to show that for all dimensions 
-\begin_inset Formula $i$
-\end_inset
-
-, the expected value of 
-\begin_inset Formula $\frac{\partial\log p(X)}{\partial x_{i}}f_{i}(X)+\frac{\partial f_{i}(X)}{\partial x_{i}}$
-\end_inset
-
- is zero.
- 
-\begin_inset Formula 
-\begin{align*}
- & \ev\left(\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right)\\
- & =\int_{R_{d}}\left[\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right]q(x)dx\\
- & =\int_{R_{d}}\left[\frac{1}{p(x)}\frac{\partial q(x)}{\partial x_{i}}f(x)+\frac{\partial f(x)}{\partial x_{i}}\right]q(x)dx\\
- & =\int_{R_{d}}\left[\frac{\partial p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}q(x)\right]dx\\
- & \overset{(a)}{=}\int_{R_{d-1}}\left(\lim_{R\to\infty}p(x)f_{i}(x)\bigg|_{x_{i}=-R}^{x_{i}=R}\right)dx_{1}\cdots dx_{i-1}\cdots dx_{i+1}\cdots d{x_{d}}\\
- & =\int_{R_{d-1}}0dx_{1}\cdots dx_{i-1}\cdots dx_{i+1}\cdots d{x_{d}}\\
- & =0.
-\end{align*}
-
-\end_inset
-
-For the equation (a) we have used integration by parts and fact that 
-\begin_inset Formula $g_{i}$
-\end_inset
-
- vanishes at infinity.
- 
-\end_layout
-
-\begin_layout --Separator--
-
-\end_layout
-
-\begin_layout Proof
-
-\lang english
-\begin_inset Argument
-status open
-
-\begin_layout Plain Layout
-
-\lang english
-Proof of Theorem 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "th:closed_form_discrepancy"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
- Recall that use notation 
-\begin_inset Formula 
-\begin{align*}
-\nabla_{1}k(x,y)=\left(\frac{\partial k(x,y)}{\partial x_{1}},\cdots,\frac{\partial k(x,y)}{\partial x_{d}}\right)\\
-\nabla_{2}k(x,y)=\left(\frac{\partial k(x,y)}{\partial y_{1}},\cdots,\frac{\partial k(x,y)}{\partial y_{d}}\right).
-\end{align*}
-
-\end_inset
-
-and 
-\begin_inset Formula $\langle\cdot,\cdot\rangle_{2}$
-\end_inset
-
- for inner product in 
-\begin_inset Formula $R^{d}$
-\end_inset
-
-.
- 
-\begin_inset Formula 
-\begin{align*}
-S(X,\mathcal{F},p)^{2} & =\langle\xi,\xi\rangle_{\mathcal{F}^{d}}\\
- & =\langle\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{1}k(X,\cdot)\right],\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{1}k(X,\cdot)\right]\rangle_{\mathcal{F}^{d}}\\
- & =\ev\langle\nabla\log p(X_{1})k(X_{1},\cdot)+\nabla_{1}k(X_{1},\cdot),\nabla\log p(X_{2})k(\cdot,X_{2})+\nabla_{2}k(\cdot,X_{2})\rangle_{\mathcal{F}^{d}}\\
- & =\ev\langle\nabla\log p(X_{1}),\nabla\log p(X_{2})\rangle_{2}k(X_{1},X_{2})+\ev\langle\nabla p(X_{2}),\nabla_{1}k(X_{1},X_{2})\rangle_{2}\\
- & \quad+\ev\langle\nabla\log p(X_{1}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}+\ev\ \langle\nabla_{1}k(X_{1},X_{2}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}
-\end{align*}
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout --Separator--
