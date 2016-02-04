@@ -235,30 +235,30 @@ key "Kolmogorov33,Smirnov48"
 
 .
  Given a set of random realisation 
-\begin_inset Formula $\{x_{i}\}_{i=1}^{n}$
+\begin_inset Formula $\{z_{i}\}_{i=1}^{n}$
 \end_inset
 
  of a random variable 
-\begin_inset Formula $X\sim p$
+\begin_inset Formula $Z\sim q$
 \end_inset
 
  with distribution 
-\begin_inset Formula $p$
+\begin_inset Formula $q$
 \end_inset
 
 , our interest is in whether 
-\begin_inset Formula $p$
+\begin_inset Formula $q$
 \end_inset
 
  matches some reference or target distribution 
-\begin_inset Formula $q$
+\begin_inset Formula $p$
 \end_inset
 
 
 \lang english
 , which is in our case assumed to have a density wrt the Lebesgue measure,
  
-\begin_inset Formula $dq(x)=q(x)dx$
+\begin_inset Formula $dp(x)=p(x)dx$
 \end_inset
 
 , and which we assume to be only known up to the normalisation constant.
@@ -613,7 +613,12 @@ T_{p}f:=\frac{\partial\log p(x)}{\partial x_{i}}f(x)+\frac{\partial f(x)}{\parti
 \end_inset
 
 As we will see, the operator can be expressed in the RKHS by defining a
- function that depends on gradients of the log-density and the kernel 
+ function that depends on gradients of the log-density and the kernel (with
+ one argument fixed to a frequency 
+\begin_inset Formula $t$
+\end_inset
+
+) 
 \begin_inset Formula 
 \[
 \xi(x,t):=\left[\nabla\log p(x)k(x,t)+\nabla k(x,t)\right],
@@ -628,7 +633,7 @@ whose inner product with
  exactly gives the expected value of the Stein operator, 
 \begin_inset Formula 
 \[
-\ev T_{p}f(Z)=\langle f,\ev\xi(Z)\rangle,
+\ev T_{p}f(X)=\langle f,\ev\xi(X)\rangle,
 \]
 
 \end_inset
@@ -642,11 +647,7 @@ reference "lem:SteinIsInner"
 \end_inset
 
 .
- The operator's expected value, when applied to any function 
-\begin_inset Formula $f\in{\cal F}$
-\end_inset
-
-, vanishes: 
+ The operator produces mean-zero functions: 
 \begin_inset Formula $\langle f,\ev\xi(X)\rangle=0$
 \end_inset
 
@@ -687,7 +688,7 @@ reference "lem:discprepancy_maximised_by_norm"
 
 .
  This makes it clear why 
-\begin_inset Formula $\ev(T_{q}f)(X)=0$
+\begin_inset Formula $\ev(T_{p}f)(X)=0$
 \end_inset
 
  is a desirable property: we can compute 
@@ -698,13 +699,21 @@ reference "lem:discprepancy_maximised_by_norm"
 \begin_inset Formula $\|\ev\xi(Z)\|$
 \end_inset
 
+ -- without the need to access 
+\begin_inset Formula $X$
+\end_inset
+
+ in the form of samples from 
+\begin_inset Formula $p$
+\end_inset
+
 .
  We arrive at our first main result, which states that the above discrepancy
  can be used to distinguish two distributions 
-\begin_inset Formula $p,q$
+\begin_inset Formula $p,q\in{\cal P}$
 \end_inset
 
-
+ .
 \end_layout
 
 \begin_layout Theorem
@@ -716,7 +725,7 @@ name "theorem_discrepancy_is_metric"
 
 \end_inset
 
- Suppose 
+ Let 
 \begin_inset Formula $q,p\in\mathcal{P}$
 \end_inset
 
@@ -745,12 +754,12 @@ reference "sec:details_kernel_stein"
 
 \end_inset
 
- contains all steps of the proof for the multivariate case and a closed
- form expression in terms of 
-\begin_inset Formula $p$
+ contains all assumptions on 
+\begin_inset Formula ${\cal P}$
 \end_inset
 
- and kernel gradients in Theorem 
+, all steps of the proof for the multivariate case, and a simple closed
+ form expression in Theorem 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "th:closed_form_discrepancy"
