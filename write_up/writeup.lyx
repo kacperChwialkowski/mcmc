@@ -185,15 +185,15 @@ vskip 0.3in ]
 \begin_layout Abstract
 We propose a nonparametric statistical test for goodness-of-fit: given a
  set of samples, the test determines how likely it is that these were generated
- from a target probability density function.
- The measure of goodness-of-fit is an integral probability metric constructed
- from a Reproducing Kernel Hilbert Space via Stein's method.
- Our test statistic is an unbiased empirical estimate of this measure, taking
- the form of a simple V-statistic in terms of the log gradients of the target
- and the kernel.
+ from a target density function.
+ The measure of goodness-of-fit is a divergence constructed via Stein's
+ method using the functions from a Reproducing Kernel Hilbert Space.
+ Our test statistic is based on an empirical estimate of this divergence,
+ taking the form of a V-statistic in terms of the log gradients of the target
+ density and the kernel.
  We derive a statistical test, both for i.i.d.
  and non-i.i.d.
- samples, where in the latter setting we propose a wild bootstrap procedure.
+ samples, where in the latter setting we make use of a wild bootstrap procedure.
  We apply our test to quantifying convergence of approximate Markov Chain
  Monte Carlo methods, statistical model critisism, and evaluating quality
  of fit vs model complexity in nonparametric density estimation.
@@ -2233,12 +2233,12 @@ name "thm:wild_bootstrap_works"
 \end_inset
 
 Let 
-\begin_inset Formula $f(W_{t,n})=\sup_{x}|P(nB_{n}>x|W_{t,n})-P(nV_{n}>x)|$
+\begin_inset Formula $f(W_{1,n},\cdots,W_{t,n})=\sup_{x}|P(nB_{n}>x|W_{1,n},\cdots,W_{t,n})-P(nV_{n}>x)|$
 \end_inset
 
  be a difference between quantiles.
  Under the null hypothesis 
-\begin_inset Formula $f(W_{t,n})$
+\begin_inset Formula $f(W_{1,n},\cdots,W_{t,n})$
 \end_inset
 
  converges to zero in probability.
