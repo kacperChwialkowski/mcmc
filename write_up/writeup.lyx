@@ -198,7 +198,7 @@ We propose a nonparametric statistical test for goodness-of-fit: given a
  The measure of goodness-of-fit is an integral probability metric constructed
  from a Reproducing Kernel Hilbert Space via Stein's method.
  Our test statistic is an unbiased empirical estimate of this measure, taking
- the form of a simple U-statistic in terms of the log gradients of the target
+ the form of a simple V-statistic in terms of the log gradients of the target
  and the kernel.
  We derive a statistical test, both for i.i.d.
  and non-i.i.d.
@@ -234,16 +234,12 @@ key "Kolmogorov33,Smirnov48"
 \end_inset
 
 .
- Given a set of random realisation 
-\begin_inset Formula $\{z_{i}\}_{i=1}^{n}$
-\end_inset
-
- of a random variable 
-\begin_inset Formula $Z\sim q$
+ Given a set of samples 
+\begin_inset Formula $\{Z_{i}\}_{i=1}^{n}$
 \end_inset
 
  with distribution 
-\begin_inset Formula $q$
+\begin_inset Formula $Z_{i}\sim q$
 \end_inset
 
 , our interest is in whether 
@@ -256,12 +252,7 @@ key "Kolmogorov33,Smirnov48"
 
 
 \lang english
-, which is in our case assumed to have a density wrt the Lebesgue measure,
- 
-\begin_inset Formula $dp(x)=p(x)dx$
-\end_inset
-
-, and which we assume to be only known up to the normalisation constant.
+, which we assume to be only known up to the normalisation constant.
 \end_layout
 
 \begin_layout Standard
@@ -525,22 +516,16 @@ heiko{references}
  -- those assume that the Markov chain reaches its equilibrium distribution.
  The described goodness-of-fit testing framework, however, fits very well
  into this context as it exactly quantifies the asymptotic bias of approximate
- MCMC, and furthermore only requires access to the 
-\emph on
-unnormalised
-\emph default
- log density function.
+ MCMC, and furthermore only requires access to the unnormalised log density
+ function.
  Additional challenge comes from the fact that MCMC samples exhibit correlation
  structure that has a potentially severe impact on asymptotic properties
  of statistical tests.
- In order to overcome such problems in our test, we apply the 
-\emph on
-wild-bootstrap
-\emph default
+ In order to overcome such problems in our test, we apply the wild-bootstrap
  technique 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "chwialkowski2014wild,Shao2010,leucht_dependent_2013"
+key "Shao2010,leucht_dependent_2013"
 
 \end_inset
 
@@ -580,7 +565,17 @@ Stein Operator in RKHS
 \begin_layout Standard
 
 \lang english
-Denote by 
+Our goal is to write the maximum discrepancy between reference distribution
+ 
+\begin_inset Formula $p$
+\end_inset
+
+ and observed sample distribution 
+\begin_inset Formula $q$
+\end_inset
+
+ in a RKHS.
+ Denote by 
 \begin_inset Formula ${\cal F}$
 \end_inset
 
@@ -618,6 +613,19 @@ As we will see, the operator can be expressed in the RKHS by defining a
 \begin_inset Formula $t$
 \end_inset
 
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+heiko{We should say what is the deal with t}
+\end_layout
+
+\end_inset
+
 ) 
 \begin_inset Formula 
 \[
@@ -630,7 +638,12 @@ whose inner product with
 \begin_inset Formula $f$
 \end_inset
 
- exactly gives the expected value of the Stein operator, 
+ exactly gives the expected value of the Stein operator, for our reference
+ 
+\begin_inset Formula $X\sim p$
+\end_inset
+
+ 
 \begin_inset Formula 
 \[
 \ev T_{p}f(X)=\langle f,\ev\xi(X)\rangle,
@@ -664,7 +677,7 @@ reference "lem:easy"
 \begin_inset Formula $X\sim p$
 \end_inset
 
- and any random variable 
+ and the observed 
 \begin_inset Formula $Z\sim q$
 \end_inset
 
@@ -758,17 +771,33 @@ reference "sec:details_kernel_stein"
 \begin_inset Formula ${\cal P}$
 \end_inset
 
-, all steps of the proof for the multivariate case, and a simple closed
- form expression in Theorem 
+, all steps of the proof for the multivariate case.
+ Theorem 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "th:closed_form_discrepancy"
 
 \end_inset
 
+ gives a simple closed from expression for the squared Stein discrepancy
+ 
+\begin_inset Formula $S(Z,\mathcal{F},p)^{2}$
+\end_inset
+
+, in terms of the expected value a function 
+\begin_inset Formula $h(Z,Z')$
+\end_inset
+
+, which itself is based on the RKHS norm of 
+\begin_inset Formula $\xi$
+\end_inset
+
 .
- We now proceed with constructing an estimator for 
-\begin_inset Formula $S(Z,\mathcal{F},p)$
+\end_layout
+
+\begin_layout Standard
+We now proceed with constructing an estimator for 
+\begin_inset Formula $S(Z,\mathcal{F},p)^{2}$
 \end_inset
 
 , and outline its asymptotic properties.
@@ -776,6 +805,271 @@ reference "th:closed_form_discrepancy"
 
 \begin_layout Subsection
 Wild Bootstrap Testing
+\end_layout
+
+\begin_layout Standard
+It is straight forward to estimate the squared Stein discrepancy 
+\begin_inset Formula $S(Z,\mathcal{F},p)^{2}$
+\end_inset
+
+ from samples 
+\begin_inset Formula $\{Z_{i}\}_{i=1}^{n}$
+\end_inset
+
+: a quadratic time estimator is an average of pairwise terms, so called
+ V-Statistic, which takes the form
+\begin_inset Formula 
+\[
+V_{n}=\frac{1}{n^{2}}\sum_{i,j=1}^{n}h(Z_{i},Z_{j}).
+\]
+
+\end_inset
+
+The asymptotic null distribution of the normalised V-Statistic 
+\begin_inset Formula $nV_{n}$
+\end_inset
+
+, however, has no computable closed form.
+ Furthermore, care has to be taken when the 
+\begin_inset Formula $Z_{i}$
+\end_inset
+
+ exhibit correlation structure, as the null distribution significantly changes,
+ impacting test significance.
+ The wild-bootstrap technique 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Shao2010,leucht_dependent_2013"
+
+\end_inset
+
+ addresses both problems.
+ First, it allows to simulate from the null distribution to compute test
+ thresholds.
+ Second, it accounts for correlation structure in the 
+\begin_inset Formula $Z_{i}$
+\end_inset
+
+ by mimicing it with a 
+\lang english
+auxiliary
+\lang british
+ random process, a simple
+\lang english
+ Markov chain taking values in 
+\begin_inset Formula $\{-1,1\}$
+\end_inset
+
+, starting from 
+\begin_inset Formula $W_{1,n}=1$
+\end_inset
+
+:
+\lang british
+
+\begin_inset Formula 
+\[
+W_{t,n}=\mathbf{1}(U_{t}>a_{n})W_{t-1,n}-\mathbf{1}(U_{t}<a_{n})W_{t-1,n},
+\]
+
+\end_inset
+
+
+\lang english
+where the 
+\begin_inset Formula $U_{t}$
+\end_inset
+
+ are uniform i.i.d.
+ random variables and 
+\begin_inset Formula $a_{n}$
+\end_inset
+
+ is the probability of 
+\begin_inset Formula $W_{t,n}$
+\end_inset
+
+ changing sign.
+ This leads to a bootstrapped V-statistic 
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+\lang english
+\begin_inset Formula 
+\[
+B_{n}=\frac{1}{n^{2}}\sum_{i,j=1}^{n}W_{i,n}W_{j,n}h(Z_{i,}Z_{j}).
+\]
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:wild_bootstrap_works"
+
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang british
+ establishes that 
+\begin_inset Formula $B_{n}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+ is a good approximation
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+of 
+\begin_inset Formula $V_{n}$
+\end_inset
+
+, so it is possible to approximate quantiles of the null distribution by
+ samplig from it.
+ We propose the following test
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang british
+ procedure:
+\end_layout
+
+\begin_layout Itemize
+Calculate 
+\lang english
+the test statistic 
+\begin_inset Formula $V_{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+
+\lang english
+Calculate
+\lang british
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+
+\begin_inset Formula $\{B_{n}\}_{i=1}^{D}$
+\end_inset
+
+ 
+\begin_inset Formula $D$
+\end_inset
+
+ times and estimate the 
+\begin_inset Formula $1-\alpha$
+\end_inset
+
+ empirical quantile 
+\begin_inset Formula $q$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+If 
+\begin_inset Formula $V_{n}>q$
+\end_inset
+
+, reject hypothesis that 
+\begin_inset Formula $Z\sim p$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
@@ -1506,14 +1800,13 @@ name "th:closed_form_discrepancy"
 \begin_inset Formula $S(Y,\mathcal{F},p)^{2}$
 \end_inset
 
- can be written in a closed form.
- 
+ can be written in a closed form, given by 
 \begin_inset Formula 
 \begin{align*}
- & \quad\ev\langle\nabla\log p(X_{1}),\nabla\log p(X_{2})\rangle_{2}k(X_{1},X_{2})\\
- & \quad+\ev\langle\nabla p(X_{2}),\nabla_{1}k(X_{1},X_{2})\rangle_{2}\\
- & \quad+\ev\langle\nabla\log p(X_{1}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}\\
- & \quad+\ev\ \langle\nabla_{1}k(X_{1},X_{2}),\nabla_{2}k(X_{1},X_{2})\rangle_{2},
+ & \quad\ev\Big[\nabla\log p(X_{1})^{\top}\nabla\log p(X_{2})k(X_{1},X_{2})\\
+ & \quad+\nabla p(X_{2})^{\top}\nabla_{1}k(X_{1},X_{2})\\
+ & \quad+\nabla\log p(X_{1}){}^{\top}\nabla k(X_{1},X_{2})\\
+ & \quad+\nabla_{1}k(X_{1},X_{2})^{\top}\nabla_{2}k(X_{1},X_{2})\Big],
 \end{align*}
 
 \end_inset
@@ -1724,6 +2017,15 @@ A constant vector filed of derivatives can be generated only by a constant
 \end_inset
 
 .
+ 
+\end_layout
+
+\begin_layout Standard
+One practical consideration is choice of flip parameter for the bootstrap
+ process when dealing with non-iid data.
+ While there is no good reprice for a finite sample and unknown covariance
+ structure, in the first experiment we discuss a strategy applicable to
+ chins obtained from MCMC methods.
  
 \end_layout
 
@@ -2071,88 +2373,6 @@ key "Shao2010,leucht_dependent_2013"
 
 .
  
-\emph default
-We introduce an auxiliary wild bootstrap process 
-\begin_inset Formula $\{W_{t,n}\}_{1\leq t\leq n}$
-\end_inset
-
-,
-\end_layout
-
-\begin_layout Standard
-
-\emph on
-\lang english
-\begin_inset Formula 
-\[
-\ensuremath{W_{t,n}=\mathbf{1}(U_{t}>p_{n})W_{t-1,n}-\mathbf{1}(U_{t}<p_{n})W_{t-1,n},}
-\]
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\emph default
-where 
-\begin_inset Formula $W_{1,n}=1$
-\end_inset
-
-, 
-\begin_inset Formula $U_{t}$
-\end_inset
-
- is a series of iid uniform random variables 
-\begin_inset Formula $p_{n}$
-\end_inset
-
- is a probability of 
-\begin_inset Formula $W_{t,n}$
-\end_inset
-
- changing a sign.
- 
-\begin_inset Formula $W_{t,n}$
-\end_inset
-
- is a Markov chain taking values in 
-\begin_inset Formula $\{-1,1\}$
-\end_inset
-
-with symmetric probability a flip.
- In order to estimate empirical integral we will study a bootstrapped 
-\begin_inset Formula $V$
-\end_inset
-
--statistics
-\end_layout
-
-\begin_layout Standard
-
-\emph on
-\lang english
-\begin_inset Formula 
-\[
-V_{b,n}(h,X)=\frac{1}{n}\sum_{i,j}W_{i,n}W_{j,n}h(X_{i,}X_{j})
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-If 
-\begin_inset Formula $X\sim p$
-\end_inset
-
-,
-\begin_inset Formula $V_{b,n}(h,X)$
-\end_inset
-
-
 \family roman
 \series medium
 \shape up
@@ -2164,36 +2384,7 @@ If
 \uwave off
 \noun off
 \color none
-\lang english
- is a good approximation
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-of 
-\begin_inset Formula $V_{n}(h)$
-\end_inset
 
-, which is simple application of the Theorem 3.1 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "leucht2012degenerate"
@@ -2217,6 +2408,12 @@ key "leucht2012degenerate"
 \noun off
 \color none
 \lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:wild_bootstrap_works"
+
+\end_inset
+
 of 
 \begin_inset Formula $V_{n}$
 \end_inset
@@ -2310,100 +2507,6 @@ reference "thm: null_dist"
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Standard
-We now present the test procedure
-\end_layout
-
-\begin_layout Paragraph
-The Test Procedure
-\end_layout
-
-\begin_layout Itemize
-Calculate 
-\lang english
-
-\begin_inset Formula $V_{n}(h,X)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-
-\lang english
-Calculate
-\lang british
- 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
-
-\begin_inset Formula $\{V_{b,n}(h,X)\}_{\{i=1\}}^{D}$
-\end_inset
-
- 
-\begin_inset Formula $D$
-\end_inset
-
- times and estimate 
-\begin_inset Formula $q_{1-\alpha}$
-\end_inset
-
-, the 
-\begin_inset Formula $1-\alpha$
-\end_inset
-
- empirical quantile of sequence 
-\begin_inset Formula $\{V_{b,n}(h,X)\}_{\{i=1\}}^{D}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Itemize
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
-If 
-\begin_inset Formula $V_{n}(h,X)>q$
-\end_inset
-
-, reject hypothesis that 
-\begin_inset Formula $X\sim p$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-One practical consideration is choice of flip parameter for the bootstrap
- process when dealing with non-iid data.
- While there is no good reprice for a finite sample and unknown covariance
- structure, in the first experiment we discuss a strategy applicable to
- chins obtained from MCMC methods.
  
 \end_layout
 
