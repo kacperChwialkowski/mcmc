@@ -2909,11 +2909,11 @@ reference "fig:density_estimation_increasing_data"
 
 \end_inset
 
- shows the distribution of p-values for this particualar test power 
-\begin_inset Formula $N_{\text{test}}$
+ shows the distribution of p-values as a function of 
+\begin_inset Formula $N$
 \end_inset
 
- is uniform for 
+; this distribution is uniform for 
 \begin_inset Formula $N=5000$
 \end_inset
 
@@ -2932,19 +2932,12 @@ key "strathmann2015gradient"
 
 \end_inset
 
- where the log pdf is taken to be 
-\begin_inset Formula $\theta^{\top}\phi_{x}$
+ to the infinite dimensional exponential family model, where the log pdf,
+ 
+\begin_inset Formula $f$
 \end_inset
 
- where 
-\begin_inset Formula $\theta\in\mathbb{R}^{m}$
-\end_inset
-
- and 
-\begin_inset Formula $\phi_{x}\in\mathbb{R}^{m}$
-\end_inset
-
- is the random Fourier feature embedding 
+, is approximated using random Fourier features 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Rahimi2007"
@@ -3140,115 +3133,7 @@ Appendix
 \begin_layout Section
 
 \lang english
-boring proofs
-\end_layout
-
-\begin_layout Proof
-
-\lang english
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "th:closed_form_discrepancy"
-
-\end_inset
-
-Recall that use notation 
-\begin_inset Formula 
-\begin{align*}
-\nabla_{1}k(x,y)=\left(\frac{\partial k(x,y)}{\partial x_{1}},\cdots,\frac{\partial k(x,y)}{\partial x_{d}}\right)\\
-\nabla_{2}k(x,y)=\left(\frac{\partial k(x,y)}{\partial y_{1}},\cdots,\frac{\partial k(x,y)}{\partial y_{d}}\right).\\
-\end{align*}
-
-\end_inset
-
-and 
-\begin_inset Formula $\langle\cdot,\cdot\rangle_{2}$
-\end_inset
-
- for inner product in 
-\begin_inset Formula $R^{d}$
-\end_inset
-
-.
- 
-\begin_inset Formula 
-\begin{align*}
-S(X,\mathcal{F},p)^{2} & =\langle\xi,\xi\rangle_{\mathcal{F}^{d}}\\
- & =\langle\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{1}k(X,\cdot)\right],\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{1}k(X,\cdot)\right]\rangle_{\mathcal{F}^{d}}\\
- & =\ev\langle\nabla\log p(X_{1})k(X_{1},\cdot)+\nabla_{1}k(X_{1},\cdot),\nabla\log p(X_{2})k(\cdot,X_{2})+\nabla_{2}k(\cdot,X_{2})\rangle_{\mathcal{F}^{d}}\\
- & =\ev\langle\nabla\log p(X_{1}),\nabla\log p(X_{2})\rangle_{2}k(X_{1},X_{2})+\ev\langle\nabla p(X_{2}),\nabla_{1}k(X_{1},X_{2})\rangle_{2}\\
- & \quad+\ev\langle\nabla\log p(X_{1}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}+\ev\ \langle\nabla_{1}k(X_{1},X_{2}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Proof
-
-\lang english
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "thm: null_dist"
-
-\end_inset
-
-The condition A1 is trivially stratified by the assumption 
-\begin_inset Formula $\sum_{t=1}^{\infty}\sqrt{\tau(t)}\leq\infty$
-\end_inset
-
-.
- The condition A2 (iv), Lipschitz continuity.
- follows form the assumption iv).
- The positive definiteness and degeneracy follows form the proof of th the
- Theorem 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "theorem_discrepancy_is_metric"
-
-\end_inset
-
-.
- Indeed
-\end_layout
-
-\begin_layout Proof
-
-\lang english
-\begin_inset Formula 
-\[
-h(x,y)=\langle\left[\nabla\log p(x)k(x,\cdot)+\nabla_{1}k(x,\cdot)\right],\left[\nabla\log p(y)k(y,\cdot)+\nabla_{1}k(y,\cdot)\right]\rangle_{\mathcal{F}^{d}}
-\]
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-so it's an inner product and hence positive definite.
- Degeneracy follows form the fact that for ant 
-\begin_inset Formula $t$
-\end_inset
-
-, by Lemma 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "lem:easy"
-
-\end_inset
-
-,
-\begin_inset Formula $\ev\nabla\log p(x)k(x,t)+\nabla_{1}k(x,t)=0$
-\end_inset
-
-.
- Finally the condition A2 (iii), 
-\begin_inset Formula $\ev h(X,X)\leq\infty$
-\end_inset
-
- follows form (ii), (iii) and boundlessness of the kernel.
+Proofs
 \end_layout
 
 \begin_layout Lemma
@@ -3364,6 +3249,170 @@ For the equation (a) we have used integration by parts and fact that
 \begin_layout Proof
 
 \lang english
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+Proof of Theorem
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "th:closed_form_discrepancy"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ Recall that use notation 
+\begin_inset Formula 
+\begin{align*}
+\nabla_{1}k(x,y)=\left(\frac{\partial k(x,y)}{\partial x_{1}},\cdots,\frac{\partial k(x,y)}{\partial x_{d}}\right)\\
+\nabla_{2}k(x,y)=\left(\frac{\partial k(x,y)}{\partial y_{1}},\cdots,\frac{\partial k(x,y)}{\partial y_{d}}\right).
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula $\langle\cdot,\cdot\rangle_{2}$
+\end_inset
+
+ for inner product in 
+\begin_inset Formula $R^{d}$
+\end_inset
+
+.
+ 
+\begin_inset Formula 
+\begin{align*}
+S(X,\mathcal{F},p)^{2} & =\langle\xi,\xi\rangle_{\mathcal{F}^{d}}\\
+ & =\langle\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{1}k(X,\cdot)\right],\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{1}k(X,\cdot)\right]\rangle_{\mathcal{F}^{d}}\\
+ & =\ev\langle\nabla\log p(X_{1})k(X_{1},\cdot)+\nabla_{1}k(X_{1},\cdot),\nabla\log p(X_{2})k(\cdot,X_{2})+\nabla_{2}k(\cdot,X_{2})\rangle_{\mathcal{F}^{d}}\\
+ & =\ev\langle\nabla\log p(X_{1}),\nabla\log p(X_{2})\rangle_{2}k(X_{1},X_{2})+\ev\langle\nabla p(X_{2}),\nabla_{1}k(X_{1},X_{2})\rangle_{2}\\
+ & \quad+\ev\langle\nabla\log p(X_{1}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}+\ev\ \langle\nabla_{1}k(X_{1},X_{2}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+Proof of 
+\lang british
+proposition
+\lang english
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm: null_dist"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+The condition A1 is trivially stratified by the assumption 
+\begin_inset Formula $\sum_{t=1}^{\infty}\sqrt{\tau(t)}\leq\infty$
+\end_inset
+
+.
+ The condition A2 (iv), Lipschitz continuity.
+ follows form the assumption iv).
+ The positive definiteness and degeneracy follows form the proof of th the
+ Theorem 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "theorem_discrepancy_is_metric"
+
+\end_inset
+
+.
+ Indeed
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+\begin_inset Formula 
+\[
+h(x,y)=\langle\left[\nabla\log p(x)k(x,\cdot)+\nabla_{1}k(x,\cdot)\right],\left[\nabla\log p(y)k(y,\cdot)+\nabla_{1}k(y,\cdot)\right]\rangle_{\mathcal{F}^{d}}
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+so it's an inner product and hence positive definite.
+ Degeneracy follows form the fact that for ant 
+\begin_inset Formula $t$
+\end_inset
+
+, by Lemma 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "lem:easy"
+
+\end_inset
+
+,
+\begin_inset Formula $\ev\nabla\log p(x)k(x,t)+\nabla_{1}k(x,t)=0$
+\end_inset
+
+.
+ Finally the condition A2 (iii), 
+\begin_inset Formula $\ev h(X,X)\leq\infty$
+\end_inset
+
+ follows form (ii), (iii) and boundlessness of the kernel.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+Proof of 
+\lang british
+proposition
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:wild_bootstrap_works"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 We have checked the assumption A2 in the proof of the Theorem 
 \lang british
 
@@ -3442,7 +3491,7 @@ reference "thm: null_dist"
 \begin_layout Subsection
 
 \lang english
-Linear time
+Linear time test
 \end_layout
 
 \begin_layout Standard
