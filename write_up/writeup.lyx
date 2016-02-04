@@ -1,5 +1,5 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
-\lyxformat 474
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
 \begin_document
 \begin_header
 \textclass scrartcl
@@ -34,13 +34,13 @@ theorems-sec
 \font_roman default
 \font_sans default
 \font_typewriter default
-\font_math auto
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
+
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -51,24 +51,15 @@ theorems-sec
 \use_hyperref false
 \papersize default
 \use_geometry false
-\use_package amsmath 2
-\use_package amssymb 2
-\use_package cancel 1
-\use_package esint 0
-\use_package mathdots 1
-\use_package mathtools 1
-\use_package mhchem 1
-\use_package stackrel 1
-\use_package stmaryrd 1
-\use_package undertilde 1
-\cite_engine natbib
-\cite_engine_type numerical
-\biblio_style plainnat
+\use_amsmath 2
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_numerical
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
 \suppress_date false
-\justification true
 \use_refstyle 0
 \index Index
 \shortcut idx
@@ -477,13 +468,9 @@ key "Rizzo09"
 \end_layout
 
 \begin_layout Standard
-PAPER OUTLINE??
-\end_layout
-
-\begin_layout Standard
-A key desideratum of any goodness-of-fit test is that it be able to correctly
- handle correlated data.
- approximate Markov Chain Monte Carlo (MCMC) 
+A specific application of this goodness-of-fit test is that it is able to
+ correctly handle samples from approximate Markov Chain Monte Carlo (MCMC)
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Korattikara2014,Welling2011,Bardenet2014"
@@ -494,49 +481,59 @@ key "Korattikara2014,Welling2011,Bardenet2014"
  With the hope to increase the overall efficiency, these methods use modificatio
 ns to Markov transition kernels that improve mixing speed at the cost of
  introducing an asymptotic bias.
- Such bias-variance trade-offs can usually be tuned with paramters of the
+ Such bias-variance trade-offs can usually be tuned with parameters of the
  sampling algorithms.
  It is therefore an important question whether for a particular parameter
  setting and for a fixed run-time, the produced samples have increased in
  quality or not.
  This question cannot be answered with classical MCMC convergence statistics
- alone, such as Effective Sample Size, Gelman-Rubin 
-\begin_inset ERT
+ alone, such as Effective Sample Size, Gelman-Rubin -- those assume that
+ the Markov chain reaches its equilibrium distribution.
+ The described goodness-of-fit testing framework, however, fits very well
+ into this context as it exactly quantifies the asymptotic bias of approximate
+ MCMC.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
+We begin our presentation in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:A-Kernel-Goodness-of-fit"
 
+\end_inset
 
-\backslash
-heiko{references}
+ with a high-level construction of the test.
+ In the 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Details"
+
+\end_inset
+
+ we prove the main results presented in the previous section.
+ In the section 
 \end_layout
 
 \end_inset
 
- -- those assume that the Markov chain reaches its equilibrium distribution.
- The described goodness-of-fit testing framework, however, fits very well
- into this context as it exactly quantifies the asymptotic bias of approximate
- MCMC, and furthermore only requires access to the unnormalised log density
- function.
- Additional challenge comes from the fact that MCMC samples exhibit correlation
- structure that has a potentially severe impact on asymptotic properties
- of statistical tests.
- In order to overcome such problems in our test, we apply the wild-bootstrap
- technique 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Shao2010,leucht_dependent_2013"
 
-\end_inset
-
-, which leads to correctly calibrated test asymptotics even for non iid
- data.
 \end_layout
 
 \begin_layout Section
 
 \lang english
 A Kernel Goodness-of-fit Test
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:A-Kernel-Goodness-of-fit"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1082,6 +1079,13 @@ If
 
 \lang english
 Details
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Details"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -1818,7 +1822,7 @@ Finally we prove that
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
@@ -2580,7 +2584,7 @@ reference "fig:student_bad"
 \begin_inset Formula $p_{n}$
 \end_inset
 
- beeing set to 
+ being set to 
 \begin_inset Formula $50\%$
 \end_inset
 
@@ -2680,7 +2684,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 TODO
@@ -2723,7 +2727,7 @@ status open
 \end_inset
 
  
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -2766,7 +2770,7 @@ status open
 \end_inset
 
 
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -3168,7 +3172,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 P-values for an increasing number of data 
@@ -3212,7 +3216,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 P-values for an increasing number of random features 
@@ -3672,7 +3676,7 @@ The computation of
 \begin_layout Proposition
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
