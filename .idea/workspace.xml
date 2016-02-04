@@ -8,6 +8,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tstudent/results_bad.npy" afterPath="$PROJECT_DIR$/tstudent/results_bad.npy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tstudent/results_good.npy" afterPath="$PROJECT_DIR$/tstudent/results_good.npy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tstudent/sgld_student.py" afterPath="$PROJECT_DIR$/tstudent/sgld_student.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/write_up/writeup.lyx" afterPath="$PROJECT_DIR$/write_up/writeup.lyx" />
     </list>
     <ignored path="mcmc.iws" />
     <ignored path=".idea/workspace.xml" />

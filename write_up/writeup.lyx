@@ -539,10 +539,9 @@ name "sec:A-Kernel-Goodness-of-fit"
 \begin_layout Standard
 
 \lang english
-We now give a high-level construction of our divergence metric and statistical
- test construction.
- While this section aims to communicate the main ideas, and is restricted
- to the real-valued case, we provide the multivariate counterpart, details,
+We now give a high-level construction of our divergence discrepancy and
+ the statistical test construction.
+ This section aims to communicate the main ideas, we provide the details
  and proofs in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -616,13 +615,29 @@ Tf:=\sum_{i=1}^{d}\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partia
 
 \end_inset
 
-As we will see, the operator can be expressed in the product RKHS by defining
- a function that depends on gradients of the log-density and the kernel
- 
+Suppose random variable 
+\begin_inset Formula $Z$
+\end_inset
+
+ is distributed according to a measure 
+\begin_inset Formula $q$
+\end_inset
+
+ and 
+\begin_inset Formula $X$
+\end_inset
+
+ is distributed according to the target measure 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ As we will see, the operator can be expressed by defining a function that
+ depends on gradients of the log-density and the kernel 
 \begin_inset Formula 
-\[
-\xi(x,\cdot):=\left[\nabla\log p(x)k(x,\cdot)+\nabla k(x,\cdot)\right],
-\]
+\begin{equation}
+\xi(x,\cdot):=\left[\nabla\log p(x)k(x,\cdot)+\nabla k(x,\cdot)\right],\label{eq:xi}
+\end{equation}
 
 \end_inset
 
@@ -630,15 +645,10 @@ whose inner product with
 \begin_inset Formula $f$
 \end_inset
 
- exactly gives the expected value of the Stein operator, for our reference
- 
-\begin_inset Formula $X\sim p$
-\end_inset
-
- 
+ exactly gives the expected value of the Stein operator 
 \begin_inset Formula 
 \[
-\ev Tf(X)=\langle f,\ev\xi(X)\rangle_{{\cal F}^{d}}=\sum_{i=1}^{d}\langle f_{i},\ev\xi_{i}(X)\rangle_{{\cal F}},
+\ev Tf(Z)=\langle f,\ev\xi(Z)\rangle_{{\cal F}^{d}}=\sum_{i=1}^{d}\langle f_{i},\ev\xi_{i}(Z)\rangle_{{\cal F}},
 \]
 
 \end_inset
@@ -652,8 +662,12 @@ reference "lem:SteinIsInner"
 \end_inset
 
 .
- The operator produces mean-zero functions: 
-\begin_inset Formula $\langle f,\ev\xi(X)\rangle=0$
+ On the other hand, for 
+\begin_inset Formula $X$
+\end_inset
+
+ from the target measure 
+\begin_inset Formula $\ev Tf(X)=0$
 \end_inset
 
 , which can be seen by integration by parts, c.f.
@@ -665,15 +679,7 @@ reference "lem:easy"
 \end_inset
 
 .
- We can now define a Stein discrepancy between 
-\begin_inset Formula $X\sim p$
-\end_inset
-
- and the observed 
-\begin_inset Formula $Z\sim q$
-\end_inset
-
- -- and express it in the RKHS,
+ We can now define a Stein discrepancy and express it in the RKHS,
 \begin_inset Formula 
 \begin{align*}
 S(Z) & :=\sup_{\Vert f\Vert<1}\ev(Tf)(Z)-\ev(Tf)(X)\\
@@ -1109,25 +1115,6 @@ name "sec:details_kernel_stein"
 \begin_layout Standard
 
 \lang english
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-heiko{I just copied the old Section 2 here.
- This now needs thinning having the new Section 2 in mind.}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\lang english
 The test is applicable to family of distributions, on a real coordinate
  space, 
 \begin_inset Formula $\mathcal{P}$
@@ -1246,17 +1233,15 @@ key "SriFukLan11"
 \begin_inset Newline newline
 \end_inset
 
-We denote by 
+Recall that 
 \begin_inset Formula $\mathcal{F}$
 \end_inset
 
- the Reproducing Kernel Hilbert Space of scalar-real-valued functions associated
- with the kernel 
+ is an RKHS associated with the kernel 
 \begin_inset Formula $k$
 \end_inset
 
-.
- Furthermore 
+ and 
 \begin_inset Formula ${\cal F}^{d}$
 \end_inset
 
@@ -1265,172 +1250,6 @@ We denote by
 \end_inset
 
  with a standard inner product.
-\end_layout
-
-\begin_layout Paragraph
-
-\lang english
-Stein operator.
-\end_layout
-
-\begin_layout Standard
-
-\lang english
-We proceed similarly to 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "stein1972,gorham2015measuring"
-
-\end_inset
-
- and make use of a Stein operator to characterize discrepancy between probabilit
-y measures.
- Following 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "gorham2015measuring"
-
-\end_inset
-
-, we study the operator 
-\begin_inset Formula $T$
-\end_inset
-
- acting on 
-\begin_inset Formula $R^{d}$
-\end_inset
-
- valued functions 
-\begin_inset Formula $f:=(f_{1},\cdots,f_{d})$
-\end_inset
-
-, 
-\begin_inset Formula $f_{i}\in\mathcal{F}$
-\end_inset
-
- 
-\begin_inset Formula 
-\[
-Tf=\sum_{i=1}^{d}\left(\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right).
-\]
-
-\end_inset
-
-As in 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "gorham2015measuring"
-
-\end_inset
-
-, we show that for all 
-\begin_inset Formula $f\in{\cal F}^{d},\ev(T_{q}f)(X)=0$
-\end_inset
-
- (Lemma 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "lem:easy"
-
-\end_inset
-
-).
- Next, for any random variable 
-\begin_inset Formula $Z$
-\end_inset
-
-, we define Stein discrepancy between 
-\begin_inset Formula $X\sim p$
-\end_inset
-
- and 
-\begin_inset Formula $Z$
-\end_inset
-
-, 
-\begin_inset Formula 
-\begin{align}
-S(Z) & :=\sup_{f\in F^{d},\|f\|<1}\ev(Tf)(Z)\label{eq:Sdef}\\
- & =\sup_{f\in F^{d}}\ev(Tf)(Z)-\ev(Tf)(X)\nonumber 
-\end{align}
-
-\end_inset
-
- .
- In Theorem 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "theorem_discrepancy_is_metric"
-
-\end_inset
-
- we show that 
-\begin_inset Formula $S(Z)$
-\end_inset
-
- captures any difference between probability measures.
- Contrary to 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "gorham2015measuring"
-
-\end_inset
-
-, we don't need to approximate 
-\begin_inset Formula $S(Y,\mathcal{F},p)$
-\end_inset
-
- -- we can calculate it explicitly, as demonstrated in the Theorem 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "th:closed_form_discrepancy"
-
-\end_inset
-
-.
- We start with a definition of a function 
-\begin_inset Formula $\xi$
-\end_inset
-
-, which expected value can be interpreted as a type of a mean embedding.
- 
-\end_layout
-
-\begin_layout Definition
-
-\lang english
-\begin_inset CommandInset label
-LatexCommand label
-name "def:xi"
-
-\end_inset
-
-For any 
-\begin_inset Formula $x\in R^{d}$
-\end_inset
-
-, define a vector valued function function 
-\begin_inset Formula $\xi:R^{d}\to R^{d}$
-\end_inset
-
-, 
-\begin_inset Formula 
-\[
-\xi(x,t)=\left[\nabla\log p(x)k(x,t)+\nabla_{1}k(x,t)\right]
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $\nabla\log p(x)=\left(\frac{\partial\log p(x)}{\partial x_{1}},\cdots,\frac{\partial\log p(x)}{\partial x_{d}}\right)$
-\end_inset
-
- and 
-\begin_inset Formula $\nabla_{1}k(x,t)=\left(\frac{\partial k(x,t)}{\partial x_{1}},\cdots,\frac{\partial k(x,t)}{\partial x_{d}}\right)$
-\end_inset
-
-.
- 
 \end_layout
 
 \begin_layout Lemma
@@ -1446,7 +1265,18 @@ name "lem:WellDefined"
 \begin_inset Formula $\xi(x,\cdot)$
 \end_inset
 
- is an element of the reproducing kernel Hilbert space 
+ (see 
+\lang british
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:xi"
+
+\end_inset
+
+
+\lang english
+) is an element of the reproducing kernel Hilbert space 
 \begin_inset Formula $\mathcal{F}^{d}$
 \end_inset
 
@@ -1471,7 +1301,7 @@ key "SteChr08"
 \end_inset
 
  each entry of 
-\begin_inset Formula $\nabla_{1}k(x,\cdot)$
+\begin_inset Formula $\nabla k(x,\cdot)$
 \end_inset
 
  belongs to 
@@ -1496,7 +1326,7 @@ key "SteChr08"
 \end_layout
 
 \begin_layout Standard
-The following technical lemma shows that the expected value of 
+The following lemma shows that the expected value of 
 \begin_inset Formula $\xi$
 \end_inset
 
@@ -1567,6 +1397,50 @@ For any random variable
 
 ).
  
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+It is sufficient to check that coefficients of 
+\begin_inset Formula $\xi$
+\end_inset
+
+ are Bochner integrable (
+\begin_inset CommandInset citation
+LatexCommand cite
+after "Definition A.5.20"
+key "SteChr08"
+
+\end_inset
+
+).
+ first we check that for random any variable 
+\begin_inset Formula $Z$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\ev\left\Vert \frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)\right\Vert ^{2}<C\ev\|\nabla\log p(X)\|^{2}<\infty,
+\]
+
+\end_inset
+
+for some constant 
+\begin_inset Formula $C$
+\end_inset
+
+, which follows form assumption (i) and boundedness of the kernel.
+ Next we check that 
+\begin_inset Formula 
+\[
+\ev\left\Vert \frac{\partial k(Z,\cdot)}{\partial x}\right\Vert ^{2}=\ev\left(\frac{\partial^{2}k(Z,Z)}{dx_{i}dx_{i+d}}\right)^{2}<\infty,
+\]
+
+\end_inset
+
+which follows from assumption (iii).
 \end_layout
 
 \begin_layout Standard
@@ -1669,45 +1543,7 @@ reference "lem:BochnerInt1"
 \noun off
 \color none
 \lang english
-By the construction of the Stein operator we know that for 
-\begin_inset Formula $X\sim p$
-\end_inset
-
-, 
-\begin_inset Formula $\ev(Tf)(X)=0$
-\end_inset
-
-, and so for any random variable 
-\begin_inset Formula $Z$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-
-\lang english
-\begin_inset Formula 
-\begin{align*}
-S(Y,\mathcal{F},p) & =\sup_{f\in F^{d}}\ev(Tf)(Y)-\ev(Tf)(X)\\
- & =\sup_{f\in F^{d}}\langle f,\ev\xi(Y)-\ev\xi(X)\rangle_{\mathcal{F}^{d}}.
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-This illustrates intuition 
-\begin_inset Formula $\ev\xi(Z)$
-\end_inset
-
- is a type of mean embedding centred at the measure 
-\begin_inset Formula $p$
-\end_inset
-
-.
+From the inner product representation we instantly get  
 \end_layout
 
 \begin_layout Lemma
@@ -1775,7 +1611,33 @@ reference "lem:SteinIsInner"
 \end_layout
 
 \begin_layout Standard
-We are ready to write down the closed form formula for 
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+The proof
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang british
+ of the closed form formula for 
 \family roman
 \series medium
 \shape up
@@ -1792,12 +1654,53 @@ We are ready to write down the closed form formula for
 \begin_inset Formula $S(Y,\mathcal{F},p)^{2}$
 \end_inset
 
-.
- The proof, which is mostly an algebraic manipulation, is in the appendix.
- 
-\end_layout
 
-\begin_layout Standard
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang british
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "th:closed_form_discrepancy"
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+, which is mostly an algebraic manipulation, is in the appendix.
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang british
 Finally we prove that 
 \family roman
 \series medium
@@ -1840,12 +1743,16 @@ reference "theorem_discrepancy_is_metric"
 
 \end_inset
 
-If 
+ If 
 \begin_inset Formula $p=q$
 \end_inset
 
  then 
-\begin_inset Formula $S(Y,\mathcal{F},p)=0$
+\begin_inset Formula $S(Y,\mathcal{F},p)$
+\end_inset
+
+ is 
+\begin_inset Formula $0$
 \end_inset
 
  by the Lemma 
@@ -1989,17 +1896,7 @@ A constant vector filed of derivatives can be generated only by a constant
 \begin_inset Formula $p=q$
 \end_inset
 
-.
- 
-\end_layout
-
-\begin_layout Standard
-One practical consideration is choice of flip parameter for the bootstrap
- process when dealing with non-iid data.
- While there is no good reprice for a finite sample and unknown covariance
- structure, in the first experiment we discuss a strategy applicable to
- chins obtained from MCMC methods.
- 
+, a contradiction.
 \end_layout
 
 \begin_layout Subsection
@@ -2081,7 +1978,7 @@ key "chwialkowski2014kernel"
 \end_inset
 
 -mixing formally, let 
-\begin_inset Formula $\{X_{t},\mathcal{F}_{t}\}_{t\in\mathbb{N}}$
+\begin_inset Formula $\{Z_{t},\mathcal{F}_{t}\}_{t\in\mathbb{N}}$
 \end_inset
 
  be a stationary sequence of integrable random variables, with respect to
@@ -2109,8 +2006,8 @@ key "chwialkowski2014kernel"
  is defined as follows 
 \begin_inset Formula 
 \begin{align*}
-\tau(r) & =\sup_{l\in\mathbb{N}}\frac{1}{l}\sup_{r\leq i_{1}...\leq i_{l}}T(\mathcal{F}_{0},(X_{i_{1}},...,X_{i_{l}})),\\
-T(\mathcal{M},X) & =\ev\left(\sup_{g\in\Lambda}\left|\int g(t)(dP_{X|\mathcal{M}}-dP)\right|\right)
+\tau(r) & =\sup_{l\in\mathbb{N}}\frac{1}{l}\sup_{r\leq i_{1}...\leq i_{l}}T(\mathcal{F}_{0},(Z_{i_{1}},...,Z_{i_{l}})),\\
+T(\mathcal{M},Z) & =\ev\left(\sup_{g\in\Lambda}\left|\int g(t)(dP_{X|\mathcal{M}}-dP)\right|\right)
 \end{align*}
 
 \end_inset
@@ -2130,72 +2027,14 @@ and
 \end_inset
 
 .
- A 
-\begin_inset Formula $V$
-\end_inset
-
--statistic of a function 
-\begin_inset Formula $h,$
-\end_inset
-
- is defined as follows
-\begin_inset Formula 
-\[
-V_{n}(h,X)=\frac{1}{n}\sum_{i,j=1}^{n}h(X_{i},X_{j}).
-\]
-
-\end_inset
-
-For the one sample test the function 
-\begin_inset Formula $h$
-\end_inset
-
- is 
-\end_layout
-
-\begin_layout Standard
-
-\lang english
-\begin_inset Formula 
-\begin{align*}
-h(x,y) & =\langle\nabla\log p(X_{1}),\nabla\log p(X_{2})\rangle_{2}k(X_{1},X_{2})\\
- & +\langle\nabla p(X_{2}),\nabla_{1}k(X_{1},X_{2})\rangle_{2}\\
- & +\langle\nabla\log p(X_{1}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}\\
- & +\langle\nabla_{1}k(X_{1},X_{2}),\nabla_{2}k(X_{1},X_{2})\rangle_{2}.
-\end{align*}
-
-\end_inset
-
-The distribution of 
-\begin_inset Formula $V(h,X)$
-\end_inset
-
- depends whether 
-\begin_inset Formula $X\sim p$
-\end_inset
-
- or not.
- This is illustrated by the following theorem, which is a direct application
- of the Theorem 2.1 
+ A direct application of the Theorem 2.1 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "leucht2012degenerate"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Theorem
-
-\lang english
-\begin_inset CommandInset label
-LatexCommand label
-name "thm: null_dist"
-
-\end_inset
-
-If 
+ characterizes limiting behavior of 
 \family roman
 \series medium
 \shape up
@@ -2208,11 +2047,51 @@ If
 \noun off
 \color none
 
-\begin_inset Formula $X\sim p$
+\begin_inset Formula $nV_{n}$
 \end_inset
 
- then 
-\begin_inset Formula $V_{n}(h,X)$
+ for 
+\begin_inset Formula $\tau$
+\end_inset
+
+-mixing processes,
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\end_layout
+
+\begin_layout Proposition
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "thm: null_dist"
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Under the null hypothesis 
+\begin_inset Formula $nV_{n}$
 \end_inset
 
  converges weakly to some distribution.
@@ -2246,7 +2125,7 @@ Proof, which is a simple verification of the assumptions, is in the appendix.
 \noun default
 \color inherit
 
-\begin_inset Formula $V_{n}(h,X)$
+\begin_inset Formula $V_{n}$
 \end_inset
 
 
@@ -2305,7 +2184,7 @@ key "leucht2012degenerate"
 \noun default
 \color inherit
 
-\begin_inset Formula $V_{n}(h,X)$
+\begin_inset Formula $V_{n}$
 \end_inset
 
 
@@ -2319,55 +2198,21 @@ key "leucht2012degenerate"
 \uwave off
 \noun off
 \color none
- in an analytic form.
- The common solution, is estimating quantiles by a resampling method.
- For resampling we use wild bootstrap 
-\family default
-\series default
-\shape default
-\size default
-\emph on
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-method 
-\emph default
-proposed by
-\emph on
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Shao2010,leucht_dependent_2013"
+ in a close form.
+ The common solution, is estimating quantiles by a resampling method, as
+ described in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:A-Kernel-Goodness-of-fit"
 
 \end_inset
 
 .
- 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset CommandInset citation
-LatexCommand citep
-key "leucht2012degenerate"
-
-\end_inset
-
+ The validity of this resampling method is guaranteed by this this proposition.
  
 \end_layout
 
-\begin_layout Theorem
+\begin_layout Proposition
 
 \family roman
 \series medium
@@ -2387,100 +2232,42 @@ name "thm:wild_bootstrap_works"
 
 \end_inset
 
-of 
-\begin_inset Formula $V_{n}$
-\end_inset
-
-.
- Let 
-\begin_inset Formula $f(W_{t,n})=\sup_{x}|P(V_{b,n}>x|W_{t,n})-P(V_{n}>x)|$
+Let 
+\begin_inset Formula $f(W_{t,n})=\sup_{x}|P(nB_{n}>x|W_{t,n})-P(nV_{n}>x)|$
 \end_inset
 
  be a difference between quantiles.
- 
+ Under the null hypothesis 
 \begin_inset Formula $f(W_{t,n})$
 \end_inset
 
  converges to zero in probability.
- 
+ Under the alternative 
+\begin_inset Formula $B_{n}$
+\end_inset
+
+ converges to zero, while 
+\begin_inset Formula $V_{n}$
+\end_inset
+
+ converges to a positive constant.
 \end_layout
 
-\begin_layout Proof
-
-\lang english
-We have checked the assumption A2 in the proof of the Theorem 
-\lang british
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "thm: null_dist"
-
-\end_inset
-
-
-\lang english
-.
- The assumption B1 follows from our technical assumption 
-\begin_inset Formula $\tau(t)\leq O(t^{-6})$
-\end_inset
-
-.
- Finally we check assumption B2 (bootstrap assumption):
-\emph on
+\begin_layout Standard
+As a consequence if the null hypothesis is true we can approximate any quantile
  
-\begin_inset Formula $\{W_{t,n}\}_{1\leq t\leq n}$
+\begin_inset Formula $x$
 \end_inset
 
-
-\emph default
- is a row-wise strictly stationary triangular array independent of all 
-\begin_inset Formula $Z_{t}$
+, while under the null hypothesis all quantiles of 
+\begin_inset Formula $B_{n}$
 \end_inset
 
- such that 
-\begin_inset Formula $\ev W_{t,n}=0$
-\end_inset
-
- and 
-\begin_inset Formula $\sup_{n}\ev|W_{t,n}^{2+\sigma}|<\infty$
-\end_inset
-
- for some 
-\begin_inset Formula $\sigma>0$
+ collapse to zero while 
+\begin_inset Formula $P(V_{n}>0)\to1$
 \end_inset
 
 .
- The auto-covariance of the process is given by 
-\begin_inset Formula $\ev W_{s,n}W_{t,n}=(1-2p_{n})^{s-t}$
-\end_inset
-
- , so the function 
-\begin_inset Formula $\rho(x)=\exp(-x)$
-\end_inset
-
-, and 
-\begin_inset Formula $l_{n}=\log(1-2p_{n})^{-1}$
-\end_inset
-
-.
- We verify that 
-\begin_inset Formula $\lim_{u\to0}\rho(u)=1$
-\end_inset
-
-, 
-\begin_inset Formula $l_{n}=o(n)$
-\end_inset
-
- , 
-\begin_inset Formula $\lim_{n\to\infty}l_{n}=\infty$
-\end_inset
-
- and 
-\begin_inset Formula $\sum_{r=1}^{n-1}\rho(|r|/l_{n})=O(l_{n})$
-\end_inset
-
-.
- 
 \end_layout
 
 \begin_layout Section
@@ -3305,53 +3092,6 @@ boring proofs
 \end_layout
 
 \begin_layout Proof
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "lem:BochnerInt"
-
-\end_inset
-
-
-\lang english
-It is sufficient to check that coefficients of 
-\begin_inset Formula $\xi$
-\end_inset
-
- are Bochner integrable (
-\begin_inset CommandInset citation
-LatexCommand cite
-after "Definition A.5.20"
-key "SteChr08"
-
-\end_inset
-
-).
- first we check that for random any variable 
-\begin_inset Formula $Z$
-\end_inset
-
- 
-\begin_inset Formula 
-\[
-\ev\left\Vert \frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)\right\Vert ^{2}=\ev\left(\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,Z)\right)^{2}<\ev\|\nabla\log p(X)\|^{2}<\infty,
-\]
-
-\end_inset
-
-which follows form assumption (i) and boundedness of the kernel.
- Next we check that 
-\begin_inset Formula 
-\[
-\ev\left\Vert \frac{\partial k(Z,\cdot)}{\partial x}\right\Vert ^{2}=\ev\left(\frac{\partial^{2}k(Z,Z)}{dx_{i}dx_{i+d}}\right)^{2}<\infty,
-\]
-
-\end_inset
-
-which follows from assumption (iii).
- 
-\end_layout
-
-\begin_layout Proof
 
 \lang english
 \begin_inset CommandInset ref
@@ -3562,6 +3302,88 @@ For the equation (a) we have used integration by parts and fact that
 \end_inset
 
  vanishes at infinity.
+ 
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+We have checked the assumption A2 in the proof of the Theorem 
+\lang british
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm: null_dist"
+
+\end_inset
+
+
+\lang english
+.
+ The assumption B1 follows from our technical assumption 
+\begin_inset Formula $\tau(t)\leq O(t^{-6})$
+\end_inset
+
+.
+ Finally we check assumption B2 (bootstrap assumption):
+\emph on
+ 
+\begin_inset Formula $\{W_{t,n}\}_{1\leq t\leq n}$
+\end_inset
+
+
+\emph default
+ is a row-wise strictly stationary triangular array independent of all 
+\begin_inset Formula $Z_{t}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\ev W_{t,n}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\sup_{n}\ev|W_{t,n}^{2+\sigma}|<\infty$
+\end_inset
+
+ for some 
+\begin_inset Formula $\sigma>0$
+\end_inset
+
+.
+ The auto-covariance of the process is given by 
+\begin_inset Formula $\ev W_{s,n}W_{t,n}=(1-2p_{n})^{s-t}$
+\end_inset
+
+ , so the function 
+\begin_inset Formula $\rho(x)=\exp(-x)$
+\end_inset
+
+, and 
+\begin_inset Formula $l_{n}=\log(1-2p_{n})^{-1}$
+\end_inset
+
+.
+ We verify that 
+\begin_inset Formula $\lim_{u\to0}\rho(u)=1$
+\end_inset
+
+, 
+\begin_inset Formula $l_{n}=o(n)$
+\end_inset
+
+ , 
+\begin_inset Formula $\lim_{n\to\infty}l_{n}=\infty$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum_{r=1}^{n-1}\rho(|r|/l_{n})=O(l_{n})$
+\end_inset
+
+.
  
 \end_layout
 
