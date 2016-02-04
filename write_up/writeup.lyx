@@ -195,19 +195,8 @@ vskip 0.3in ]
 We propose a nonparametric statistical test for goodness-of-fit: given a
  set of samples, the test determines how likely it is that these were generated
  from a target probability density function.
- The measure of goodness-of-fit 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-uses the largest expectation over a class of functions to determine the
- distance from the input density to the target density,
-\end_layout
-
-\end_inset
-
- is an integral probability metric constructed from a reproducing kernel
- Hilbert space via Stein's method.
+ The measure of goodness-of-fit is an integral probability metric constructed
+ from a Reproducing Kernel Hilbert Space via Stein's method.
  Our test statistic is an unbiased empirical estimate of this measure, taking
  the form of a simple U-statistic in terms of the log gradients of the target
  and the kernel.
@@ -217,32 +206,6 @@ uses the largest expectation over a class of functions to determine the
  We apply our test to quantifying convergence of approximate Markov Chain
  Monte Carlo methods, statistical model critisism, and evaluating quality
  of fit vs model complexity in nonparametric density estimation.
-\end_layout
-
-\begin_layout Abstract
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-We present a nonparametric goodness-of-fit test.
- Given a set of samples, the test allows to quantify how likely it is that
- the samples have been generated from a given probability density function.
- We use Stein operators in Reproducing Kernel Hilbert Spaces to construct
- a divergence metric that that solely depends on the log-gradients of the
- target density.
- The metric has a simple form and can be efficiently estimated from data.
- We analyse the estimator's asymptotic properties, and embed it into the
- framwork of statistical hypothesis testing -- including efficient test
- constructions using non iid data.
- As a demonstration of the test's practicality, we apply it to quantifying
- convergence of approximate Markov Chain Monte Carlo methods, statistical
- model critisism, and assessing estimation and approximation convergence
- in non-parametric density estimation.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -298,7 +261,7 @@ key "Kolmogorov33,Smirnov48"
 \begin_inset Formula $dq(x)=q(x)dx$
 \end_inset
 
-, and which we assume to be known up to the normalisation constant.
+, and which we assume to be only known up to the normalisation constant.
 \end_layout
 
 \begin_layout Standard
@@ -368,8 +331,8 @@ An important application of a goodness-of-fit measure is in statistical
 
 \begin_layout Standard
 The key contribution of this work is to define a statistical test of goodness-of
--fit, based on a Stein discrepancy computed in a reproducing kernel Hilbert
- space (RKHS).
+-fit, based on a Stein discrepancy computed in a Reproducing Kernel Hilbert
+ Space (RKHS).
  To construct our test statistic, we apply the Stein operator to our chosen
  RKHS functions, and define our measure of goodness of fit as the largest
  discrepancy between empirical sample expectations and target expectations
@@ -447,19 +410,19 @@ key "GreGyo10"
  the characteristic function of the target density.
  This dates back to the test of Gaussianity of 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "BaringhausHenze88"
 
 \end_inset
 
-, who used a squared exponential smoothing function (see eq.
- (2.1) in their paper).
+, who used a squared exponential smoothing function (see Eq.
+ 2.1 in their paper).
  For this choice of smoothing function, their statistic is identical to
  the maximum mean discrepancy (MMD) with the squared exponential kernel,
  which can be shown using the Bochner representation of the kernel (compare
  with 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citealt
 after "Corollary 4"
 key "SriGreFukLanetal10"
 
@@ -546,8 +509,20 @@ ns to Markov transition kernels that improve mixing speed at the cost of
  setting and for a fixed run-time, the produced samples have increased in
  quality or not.
  This question cannot be answered with classical MCMC convergence statistics
- alone -- those assume that the Markov chain reaches its equilibrium distributio
-n.
+ alone, such as Effective Sample Size, Gelman-Rubin 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+heiko{references}
+\end_layout
+
+\end_inset
+
+ -- those assume that the Markov chain reaches its equilibrium distribution.
  The described goodness-of-fit testing framework, however, fits very well
  into this context as it exactly quantifies the asymptotic bias of approximate
  MCMC, and furthermore only requires access to the 
