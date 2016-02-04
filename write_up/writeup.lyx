@@ -2846,8 +2846,8 @@ Convergence in non-parametric density estimation
 \end_layout
 
 \begin_layout Standard
-Our next experiment illustrates using the developed test to asses estimation
- quality in the context of nonparametricdensity estimation.
+We use the developed test to asses estimation quality in the context of
+ nonparametric density estimation.
  We quantify estimation quality and approximation quality of the infinite
  dimensional exponential family model 
 \begin_inset CommandInset citation
@@ -2867,31 +2867,41 @@ key "strathmann2015gradient"
 \end_layout
 
 \begin_layout Standard
-The original model's (un-normalised) log pdf is given by 
+In this particular model log density is assumed to be of a form 
 \begin_inset Formula $f(x)$
 \end_inset
 
  where 
-\begin_inset Formula $f\in{\cal H}$
+\begin_inset Formula $f$
 \end_inset
 
  lies in a Reproducing Kernel Hilbert Space 
 \begin_inset Formula ${\cal H}$
 \end_inset
 
- induced by a Gaussian kernel with bandwidth 1.
+ induced by a Gaussian kernel with bandwidth 
+\begin_inset Formula $1$
+\end_inset
+
+.
  We fit the model to 
 \begin_inset Formula $N$
 \end_inset
 
- standard Gaussian distributed data and perform our quadratic time test
- on seperate test data of a fixed size 
+ standard Gaussian distributed observations and perform our quadratic time
+ test on separate evaluation dataset of a fixed size 
 \begin_inset Formula $N_{\text{test}}=500$
 \end_inset
 
-.
- We aim to identify the number of samples necessary to make model and data
- indistinguishable for a test of a certain power.
+ (observations in the evaluation dataset are also drawn from standard Gaussian
+ distribution).
+ We aim to identify 
+\begin_inset Formula $N$
+\end_inset
+
+ large enough (number of samples) so that the one-sample test does not reject
+ hypothesis that assumed model of density is compatible with evaluation
+ dataset.
  Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2915,7 +2925,7 @@ reference "fig:density_estimation_increasing_data"
 \end_layout
 
 \begin_layout Standard
-We now use the recent random Features approximation 
+We next use the recent random Features approximation 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "strathmann2015gradient"
