@@ -261,7 +261,7 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-Goodness-of-it testing, or measuring sampling quality, is a fundamental
+Goodness-of-fit testing, or measuring sampling quality, is a fundamental
  tool in statistical analysis, dating back to the test of Kolmogorov and
  Smirnov 
 \begin_inset CommandInset citation
@@ -271,38 +271,7 @@ key "Kolmogorov33,Smirnov48"
 \end_inset
 
 .
- Recent nonparametric multivariate approaches include space paritioning
- 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Bar89,Beirlant2,Gyorfi,GyVa02"
-
-\end_inset
-
-, In the case where the test is against a particular alternative, most commonly
- the multivariate Normal, then bespoke tests have been developed based on
- differences in empirical characteristic functions, with or without 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "BaringhausHenze88"
-
-\end_inset
-
- smoothing.
- kernel density estimation ADD, and energy distances, based on smoothed
- differences in characteristic functions (another special case which has
- been develpoed is the Pareto distribution 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Rizzo09"
-
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
-Given a set of random realisation 
+ Given a set of random realisation 
 \begin_inset Formula $\{x_{i}\}_{i=1}^{n}$
 \end_inset
 
@@ -314,11 +283,11 @@ Given a set of random realisation
 \begin_inset Formula $p$
 \end_inset
 
-, researchers are often interested in the question whether 
+, our interest is in whether 
 \begin_inset Formula $p$
 \end_inset
 
- matches some reference distribution 
+ matches some reference or target distribution 
 \begin_inset Formula $q$
 \end_inset
 
@@ -330,27 +299,12 @@ Given a set of random realisation
 \end_inset
 
 , and which we assume to be known up to the normalisation constant.
- While the problem is well studied for certain parametric families, e.g.
- Gaussian 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-heiko{reference, also add more examples}
-\end_layout
-
-\end_inset
-
-, it is more challenging in the nonparametric context.
 \end_layout
 
 \begin_layout Standard
 
 \lang english
-Recently, 
+Our measure of goodness of fit builds on recent work of 
 \lang british
 
 \begin_inset CommandInset citation
@@ -359,92 +313,223 @@ key "gorham2015measuring"
 
 \end_inset
 
- proposed an elegant construction to measure sample quality by quantifying
- the maximum discrepancy between empirical sample expectations and target
- expectations for a large class of test functions.
- The method is based on the so-called 
-\emph on
-Stein operator
-\emph default
- on the test function, whose application produces vanishing expectation
- under 
-\begin_inset Formula $q$
-\end_inset
-
-, and which only depends on the derivarive of the 
+, who proposed an elegant measure of sample quality with respect to a target.
+ This is a maximum discrepancy between empirical sample expectations and
+ target expectations over a large class of test functions, constructed so
+ as to have zero expectation over the target distribution by use of a Stein
+ operator.
+ This operator depends only on the derivarive of the 
 \begin_inset Formula $\log q$
 \end_inset
 
-.
- It therefore allows for construction of a discrepancy metric that can be
- computed 
-\emph on
-without
-\emph default
- requiring samples from 
-\begin_inset Formula $q$
-\end_inset
-
-, but only the 
-\begin_inset Formula $\{x_{i}\}_{i=1}^{n}$
-\end_inset
-
- .
+: thus, the approach can be applied very generally, as it does not require
+ closed-form integrals over the target distribution (or numerical approximations
+ of such integrals).
+ By contrast, many earlier discrepancy measures require integrals with resepect
+ to the target (see below for a review).
+ This is problematic if the intention is to perform benchmarks for assessing
+ Markov Chain Monte Carlo, since these integrals will certainly not be known
+ to the practitioner.
 \end_layout
 
 \begin_layout Standard
-Computation of the Stein operator in 
+A challenge in applying the approach of 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "gorham2015measuring"
 
 \end_inset
 
- is based on solving an expensive linear program that arises from a complicated
- construction of graph Stein discrepancies and geometric spanners.
+ is the complexity of the function class used, which results from applying
+ the Stein operator to the bounded Lipschitz functions (which give rise
+ to the Wasserstein integral probability metric).
+ Thus, their sample quality measure requires solving an expensive linear
+ program that arises from a complicated construction of graph Stein discrepancie
+s and geometric spanners.
  Their metric furthermore requires access to nontrivial lower bounds that,
  despite being provided for log-concave densities, are a largely open problem
  otherwise, in particular for multivariate cases.
- In addition, the lack of asymptotic analysis of their estimator makes it
- extremely hard to quantify cases when it detects a 
-\emph on
-significant
-\emph default
- difference between samples and reference distribution.
- This in particular is holds the samples exhibit correlation structure.
 \end_layout
 
 \begin_layout Standard
-The key contribution of this work is two-fold.
- First, we express the Stein operator as an inner product in a Reproducing
- Kernel Hilbert Space (RKHS), which results in a simple form that is straight-fo
-rward and cheap to estimate from data.
- Second, we analyse asymptotic properties of our estimator and embed it
- into the statistical hypothesis testing framework.
- This allows us to quantify significance of the estimated divergence.
- We furthermore cover the important case of testing using correlated data.
- The result is a mathematically and computationally simple, nonparametric
- goodness-of-fit test, that only relies on the gradients on the log-density,
- and that can be applied to non-iid data.
+An important application of a goodness-of-fit measure is in statistical
+ testing, where it is desired to determine whether the measure is large
+ enough to reject the null hypothesis (that the sample arises from the target
+ distribution).
+ One approach is to establish the asymptotic behaviour of the test statistic,
+ and to set a test threshold at a large quantile of he asymptotic distribution.
+ The asymptotic behaviour of the Wasserstein-based Stein discrepancy remains
+ a challenging open problem due to the complexity of the function class
+ used.
+ Thus, it is not clear how one would compute p-values for this statistic,
+ or determine when the goodness of fit allows one to accept the null hypothesis
+ (at the user-specified test level).
 \end_layout
 
 \begin_layout Standard
-Compared with other goodness-of-fit testing approaches, the space partitioning
- approach has been shown to perform substantially worse than RKHS-based
- approaches even in moderate dimensions, since too few points per bin are
- found 
+The key contribution of this work is to define a statistical test of goodness-of
+-fit, based on a Stein discrepancy computed in a reproducing kernel Hilbert
+ space (RKHS).
+ To construct our test statistic, we apply the Stein operator to our chosen
+ RKHS functions, and define our measure of goodness of fit as the largest
+ discrepancy between empirical sample expectations and target expectations
+ over the resulting test functions.
+ This approach is a natural extension to goodness-of-fit testing of the
+ earlier two-sample tests 
 \begin_inset CommandInset citation
 LatexCommand citep
+key "gretton2012kernel"
+
+\end_inset
+
+ and independence tests 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gretton_kernel_2008"
+
+\end_inset
+
+ based on the maximum mean discrepancy, which is an integral probability
+ metric.
+ As with these earlier tests, our statistic is a simple U-statistic, and
+ can be computed in closed form and in quadratic time; moreover, it is an
+ unbiased estimate of the corresponding population discrepancy.
+ As with all Stein-based discrepancies, only the gradient of the log-density
+ of the target density is needed; we do not require integrals with respect
+ to the target density.
+ Given that our test statistic is a U-statistic, we may make use of the
+ extensive literature on asymptotics of U-statistics to formulate a hypothesis
+ test 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "serfling80,leucht_dependent_2013"
+
+\end_inset
+
+.
+ We are able to provide statistical tests even in the case of correlated
+ samples, which is essential if the test is to be used in assessing the
+ quality of output of an MCMC procedure.
+\end_layout
+
+\begin_layout Standard
+Several alternative approaches exist in the statistics literature to perform
+ goodness-of-fit testing.
+ A first strategy is to partition the space, and to conduct the test on
+ a histogram estimate of the distribution 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Bar89,Beirlant2,Gyorfi,GyVa02"
+
+\end_inset
+
+.
+
+\lang english
+ Such space parititioning approaches can have attractive theoretical properties
+ (eg distribution-free test thresholds) and work well in low dimensions,
+ however they are much less powerful than alternatives once the dimensionality
+ increases 
+\begin_inset CommandInset citation
+LatexCommand cite
 key "GreGyo10"
 
 \end_inset
 
- (even when a coarse binning is used).
+.
+
+\lang british
+ A second popular approach has been to use the smoothed 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+ distance between the empirical chacacteristic function of the sample, and
+ the characteristic function of the target density.
+ This dates back to the test of Gaussianity of 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BaringhausHenze88"
+
+\end_inset
+
+, who used a squared exponential smoothing function (see eq.
+ (2.1) in their paper).
+ For this choice of smoothing function, their statistic is identical to
+ the maximum mean discrepancy (MMD) with the squared exponential kernel,
+ which can be shown using the Bochner representation of the kernel (compare
+ with 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "Corollary 4"
+key "SriGreFukLanetal10"
+
+\end_inset
+
+).
+ It is essential in this case that the target distribution be Gaussian,
+ since the convolution with the kernel (or in the Fourier domain, the smoothing
+ function) must be available in closed form.
+ An 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+ distance between Parzen window estimates can also be used  
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BowFos93"
+
+\end_inset
+
+, giving the same expression again, although the optimal choice of bandwidth
+ for consistent Parzen window estimates may not be a good choice for testing
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AndHalTit94"
+
+\end_inset
+
+.
+ A different smoothing scheme in the frequency domain results in an energy
+ distance statistic (this likewise being an MMD with a particular choice
+ of kernel 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "SejSriGreFuk13"
+
+\end_inset
+
+), which can be used in a test of normality 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "SzeRiz05"
+
+\end_inset
+
+.
+ The key point is that the required integrals are again computable in closed
+ form for the Gaussian (this may be extended to certain other families of
+ interest, e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Rizzo09"
+
+\end_inset
+
+).
+ The requirement of computing closed-form integrals with respect to the
+ test distribution severely restricts this testing strategy.
 \end_layout
 
 \begin_layout Standard
-The last point is useful in a highly interesting application of goodness-of-fit
- tests: approximate Markov Chain Monte Carlo (MCMC) 
+PAPER OUTLINE??
+\end_layout
+
+\begin_layout Standard
+A key desideratum of any goodness-of-fit test is that it be able to correctly
+ handle correlated data.
+ approximate Markov Chain Monte Carlo (MCMC) 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Korattikara2014,Welling2011,Bardenet2014"
