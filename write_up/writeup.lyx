@@ -497,8 +497,8 @@ key "Rizzo09"
 .
  The requirement of computing closed-form integrals with respect to the
  test distribution severely restricts this testing strategy.
- Recently, an empirical approach to quantifying goodness-of-fit for generative
- models has been proposed 
+ Finally, a problem related to goodness-of-fit testing is that of model
+ criticism 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "lloyd2015statistical"
@@ -506,14 +506,15 @@ key "lloyd2015statistical"
 \end_inset
 
 .
- Via generating samples from a fitted generative models, it is possible
- perform model criticism by quantifying the MMD distance of the generative
- model's distribution and samples used to fit the latter.
- Besides being impractical when a fitted model cannot be sampled from easily,
- it is not clear how to select the number of samples to be generated for
- the test.
- Our methodology elegantly side-steps both issues as no samples from the
- target density are required.
+ In this setting, samples generated from a fitted generative model are compared
+ via the maximum mean discrepancy with samples used to train the model,
+ such that a small MMD indicates a good fit.
+ There are two limitation to the method: first, it requires samples from
+ the model (which might not be easy if this requires a complex MCMC sampler);
+ second, the choice of number of samples from the model is not obvious,
+ since too few samples cause a loss in test power, and too many are computationa
+lly wasteful.
+ Neither issue arises in our test, since we do not require model samples.
 \end_layout
 
 \begin_layout Standard
