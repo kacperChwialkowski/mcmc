@@ -2134,11 +2134,32 @@ We recognise that the expected value of
 \end_inset
 
 .
- Since the kernel 
+ By assumption (ii) Function 
+\begin_inset Formula $g$
+\end_inset
+
+ is square integrable (
+\begin_inset Formula $\ev(\frac{\partial}{\partial x_{i}}\log p(Y))^{2}\leq\infty$
+\end_inset
+
+and 
+\begin_inset Formula $\ev(\frac{\partial}{\partial x_{i}}\log q(Y))^{2}\leq\infty$
+\end_inset
+
+ ) .
+ Therefore, since the kernel 
 \begin_inset Formula $k$
 \end_inset
 
- is cc-universal, this embedding is zero if and only if 
+ is cc-universal, by 
+\begin_inset CommandInset citation
+LatexCommand citet
+after " Theorem 4.4 c"
+key "carmeli2010vector"
+
+\end_inset
+
+ this embedding is zero if and only if 
 \begin_inset Formula $g=0$
 \end_inset
 
