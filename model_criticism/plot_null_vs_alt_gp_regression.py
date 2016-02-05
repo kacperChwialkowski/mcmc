@@ -112,9 +112,9 @@ if __name__ == '__main__':
     num_test_samples = 10000
     null_samples = bootstrap_null(U_matrix, num_bootstrap=num_test_samples)
     
-    plt.hist(null_samples, bins=50, facecolor='b', normed=True)
+    sns.distplot(null_samples, kde=False, norm_hist=True)
     plt.plot([stat, stat], [0, .012], 'black')
-    plt.legend([r"$V_n$ test", r"Bootstrapped $V_n$"])
+    plt.legend([r"$V_n$ test", r"Bootstrapped $B_n$"])
     plt.xlabel(r"$V_n$")
     plt.ylabel(r"Frequency")
     plt.savefig("gp_regression_bootstrap_hist.eps", bbox_inches='tight')

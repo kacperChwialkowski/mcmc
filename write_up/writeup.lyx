@@ -559,9 +559,8 @@ reference "sec:experiment"
 \end_inset
 
  contains experimental illustrations on synthetic examples, statistical
- model criticism for non-parametric regression, quantifying bias-variance
- trade-offs in approximate MCMC, and assessing estimation and approximation
- convergence in non-parametric density estimation.
+ model criticism, bias-variance trade-offs in approximate MCMC, and convergence
+ in non-parametric density estimation.
 \end_layout
 
 \begin_layout Section
@@ -2474,14 +2473,19 @@ name "sec:experiment"
 \begin_layout Standard
 
 \lang english
-The proposed test can be used for the convergance diagnostics of the MCMC
- methods.
- In the first two experiments we demonstrate how use the test to verify
- if the samples obtained form a MCMC sampling method can be assumed to be
- drawn from the stationary distribution.
+We now provide a number of experimental illustrations of the usefullness
+ of our test.
+ After a simple sanity check on i.i.d.
+ and non i.i.d.
+ data, we give an illustrating of the testing bootstrap in the context of
+ statistical model criticism for Gaussian Process (GP) regression.
+ We then apply the proposed test to quantify bias-variance trade-offs of
+ MCMC, and demonstrate how use the test to verify if the samples obtained
+ form a MCMC sampling method can be assumed to be drawn from the stationary
+ distribution.
  In the third experiment we
 \lang british
- use the test for a different task -- quality check of a density estimator.
+ use the test for a different task -- convergence of a density estimator.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -2877,8 +2881,13 @@ key "lloyd2015statistical"
 \end_inset
 
 .
- We choose the Solar dataset consisting of a regression problem with 
+ We choose the Solar dataset consisting of a 1D regression problem with
+ 
 \begin_inset Formula $N=402$
+\end_inset
+
+ pairs of 
+\begin_inset Formula $(X,y)$
 \end_inset
 
 .
@@ -3345,8 +3354,7 @@ Convergence in non-parametric density estimation
 \end_layout
 
 \begin_layout Standard
-We use the developed test to asses estimation quality in the context of
- nonparametric density estimation.
+We now use the developed test to convergence in nonparametric density estimation.
  We quantify estimation quality and approximation quality of the infinite
  dimensional exponential family model 
 \begin_inset CommandInset citation
@@ -3374,11 +3382,7 @@ In this particular model log density is assumed to be of a form
 \begin_inset Formula $f$
 \end_inset
 
- lies in a Reproducing Kernel Hilbert Space 
-\begin_inset Formula ${\cal H}$
-\end_inset
-
- induced by a Gaussian kernel with bandwidth 
+ lies in a RKHS induced by a Gaussian kernel with bandwidth 
 \begin_inset Formula $1$
 \end_inset
 
@@ -3392,8 +3396,7 @@ In this particular model log density is assumed to be of a form
 \begin_inset Formula $N_{\text{test}}=500$
 \end_inset
 
- (observations in the evaluation dataset are also drawn from standard Gaussian
- distribution).
+.
  We aim to identify 
 \begin_inset Formula $N$
 \end_inset
@@ -3478,15 +3481,24 @@ reference "fig:density_estimation_increasing_features"
 \end_inset
 
 , the null hypothesis would rarely be rejected for the chosen test power.
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:density_estimation_increasing_features"
+ Note that the p-values are not uniform, even for a large number of random
+ features.
+ This subtle effect is caused by the an over-smoothing due to the regularisation
+ approach taken in 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "KMC finite"
+key "strathmann2015gradient"
 
 \end_inset
 
+.
+ It vanishes when the estimator is not regularised, however, at the cost
+ of numerical instability.
+ Our test sucessfully detected this behaviour.
+\end_layout
+
+\begin_layout Standard
  
 \begin_inset Float figure
 wide false
@@ -3507,7 +3519,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-P-values for an increasing number of data 
+Density estimation: P-values for an increasing number of data 
 \begin_inset Formula $N$
 \end_inset
 
@@ -3551,7 +3563,8 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-P-values for an increasing number of random features 
+Aprpoximate density estimation: P-values for an increasing number of random
+ features 
 \begin_inset Formula $m$
 \end_inset
 
