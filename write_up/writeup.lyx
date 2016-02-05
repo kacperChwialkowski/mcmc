@@ -196,13 +196,14 @@ We propose a nonparametric statistical test for goodness-of-fit: given a
  set of samples, the test determines how likely it is that these were generated
  from a target density function.
  The measure of goodness-of-fit is a divergence constructed via Stein's
- method using the functions from a Reproducing Kernel Hilbert Space.
+ method using functions from a Reproducing Kernel Hilbert Space.
  Our test statistic is based on an empirical estimate of this divergence,
  taking the form of a V-statistic in terms of the log gradients of the target
  density and the kernel.
  We derive a statistical test, both for i.i.d.
  and non-i.i.d.
- samples, where in the latter setting we make use of a wild bootstrap procedure.
+ samples, where we estimate the null distribution quantiles using a wild
+ bootstrap procedure.
  We apply our test to quantifying convergence of approximate Markov Chain
  Monte Carlo methods, statistical model critisism, and evaluating quality
  of fit vs model complexity in nonparametric density estimation.
@@ -224,9 +225,8 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-Goodness-of-fit testing, or measuring sampling quality, is a fundamental
- tool in statistical analysis, dating back to the test of Kolmogorov and
- Smirnov 
+Statistical tests of goodness-of-fit are a fundamental tool in statistical
+ analysis, dating back to the test of Kolmogorov and Smirnov 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Kolmogorov33,Smirnov48"
@@ -253,12 +253,7 @@ key "Kolmogorov33,Smirnov48"
 
 \lang english
 , which we assume to be only known up to the normalisation constant.
-\end_layout
-
-\begin_layout Standard
-
-\lang english
-Our measure of goodness of fit builds on recent work of 
+ More recently, in the multivariate setting, 
 \lang british
 
 \begin_inset CommandInset citation
@@ -267,11 +262,11 @@ key "gorham2015measuring"
 
 \end_inset
 
-, who proposed an elegant measure of sample quality with respect to a target.
- This is a maximum discrepancy between empirical sample expectations and
- target expectations over a large class of test functions, constructed so
- as to have zero expectation over the target distribution by use of a Stein
- operator.
+ proposed an elegant measure of sample quality with respect to a target.
+ This measure is a maximum discrepancy between empirical sample expectations
+ and target expectations over a large class of test functions, constructed
+ so as to have zero expectation over the target distribution by use of a
+ Stein operator.
  This operator depends only on the derivarive of the 
 \begin_inset Formula $\log q$
 \end_inset
@@ -289,14 +284,41 @@ key "gorham2015measuring"
 \begin_layout Standard
 A challenge in applying the approach of 
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citeauthor
 key "gorham2015measuring"
 
 \end_inset
 
  is the complexity of the function class used, which results from applying
- the Stein operator to the bounded Lipschitz functions (which give rise
- to the Wasserstein integral probability metric).
+ the Stein operator to the bounded Lipschitz functions.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The bounded Lipschitz functions give rise to the Wasserstein integral probabilit
+y metric.
+ By contrast, the Kolmogorov-Smirnov test uses functions of bounded variation
+ 1 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Mueller97"
+
+\end_inset
+
+.
+ Multivariate generalisations of the K-S test exist, however the computational
+ cost of a consistent test rapidly becomes prohibitive with dimension 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Justel1997251"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
  Thus, their sample quality measure requires solving an expensive linear
  program that arises from a complicated construction of graph Stein discrepancie
 s and geometric spanners.
@@ -307,16 +329,16 @@ s and geometric spanners.
 
 \begin_layout Standard
 An important application of a goodness-of-fit measure is in statistical
- testing, where it is desired to determine whether the measure is large
- enough to reject the null hypothesis (that the sample arises from the target
- distribution).
+ testing, where it is desired to determine whether the empirical discrepancy
+ measure is large enough to reject the null hypothesis (that the sample
+ arises from the target distribution).
  One approach is to establish the asymptotic behaviour of the test statistic,
- and to set a test threshold at a large quantile of he asymptotic distribution.
+ and to set a test threshold at a large quantile of the asymptotic distribution.
  The asymptotic behaviour of the Wasserstein-based Stein discrepancy remains
- a challenging open problem due to the complexity of the function class
+ a challenging open problem, due to the complexity of the function class
  used.
- Thus, it is not clear how one would compute p-values for this statistic,
- or determine when the goodness of fit allows one to accept the null hypothesis
+ It is not clear how one would compute p-values for this statistic, or determine
+ when the goodness of fit test would allow us to accept the null hypothesis
  (at the user-specified test level).
 \end_layout
 
@@ -325,9 +347,10 @@ The key contribution of this work is to define a statistical test of goodness-of
 -fit, based on a Stein discrepancy computed in a Reproducing Kernel Hilbert
  Space (RKHS).
  To construct our test statistic, we apply the Stein operator to our chosen
- RKHS functions, and define our measure of goodness of fit as the largest
- discrepancy between empirical sample expectations and target expectations
- over the resulting test functions.
+ set of RKHS functions, and define our measure of goodness of fit as the
+ largest discrepancy over this set between empirical sample expectations
+ and target expectations (the latter being zero, due to the effect of the
+ Stein operator).
  This approach is a natural extension to goodness-of-fit testing of the
  earlier two-sample tests 
 \begin_inset CommandInset citation
@@ -367,8 +390,8 @@ key "serfling80,leucht_dependent_2013"
 \end_layout
 
 \begin_layout Standard
-Several alternative approaches exist in the statistics literature to perform
- goodness-of-fit testing.
+Several alternative approaches exist in the statistics literature to goodness-of
+-fit testing.
  A first strategy is to partition the space, and to conduct the test on
  a histogram estimate of the distribution 
 \begin_inset CommandInset citation
@@ -445,15 +468,15 @@ key "AndHalTit94"
 
 .
  A different smoothing scheme in the frequency domain results in an energy
- distance statistic (this likewise being an MMD with a particular choice
- of kernel 
+ distance statistic 
 \begin_inset CommandInset citation
 LatexCommand citep
+before "this likewise being an MMD with a particular choice of kernel; see "
 key "SejSriGreFuk13"
 
 \end_inset
 
-), which can be used in a test of normality 
+, which can be used in a test of normality 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "SzeRiz05"
@@ -462,8 +485,8 @@ key "SzeRiz05"
 
 .
  The key point is that the required integrals are again computable in closed
- form for the Gaussian (this may be extended to certain other families of
- interest, e.g.
+ form for the Gaussian, although the reasoning may be extended to certain
+ other families of interest, e.g.
  
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -471,7 +494,7 @@ key "Rizzo09"
 
 \end_inset
 
-).
+.
  The requirement of computing closed-form integrals with respect to the
  test distribution severely restricts this testing strategy.
  Recently, an empirical approach to quantifying goodness-of-fit for generative
