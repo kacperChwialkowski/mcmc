@@ -1,5 +1,5 @@
-#LyX 2.0 created this file. For more info see http://www.lyx.org/
-\lyxformat 413
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
 \begin_document
 \begin_header
 \textclass article
@@ -35,13 +35,13 @@ theorems-sec
 \font_roman default
 \font_sans default
 \font_typewriter default
+\font_math auto
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
-
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -52,15 +52,24 @@ theorems-sec
 \use_hyperref false
 \papersize a4paper
 \use_geometry false
-\use_amsmath 2
-\use_esint 0
-\use_mhchem 1
-\use_mathdots 1
-\cite_engine natbib_numerical
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type numerical
+\biblio_style plainnat
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
 \suppress_date false
+\justification true
 \use_refstyle 1
 \index Index
 \shortcut idx
@@ -205,7 +214,7 @@ We propose a nonparametric statistical test for goodness-of-fit: given a
 
 \lang english
 \begin_inset FormulaMacro
-\renewcommand{\ev}{\mathbb{E}}
+\newcommand{\ev}{\mathbb{E}}
 {\mathbb{E}}
 \end_inset
 
@@ -755,7 +764,7 @@ reference "lem:easy"
 
 \end_inset
 
-.
+ in the supplement.
  We can now define a Stein discrepancy and express it in the RKHS,
 \begin_inset Formula 
 \begin{align*}
@@ -1883,7 +1892,7 @@ We are now ready for the proof
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument
+\begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
@@ -1954,7 +1963,7 @@ the discrepancy
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument
+\begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
@@ -2642,7 +2651,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 
@@ -2778,7 +2787,7 @@ status open
 \end_inset
 
  
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 
@@ -2961,7 +2970,7 @@ status open
 \end_inset
 
 
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 
@@ -3041,7 +3050,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Fitted GP and data used to fit (blue) and to apply test (red).
@@ -3165,7 +3174,6 @@ bootstrapped
 \begin_inset Formula $B_{n}$
 \end_inset
 
-
  are not distributed according to the true null distribution (which is only
  guaranteed when the null holds), however
 \end_layout
@@ -3200,7 +3208,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Bootstrapped 
@@ -3257,7 +3265,7 @@ status open
 
 \lang british
 
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 
@@ -3346,7 +3354,7 @@ status open
 
 \lang british
 
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 
@@ -3558,7 +3566,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Density estimation: P-values for an increasing number of data 
@@ -3736,13 +3744,11 @@ status open
 \begin_layout Plain Layout
 It vanishes when the estimator is not regularised, however, at the cost
  of numerical instability.
-
 \end_layout
 
 \end_inset
 
  
-
 \end_layout
 
 \begin_layout Standard
@@ -3762,7 +3768,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Approximate density estimation: P-values for an increasing number of random
@@ -3985,7 +3991,7 @@ where in (a) we used integration by parts and that
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument
+\begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
@@ -4023,7 +4029,7 @@ key "leucht2012degenerate"
 \begin_inset Formula $\sum_{t=1}^{\infty}t^{2}\sqrt{\tau(t)}\leq\infty$
 \end_inset
 
- from the section 
+ in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Details"
@@ -4031,17 +4037,17 @@ reference "sec:Details"
 \end_inset
 
 .
- The condition A2 (iv), Lipschitz continuity of 
+ Condition A2 (iv), Lipschitz continuity of 
 \begin_inset Formula $h$
 \end_inset
 
- follows form the assumption iv).
+, follows from assumption (iv).
  Conditions A2 i), ii) positive definiteness, symmetry and degeneracy of
  
 \begin_inset Formula $h$
 \end_inset
 
- follow form the proof of th the Theorem 
+ follow from the proof of Theorem 
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "theorem_discrepancy_is_metric"
@@ -4066,8 +4072,8 @@ h(x,y)=\langle\left[\nabla\log p(x)k(x,\cdot)+\nabla_{1}k(x,\cdot)\right],\left[
 \begin_inset Newline newline
 \end_inset
 
-so it's an inner product and hence positive definite.
- Degeneracy under the null follows form the fact that for any 
+so the statistic is an inner product and hence positive definite.
+ Degeneracy under the null follows from the fact that for any 
 \begin_inset Formula $t$
 \end_inset
 
@@ -4083,11 +4089,11 @@ reference "lem:easy"
 \end_inset
 
 .
- Finally the condition A2 (iii), 
+ Finally, condition A2 (iii), 
 \begin_inset Formula $\ev h(X,X)\leq\infty$
 \end_inset
 
- follows form the assumptions (ii), (iii) and boundedness of the kernel.
+ follows from assumptions (ii), (iii) and boundedness of the kernel.
 \end_layout
 
 \begin_layout --Separator--
@@ -4097,7 +4103,7 @@ reference "lem:easy"
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument
+\begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
@@ -4153,7 +4159,7 @@ under the null hypothesis,
 \uwave default
 \noun default
 \color inherit
- We have checked the assumption A1,A2 in the proof of the proposition 
+ We have checked assumptions A1,A2 in the proof of the proposition 
 \lang british
 
 \begin_inset CommandInset ref
@@ -4165,7 +4171,7 @@ reference "thm: null_dist"
 
 \lang english
 .
- The assumption B1 is identical to our assumption from the section 
+ Assumption B1 is identical to our assumption from Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Details"
@@ -4202,7 +4208,7 @@ reference "sec:Details"
 \begin_inset Formula $\ev W_{s,n}W_{t,n}=(1-2p_{n})^{-|s-t|}$
 \end_inset
 
- , so the function 
+, so the function 
 \begin_inset Formula $\rho(x)=\exp(-x)$
 \end_inset
 
@@ -4236,12 +4242,23 @@ reference "sec:Details"
 \begin_inset Formula $\sum_{r=1}^{n-1}\rho(|r|/l_{n})=\frac{1-(1-2p_{n})^{n+1}}{p_{n}}=O(w_{n})=O(l_{n})$
 \end_inset
 
-, what we had show.
+.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang english
+, what we had show
+\end_layout
+
+\end_inset
+
  Finally we show that 
 \begin_inset Formula $B_{n}$
 \end_inset
 
-converges to zero under the alternative.
+ converges to zero under the alternative.
  It is sufficient to check that 
 \family roman
 \series medium
@@ -4266,27 +4283,26 @@ converges to zero under the alternative.
 \lang english
 \begin_inset Formula 
 \begin{align*}
-\ev B_{n} & =\frac{1}{n^{2}}\sum_{i,j}\ev W_{i}W_{j}\ev h(Z_{i},Z_{j})=\\
- & \frac{1}{n^{2}}\sum_{i\in N^{m}}\rho(|j-i|/l_{n})\ev h(Z_{j},Z_{i})\leq\\
- & \frac{1}{n^{2}}\sum_{i\in N^{m}}\rho(|j-i|/l_{n})C\to0
+\ev B_{n} & =\frac{1}{n^{2}}\sum_{i,j}\ev W_{i}W_{j}\ev h(Z_{i},Z_{j})\\
+ & =\frac{1}{n^{2}}\sum_{i\in N^{m}}\rho(|j-i|/l_{n})\ev h(Z_{j},Z_{i})\\
+ & \leq\frac{1}{n^{2}}\sum_{i\in N^{m}}\rho(|j-i|/l_{n})C\\
+ & \to0
 \end{align*}
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Proof
-For some constant 
+\lang british
+for some constant 
 \begin_inset Formula $C=\ev h(Z_{1},Z_{2})$
 \end_inset
 
-, which existence follows from assumptions i) and iii).
+, whose existence follows from assumptions i) and iii).
  As for 
-\begin_inset Formula $\ev B_{n}^{2}.$
+\begin_inset Formula $\ev B_{n}^{2}$
 \end_inset
 
-
+, we have
 \end_layout
 
 \begin_layout Proof
@@ -4294,17 +4310,16 @@ For some constant
 \lang english
 \begin_inset Formula 
 \begin{align*}
-\ev B_{n}^{2} & =\frac{1}{n^{4}}\sum_{i,j,k,l}\ev W_{i}W_{j}W_{k}W_{l}\ev h(Z_{i},Z_{j})h(Z_{k},Z_{l})\leq\\
- & \frac{1}{n^{4}}\sum_{i\neq j,i\neq k,i\neq l,j\neq k,j\neq l,k\neq l}\ev W_{i}W_{j}W_{k}W_{l}\ev h(Z_{i},Z_{j})^{2}\ev h(Z_{k},Z_{l})^{2}+C'\frac{6n^{3}}{n^{4}}\leq\\
- & \frac{1}{n^{4}}\sum_{i\neq j,i\neq k,i\neq l,j\neq k,j\neq l,k\neq l}\ev W_{i}W_{j}W_{k}W_{l}C'+\frac{6C'}{n}=\frac{6C'}{n}\to0
+\ev B_{n}^{2} & =\frac{1}{n^{4}}\sum_{i,j,k,l}\ev W_{i}W_{j}W_{k}W_{l}\ev h(Z_{i},Z_{j})h(Z_{k},Z_{l})\\
+ & \leq\frac{1}{n^{4}}\sum_{i\neq j,i\neq k,i\neq l,j\neq k,j\neq l,k\neq l}\ev W_{i}W_{j}W_{k}W_{l}\ev h(Z_{i},Z_{j})^{2}\ev h(Z_{k},Z_{l})^{2}+C'\frac{6n^{3}}{n^{4}}\\
+ & \leq\frac{1}{n^{4}}\sum_{i\neq j,i\neq k,i\neq l,j\neq k,j\neq l,k\neq l}\ev W_{i}W_{j}W_{k}W_{l}C'+\frac{6C'}{n}\\
+ & =\frac{6C'}{n}\to0,
 \end{align*}
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Proof
+\lang british
 where 
 \begin_inset Formula $C'=\ev h(Z_{i},Z_{j})^{2}\ev h(Z_{k},Z_{l})^{2}$
 \end_inset
@@ -4321,7 +4336,16 @@ Linear time test
 \begin_layout Standard
 
 \lang english
-For some fixed location 
+We may use similar reasoning for the quadratic time test to define a linear
+ time test, based on the two-sample test of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Chwialkowski2015"
+
+\end_inset
+
+.
+ For some fixed location 
 \begin_inset Formula $y$
 \end_inset
 
@@ -4333,7 +4357,7 @@ For some fixed location
 \begin_inset Formula $s(X,y)$
 \end_inset
 
- 
+ as 
 \begin_inset Formula 
 \begin{align}
 s(X,y)=\nabla\log p(X)g(X,y)-\nabla g(X,y).
@@ -4361,12 +4385,6 @@ Z_{i}=(s(X_{i},Y_{1}),\cdots,s(X_{i},Y_{J}))\in\mathbf{R}^{J}.
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-
-\lang english
 Let 
 \begin_inset Formula $W_{n}$
 \end_inset
@@ -4423,7 +4441,7 @@ The computation of
 \begin_layout Proposition
 
 \lang english
-\begin_inset Argument
+\begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
