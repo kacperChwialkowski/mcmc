@@ -350,9 +350,9 @@ key "gretton_kernel_2008"
  unbiased estimate of the corresponding population discrepancy.
  As with all Stein-based discrepancies, only the gradient of the log-density
  of the target density is needed; we do not require integrals with respect
- to the target density.
- Given that our test statistic is a U-statistic, we may make use of the
- extensive literature on asymptotics of U-statistics to formulate a hypothesis
+ to the target density -- including the normalisation constant.
+ Given that our test statistic is a V-statistic, we may make use of the
+ extensive literature on asymptotics of V-statistics to formulate a hypothesis
  test 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -474,6 +474,23 @@ key "Rizzo09"
 ).
  The requirement of computing closed-form integrals with respect to the
  test distribution severely restricts this testing strategy.
+ Recently, an empirical approach to quantifying goodness-of-fit for generative
+ models has been proposed 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "lloyd2015statistical"
+
+\end_inset
+
+.
+ Via generating samples from a fitted generative models, it is possible
+ perform model criticism by quantifying the MMD distance of the generative
+ model's distribution and samples used to fit the latter.
+ Besides being impractical when a fitted model cannot be sampled from easily,
+ it is not clear how to select the number of samples to be generated for
+ the test.
+ Our methodology elegantly side-steps both issues as no samples from the
+ reference density are required.
 \end_layout
 
 \begin_layout Standard
@@ -504,31 +521,19 @@ key "gelman1992inference"
 
 \end_inset
 
- -- those assume that the Markov chain reaches its equilibrium distribution.
+ or the effective sample size -- those assume that the Markov chain reaches
+ its equilibrium distribution.
  The described goodness-of-fit testing framework, however, fits very well
  into this context as it exactly quantifies the asymptotic bias of approximate
  MCMC.
  
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-heiko{We should mention the model criticism paper somewhere!}
 \end_layout
 
-\end_inset
-
-
+\begin_layout Paragraph
+Paper outline
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
 We begin our presentation in the section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -536,21 +541,27 @@ reference "sec:A-Kernel-Goodness-of-fit"
 
 \end_inset
 
- with a high-level construction of the test.
- In the 
+ with a high-level construction of the divergence and a statistical test.
+ In Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Details"
 
 \end_inset
 
- we prove the main results presented in the previous section.
- In the section 
-\end_layout
+, we provide additional details and prove the main results presented in
+ the previous section.
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:experiment"
 
 \end_inset
 
-
+ contains experimental illustrations on synthetic examples, statistical
+ model criticism for non-parametric regression, quantifying bias-variance
+ trade-offs in approximate MCMC, and assessing estimation and approximation
+ convergence in non-parametric density estimation.
 \end_layout
 
 \begin_layout Section
@@ -2446,6 +2457,18 @@ As a consequence if the null hypothesis is true we can approximate any quantile
 
 \lang english
 Experiments
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:experiment"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
