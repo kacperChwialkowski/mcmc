@@ -1,5 +1,5 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
-\lyxformat 474
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
 \begin_document
 \begin_header
 \textclass article
@@ -35,13 +35,13 @@ theorems-sec
 \font_roman default
 \font_sans default
 \font_typewriter default
-\font_math auto
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
+
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -52,24 +52,15 @@ theorems-sec
 \use_hyperref false
 \papersize a4paper
 \use_geometry false
-\use_package amsmath 2
-\use_package amssymb 2
-\use_package cancel 1
-\use_package esint 0
-\use_package mathdots 1
-\use_package mathtools 1
-\use_package mhchem 1
-\use_package stackrel 1
-\use_package stmaryrd 1
-\use_package undertilde 1
-\cite_engine natbib
-\cite_engine_type numerical
-\biblio_style plainnat
+\use_amsmath 2
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_numerical
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
 \suppress_date false
-\justification true
 \use_refstyle 1
 \index Index
 \shortcut idx
@@ -1892,7 +1883,7 @@ We are now ready for the proof
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
@@ -1963,7 +1954,7 @@ the discrepancy
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
@@ -2239,7 +2230,12 @@ key "dedecker2005new,dedecker2007weak"
 
 \end_inset
 
- .
+.
+ For this work we will assume a technical condition 
+\begin_inset Formula $\sum_{t=1}^{\infty}t^{2}\sqrt{\tau(t)}\leq\infty$
+\end_inset
+
+.
  
 \begin_inset Note Note
 status open
@@ -2296,11 +2292,7 @@ where
 \end_inset
 
 .
- For this work we will assume a technical condition 
-\begin_inset Formula $\tau(t)\leq O(t^{-6})$
-\end_inset
-
-.
+ 
 \end_layout
 
 \end_inset
@@ -2493,8 +2485,45 @@ reference "sec:A-Kernel-Goodness-of-fit"
 
 .
  The validity of this resampling method is guaranteed by the following propositi
-on, proved in the supplement.
- 
+on (which follows from Theorem 2.1 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "leucht2012degenerate"
+
+\end_inset
+
+ and modification of the Lemma 5 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chwialkowski2014wild"
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ ) , proved in the supplement.
 \end_layout
 
 \begin_layout Proposition
@@ -2612,7 +2641,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -2731,7 +2760,7 @@ status open
 \end_inset
 
  
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -2906,7 +2935,7 @@ status open
 \end_inset
 
 
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -2987,7 +3016,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 Fitted GP and data used to fit (blue) and to apply test (red).
@@ -3142,7 +3171,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 Bootstrapped 
@@ -3211,7 +3240,7 @@ name "p-values"
 
 \lang british
 
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -3300,7 +3329,7 @@ name "lik-evals"
 
 \lang british
 
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -3476,7 +3505,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 Density estimation: P-values for an increasing number of data 
@@ -3668,7 +3697,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 Aprpoximate density estimation: P-values for an increasing number of random
@@ -3891,7 +3920,7 @@ where in (a) we used integration by parts and that
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
@@ -3913,15 +3942,41 @@ reference "thm: null_dist"
 
 \end_inset
 
-The condition A1 is trivially stratified by the assumption 
-\begin_inset Formula $\sum_{t=1}^{\infty}\sqrt{\tau(t)}\leq\infty$
+We check assumptions of the Theorem 2.1 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "leucht2012degenerate"
+
 \end_inset
 
 .
- The condition A2 (iv), Lipschitz continuity.
+ The condition A1, 
+\begin_inset Formula $\sum_{t=1}^{\infty}\sqrt{\tau(t)}\leq\infty$
+\end_inset
+
+, is implied by assumption 
+\begin_inset Formula $\sum_{t=1}^{\infty}t^{2}\sqrt{\tau(t)}\leq\infty$
+\end_inset
+
+ from the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Details"
+
+\end_inset
+
+.
+ The condition A2 (iv), Lipschitz continuity of 
+\begin_inset Formula $h$
+\end_inset
+
  follows form the assumption iv).
- The positive definiteness and degeneracy follows form the proof of th the
- Theorem 
+ Conditions A2 i), ii) positive definiteness, symmetry and degeneracy of
+ 
+\begin_inset Formula $h$
+\end_inset
+
+ follow form the proof of th the Theorem 
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "theorem_discrepancy_is_metric"
@@ -3947,7 +4002,7 @@ h(x,y)=\langle\left[\nabla\log p(x)k(x,\cdot)+\nabla_{1}k(x,\cdot)\right],\left[
 \end_inset
 
 so it's an inner product and hence positive definite.
- Degeneracy follows form the fact that for ant 
+ Degeneracy under the null follows form the fact that for any 
 \begin_inset Formula $t$
 \end_inset
 
@@ -3959,7 +4014,7 @@ reference "lem:easy"
 \end_inset
 
 ,
-\begin_inset Formula $\ev\nabla\log p(x)k(x,t)+\nabla_{1}k(x,t)=0$
+\begin_inset Formula $\ev(\nabla\log p(x)k(x,t)+\nabla_{1}k(x,t))=0$
 \end_inset
 
 .
@@ -3967,7 +4022,7 @@ reference "lem:easy"
 \begin_inset Formula $\ev h(X,X)\leq\infty$
 \end_inset
 
- follows form (ii), (iii) and boundlessness of the kernel.
+ follows form the assumptions (ii), (iii) and boundedness of the kernel.
 \end_layout
 
 \begin_layout --Separator--
@@ -3977,7 +4032,7 @@ reference "lem:easy"
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
@@ -3997,7 +4052,43 @@ reference "thm:wild_bootstrap_works"
 
 \end_inset
 
-We have checked the assumption A2 in the proof of the Theorem 
+We use Theorem 2.1 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "leucht2012degenerate"
+
+\end_inset
+
+ to see that, 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+under the null hypothesis, 
+\begin_inset Formula $f(W_{1,n},\cdots,W_{t,n})$
+\end_inset
+
+ converges to zero in probability.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ We have checked the assumption A1,A2 in the proof of the proposition 
 \lang british
 
 \begin_inset CommandInset ref
@@ -4009,11 +4100,14 @@ reference "thm: null_dist"
 
 \lang english
 .
- The assumption B1 follows from our technical assumption 
-\begin_inset Formula $\tau(t)\leq O(t^{-6})$
+ The assumption B1 is identical to our assumption from the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Details"
+
 \end_inset
 
-.
+ .
  Finally we check assumption B2 (bootstrap assumption):
 \emph on
  
@@ -4031,7 +4125,7 @@ reference "thm: null_dist"
 \end_inset
 
  and 
-\begin_inset Formula $\sup_{n}\ev|W_{t,n}^{2+\sigma}|<\infty$
+\begin_inset Formula $\sup_{n}\ev|W_{t,n}^{2+\sigma}|=1<\infty$
 \end_inset
 
  for some 
@@ -4040,7 +4134,7 @@ reference "thm: null_dist"
 
 .
  The auto-covariance of the process is given by 
-\begin_inset Formula $\ev W_{s,n}W_{t,n}=(1-2p_{n})^{s-t}$
+\begin_inset Formula $\ev W_{s,n}W_{t,n}=(1-2p_{n})^{-|s-t|}$
 \end_inset
 
  , so the function 
@@ -4056,26 +4150,107 @@ reference "thm: null_dist"
 \begin_inset Formula $\lim_{u\to0}\rho(u)=1$
 \end_inset
 
-, 
-\begin_inset Formula $l_{n}=o(n)$
+.
+ If we set 
+\begin_inset Formula $p_{n}=w_{n}^{-1}$
 \end_inset
 
- , 
-\begin_inset Formula $\lim_{n\to\infty}l_{n}=\infty$
+ , such that 
+\begin_inset Formula $w_{n}=o(n)$
 \end_inset
 
  and 
-\begin_inset Formula $\sum_{r=1}^{n-1}\rho(|r|/l_{n})=O(l_{n})$
+\begin_inset Formula $\lim_{n\to\infty}w_{n}=\infty$
+\end_inset
+
+, then 
+\begin_inset Formula $l_{n}=O(w_{n})$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum_{r=1}^{n-1}\rho(|r|/l_{n})=\frac{1-(1-2p_{n})^{n+1}}{p_{n}}=O(w_{n})=O(l_{n})$
+\end_inset
+
+, what we had show.
+ Finally we show that 
+\begin_inset Formula $B_{n}$
+\end_inset
+
+converges to zero under the alternative.
+ It is sufficient to check that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\ev B_{n}\to0,\ev B_{n}^{2}\to0.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+\begin_inset Formula 
+\begin{align*}
+\ev B_{n} & =\frac{1}{n^{2}}\sum_{i,j}\ev W_{i}W_{j}\ev h(Z_{i},Z_{j})=\\
+ & \frac{1}{n^{2}}\sum_{i\in N^{m}}\rho(|j-i|/l_{n})\ev h(Z_{j},Z_{i})\leq\\
+ & \frac{1}{n^{2}}\sum_{i\in N^{m}}\rho(|j-i|/l_{n})C\to0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+For some constant 
+\begin_inset Formula $C=\ev h(Z_{1},Z_{2})$
+\end_inset
+
+, which existence follows from assumptions i) and iii).
+ As for 
+\begin_inset Formula $\ev B_{n}^{2}.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+\begin_inset Formula 
+\begin{align*}
+\ev B_{n}^{2} & =\frac{1}{n^{4}}\sum_{i,j,k,l}\ev W_{i}W_{j}W_{k}W_{l}\ev h(Z_{i},Z_{j})h(Z_{k},Z_{l})\leq\\
+ & \frac{1}{n^{4}}\sum_{i\neq j,i\neq k,i\neq l,j\neq k,j\neq l,k\neq l}\ev W_{i}W_{j}W_{k}W_{l}\ev h(Z_{i},Z_{j})^{2}\ev h(Z_{k},Z_{l})^{2}+C'\frac{6n^{3}}{n^{4}}\leq\\
+ & \frac{1}{n^{4}}\sum_{i\neq j,i\neq k,i\neq l,j\neq k,j\neq l,k\neq l}\ev W_{i}W_{j}W_{k}W_{l}C'+\frac{6C'}{n}=\frac{6C'}{n}\to0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+where 
+\begin_inset Formula $C'=\ev h(Z_{i},Z_{j})^{2}\ev h(Z_{k},Z_{l})^{2}$
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Subsection
 
 \lang english
-Linear time test
+Linear time test 
 \end_layout
 
 \begin_layout Standard
@@ -4183,7 +4358,7 @@ The computation of
 \begin_layout Proposition
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
