@@ -1,5 +1,5 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
-\lyxformat 474
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
 \begin_document
 \begin_header
 \textclass article
@@ -34,13 +34,13 @@ theorems-sec
 \font_roman default
 \font_sans default
 \font_typewriter default
-\font_math auto
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
+
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -51,24 +51,15 @@ theorems-sec
 \use_hyperref false
 \papersize a4paper
 \use_geometry false
-\use_package amsmath 2
-\use_package amssymb 2
-\use_package cancel 1
-\use_package esint 0
-\use_package mathdots 1
-\use_package mathtools 1
-\use_package mhchem 1
-\use_package stackrel 1
-\use_package stmaryrd 1
-\use_package undertilde 1
-\cite_engine natbib
-\cite_engine_type numerical
-\biblio_style plainnat
+\use_amsmath 2
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_numerical
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
 \suppress_date false
-\justification true
 \use_refstyle 1
 \index Index
 \shortcut idx
@@ -1240,62 +1231,61 @@ We make the following assumptions.
  satisfy two conditions:
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Standard
 
 \lang english
-\begin_inset Argument item:1
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-\lang english
-(i)
+
+\backslash
+begin{itemize}
 \end_layout
-
-\end_inset
-
-
-\begin_inset Formula $\nabla\log p(x)$
-\end_inset
-
- 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-is Lipschitz continuous.
-\end_layout
-
-\begin_layout Enumerate
-
-\lang english
-\begin_inset Argument item:1
-status open
 
 \begin_layout Plain Layout
 
-\lang english
-(ii)
+	
+\backslash
+item[(i)]  $
+\backslash
+nabla 
+\backslash
+log p(x)$ is Lipschitz continuous.
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+item[(ii)] $
+\backslash
+mathbb E 
+\backslash
+| 
+\backslash
+nabla 
+\backslash
+log p(Z) 
+\backslash
+|^2 
+\backslash
+leq 
+\backslash
+infty$ for any random variable.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{itemize}
 \end_layout
 
 \end_inset
 
 
-\begin_inset Formula $\ev\|\nabla\log p(Z)\|^{2}\leq\infty$
-\end_inset
-
- for any random variable 
-\begin_inset Formula $Z$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard
@@ -1317,72 +1307,64 @@ key "SriFukLan11"
  satisfies
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Standard
 
 \lang english
-\begin_inset Argument item:1
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-\lang english
-(iii)
+
+\backslash
+begin{itemize}
 \end_layout
-
-\end_inset
-
-
-\begin_inset Formula $\ev\left(\frac{\partial^{2}k(Z,Z)}{dx_{i}dx_{i+d}}\right)^{2}<\infty$
-\end_inset
-
-, for any random variable 
-\begin_inset Formula $Z$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
-\begin_inset Argument item:1
-status open
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
-(iv)
+	
+\backslash
+item[(iii)]  $
+\backslash
+mathbb E  
+\backslash
+left( 
+\backslash
+frac{
+\backslash
+partial^2 k(Z,Z)}{
+\backslash
+partial x_i 
+\backslash
+partial x_{i+d}} 
+\backslash
+right)^2 
+\backslash
+leq 
+\backslash
+infty$.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+item[(iv)] $
+\backslash
+nabla_x k(x,y)$ is Lipschitz continuous.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{itemize}
 \end_layout
 
 \end_inset
 
 
-\begin_inset Formula $\nabla k(x,y)$
-\end_inset
-
- is Lipschitz continuous.
 \end_layout
 
 \begin_layout Standard
@@ -1954,7 +1936,7 @@ We are now ready for the proof
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
@@ -2025,7 +2007,7 @@ the discrepancy
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
@@ -2816,7 +2798,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -2888,7 +2870,7 @@ status open
 \end_inset
 
  
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -2950,7 +2932,7 @@ status open
 \end_inset
 
 
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -3152,7 +3134,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -3378,7 +3360,7 @@ name "p-values"
 
 \lang british
 
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -3435,7 +3417,7 @@ name "lik-evals"
 
 \lang british
 
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -3662,7 +3644,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 Density estimation: P-values for an increasing number of data 
@@ -3706,7 +3688,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 Aprpoximate density estimation: P-values for an increasing number of random
@@ -3801,7 +3783,7 @@ Proofs
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
@@ -3887,7 +3869,7 @@ reference "lem:easy"
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
@@ -4093,7 +4075,7 @@ The computation of
 \begin_layout Proposition
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
