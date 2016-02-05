@@ -1,5 +1,5 @@
-#LyX 2.0 created this file. For more info see http://www.lyx.org/
-\lyxformat 413
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
 \begin_document
 \begin_header
 \textclass article
@@ -35,13 +35,13 @@ theorems-sec
 \font_roman default
 \font_sans default
 \font_typewriter default
+\font_math auto
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
-
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -52,15 +52,24 @@ theorems-sec
 \use_hyperref false
 \papersize a4paper
 \use_geometry false
-\use_amsmath 2
-\use_esint 0
-\use_mhchem 1
-\use_mathdots 1
-\cite_engine natbib_numerical
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type numerical
+\biblio_style plainnat
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
 \suppress_date false
+\justification true
 \use_refstyle 1
 \index Index
 \shortcut idx
@@ -580,7 +589,7 @@ reference "sec:experiment"
 \begin_layout Section
 
 \lang english
-A Kernel Goodness-of-fit Test
+Test Definition: Statistic and Threshold
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:A-Kernel-Goodness-of-fit"
@@ -593,8 +602,8 @@ name "sec:A-Kernel-Goodness-of-fit"
 \begin_layout Standard
 
 \lang english
-We now give a high-level construction of our divergence discrepancy and
- the statistical test construction.
+We begin with a high-level construction of our divergence discrepancy and
+ the statistical test.
  While this section aims to communicate the main ideas, we provide details
  and proofs in Section 
 \begin_inset CommandInset ref
@@ -687,7 +696,7 @@ Throughout the article, all occurences of
 \begin_inset Formula $Z',Z_{i},Z_{\heartsuit}$
 \end_inset
 
-, are assumed to be distributed to 
+, are understood to be distributed according to 
 \begin_inset Formula $q$
 \end_inset
 
@@ -710,7 +719,7 @@ Throughout the article, all occurences of
 
 .
  As we will see, the operator can be expressed by defining a function that
- depends on gradients of the log-density and the kernel 
+ depends on gradients of the log-density and the kernel, 
 \begin_inset Formula 
 \begin{equation}
 \xi(x,\cdot):=\left[\nabla\log p(x)k(x,\cdot)+\nabla k(x,\cdot)\right],\label{eq:xi}
@@ -747,7 +756,7 @@ reference "lem:SteinIsInner"
 \begin_inset Formula $\ev(Tf)(X)=0$
 \end_inset
 
-, which can be seen by integration by parts, c.f.
+, which can be seen using integration by parts, c.f.
  Lemma 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -784,11 +793,11 @@ reference "lem:discprepancy_maximised_by_norm"
 \begin_inset Formula $S(Z)$
 \end_inset
 
- by only computing 
+ by computing 
 \begin_inset Formula $\|\ev\xi(Z)\|$
 \end_inset
 
- -- without the need to access 
+, without the need to access 
 \begin_inset Formula $X$
 \end_inset
 
@@ -818,8 +827,43 @@ name "theorem_discrepancy_is_metric"
 \begin_inset Formula $q,p\in\mathcal{P}$
 \end_inset
 
- and let 
+ where the derivatives of elements of 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ satisfy assumption (ii) in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:details_kernel_stein"
+
+\end_inset
+
+, and let 
 \begin_inset Formula $Z\sim q$
+\end_inset
+
+.
+ Let the RKHS 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ satisfy properties (iii) and (v) in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:details_kernel_stein"
+
+\end_inset
+
+, which include the requirement that 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ be cc-universal 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "Definition 4.1"
+key "CarDevToiUma10"
+
 \end_inset
 
 .
@@ -843,8 +887,12 @@ reference "sec:details_kernel_stein"
 
 \end_inset
 
- contains minor details, assumptions on 
+ contains the formal statements of the assumptions on 
 \begin_inset Formula ${\cal P}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{F}$
 \end_inset
 
 , and a proof.
@@ -895,7 +943,7 @@ Wild Bootstrap Testing
 \end_layout
 
 \begin_layout Standard
-It is straight forward to estimate the squared Stein discrepancy 
+It is straightforward to estimate the squared Stein discrepancy 
 \begin_inset Formula $S(Z)^{2}$
 \end_inset
 
@@ -903,8 +951,7 @@ It is straight forward to estimate the squared Stein discrepancy
 \begin_inset Formula $\{Z_{i}\}_{i=1}^{n}$
 \end_inset
 
-: a quadratic time estimator is an average of pairwise terms, so called
- V-Statistic, which takes the form
+: a quadratic time estimator is a V-Statistic, and takes the form
 \begin_inset Formula 
 \[
 V_{n}=\frac{1}{n^{2}}\sum_{i,j=1}^{n}h(Z_{i},Z_{j}).
@@ -923,7 +970,7 @@ V_{n}=\frac{1}{n^{2}}\sum_{i,j=1}^{n}h(Z_{i},Z_{j}).
 
  exhibit correlation structure, as the null distribution significantly changes,
  impacting test significance.
- The wild-bootstrap technique 
+ The wild bootstrap technique 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Shao2010,leucht_dependent_2013,FroLauLerRey12"
@@ -976,7 +1023,12 @@ where the
 \begin_inset Formula $W_{t,n}$
 \end_inset
 
- changing sign.
+ changing sign (for i.i.d.
+ data we may set 
+\begin_inset Formula $a_{n}=0.5$
+\end_inset
+
+).
  This leads to a bootstrapped V-statistic 
 \end_layout
 
@@ -1132,7 +1184,7 @@ the test statistic
 \begin_layout Itemize
 
 \lang english
-Bootstrap
+Obtain wild bootstrap samples
 \lang british
  
 \family roman
@@ -1155,7 +1207,7 @@ Bootstrap
 \begin_inset Formula $1-\alpha$
 \end_inset
 
- empirical quantile.
+ empirical quantile of these samples.
  
 \end_layout
 
@@ -1938,7 +1990,7 @@ We are now ready for the proof
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument
+\begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
@@ -2009,7 +2061,7 @@ the discrepancy
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument
+\begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
@@ -2815,7 +2867,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 
@@ -2887,7 +2939,7 @@ status open
 \end_inset
 
  
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 
@@ -2949,7 +3001,7 @@ status open
 \end_inset
 
 
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 
@@ -3151,7 +3203,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 
@@ -3377,7 +3429,7 @@ name "p-values"
 
 \lang british
 
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 
@@ -3425,7 +3477,7 @@ name "lik-evals"
 
 \lang british
 
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 
@@ -3643,7 +3695,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Density estimation: P-values for an increasing number of data 
@@ -3687,7 +3739,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Aprpoximate density estimation: P-values for an increasing number of random
@@ -3798,7 +3850,7 @@ Proofs
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument
+\begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
@@ -3884,7 +3936,7 @@ reference "lem:easy"
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument
+\begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
@@ -4090,7 +4142,7 @@ The computation of
 \begin_layout Proposition
 
 \lang english
-\begin_inset Argument
+\begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
