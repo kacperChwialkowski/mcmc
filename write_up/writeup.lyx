@@ -496,8 +496,15 @@ ns to Markov transition kernels that improve mixing speed at the cost of
  setting and for a fixed run-time, the produced samples have increased in
  quality or not.
  This question cannot be answered with classical MCMC convergence statistics
- alone, such as Effective Sample Size, Gelman-Rubin -- those assume that
- the Markov chain reaches its equilibrium distribution.
+ alone, such as the widely used potential scale reduction factor (R-factor)
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gelman1992inference"
+
+\end_inset
+
+ -- those assume that the Markov chain reaches its equilibrium distribution.
  The described goodness-of-fit testing framework, however, fits very well
  into this context as it exactly quantifies the asymptotic bias of approximate
  MCMC.
@@ -2931,7 +2938,7 @@ reference "fig:experiment_gp"
  Their distribution, however, behaves favourbly to (correctly) rejecting
  the null hypothesis.
  Exacty this happens for this example: even for the low number of test data
-  
+ 
 \begin_inset Formula $N_{\text{test}}=41$
 \end_inset
 
