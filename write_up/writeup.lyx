@@ -197,7 +197,7 @@ We propose a nonparametric statistical test for goodness-of-fit: given a
  samples, where we estimate the null distribution quantiles using a wild
  bootstrap procedure.
  We apply our test to quantifying convergence of approximate Markov Chain
- Monte Carlo methods, statistical model critisism, and evaluating quality
+ Monte Carlo methods, statistical model criticism, and evaluating quality
  of fit vs model complexity in nonparametric density estimation.
 \end_layout
 
@@ -205,7 +205,7 @@ We propose a nonparametric statistical test for goodness-of-fit: given a
 
 \lang english
 \begin_inset FormulaMacro
-\newcommand{\ev}{\mathbb{E}}
+\renewcommand{\ev}{\mathbb{E}}
 {\mathbb{E}}
 \end_inset
 
@@ -259,14 +259,14 @@ key "gorham2015measuring"
  and target expectations over a large class of test functions, constructed
  so as to have zero expectation over the target distribution by use of a
  Stein operator.
- This operator depends only on the derivarive of the 
+ This operator depends only on the derivative of the 
 \begin_inset Formula $\log q$
 \end_inset
 
 : thus, the approach can be applied very generally, as it does not require
  closed-form integrals over the target distribution (or numerical approximations
  of such integrals).
- By contrast, many earlier discrepancy measures require integrals with resepect
+ By contrast, many earlier discrepancy measures require integrals with respect
  to the target (see below for a review).
  This is problematic if the intention is to perform benchmarks for assessing
  Markov Chain Monte Carlo, since these integrals will certainly not be known
@@ -396,7 +396,7 @@ key "Bar89,Beirlant2,Gyorfi,GyVa02"
 .
 
 \lang english
- Such space parititioning approaches can have attractive theoretical properties
+ Such space partitioning approaches can have attractive theoretical properties
  (e.g.
  distribution-free test thresholds) and work well in low dimensions, however
  they are much less powerful than alternatives once the dimensionality increases
@@ -414,7 +414,7 @@ key "GreGyo10"
 \begin_inset Formula $L_{2}$
 \end_inset
 
- distance between the empirical chacacteristic function of the sample, and
+ distance between the empirical characteristic function of the sample, and
  the characteristic function of the target density.
  This dates back to the test of Gaussianity of 
 \begin_inset CommandInset citation
@@ -678,7 +678,7 @@ Suppose a random variable
 status open
 
 \begin_layout Plain Layout
-Throughout the article, all occurences of 
+Throughout the article, all occurrences of 
 \begin_inset Formula $Z$
 \end_inset
 
@@ -975,7 +975,7 @@ key "Shao2010,leucht_dependent_2013,FroLauLerRey12"
 \begin_inset Formula $Z_{i}$
 \end_inset
 
- by mimicing it with an 
+ by mimicking it with an 
 \lang english
 auxiliary
 \lang british
@@ -1112,7 +1112,7 @@ of
 \end_inset
 
 , so it is possible to approximate quantiles of the null distribution by
- samplig from it.
+ sampling from it.
  Under the alternative, however, 
 \begin_inset Formula $V_{n}$
 \end_inset
@@ -1781,7 +1781,7 @@ The discrepancy
 \begin_inset Formula $S(Y,\mathcal{F},p)$
 \end_inset
 
- is maximised by the expected value of 
+ is maximized by the expected value of 
 \begin_inset Formula $\xi$
 \end_inset
 
@@ -2066,7 +2066,11 @@ reference "lem:easy"
 
 \end_inset
 
-We recognise that the expected value of 
+We 
+\lang british
+recognise
+\lang english
+ that the expected value of 
 \begin_inset Formula $\frac{\partial}{\partial x_{i}}(\log p(Y)-\log q(Y))k(Y,\cdot)$
 \end_inset
 
@@ -2310,7 +2314,7 @@ key "leucht2012degenerate"
 
 \end_inset
 
- characterises the limiting behavior of 
+ characterizes the limiting behavior of 
 \family roman
 \series medium
 \shape up
@@ -2601,7 +2605,7 @@ name "sec:experiment"
 \begin_layout Standard
 
 \lang english
-We now provide a number of experimental illustrations of the usefullness
+We now provide a number of experimental illustrations of the usefulness
  of our test.
  After a simple sanity check on i.i.d.
  and non i.i.d.
@@ -3141,10 +3145,10 @@ reference "fig:experiment_gp_test"
 \end_inset
 
  are not distributed according to the true null distribution.
- Their distribution, however, behaves favourbly to (correctly) rejecting
+ Their distribution, however, behaves favourably to (correctly) rejecting
  the null hypothesis.
- Exacty this happens for this example: even for the low number of test data
- 
+ Exactly this happens for this example: even for the low number of test
+ data 
 \begin_inset Formula $N_{\text{test}}=41$
 \end_inset
 
@@ -3677,7 +3681,7 @@ key "strathmann2015gradient"
 .
  It vanishes when the estimator is not regularised, however, at the cost
  of numerical instability.
- Our test sucessfully detected this behaviour.
+ Our test successfully detected this behaviour.
 \end_layout
 
 \begin_layout Standard
@@ -3700,7 +3704,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Aprpoximate density estimation: P-values for an increasing number of random
+Approximate density estimation: P-values for an increasing number of random
  features 
 \begin_inset Formula $m$
 \end_inset
