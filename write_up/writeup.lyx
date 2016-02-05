@@ -989,7 +989,7 @@ B_{n}=\frac{1}{n^{2}}\sum_{i,j=1}^{n}W_{i,n}W_{j,n}h(Z_{i,}Z_{j}).
 \uwave off
 \noun off
 \color none
-Theorem 
+Proposition 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "thm:wild_bootstrap_works"
@@ -1179,10 +1179,16 @@ name "sec:Details"
 
 \end_layout
 
+\begin_layout Standard
+
+\lang english
+We now prove the claims made in the previous Section.
+\end_layout
+
 \begin_layout Subsection
 
 \lang english
-Kernel-Stein
+Stein Operator in RKHS
 \end_layout
 
 \begin_layout Standard
@@ -1200,20 +1206,34 @@ name "sec:details_kernel_stein"
 \begin_layout Standard
 
 \lang english
-The test is applicable to family of distributions, on a real coordinate
- space, 
-\begin_inset Formula $\mathcal{P}$
+We make the following assumptions.
+ Let 
+\begin_inset Formula ${\cal P}$
 \end_inset
 
-, where distributions 
+ be a family of distributions on a real coordinate space, where its elements
+ 
 \begin_inset Formula $p\in\mathcal{P}$
 \end_inset
 
- satisfy two conditions: 
-\begin_inset Newline newline
+ satisfy two conditions:
+\end_layout
+
+\begin_layout Enumerate
+
+\lang english
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+(i)
+\end_layout
+
 \end_inset
 
- (i) 
+
 \begin_inset Formula $\nabla\log p(x)$
 \end_inset
 
@@ -1229,23 +1249,24 @@ The test is applicable to family of distributions, on a real coordinate
 \uwave off
 \noun off
 \color none
-is Lipschitz continuous
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-; 
-\begin_inset Newline newline
+is Lipschitz continuous.
+\end_layout
+
+\begin_layout Enumerate
+
+\lang english
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+(ii)
+\end_layout
+
 \end_inset
 
- (ii) 
+
 \begin_inset Formula $\ev\|\nabla\log p(Z)\|^{2}\leq\infty$
 \end_inset
 
@@ -1254,10 +1275,12 @@ is Lipschitz continuous
 \end_inset
 
 .
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
- The kernels considered in this work are assumed to be bounded, symmetric
+\begin_layout Standard
+
+\lang english
+The kernels considered in this work are assumed to be bounded, symmetric
  and cc-universal 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -1266,15 +1289,28 @@ key "SriFukLan11"
 \end_inset
 
 .
- On top of that we assume that any kernel 
+ On top of that, we assume that the kernel 
 \begin_inset Formula $k$
 \end_inset
 
- must satisfy 
-\begin_inset Newline newline
+ satisfies
+\end_layout
+
+\begin_layout Enumerate
+
+\lang english
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+(iii)
+\end_layout
+
 \end_inset
 
- (iii) 
+
 \begin_inset Formula $\ev\left(\frac{\partial^{2}k(Z,Z)}{dx_{i}dx_{i+d}}\right)^{2}<\infty$
 \end_inset
 
@@ -1282,11 +1318,11 @@ key "SriFukLan11"
 \begin_inset Formula $Z$
 \end_inset
 
-,
-\begin_inset Newline newline
-\end_inset
+.
+\end_layout
 
-(iv)
+\begin_layout Enumerate
+
 \family roman
 \series medium
 \shape up
@@ -1298,44 +1334,67 @@ key "SriFukLan11"
 \uwave off
 \noun off
 \color none
+\lang english
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+(iv)
+\end_layout
+
+\end_inset
+
 
 \begin_inset Formula $\nabla k(x,y)$
 \end_inset
 
  is Lipschitz continuous.
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
+\end_layout
 
-\begin_inset Newline newline
+\begin_layout Standard
+While (i) and (iv) are a technical assumption necessary for Proposition
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:wild_bootstrap_works"
+
 \end_inset
 
-Recall that 
-\begin_inset Formula $\mathcal{F}$
+ regarding the wild-bootstrap procedure, (ii) and (iii) are required for
+ Bocher integrability of 
+\begin_inset Formula $\xi$
 \end_inset
 
- is an RKHS associated with the kernel 
-\begin_inset Formula $k$
+ in Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:BochnerInt1"
+
 \end_inset
 
- and 
-\begin_inset Formula ${\cal F}^{d}$
-\end_inset
+.
 
- is a product space 
-\begin_inset Formula $\otimes_{i=1}^{d}{\cal F}$
-\end_inset
+\lang english
+ 
+\end_layout
 
- with a standard inner product.
- We first show that expected value of the Stein operator is zero on the
+\begin_layout Standard
+
+\lang english
+We first show that the expected value of the Stein operator is zero on the
  target measure.
 \end_layout
 
@@ -1356,17 +1415,17 @@ name "lem:easy"
 \begin_inset Formula $p$
 \end_inset
 
-, then for all function 
+, then for all 
 \begin_inset Formula $f\in\mathcal{F}$
 \end_inset
 
- expected value of 
+, the expected value of 
 \begin_inset Formula $T$
 \end_inset
 
  is zero, i.e.
  
-\begin_inset Formula $\forall_{f\in\mathcal{F}}\ev(T_{q}f)(X)=0$
+\begin_inset Formula $\ev(Tf)(X)=0$
 \end_inset
 
 .
@@ -1375,15 +1434,16 @@ name "lem:easy"
 \begin_layout Proof
 
 \lang english
-First we show that the functions 
-\begin_inset Formula $g_{i}=p\cdot f_{i}$
+First, we show that the functions 
+\begin_inset Formula $g_{i}:=pf_{i}$
 \end_inset
 
- vanish at infinity, by which we mean that for all dimensions 
+ vanish at infinity, i.e.
+ for all dimensions 
 \begin_inset Formula $j$
 \end_inset
 
- 
+, 
 \begin_inset Formula 
 \[
 \lim_{x_{j}\to\infty}g_{i}(x_{1},\cdots,x_{d})=0.
@@ -1410,7 +1470,7 @@ The density function
 \end_inset
 
  vanishes at infinity.
- To show the expected value 
+ To show that the expected value 
 \begin_inset Formula $\ev(T)f(X)$
 \end_inset
 
@@ -1479,9 +1539,10 @@ name "lem:WellDefined"
 
  (see 
 \lang british
-
+Eq.
+ 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "eq:xi"
 
 \end_inset
@@ -1499,8 +1560,7 @@ reference "eq:xi"
 \begin_layout Proof
 
 \lang english
-We use the proof on p.
- 132 of 
+We use the proof of 
 \begin_inset CommandInset citation
 LatexCommand citet
 after "Corollary 4.36"
@@ -1542,7 +1602,7 @@ The following lemma shows that the expected value of
 \begin_inset Formula $\xi$
 \end_inset
 
- is well defined -- it is needed for establishing a link between Stain operator
+ is well defined -- it is needed for establishing a link between Stein operator
  
 \begin_inset Formula $Tf$
 \end_inset
@@ -1627,7 +1687,7 @@ key "SteChr08"
 \end_inset
 
 ).
- first we check that for random any variable 
+ First we check that for random any variable 
 \begin_inset Formula $Z$
 \end_inset
 
@@ -1643,7 +1703,7 @@ for some constant
 \begin_inset Formula $C$
 \end_inset
 
-, which follows form assumption (i) and boundedness of the kernel.
+, which follows from assumption (i) and boundedness of the kernel.
  Next we check that 
 \begin_inset Formula 
 \[
@@ -1656,17 +1716,17 @@ which follows from assumption (iii).
 \end_layout
 
 \begin_layout Standard
-Now we can show that the expected value of the Stain operator is a functional
- on the RKHS 
+Now we can show that the expected value of the Stein operator is a functional
+ in the RKHS 
 \begin_inset Formula $\mathcal{F}^{d}$
 \end_inset
 
-, hence it coincidences with a inner product with some element of 
+, hence, it coincidences with an inner product with some element of 
 \begin_inset Formula $\mathcal{F}^{d}$
 \end_inset
 
 .
- This element turns out to be the expected value of 
+ This element is the expected value of 
 \begin_inset Formula $\xi$
 \end_inset
 
@@ -1687,19 +1747,19 @@ For any random variable
 \begin_inset Formula $Z$
 \end_inset
 
-, expected value of Stein operator coincides with inner product of 
+, the expected value of the Stein operator coincides with the inner product
+ of 
 \begin_inset Formula $f$
 \end_inset
 
- and expected value of 
+ and the expected value of 
 \begin_inset Formula $\xi(Z)$
 \end_inset
 
- i.e.
- 
+, 
 \begin_inset Formula 
 \begin{align*}
-\ev Tf(Z)=\langle f,\ev\xi(Z)\rangle_{\mathcal{F}^{d}} & =\sum_{i=1}^{d}\langle f_{i},\ev\xi_{i}(Z)\rangle_{\mathcal{F}}
+\ev Tf(Z)=\langle f,\ev\xi(Z)\rangle_{\mathcal{F}^{d}} & =\sum_{i=1}^{d}\langle f_{i},\ev\xi_{i}(Z)\rangle_{\mathcal{F}}.
 \end{align*}
 
 \end_inset
@@ -1721,11 +1781,11 @@ We write
 
 \end_inset
 
-The second equality follows form the fact that linear operator 
+The second equality follows from the fact that a linear operator 
 \begin_inset Formula $\langle f_{i},\cdot\rangle_{\mathcal{F}}$
 \end_inset
 
- can be interchanged with Bochner integral and the fact that 
+ can be interchanged with the Bochner integral, and the fact that 
 \begin_inset Formula $\xi$
 \end_inset
 
@@ -1737,7 +1797,7 @@ reference "lem:BochnerInt1"
 \end_inset
 
 ).
- The last equality is an application of reproducing property.
+ The last equality is an application of the reproducing property.
  
 \end_layout
 
@@ -1755,7 +1815,7 @@ reference "lem:BochnerInt1"
 \noun off
 \color none
 \lang english
-From the inner product representation we instantly get  
+From the inner product representation, we get  
 \end_layout
 
 \begin_layout Lemma
@@ -1767,15 +1827,16 @@ name "lem:discprepancy_maximised_by_norm"
 
 \end_inset
 
-Discrepancy 
+The discrepancy 
 \begin_inset Formula $S(Y,\mathcal{F},p)$
 \end_inset
 
- is maximized by an expected value of 
+ is maximised by the expected value of 
 \begin_inset Formula $\xi$
 \end_inset
 
-, 
+, i.e.
+ 
 \begin_inset Formula $S(Y,\mathcal{F},p)=\|\ev\xi(Y)\|$
 \end_inset
 
@@ -1811,7 +1872,7 @@ reference "lem:SteinIsInner"
 \begin_inset Formula $\ev Tf(Y)=\langle f,\ev\xi(Y)\rangle$
 \end_inset
 
-, therefore 
+ and therefore, 
 \begin_inset Formula $S(Y,\mathcal{F},p)$
 \end_inset
 
@@ -1836,7 +1897,7 @@ reference "lem:SteinIsInner"
 \noun off
 \color none
 \lang english
-We are ready for the proof
+We are now ready for the proof
 \family default
 \series default
 \shape default
@@ -1866,7 +1927,7 @@ We are ready for the proof
 \begin_inset Formula $S(Y,\mathcal{F},p)^{2}$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Proof
@@ -1890,25 +1951,16 @@ reference "th:closed_form_discrepancy"
 
 \end_inset
 
- Recall that use notation 
+ We use the notation 
 \begin_inset Formula 
 \begin{align*}
 \nabla_{x}k(x,y)=\left(\frac{\partial k(x,y)}{\partial x_{1}},\cdots,\frac{\partial k(x,y)}{\partial x_{d}}\right)\\
-\nabla_{y}k(x,y)=\left(\frac{\partial k(x,y)}{\partial y_{1}},\cdots,\frac{\partial k(x,y)}{\partial y_{d}}\right).
+\nabla_{y}k(x,y)=\left(\frac{\partial k(x,y)}{\partial y_{1}},\cdots,\frac{\partial k(x,y)}{\partial y_{d}}\right),
 \end{align*}
 
 \end_inset
 
-and 
-\begin_inset Formula $\langle\cdot,\cdot\rangle_{2}$
-\end_inset
-
- for inner product in 
-\begin_inset Formula $R^{d}$
-\end_inset
-
-.
- 
+A plain algebraic manuipulation reveals 
 \begin_inset Formula 
 \begin{align*}
  & S(X,\mathcal{F},p)^{2}=\langle\xi,\xi\rangle_{\mathcal{F}^{d}}\\
@@ -1928,7 +1980,7 @@ and
 \end_layout
 
 \begin_layout Standard
-Finally we prove that 
+Finally, we prove that 
 \family roman
 \series medium
 \shape up
@@ -1941,7 +1993,7 @@ Finally we prove that
 \noun off
 \color none
 \lang english
-discrepancy 
+the discrepancy 
 \begin_inset Formula $S$
 \end_inset
 
@@ -2035,7 +2087,7 @@ reference "lem:easy"
 \begin_inset Formula $\ev\xi(Y)$
 \end_inset
 
- we add and subtract 
+, we add and subtract 
 \begin_inset Formula $\log q(Y)$
 \end_inset
 
@@ -2064,11 +2116,11 @@ reference "lem:easy"
 
 \end_inset
 
-We recognize that expected value of random 
+We recognise that the expected value of 
 \begin_inset Formula $\frac{\partial}{\partial x_{i}}(\log p(Y)-\log q(Y))k(Y,\cdot)$
 \end_inset
 
- is mean emending of a function 
+ is mean the embedding of a function 
 \begin_inset Formula $g(y)=\frac{\partial}{\partial x_{i}}\left(\log\frac{p(y)}{q(y)}\right)$
 \end_inset
 
@@ -2077,24 +2129,24 @@ We recognize that expected value of random
 \end_inset
 
 .
- Since kernel 
+ Since the kernel 
 \begin_inset Formula $k$
 \end_inset
 
- is cc-universal this embedding is zero if and only if 
+ is cc-universal, this embedding is zero if and only if 
 \begin_inset Formula $g=0$
 \end_inset
 
- which implies that 
+, which implies that 
 \begin_inset Formula 
 \[
-\nabla\log\frac{p(y)}{q(y)}=(0,\cdots,0)
+\nabla\log\frac{p(y)}{q(y)}=(0,\cdots,0).
 \]
 
 \end_inset
 
-A constant vector filed of derivatives can be generated only by a constant
- functions, so 
+A constant vector field of derivatives can only be generated by a constant
+ function, so 
 \begin_inset Formula $\log\frac{p(y)}{q(y)}=C$
 \end_inset
 
@@ -2115,7 +2167,7 @@ A constant vector filed of derivatives can be generated only by a constant
 \begin_inset Formula $q$
 \end_inset
 
- integrates to one 
+ both integrate to one, 
 \begin_inset Formula $C=0$
 \end_inset
 
@@ -2123,13 +2175,11 @@ A constant vector filed of derivatives can be generated only by a constant
 \begin_inset Formula $p=q$
 \end_inset
 
-, a contradiction.
+ -- a contradiction.
 \end_layout
 
 \begin_layout Subsection
-
-\lang english
-Test
+Wild Bootstrap Testing
 \end_layout
 
 \begin_layout Standard
@@ -2147,22 +2197,19 @@ name "sub:details_testing"
 \begin_layout Standard
 
 \lang english
-Basic two concepts required for derivation of the test statistic is 
+The two concepts required to derive the distribution of the test statistic
+ are: 
 \begin_inset Formula $\tau$
 \end_inset
 
 -mixing 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "dedecker2007weak"
+LatexCommand citep
+key "dedecker2007weak,leucht_dependent_2013"
 
 \end_inset
 
-, and 
-\begin_inset Formula $V$
-\end_inset
-
--statistics 
+, and V-statistics 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "serfling80"
@@ -2181,18 +2228,19 @@ key "serfling80"
 
 -mixing is a notion of dependence within the observations, weak enough for
  most practical applications.
- Trivially, iid observations are 
+ Trivially, i.i.d.
+ observations are 
 \begin_inset Formula $\tau$
 \end_inset
 
 -mixing.
- As for the Markov Chains, which convergance we study in the experiments,
+ As for the Markov Chains, whose convergance we study in the experiments,
  the property of geometric ergodicity implies 
 \begin_inset Formula $\tau$
 \end_inset
 
 -mixing (given that the stationary distribution has a finite moment, see
- appendix B of 
+ Appendix B of 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "chwialkowski2014kernel"
@@ -2200,17 +2248,42 @@ key "chwialkowski2014kernel"
 \end_inset
 
 ).
- To introduce 
+ For details on 
 \begin_inset Formula $\tau$
 \end_inset
 
--mixing formally, let 
-\begin_inset Formula $\{Z_{t},\mathcal{F}_{t}\}_{t\in\mathbb{N}}$
+-mixing, see 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+heiko{Kacper: put in tau mixing reference}
+\end_layout
+
 \end_inset
 
- be a stationary sequence of integrable random variables, with respect to
+.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+To formally introduce 
+\begin_inset Formula $\tau$
+\end_inset
+
+-mixing, let 
+\begin_inset Formula $\{Z_{t},\mathcal{G}_{t}\}_{t\in\mathbb{N}}$
+\end_inset
+
+ be a stationary sequence of integrable random variables with respect to
  a natural filtration 
-\begin_inset Formula $\mathcal{F}_{t}$
+\begin_inset Formula $\mathcal{G}_{t}$
 \end_inset
 
 .
@@ -2233,19 +2306,19 @@ key "chwialkowski2014kernel"
  is defined as follows 
 \begin_inset Formula 
 \begin{align*}
-\tau(r) & =\sup_{l\in\mathbb{N}}\frac{1}{l}\sup_{r\leq i_{1}...\leq i_{l}}T(\mathcal{F}_{0},(Z_{i_{1}},...,Z_{i_{l}})),\\
-T(\mathcal{M},Z) & =\ev\left(\sup_{g\in\Lambda}\left|\int g(t)(dP_{X|\mathcal{M}}-dP)\right|\right)
+\tau(r) & :=\sup_{l\in\mathbb{N}}\frac{1}{l}\sup_{r\leq i_{1}...\leq i_{l}}L(Z_{i_{1}},...,Z_{i_{l}})\quad\text{with}\\
+L(Z) & :=\ev\left(\sup_{g\in\Lambda}\left|\int g(t)(dP_{Z|\mathcal{\mathcal{G}}_{0}}-dP)\right|\right),
 \end{align*}
 
 \end_inset
 
-and 
+where 
 \begin_inset Formula $\Lambda$
 \end_inset
 
  is the set of all one-Lipschitz continuous real-valued functions on the
  domain of 
-\begin_inset Formula $X$
+\begin_inset Formula $Z$
 \end_inset
 
 .
@@ -2254,14 +2327,24 @@ and
 \end_inset
 
 .
- A direct application of the Theorem 2.1 
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+A direct application of Theorem 2.1 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "leucht2012degenerate"
 
 \end_inset
 
- characterizes limiting behavior of 
+ characterises the limiting behavior of 
 \family roman
 \series medium
 \shape up
@@ -2322,7 +2405,6 @@ Under the null hypothesis
 \end_inset
 
  converges weakly to some distribution.
- 
 \end_layout
 
 \begin_layout Standard
@@ -2339,7 +2421,8 @@ Under the null hypothesis
 \noun off
 \color none
 \lang english
-Proof, which is a simple verification of the assumptions, is in the appendix.
+The proof, which is a simple verification of the assumptions, can be found
+ in the Appendix.
  Although a formula for a limit distribution of 
 \family default
 \series bold
@@ -2366,7 +2449,7 @@ Proof, which is a simple verification of the assumptions, is in the appendix.
 \uwave off
 \noun off
 \color none
- can be derived explicitly ( 
+ can be derived explicitly (
 \family default
 \series default
 \shape default
@@ -2397,8 +2480,8 @@ key "leucht2012degenerate"
 
 \end_inset
 
-), we do provide it here.
- To our knowledge there are no methods of obtaining quintiles of a limit
+), we do not provide it here.
+ To our knowledge there are no methods of obtaining quantiles of a limit
  of 
 \family default
 \series bold
@@ -2425,9 +2508,9 @@ key "leucht2012degenerate"
 \uwave off
 \noun off
 \color none
- in a close form.
- The common solution, is estimating quantiles by a resampling method, as
- described in the section 
+ in closed form.
+ The common solution is to estimate quantiles by a resampling method, as
+ described in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:A-Kernel-Goodness-of-fit"
@@ -2435,7 +2518,8 @@ reference "sec:A-Kernel-Goodness-of-fit"
 \end_inset
 
 .
- The validity of this resampling method is guaranteed by this this proposition.
+ The validity of this resampling method is guaranteed by the following propositi
+on.
  
 \end_layout
 
@@ -2464,12 +2548,12 @@ Let
 \end_inset
 
  be a difference between quantiles.
- Under the null hypothesis 
+ Under the null hypothesis, 
 \begin_inset Formula $f(W_{1,n},\cdots,W_{t,n})$
 \end_inset
 
  converges to zero in probability.
- Under the alternative 
+ Under the alternative hypothesis, 
 \begin_inset Formula $B_{n}$
 \end_inset
 
@@ -2481,12 +2565,8 @@ Let
 \end_layout
 
 \begin_layout Standard
-As a consequence if the null hypothesis is true we can approximate any quantile
- 
-\begin_inset Formula $x$
-\end_inset
-
-, while under the null hypothesis all quantiles of 
+As a consequence, if the null hypothesis is true, we can approximate any
+ quantile; while under the null hypothesis, all quantiles of 
 \begin_inset Formula $B_{n}$
 \end_inset
 
