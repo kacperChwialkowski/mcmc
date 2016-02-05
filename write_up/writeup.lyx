@@ -924,7 +924,7 @@ V_{n}=\frac{1}{n^{2}}\sum_{i,j=1}^{n}h(Z_{i},Z_{j}).
  The wild-bootstrap technique 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "Shao2010,leucht_dependent_2013"
+key "Shao2010,leucht_dependent_2013,FroLauLerRey12"
 
 \end_inset
 
@@ -1681,7 +1681,7 @@ It is sufficient to check that coefficients of
 \begin_inset Formula $\xi$
 \end_inset
 
- are Bochner integrable (
+ are Bochner integrable 
 \begin_inset CommandInset citation
 LatexCommand cite
 after "Definition A.5.20"
@@ -1689,7 +1689,7 @@ key "SteChr08"
 
 \end_inset
 
-).
+.
  First we check that for random any variable 
 \begin_inset Formula $Z$
 \end_inset
@@ -2256,19 +2256,13 @@ key "chwialkowski2014kernel"
 \end_inset
 
 -mixing, see 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-heiko{Kacper: put in tau mixing reference}
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand citet
+key "dedecker2005new,dedecker2007weak"
 
 \end_inset
 
-.
+ .
  
 \begin_inset Note Note
 status open
