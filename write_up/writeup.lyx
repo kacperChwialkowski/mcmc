@@ -397,9 +397,10 @@ key "Bar89,Beirlant2,Gyorfi,GyVa02"
 
 \lang english
  Such space parititioning approaches can have attractive theoretical properties
- (eg distribution-free test thresholds) and work well in low dimensions,
- however they are much less powerful than alternatives once the dimensionality
- increases 
+ (e.g.
+ distribution-free test thresholds) and work well in low dimensions, however
+ they are much less powerful than alternatives once the dimensionality increases
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "GreGyo10"
