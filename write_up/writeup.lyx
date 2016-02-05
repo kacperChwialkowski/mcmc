@@ -862,7 +862,7 @@ reference "sec:details_kernel_stein"
 \begin_inset CommandInset citation
 LatexCommand citep
 after "Definition 4.1"
-key "CarDevToiUma10"
+key "carmeli2010vector"
 
 \end_inset
 
@@ -1235,7 +1235,7 @@ If
 \begin_layout Section
 
 \lang english
-Details
+Proofs of the Main Results
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Details"
@@ -1345,20 +1345,11 @@ end{itemize}
 \begin_layout Standard
 
 \lang english
-The kernels considered in this work are assumed to be bounded, symmetric
- and cc-universal 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "SriFukLan11"
-
-\end_inset
-
-.
- On top of that, we assume that the kernel 
+The kernels 
 \begin_inset Formula $k$
 \end_inset
 
- satisfies
+ considered in this work satisfy
 \end_layout
 
 \begin_layout Standard
@@ -1411,6 +1402,15 @@ nabla_x k(x,y)$ is Lipschitz continuous.
 
 \begin_layout Plain Layout
 
+    
+\backslash
+item[(v)] $k$ is bounded, symmetric and cc-universal 
+\backslash
+citep{carmeli2010vector}.
+\end_layout
+
+\begin_layout Plain Layout
+
 
 \backslash
 end{itemize}
@@ -1422,16 +1422,15 @@ end{itemize}
 \end_layout
 
 \begin_layout Standard
-While (i) and (iv) are a technical assumption necessary for Proposition
- 
+Requirements (i) and (iv) are used in Proposition 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "thm:wild_bootstrap_works"
 
 \end_inset
 
- regarding the wild-bootstrap procedure, (ii) and (iii) are required for
- Bocher integrability of 
+ regarding the wild-bootstrap procedure, (ii) and (iii) are needed for Bocher
+ integrability of 
 \begin_inset Formula $\xi$
 \end_inset
 
@@ -1439,6 +1438,13 @@ reference "thm:wild_bootstrap_works"
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "lem:BochnerInt1"
+
+\end_inset
+
+, and (v) is needed in the proof of Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "theorem_discrepancy_is_metric"
 
 \end_inset
 
@@ -1465,7 +1471,7 @@ reference "lem:easy"
 \begin_layout Standard
 
 \lang english
-The following lemmas are useful in proving main results, Theorems 
+The following lemmas are useful in proving our main results, Theorems 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "th:closed_form_discrepancy"
@@ -1621,7 +1627,7 @@ For any random variable
 \uwave default
 \noun default
 \color inherit
- is Bochner integrable wrt measure of 
+ is Bochner integrable wrt the measure of 
 \begin_inset Formula $Z$
 \end_inset
 
@@ -1645,11 +1651,11 @@ key "SteChr08"
 \end_inset
 
 .
- First we check that for random any variable 
+ First we check that for any random variable 
 \begin_inset Formula $Z$
 \end_inset
 
- 
+, 
 \begin_inset Formula 
 \[
 \ev\left\Vert \frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)\right\Vert ^{2}<C\ev\|\nabla\log p(X)\|^{2}<\infty,
@@ -1674,17 +1680,12 @@ which follows from assumption (iii).
 \end_layout
 
 \begin_layout Standard
-Now we can show that the expected value of the Stein operator is a functional
- in the RKHS 
+We can now show that the expected value of the Stein operator can be expressed
+ as an inner product with an element of 
 \begin_inset Formula $\mathcal{F}^{d}$
 \end_inset
 
-, hence, it coincidences with an inner product with some element of 
-\begin_inset Formula $\mathcal{F}^{d}$
-\end_inset
-
-.
- This element is the expected value of 
+, where this element is the expected value of 
 \begin_inset Formula $\xi$
 \end_inset
 
@@ -1918,7 +1919,7 @@ reference "th:closed_form_discrepancy"
 
 \end_inset
 
-A plain algebraic manuipulation reveals 
+giving 
 \begin_inset Formula 
 \begin{align*}
  & S(X,\mathcal{F},p)^{2}=\langle\xi,\xi\rangle_{\mathcal{F}^{d}}\\
@@ -1992,7 +1993,7 @@ reference "theorem_discrepancy_is_metric"
 \begin_inset Formula $0$
 \end_inset
 
- by the Lemma 
+ by Lemma 
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "lem:easy"
@@ -2078,7 +2079,7 @@ We recognise that the expected value of
 \begin_inset Formula $\frac{\partial}{\partial x_{i}}(\log p(Y)-\log q(Y))k(Y,\cdot)$
 \end_inset
 
- is mean the embedding of a function 
+ is the mean embedding of a function 
 \begin_inset Formula $g(y)=\frac{\partial}{\partial x_{i}}\left(\log\frac{p(y)}{q(y)}\right)$
 \end_inset
 
@@ -2095,7 +2096,7 @@ We recognise that the expected value of
 \begin_inset Formula $\ev(\frac{\partial}{\partial x_{i}}\log p(Y))^{2}\leq\infty$
 \end_inset
 
-and 
+ and 
 \begin_inset Formula $\ev(\frac{\partial}{\partial x_{i}}\log q(Y))^{2}\leq\infty$
 \end_inset
 
@@ -2213,13 +2214,13 @@ key "serfling80"
 \end_inset
 
 -mixing.
- As for the Markov Chains, whose convergance we study in the experiments,
+ As for the Markov Chains, whose convergence we study in the experiments,
  the property of geometric ergodicity implies 
 \begin_inset Formula $\tau$
 \end_inset
 
--mixing (given that the stationary distribution has a finite moment, see
- Appendix B of 
+-mixing (given that the stationary distribution has a finite moment of some
+ order: see Appendix B of 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "chwialkowski2014kernel"
@@ -2227,7 +2228,7 @@ key "chwialkowski2014kernel"
 \end_inset
 
 ).
- For details on 
+ For further details on 
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -2492,7 +2493,7 @@ reference "sec:A-Kernel-Goodness-of-fit"
 
 .
  The validity of this resampling method is guaranteed by the following propositi
-on.
+on, proved in the supplement.
  
 \end_layout
 
@@ -2539,7 +2540,7 @@ Let
 
 \begin_layout Standard
 As a consequence, if the null hypothesis is true, we can approximate any
- quantile; while under the null hypothesis, all quantiles of 
+ quantile; while under the alternative hypothesis, all quantiles of 
 \begin_inset Formula $B_{n}$
 \end_inset
 
@@ -3840,7 +3841,7 @@ The density function
 \begin_inset Formula $f$
 \end_inset
 
- is bounded, which is implied by Cauchy-Schwarz inequality -- 
+ is bounded, which is implied by the Cauchy-Schwarz inequality -- 
 \begin_inset Formula $\left|f(x)\right|\le\left\Vert f\right\Vert \sqrt{k(x,x)}$
 \end_inset
 
@@ -3862,8 +3863,7 @@ The density function
 \begin_inset Formula $\frac{\partial\log p(X)}{\partial x_{i}}f_{i}(X)+\frac{\partial f_{i}(X)}{\partial x_{i}}$
 \end_inset
 
- is zero.
- 
+ is zero, 
 \begin_inset Formula 
 \begin{align*}
  & \ev\left(\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right)\\
@@ -3876,7 +3876,7 @@ The density function
 
 \end_inset
 
-For the equation (a) we have used integration by parts and fact that 
+where in (a) we used integration by parts and that 
 \begin_inset Formula $g_{i}$
 \end_inset
 
