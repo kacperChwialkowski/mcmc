@@ -490,7 +490,7 @@ key "lloyd2015statistical"
  it is not clear how to select the number of samples to be generated for
  the test.
  Our methodology elegantly side-steps both issues as no samples from the
- reference density are required.
+ target density are required.
 \end_layout
 
 \begin_layout Standard
@@ -601,7 +601,7 @@ Stein Operator in RKHS
 \begin_layout Standard
 
 \lang english
-Our goal is to write the maximum discrepancy between reference distribution
+Our goal is to write the maximum discrepancy between target distribution
  
 \begin_inset Formula $p$
 \end_inset
@@ -1098,7 +1098,7 @@ We propose the following test
 \begin_inset Formula $Z_{i}$
 \end_inset
 
- are distributed according to the reference distribution 
+ are distributed according to the target distribution 
 \begin_inset Formula $p$
 \end_inset
 
