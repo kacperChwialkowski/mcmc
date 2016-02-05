@@ -85,6 +85,9 @@ if __name__ == '__main__':
     
     X_train, y_train, X_test, y_test, N, N_test = prepare_dataset(X, y)
     
+    print "num_train:", len(X_train)
+    print "num_test:", len(X_test)
+    
     kernel = RBF(input_dim=1, variance=1., lengthscale=1.)
     m = GPRegression(X_train, y_train, kernel)
     m.optimize()

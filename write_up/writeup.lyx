@@ -2835,11 +2835,48 @@ Statistical Model Criticism on Gaussian Processes
 \end_layout
 
 \begin_layout Standard
-See Figure 
+We now apply our test to the context of statistical model criticism on GP
+ regression.
+ Our presentation and approach follows 
+\begin_inset CommandInset citation
+LatexCommand citealt
+after "Section 6"
+key "lloyd2015statistical"
+
+\end_inset
+
+.
+ We choose the Solar dataset consisting of a regression problem with 
+\begin_inset Formula $N=402$
+\end_inset
+
+.
+ We fit 
+\begin_inset Formula $N_{\text{train}}=361$
+\end_inset
+
+ data fit using a GP using a standard exponentiated squared kernel and a
+ Gaussian noise model to it, and perform standard maximum likelihood II
+ on the hyperparameters (length-scale, overall scale, noise-variance).
+ We then apply our test to the remaining 
+\begin_inset Formula $N_{\text{test}}=41$
+\end_inset
+
+ data.
+ Note that this setup is chosen to make sure the GP fit has stabilised,
+ and a poor fit is not coming from a lack of data.
+ Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:experiment_gp"
 
+\end_inset
+
+ (top) shows training and testing data, and the fitted GP.
+ Clearly, the Gaussian noise model is a poor fit for this particular dataset,
+ e.g.
+ around 
+\begin_inset Formula $X=-1$
 \end_inset
 
 .
