@@ -2837,7 +2837,8 @@ Statistical Model Criticism on Gaussian Processes
 \begin_layout Standard
 We now apply our test to the context of statistical model criticism on GP
  regression.
- Our presentation and approach follows 
+ Our presentation and approach is similar to the non i.i.d.
+ case of 
 \begin_inset CommandInset citation
 LatexCommand citealt
 after "Section 6"
@@ -2863,8 +2864,30 @@ key "lloyd2015statistical"
 \end_inset
 
  data.
- Note that this setup is chosen to make sure the GP fit has stabilised,
- and a poor fit is not coming from a lack of data.
+ Our test attempts to falsify the null hypothesis that the Solar dataset
+ was generated from the predictive distribution (conditioned on training
+ data and predicted position) of the GP.
+ 
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "lloyd2015statistical"
+
+\end_inset
+
+ refer to this setup as non i.i.d.
+ as the predictive distribution is a different univariate Gaussian for every
+ predicted point.
+ Note that in contrast to their MMD-based method, our test does 
+\emph on
+not
+\emph default
+ need to simulate from the multiple predictive distributions.
+ Our particular 
+\begin_inset Formula $N_{\text{train}},N_{\text{test}}$
+\end_inset
+
+ are chosen to make sure the GP fit has stabilised, i.e.
+ adding more data does not cause further changes.
  Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2880,6 +2903,41 @@ reference "fig:experiment_gp"
 \end_inset
 
 .
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:experiment_gp"
+
+\end_inset
+
+ (bottom) shows the distribution over 
+\begin_inset Formula $D=10000$
+\end_inset
+
+ bootstrapped V-statistics 
+\begin_inset Formula $B_{n}$
+\end_inset
+
+ with 
+\begin_inset Formula $n=N_{\text{test}}$
+\end_inset
+
+.
+ Note that under the alternative distribution, the bootstrapped 
+\begin_inset Formula $B_{n}$
+\end_inset
+
+ are not distributed according to the true null distribution.
+ Their distribution, however, behaves favourbly to (correctly) rejecting
+ the null hypothesis.
+ Exacty this happens for this example: even for the low number of test data
+  
+\begin_inset Formula $N_{\text{test}}=41$
+\end_inset
+
+, our procedure rejects the hypothesis that the Solar dataset were generated
+ from the fitted GP.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2912,8 +2970,16 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Top: Fitted GP and data used to fit (blue) and to apply test (red).
- Bottom: Bootstrapped 
+
+\series bold
+Top
+\series default
+: Fitted GP and data used to fit (blue) and to apply test (red).
+ 
+\series bold
+Bottom
+\series default
+: Bootstrapped 
 \begin_inset Formula $B_{n}$
 \end_inset
 
