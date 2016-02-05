@@ -253,7 +253,7 @@ key "Kolmogorov33,Smirnov48"
 
 \lang english
 , which we assume to be only known up to the normalisation constant.
- More recently, in the multivariate setting, 
+ Recently, in the multivariate setting, 
 \lang british
 
 \begin_inset CommandInset citation
@@ -307,7 +307,8 @@ key "Mueller97"
 
 .
  Multivariate generalisations of the K-S test exist, however the computational
- cost of a consistent test rapidly becomes prohibitive with dimension 
+ cost of a consistent test rapidly becomes prohibitive with increasing dimension
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Justel1997251"
