@@ -506,9 +506,9 @@ key "lloyd2015statistical"
 \end_inset
 
 .
- In this setting, samples generated from a fitted generative model are compared
- via the maximum mean discrepancy with samples used to train the model,
- such that a small MMD indicates a good fit.
+ In this setting, samples generated from a fitted model are compared via
+ the maximum mean discrepancy with samples used to train the model, such
+ that a small MMD indicates a good fit.
  There are two limitation to the method: first, it requires samples from
  the model (which might not be easy if this requires a complex MCMC sampler);
  second, the choice of number of samples from the model is not obvious,
@@ -518,9 +518,9 @@ lly wasteful.
 \end_layout
 
 \begin_layout Standard
-A specific application of this goodness-of-fit test is that it is able to
- correctly handle samples from approximate Markov Chain Monte Carlo (MCMC)
- 
+In our experiments, a particular focus is on applying our goodness-of-fit
+ test to certify the output of approximate Markov Chain Monte Carlo (MCMC)
+ samplers 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Korattikara2014,Welling2011,Bardenet2014"
@@ -528,27 +528,23 @@ key "Korattikara2014,Welling2011,Bardenet2014"
 \end_inset
 
 .
- With the hope to increase the overall efficiency, these methods use modificatio
-ns to Markov transition kernels that improve mixing speed at the cost of
- introducing an asymptotic bias.
- Such bias-variance trade-offs can usually be tuned with parameters of the
+ These methods use modifications to Markov transition kernels that improve
+ mixing speed at the cost of worsening the asymptotic bias.
+ The bias-variance trade-off can usually be tuned with parameters of the
  sampling algorithms.
- It is therefore an important question whether for a particular parameter
- setting and for a fixed run-time, the produced samples have increased in
- quality or not.
- This question cannot be answered with classical MCMC convergence statistics
- alone, such as the widely used potential scale reduction factor (R-factor)
- 
+ It is therefore important to test whether for a particular parameter setting
+ and run-time, the samples are of the desired quality.
+ This question cannot be answered with classical MCMC convergence statistics,
+ such as the widely used potential scale reduction factor (R-factor) 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "gelman1992inference"
 
 \end_inset
 
- or the effective sample size -- those assume that the Markov chain reaches
- its equilibrium distribution.
- The described goodness-of-fit testing framework, however, fits very well
- into this context as it exactly quantifies the asymptotic bias of approximate
+ or the effective sample size, since these assume that the Markov chain
+ reaches its equilibrium distribution.
+ By contrast, our test exactly quantifies the asymptotic bias of approximate
  MCMC.
  
 \end_layout
@@ -565,7 +561,8 @@ reference "sec:A-Kernel-Goodness-of-fit"
 
 \end_inset
 
- with a high-level construction of the divergence and a statistical test.
+ with a high-level construction of the RKHS-based Stein discrepancy and
+ associated statistical test.
  In Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -573,8 +570,7 @@ reference "sec:Details"
 
 \end_inset
 
-, we provide additional details and prove the main results presented in
- the previous section.
+, we provide additional details and prove the main results.
  Section 
 \begin_inset CommandInset ref
 LatexCommand ref
