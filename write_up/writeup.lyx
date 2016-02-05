@@ -581,11 +581,11 @@ name "sec:A-Kernel-Goodness-of-fit"
 \lang english
 We now give a high-level construction of our divergence discrepancy and
  the statistical test construction.
- This section aims to communicate the main ideas, we provide the details
+ While this section aims to communicate the main ideas, we provide details
  and proofs in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:details_kernel_stein"
+reference "sec:Details"
 
 \end_inset
 
@@ -631,7 +631,7 @@ Our goal is to write the maximum discrepancy between reference distribution
 \begin_inset Formula $f_{i}\in{\cal F}$
 \end_inset
 
-, and with standard inner product.
+, and with a standard inner product.
  Similarly to 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -655,11 +655,34 @@ Tf:=\sum_{i=1}^{d}\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partia
 
 \end_inset
 
-Suppose random variable 
+Suppose a random variable 
 \begin_inset Formula $Z$
 \end_inset
 
- is distributed according to a measure 
+ is distributed according to a measure
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Throughout the article, all occurences of 
+\begin_inset Formula $Z$
+\end_inset
+
+, e.g.
+ 
+\begin_inset Formula $Z',Z_{i},Z_{\heartsuit}$
+\end_inset
+
+, are assumed to be distributed to 
+\begin_inset Formula $q$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset Formula $q$
 \end_inset
 
@@ -685,7 +708,7 @@ whose inner product with
 \begin_inset Formula $f$
 \end_inset
 
- exactly gives the expected value of the Stein operator 
+ gives exactly the expected value of the Stein operator 
 \begin_inset Formula 
 \[
 \ev Tf(Z)=\langle f,\ev\xi(Z)\rangle_{{\cal F}^{d}}=\sum_{i=1}^{d}\langle f_{i},\ev\xi_{i}(Z)\rangle_{{\cal F}},
@@ -706,8 +729,8 @@ reference "lem:SteinIsInner"
 \begin_inset Formula $X$
 \end_inset
 
- from the target measure 
-\begin_inset Formula $\ev Tf(X)=0$
+ from the target measure, we have 
+\begin_inset Formula $\ev(Tf)(X)=0$
 \end_inset
 
 , which can be seen by integration by parts, c.f.
@@ -724,6 +747,7 @@ reference "lem:easy"
 \begin{align*}
 S(Z) & :=\sup_{\Vert f\Vert<1}\ev(Tf)(Z)-\ev(Tf)(X)\\
  & =\sup_{\Vert f\Vert<1}\langle f,\ev\xi(Z)-\ev\xi(X)\rangle\\
+ & =\sup_{\Vert f\Vert<1}\langle f,\ev\xi(Z)\rangle\\
  & =\|\ev\xi(Z)\|,
 \end{align*}
 
@@ -743,7 +767,7 @@ reference "lem:discprepancy_maximised_by_norm"
 \end_inset
 
  is a desirable property: we can compute 
-\begin_inset Formula $S(Z,p)$
+\begin_inset Formula $S(Z)$
 \end_inset
 
  by only computing 
@@ -764,7 +788,7 @@ reference "lem:discprepancy_maximised_by_norm"
 \begin_inset Formula $p,q\in{\cal P}$
 \end_inset
 
- .
+.
 \end_layout
 
 \begin_layout Theorem
@@ -805,11 +829,11 @@ reference "sec:details_kernel_stein"
 
 \end_inset
 
- contains details such as all assumptions on 
+ contains minor details, assumptions on 
 \begin_inset Formula ${\cal P}$
 \end_inset
 
- and proof.
+, and a proof.
  The following theorem gives a simple closed form expression.
 \end_layout
 
@@ -835,9 +859,9 @@ h(x,y) & :=\nabla\log p(x)^{\top}\nabla\log p(y)k(x,y)\\
 
 The 
 \lang british
-squared Stein discrepancy has
+squared Stein discrepancy is
 \lang english
- the closed form 
+ 
 \begin_inset Formula $S(Z)^{2}=\ev h(Z,Z')$
 \end_inset
 
@@ -899,11 +923,11 @@ key "Shao2010,leucht_dependent_2013"
 \begin_inset Formula $Z_{i}$
 \end_inset
 
- by mimicing it with a 
+ by mimicing it with an 
 \lang english
 auxiliary
 \lang british
- random process, a simple
+ random process: a
 \lang english
  Markov chain taking values in 
 \begin_inset Formula $\{-1,1\}$
@@ -913,7 +937,7 @@ auxiliary
 \begin_inset Formula $W_{1,n}=1$
 \end_inset
 
-:
+,
 \lang british
 
 \begin_inset Formula 
@@ -985,8 +1009,8 @@ reference "thm:wild_bootstrap_works"
 \noun default
 \color inherit
 \lang british
- establishes that 
-\begin_inset Formula $B_{n}$
+ establishes that, under the null hypothesis, 
+\begin_inset Formula $nB_{n}$
 \end_inset
 
 
@@ -1027,12 +1051,37 @@ reference "thm:wild_bootstrap_works"
 \noun off
 \color none
 of 
-\begin_inset Formula $V_{n}$
+\begin_inset Formula $nV_{n}$
 \end_inset
 
 , so it is possible to approximate quantiles of the null distribution by
  samplig from it.
- We propose the following test
+ Under the alternative, however, 
+\begin_inset Formula $V_{n}$
+\end_inset
+
+ dominates 
+\begin_inset Formula $B_{n}$
+\end_inset
+
+ -- resulting in almost sure rejection of the null hypothesis.
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+We propose the following test
 \family default
 \series default
 \shape default
@@ -1045,7 +1094,15 @@ of
 \noun default
 \color inherit
 \lang british
- procedure:
+ procedure for testing the null hypothesis that the 
+\begin_inset Formula $Z_{i}$
+\end_inset
+
+ are distributed according to the reference distribution 
+\begin_inset Formula $p$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Itemize
@@ -1061,7 +1118,7 @@ the test statistic
 \begin_layout Itemize
 
 \lang english
-Calculate
+Bootstrap
 \lang british
  
 \family roman
@@ -1080,19 +1137,11 @@ Calculate
 \begin_inset Formula $\{B_{n}\}_{i=1}^{D}$
 \end_inset
 
- 
-\begin_inset Formula $D$
-\end_inset
-
- times and estimate the 
+ and estimate the 
 \begin_inset Formula $1-\alpha$
 \end_inset
 
- empirical quantile 
-\begin_inset Formula $q$
-\end_inset
-
-.
+ empirical quantile.
  
 \end_layout
 
@@ -1111,14 +1160,10 @@ Calculate
 \color none
 \lang english
 If 
-\begin_inset Formula $V_{n}>q$
+\begin_inset Formula $V_{n}$
 \end_inset
 
-, reject hypothesis that 
-\begin_inset Formula $Z\sim p$
-\end_inset
-
-.
+ exceeds the quantile, reject.
 \end_layout
 
 \begin_layout Section
