@@ -11,6 +11,7 @@
 \usepackage{hyperref}
 \newcommand{\theHalgorithm}{\arabic{algorithm}}
 \usepackage{icml2016} 
+\usepackage{placeins}
 
 %\usepackage[accepted]{icml2016}
 
@@ -3364,16 +3365,7 @@ Distribution of p-values as a function of
 \end_inset
 
  in the austerity MCMC.
- The null hypothesis is unlikely to be rejected for 
-\begin_inset Formula $\epsilon=0.09$
-\end_inset
-
-, however it is only for 
-\begin_inset Formula $\epsilon=0.001$
-\end_inset
-
- that distribution of p-values resembles uniform distribution.
- 
+  
 \end_layout
 
 \end_inset
@@ -3420,12 +3412,7 @@ Average number of likelihood evaluations a function of
 \begin_inset Formula $\epsilon$
 \end_inset
 
- in the austerity MCMC.
- Number of likelihood evaluations for 
-\begin_inset Formula $\epsilon=0.09$
-\end_inset
-
- is three times smaller then for 
+ in the austerity MCMC
 \family roman
 \series medium
 \shape up
@@ -3437,10 +3424,6 @@ Average number of likelihood evaluations a function of
 \uwave off
 \noun off
 \color none
-
-\begin_inset Formula $\epsilon=0.001$
-\end_inset
-
 .
 
 \family default
@@ -3706,6 +3689,22 @@ name "fig:density_estimation_increasing_features"
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+FloatBarrier
 \end_layout
 
 \end_inset
