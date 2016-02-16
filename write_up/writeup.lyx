@@ -1,5 +1,5 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
-\lyxformat 474
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
 \begin_document
 \begin_header
 \textclass article
@@ -35,13 +35,13 @@ theorems-sec
 \font_roman default
 \font_sans default
 \font_typewriter default
-\font_math auto
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
+
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -52,24 +52,15 @@ theorems-sec
 \use_hyperref false
 \papersize a4paper
 \use_geometry false
-\use_package amsmath 2
-\use_package amssymb 2
-\use_package cancel 1
-\use_package esint 0
-\use_package mathdots 1
-\use_package mathtools 1
-\use_package mhchem 1
-\use_package stackrel 1
-\use_package stmaryrd 1
-\use_package undertilde 1
-\cite_engine natbib
-\cite_engine_type numerical
-\biblio_style plainnat
+\use_amsmath 2
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_numerical
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
 \suppress_date false
-\justification true
 \use_refstyle 1
 \index Index
 \shortcut idx
@@ -370,7 +361,7 @@ key "gretton_kernel_2008"
 
  based on the maximum mean discrepancy, which is an integral probability
  metric.
- As with these earlier tests, our statistic is a simple U-statistic, and
+ As with these earlier tests, our statistic is a simple V-statistic, and
  can be computed in closed form and in quadratic time; moreover, it is an
  unbiased estimate of the corresponding population discrepancy.
  As with all Stein-based discrepancies, only the gradient of the log-density
@@ -673,7 +664,7 @@ key "stein1972,gorham2015measuring"
  
 \begin_inset Formula 
 \[
-Tf:=\sum_{i=1}^{d}\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}.
+Tf:=\sum_{i=1}^{d}\left(\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right).
 \]
 
 \end_inset
@@ -914,12 +905,23 @@ name "th:closed_form_discrepancy"
 h(x,y) & :=\nabla\log p(x)^{\top}\nabla\log p(y)k(x,y)\\
  & \quad+\nabla\log p(y)^{\top}\nabla_{x}k(x,y)\\
  & \quad+\nabla\log p(x){}^{\top}\nabla_{y}k(x,y)\\
- & \quad+\nabla_{x}k(x,y)^{\top}\nabla_{y}k(x,y).
+ & \quad+\langle\nabla_{x}k(x,\cdot),\nabla_{y}k(\cdot,y)\rangle,
 \end{align*}
 
 \end_inset
 
-The 
+
+\end_layout
+
+\begin_layout Theorem
+
+\lang english
+where the last term can be written as a sum 
+\begin_inset Formula $\sum_{\{i=1\}}^{d}\frac{\partial k(x,y)}{\partial x_{i}\partial y_{i}}$
+\end_inset
+
+.
+ The 
 \lang british
 squared Stein discrepancy is
 \lang english
@@ -928,6 +930,9 @@ squared Stein discrepancy is
 \end_inset
 
 .
+
+\lang british
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1591,11 +1596,11 @@ For any random variable
 \begin_inset Formula $Z$
 \end_inset
 
-, expected value of 
+, the expected value of 
 \begin_inset Formula $\xi(Z)$
 \end_inset
 
- is is element of 
+ is an element of 
 \begin_inset Formula $\mathcal{F}^{d}$
 \end_inset
 
@@ -1667,7 +1672,7 @@ for some constant
 \begin_inset Formula $C$
 \end_inset
 
-, which follows from assumption (i) and boundedness of the kernel.
+, which follows from assumption (ii) and boundedness of the kernel.
  Next we check that 
 \begin_inset Formula 
 \[
@@ -1735,7 +1740,7 @@ We write
  & \left\langle f_{i},\ev\xi_{i}(Z)\right\rangle _{\mathcal{F}}\\
  & =\left\langle f_{i},\ev\left[\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right]\right\rangle _{\mathcal{F}}\\
  & =\ev\left\langle f_{i},\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right\rangle _{\mathcal{F}}\\
- & =\ev\left[\frac{\partial\log p(Z)}{\partial x_{i}}f_{i}(Z)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right].
+ & =\ev\left[\frac{\partial\log p(Z)}{\partial x_{i}}f_{i}(Z)+\frac{\partial f(Z,\cdot)}{\partial x_{i}}\right].
 \end{align*}
 
 \end_inset
@@ -1892,7 +1897,7 @@ We are now ready for the proof
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
@@ -1913,8 +1918,8 @@ reference "th:closed_form_discrepancy"
  We use the notation 
 \begin_inset Formula 
 \begin{align*}
-\nabla_{x}k(x,y)=\left(\frac{\partial k(x,y)}{\partial x_{1}},\cdots,\frac{\partial k(x,y)}{\partial x_{d}}\right)\\
-\nabla_{y}k(x,y)=\left(\frac{\partial k(x,y)}{\partial y_{1}},\cdots,\frac{\partial k(x,y)}{\partial y_{d}}\right),
+\nabla_{x}k(x,\cdot)=\left(\frac{\partial k(x,\cdot)}{\partial x_{1}},\cdots,\frac{\partial k(x,\cdot)}{\partial x_{d}}\right)\\
+\nabla_{y}k(\cdot,y)=\left(\frac{\partial k(\cdot,y)}{\partial y_{1}},\cdots,\frac{\partial k(\cdot,y)}{\partial y_{d}}\right),
 \end{align*}
 
 \end_inset
@@ -1922,15 +1927,15 @@ reference "th:closed_form_discrepancy"
 giving 
 \begin_inset Formula 
 \begin{align*}
- & S(X,\mathcal{F},p)^{2}=\langle\xi,\xi\rangle_{\mathcal{F}^{d}}\\
+ & S(X,\mathcal{F},p)^{2}=\langle\ev\xi,\ev\xi\rangle_{\mathcal{F}^{d}}\\
  & =\langle\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{x}k(X,\cdot)\right],\\
  & \quad\quad\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{x}k(X,\cdot)\right]\rangle\\
- & =\ev\langle\nabla\log p(X)k(X,\cdot)+\nabla_{x}k(X_{1},\cdot),\\
- & \quad\quad\quad\nabla\log p(X)k(\cdot,X)+\nabla_{y}k(\cdot,X)\rangle\\
+ & =\ev\langle\nabla\log p(X)k(X,\cdot)+\nabla_{x}k(X,\cdot),\\
+ & \quad\quad\quad\nabla\log p(X)k(\cdot,X')+\nabla_{y}k(\cdot,X')\rangle\\
  & =\ev\nabla\log p(X)^{\top}\nabla\log p(X')k(X,X')\\
  & \quad+\ev\nabla\log p(X)\nabla_{x}k(X,X')\\
  & \quad+\ev\nabla\log p(X){}^{\top}\nabla_{y}k(X,X')\\
- & \quad+\ev\nabla_{x}k(X,X')^{\top}\nabla_{y}k(X,X').
+ & \quad+\ev\langle\nabla_{x}k(X,\cdot),\nabla_{y}k(\cdot,X')\rangle,.
 \end{align*}
 
 \end_inset
@@ -1963,7 +1968,7 @@ the discrepancy
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
@@ -2092,11 +2097,11 @@ recognise
 \end_inset
 
 .
- By assumption (ii) Function 
+ By assumption (ii) function 
 \begin_inset Formula $g$
 \end_inset
 
- is square integrable (
+ is square integrable, 
 \begin_inset Formula $\ev(\frac{\partial}{\partial x_{i}}\log p(Y))^{2}\leq\infty$
 \end_inset
 
@@ -2104,7 +2109,7 @@ recognise
 \begin_inset Formula $\ev(\frac{\partial}{\partial x_{i}}\log q(Y))^{2}\leq\infty$
 \end_inset
 
- ) .
+ .
  Therefore, since the kernel 
 \begin_inset Formula $k$
 \end_inset
@@ -2218,8 +2223,8 @@ key "serfling80"
 \end_inset
 
 -mixing.
- As for the Markov Chains, whose convergence we study in the experiments,
- the property of geometric ergodicity implies 
+ As for Markov chains, whose convergence we study in the experiments, the
+ property of geometric ergodicity implies 
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -2651,7 +2656,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -2787,7 +2792,7 @@ status open
 \end_inset
 
  
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -2970,7 +2975,7 @@ status open
 \end_inset
 
 
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -3050,7 +3055,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 Fitted GP and data used to fit (blue) and to apply test (red).
@@ -3208,7 +3213,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 Bootstrapped 
@@ -3265,7 +3270,7 @@ status open
 
 \lang british
 
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -3354,7 +3359,7 @@ status open
 
 \lang british
 
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -3566,7 +3571,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 Density estimation: P-values for an increasing number of data 
@@ -3768,7 +3773,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_inset Caption
 
 \begin_layout Plain Layout
 Approximate density estimation: P-values for an increasing number of random
@@ -3991,7 +3996,7 @@ where in (a) we used integration by parts and that
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
@@ -4103,7 +4108,7 @@ reference "lem:easy"
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
@@ -4441,7 +4446,7 @@ The computation of
 \begin_layout Proposition
 
 \lang english
-\begin_inset Argument 1
+\begin_inset Argument
 status open
 
 \begin_layout Plain Layout
