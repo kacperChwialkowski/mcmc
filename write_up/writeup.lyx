@@ -1,5 +1,5 @@
-#LyX 2.0 created this file. For more info see http://www.lyx.org/
-\lyxformat 413
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
 \begin_document
 \begin_header
 \textclass article
@@ -35,13 +35,13 @@ theorems-sec
 \font_roman default
 \font_sans default
 \font_typewriter default
+\font_math auto
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
-
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -52,15 +52,24 @@ theorems-sec
 \use_hyperref false
 \papersize a4paper
 \use_geometry false
-\use_amsmath 2
-\use_esint 0
-\use_mhchem 1
-\use_mathdots 1
-\cite_engine natbib_numerical
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type numerical
+\biblio_style plainnat
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
 \suppress_date false
+\justification true
 \use_refstyle 1
 \index Index
 \shortcut idx
@@ -1897,7 +1906,7 @@ We are now ready for the proof
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument
+\begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
@@ -1968,7 +1977,7 @@ the discrepancy
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument
+\begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
@@ -2656,7 +2665,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 
@@ -2792,7 +2801,7 @@ status open
 \end_inset
 
  
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 
@@ -2975,7 +2984,7 @@ status open
 \end_inset
 
 
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 
@@ -3055,7 +3064,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Fitted GP and data used to fit (blue) and to apply test (red).
@@ -3213,7 +3222,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Bootstrapped 
@@ -3270,7 +3279,7 @@ status open
 
 \lang british
 
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 
@@ -3359,7 +3368,7 @@ status open
 
 \lang british
 
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 
@@ -3571,7 +3580,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Density estimation: P-values for an increasing number of data 
@@ -3773,7 +3782,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Approximate density estimation: P-values for an increasing number of random
@@ -3920,16 +3929,15 @@ name "lem:easy"
 \begin_layout Proof
 
 \lang english
-First, we show that the functions 
-\begin_inset Formula $g_{i}:=pf_{i}$
+First we show that the functions 
+\begin_inset Formula $g_{i}=p\cdot f_{i}$
 \end_inset
 
- vanish at infinity, i.e.
- for all dimensions 
+ vanish at infinity, by which we mean that for all dimensions 
 \begin_inset Formula $j$
 \end_inset
 
-, 
+ 
 \begin_inset Formula 
 \[
 \lim_{x_{j}\to\infty}g_{i}(x_{1},\cdots,x_{d})=0.
@@ -3946,7 +3954,7 @@ The density function
 \begin_inset Formula $f$
 \end_inset
 
- is bounded, which is implied by the Cauchy-Schwarz inequality -- 
+ is bounded, which is implied by Cauchy-Schwarz inequality -- 
 \begin_inset Formula $\left|f(x)\right|\le\left\Vert f\right\Vert \sqrt{k(x,x)}$
 \end_inset
 
@@ -3956,8 +3964,8 @@ The density function
 \end_inset
 
  vanishes at infinity.
- To show that the expected value 
-\begin_inset Formula $\ev(T)f(X)$
+ To show the expected value 
+\begin_inset Formula $\ev(T_{p})f(X)$
 \end_inset
 
  is zero, it is sufficient to show that for all dimensions 
@@ -3968,24 +3976,59 @@ The density function
 \begin_inset Formula $\frac{\partial\log p(X)}{\partial x_{i}}f_{i}(X)+\frac{\partial f_{i}(X)}{\partial x_{i}}$
 \end_inset
 
- is zero, 
+ is zero.
+ 
 \begin_inset Formula 
 \begin{align*}
  & \ev\left(\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right)\\
  & =\int_{R_{d}}\left[\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right]q(x)dx\\
  & =\int_{R_{d}}\left[\frac{1}{p(x)}\frac{\partial q(x)}{\partial x_{i}}f(x)+\frac{\partial f(x)}{\partial x_{i}}\right]q(x)dx\\
  & =\int_{R_{d}}\left[\frac{\partial p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}q(x)\right]dx\\
- & \overset{(a)}{=}\int_{R_{d-1}}\left(\lim_{R\to\infty}p(x)f_{i}(x)\bigg|_{x_{i}=-R}^{x_{i}=R}\right)dx\\
- & =\int_{R_{d-1}}0dx=0
+ & \overset{(a)}{=}\int_{R_{d-1}}\left(\lim_{R\to\infty}p(x)f_{i}(x)\bigg|_{x_{i}=-R}^{x_{i}=R}\right)dx_{1}\cdots dx_{i-1}\cdots dx_{i+1}\cdots d{x_{d}}\\
+ & =\int_{R_{d-1}}0dx_{1}\cdots dx_{i-1}\cdots dx_{i+1}\cdots d{x_{d}}\\
+ & =0.
 \end{align*}
 
 \end_inset
 
-where in (a) we used integration by parts and that 
+For the equation (a) we have used integration by parts, fact that 
 \begin_inset Formula $g_{i}$
 \end_inset
 
- vanishes at infinity.
+ vanishes at infinity and Fubini-Toneli theorem to show that we can do iterated
+ integration.
+ The sufficient condition for the Fubini-Toneli theorem is that 
+\begin_inset Formula $\int|g_{i}f(x)|q(x)dx$
+\end_inset
+
+ exists.
+ This is implied by existence of 
+\begin_inset Formula $\ev|\frac{\partial\log p(X)}{\partial x_{i}}f_{i}(X)|$
+\end_inset
+
+ and 
+\begin_inset Formula $\ev|\frac{\partial f_{i}(X)}{\partial x_{i}}|$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ is bounded and 
+\begin_inset Formula $\ev|\frac{\partial\log p(X)}{\partial x_{i}}|\leq\ev\|\nabla\log p(Z)\|^{2}$
+\end_inset
+
+, condition ii) guarantees that 
+\begin_inset Formula $\ev|\frac{\partial\log p(X)}{\partial x_{i}}f_{i}(X)|$
+\end_inset
+
+ is finite.
+ For the second term we have 
+\begin_inset Formula $\ev|\frac{\partial f_{i}(X)}{\partial x_{i}}|=\ev|\langle\frac{\partial k(X,cdot)}{\partial x_{i}},f_{i}|\rangle\leq\|f_{i}\|_{\mathcal{F}}\ev\sqrt{\frac{\partial^{2}k(X,X)}{dx_{i}dx_{i+d}}}$
+\end_inset
+
+, which is guaranteed by the condition iv).
  
 \end_layout
 
@@ -3996,7 +4039,7 @@ where in (a) we used integration by parts and that
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument
+\begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
@@ -4108,7 +4151,7 @@ reference "lem:easy"
 \begin_layout Proof
 
 \lang english
-\begin_inset Argument
+\begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
@@ -4446,7 +4489,7 @@ The computation of
 \begin_layout Proposition
 
 \lang english
-\begin_inset Argument
+\begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
