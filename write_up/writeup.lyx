@@ -385,9 +385,9 @@ key "OatGirCho15"
 
 \end_inset
 
- Our measure of goodness of fit is the largest discrepancy over this new
- space of functions between empirical sample expectations and target expectation
-s (the latter being zero, due to the effect of the Stein operator).
+ Our measure of goodness of fit is the largest discrepancy over this space
+ of functions between empirical sample expectations and target expectations
+ (the latter being zero, due to the effect of the Stein operator).
  The approach is a natural extension to goodness-of-fit testing of the earlier
  two-sample tests 
 \begin_inset CommandInset citation
