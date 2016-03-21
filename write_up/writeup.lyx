@@ -421,9 +421,6 @@ key "serfling80,leucht_dependent_2013"
 \end_inset
 
 .
- We are able to provide statistical tests even in the case of correlated
- samples, which is essential if the test is to be used in assessing the
- quality of output of an MCMC procedure.
  
 \begin_inset Note Note
 status open
@@ -434,15 +431,27 @@ status open
 
 \end_inset
 
- For uncorrelated samples, an identical test was obtained simultaneously
- in independent work by 
+ We are able to provide statistical tests for both uncorrelated and correlated
+ samples, where the latter is essential if the test is to be used in assessing
+ the quality of output of an MCMC procedure.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+%AG
+\end_layout
+
+\end_inset
+
+ An identical test was obtained simultaneously in independent work by 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "LiuLeeJor16"
 
 \end_inset
 
-.
+, for uncorrelated samples.
 \end_layout
 
 \begin_layout Standard
