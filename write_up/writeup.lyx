@@ -1286,7 +1286,8 @@ name "sec:details_kernel_stein"
 \begin_layout Standard
 
 \lang english
-We make the following assumptions.
+TODO: revise assumptions.
+ We make the following assumptions.
  Let 
 \begin_inset Formula ${\cal P}$
 \end_inset
