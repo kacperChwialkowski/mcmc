@@ -348,13 +348,48 @@ An important application of a goodness-of-fit measure is in statistical
 The key contribution of this work is to define a statistical test of goodness-of
 -fit, based on a Stein discrepancy computed in a Reproducing Kernel Hilbert
  Space (RKHS).
- To construct our test statistic, we apply the Stein operator to our chosen
- set of RKHS functions, and define our measure of goodness of fit as the
- largest discrepancy over this set between empirical sample expectations
- and target expectations (the latter being zero, due to the effect of the
- Stein operator).
- This approach is a natural extension to goodness-of-fit testing of the
- earlier two-sample tests 
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+%AG
+\end_layout
+
+\end_inset
+
+ To construct our test statistic, we use a function class defined by applying
+ the Stein operator to a chosen space of RKHS functions, as proposed by
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "OatGirCho15"
+
+\end_inset
+
+.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "OatGirCho15"
+
+\end_inset
+
+ addressed the problem variance reduction in Monte Carlo integration, using
+ the Stein operator to avoid bias.
+ 
+\end_layout
+
+\end_inset
+
+ Our measure of goodness of fit is the largest discrepancy over this new
+ space of functions between empirical sample expectations and target expectation
+s (the latter being zero, due to the effect of the Stein operator).
+ The approach is a natural extension to goodness-of-fit testing of the earlier
+ two-sample tests 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "gretton2012kernel"
@@ -389,6 +424,25 @@ key "serfling80,leucht_dependent_2013"
  We are able to provide statistical tests even in the case of correlated
  samples, which is essential if the test is to be used in assessing the
  quality of output of an MCMC procedure.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+%AG
+\end_layout
+
+\end_inset
+
+ For uncorrelated samples, an identical test was obtained simultaneously
+ in independent work by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "LiuLeeJor16"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -638,7 +692,23 @@ Our goal is to write the maximum discrepancy between target distribution
 \begin_inset Formula ${\cal F}$
 \end_inset
 
- the RKHS of real-valued functions with reproducing kernel 
+ the RKHS of real-valued functions
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+%AG: added 
+\backslash
+Re^d condition
+\end_layout
+
+\end_inset
+
+ on 
+\begin_inset Formula $\mathbb{R}^{d}$
+\end_inset
+
+ with reproducing kernel 
 \begin_inset Formula $k$
 \end_inset
 
@@ -654,11 +724,27 @@ Our goal is to write the maximum discrepancy between target distribution
 \begin_inset Formula $f_{i}\in{\cal F}$
 \end_inset
 
-, and with a standard inner product.
+, and with a standard inner product 
+\begin_inset Formula $\left\langle f,g\right\rangle _{\mathcal{F}^{d}}=\sum_{i=1}^{d}\left\langle f_{i},g_{i}\right\rangle _{\mathcal{F}}$
+\end_inset
+
+.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang english
+%AG: added the inner product.
+ Added new citation to Oates.
+\end_layout
+
+\end_inset
+
  Similarly to 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "stein1972,gorham2015measuring"
+key "stein1972,gorham2015measuring,OatGirCho15"
 
 \end_inset
 
@@ -766,12 +852,24 @@ reference "lem:easy"
 
  in the supplement.
  We can now define a Stein discrepancy and express it in the RKHS,
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+%AG: added subscripts to dot products.
+\end_layout
+
+\end_inset
+
+
 \begin_inset Formula 
 \begin{align*}
 S(Z) & :=\sup_{\Vert f\Vert<1}\ev(Tf)(Z)-\ev(Tf)(X)\\
- & =\sup_{\Vert f\Vert<1}\langle f,\ev\xi(Z)-\ev\xi(X)\rangle\\
- & =\sup_{\Vert f\Vert<1}\langle f,\ev\xi(Z)\rangle\\
- & =\|\ev\xi(Z)\|,
+ & =\sup_{\Vert f\Vert<1}\langle f,\ev\xi(Z)-\ev\xi(X)\rangle_{{\cal F}^{d}}\\
+ & =\sup_{\Vert f\Vert<1}\langle f,\ev\xi(Z)\rangle_{{\cal F}^{d}}\\
+ & =\|\ev\xi(Z)\|_{{\cal F}^{d}},
 \end{align*}
 
 \end_inset
@@ -908,13 +1006,25 @@ name "th:closed_form_discrepancy"
 
 \end_inset
 
- Let 
+ Let
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+%AG: added subscript to dot products.
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset Formula 
 \begin{align*}
 h(x,y) & :=\nabla\log p(x)^{\top}\nabla\log p(y)k(x,y)\\
  & \quad+\nabla\log p(y)^{\top}\nabla_{x}k(x,y)\\
  & \quad+\nabla\log p(x){}^{\top}\nabla_{y}k(x,y)\\
- & \quad+\langle\nabla_{x}k(x,\cdot),\nabla_{y}k(\cdot,y)\rangle,
+ & \quad+\langle\nabla_{x}k(x,\cdot),\nabla_{y}k(\cdot,y)\rangle_{{\cal F}^{d}},
 \end{align*}
 
 \end_inset
@@ -1669,10 +1779,22 @@ key "SteChr08"
 \begin_inset Formula $Z$
 \end_inset
 
-, 
+,
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+%AG: added subscript to norm.
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset Formula 
 \[
-\ev\left\Vert \frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)\right\Vert ^{2}<C\ev\|\nabla\log p(X)\|^{2}<\infty,
+\ev\left\Vert \frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)\right\Vert _{\mathcal{F}}^{2}<C\ev\|\nabla\log p(X)\|^{2}<\infty,
 \]
 
 \end_inset
@@ -1682,10 +1804,22 @@ for some constant
 \end_inset
 
 , which follows from assumption (ii) and boundedness of the kernel.
- Next we check that 
+ Next we check that
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+%AG: added subscript to norm.
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset Formula 
 \[
-\ev\left\Vert \frac{\partial k(Z,\cdot)}{\partial x}\right\Vert ^{2}=\ev\left(\frac{\partial^{2}k(Z,Z)}{dx_{i}dx_{i+d}}\right)^{2}<\infty,
+\ev\left\Vert \frac{\partial k(Z,\cdot)}{\partial x}\right\Vert _{\mathcal{F}^{d}}^{2}=\ev\left(\frac{\partial^{2}k(Z,Z)}{dx_{i}dx_{i+d}}\right)^{2}<\infty,
 \]
 
 \end_inset
@@ -1842,7 +1976,7 @@ reference "lem:SteinIsInner"
 \color none
 \lang english
 
-\begin_inset Formula $\ev Tf(Y)=\langle f,\ev\xi(Y)\rangle$
+\begin_inset Formula $\ev Tf(Y)=\langle f,\ev\xi(Y)\rangle_{\mathcal{F}^{d}}$
 \end_inset
 
  and therefore, 
@@ -1850,10 +1984,34 @@ reference "lem:SteinIsInner"
 \end_inset
 
  is maximized by 
-\begin_inset Formula $\frac{\ev\xi(Y)}{\|\ev\xi(Y)\|}$
+\begin_inset Formula $\frac{\ev\xi(Y)}{\|\ev\xi(Y)\|_{\mathcal{F}^{d}}}$
 \end_inset
 
 .
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+%AG: added subscript to norms.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1933,18 +2091,30 @@ reference "th:closed_form_discrepancy"
 
 \end_inset
 
-giving 
+giving
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+%AG: added subscript to norms.
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset Formula 
 \begin{align*}
  & S(X,\mathcal{F},p)^{2}=\langle\ev\xi,\ev\xi\rangle_{\mathcal{F}^{d}}\\
  & =\langle\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{x}k(X,\cdot)\right],\\
- & \quad\quad\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{x}k(X,\cdot)\right]\rangle\\
+ & \quad\quad\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{x}k(X,\cdot)\right]\rangle_{\mathcal{F}^{d}}\\
  & =\ev\langle\nabla\log p(X)k(X,\cdot)+\nabla_{x}k(X,\cdot),\\
- & \quad\quad\quad\nabla\log p(X)k(\cdot,X')+\nabla_{y}k(\cdot,X')\rangle\\
+ & \quad\quad\quad\nabla\log p(X)k(\cdot,X')+\nabla_{y}k(\cdot,X')\rangle_{\mathcal{F}^{d}}\\
  & =\ev\nabla\log p(X)^{\top}\nabla\log p(X')k(X,X')\\
  & \quad+\ev\nabla\log p(X)\nabla_{x}k(X,X')\\
  & \quad+\ev\nabla\log p(X){}^{\top}\nabla_{y}k(X,X')\\
- & \quad+\ev\langle\nabla_{x}k(X,\cdot),\nabla_{y}k(\cdot,X')\rangle,.
+ & \quad+\ev\langle\nabla_{x}k(X,\cdot),\nabla_{y}k(\cdot,X')\rangle_{\mathcal{F}^{d}}.
 \end{align*}
 
 \end_inset
@@ -2064,7 +2234,7 @@ reference "lem:easy"
 \begin_inset Formula $\log q(Y)$
 \end_inset
 
- 
+, 
 \begin_inset Formula 
 \begin{align*}
  & \ev\left(\frac{\partial}{\partial x_{i}}\log p(Y)k(Y,\cdot)+\frac{\partial}{\partial x_{i}}k(Y,\cdot)\right)\\
@@ -3929,7 +4099,68 @@ name "lem:easy"
 \begin_layout Proof
 
 \lang english
-First we show that the functions 
+This result was proved on bounded domains 
+\begin_inset Formula $\mathcal{X}\subset\mathbb{R}^{d}$
+\end_inset
+
+ by 
+\begin_inset CommandInset citation
+LatexCommand citet
+after "Lemma 1"
+key "OatGirCho15"
+
+\end_inset
+
+, under conditions on the kernel
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang english
+%AG: added discussion of Oates' proof.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+0 & =\oint_{\partial\mathcal{X}}k(x,x')p(x)n(x)dS(x'),\\
+0 & =\oint_{\partial\mathcal{X}}\nabla_{x}k(x,x')^{\top}n(x')p(x')dS(x'),
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $n(x)$
+\end_inset
+
+ is the unit vector normal to the boundary at 
+\begin_inset Formula $x$
+\end_inset
+
+, and 
+\begin_inset Formula $\oint_{\partial\mathcal{X}}$
+\end_inset
+
+ is the surface integral over the boundary 
+\begin_inset Formula $\partial\mathcal{X}$
+\end_inset
+
+.
+ The case of unbounded domains was discussed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+after "Remark 2"
+key "OatGirCho15"
+
+\end_inset
+
+.
+ Here we provide an alternative proof for the latter case, with simpler
+ conditions.
+ First we show that the functions 
 \begin_inset Formula $g_{i}=p\cdot f_{i}$
 \end_inset
 
