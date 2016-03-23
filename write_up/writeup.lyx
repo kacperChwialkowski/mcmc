@@ -4168,8 +4168,7 @@ key "OatGirCho15"
 \end_inset
 
 .
- Here we provide an alternative proof for the latter case, with simpler
- conditions.
+ Here we provide an alternative, elementary proof for the latter case.
  First we show that the functions 
 \begin_inset Formula $g_{i}=p\cdot f_{i}$
 \end_inset
