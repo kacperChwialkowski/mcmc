@@ -9,8 +9,8 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{hyperref}
-\newcommand{\theHalgorithm}{\arabic{algorithm}}
-\usepackage{icml2016} 
+%\newcommand{\theHalgorithm}{\arabic{algorithm}}
+\usepackage[accepted]{icml2016} 
 \usepackage{placeins}
 
 %\usepackage[accepted]{icml2016}
@@ -613,6 +613,18 @@ key "gelman1992inference"
  By contrast, our test exactly quantifies the asymptotic bias of approximate
  MCMC.
  
+\end_layout
+
+\begin_layout Standard
+Code can be found at 
+\begin_inset CommandInset href
+LatexCommand href
+name "https://github.com/karlnapf/kernel_goodness_of_fit"
+target "https://github.com/karlnapf/kernel_goodness_of_fit"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Paragraph
@@ -2829,6 +2841,15 @@ We provide a number of experimental applications for our test.
  In the final experiment, we move away from the MCMC setting, and
 \lang british
  use the test to evaluate the convergence of a nonparametric density estimator.
+ Code can be found at 
+\begin_inset CommandInset href
+LatexCommand href
+name "https://github.com/karlnapf/kernel_goodness_of_fit"
+target "https://github.com/karlnapf/kernel_goodness_of_fit"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection*
