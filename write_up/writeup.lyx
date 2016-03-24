@@ -1405,8 +1405,19 @@ name "sec:details_kernel_stein"
 \begin_layout Standard
 
 \lang english
-TODO: revise assumptions.
- We make the following assumptions.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+revise assumptions.
+ 
+\end_layout
+
+\end_inset
+
+We make the following assumptions.
  Let 
 \begin_inset Formula ${\cal P}$
 \end_inset
@@ -1791,7 +1802,7 @@ key "SteChr08"
 
 ,
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
