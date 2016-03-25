@@ -1827,7 +1827,7 @@ status collapsed
  
 \begin_inset Formula 
 \[
-\ev\left\Vert \frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)\right\Vert _{\mathcal{F}}^{2}<C\ev\|\nabla\log p(X)\|^{2}<\infty,
+\ev\left\Vert \frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)\right\Vert _{\mathcal{F}}<C\ev|\frac{\partial\log p(Z)}{\partial x_{i}}|<\infty,
 \]
 
 \end_inset
@@ -1852,7 +1852,7 @@ status open
  
 \begin_inset Formula 
 \[
-\ev\left\Vert \frac{\partial k(Z,\cdot)}{\partial x}\right\Vert _{\mathcal{F}^{d}}^{2}=\ev\left(\frac{\partial^{2}k(Z,Z)}{dx_{i}dx_{i+d}}\right)^{2}<\infty,
+\ev\left\Vert \frac{\partial k(Z,\cdot)}{\partial x}\right\Vert _{\mathcal{F}^{d}}=\ev\sqrt{\left(\frac{\partial^{2}k(Z,Z)}{dx_{i}dx_{i+d}}\right)}<\infty,
 \]
 
 \end_inset
