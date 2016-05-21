@@ -1431,15 +1431,14 @@ revise assumptions.
 
 We make the following assumptions.
  Let 
-\begin_inset Formula ${\cal P}$
+\begin_inset Formula $p$
 \end_inset
 
- be a family of distributions on a real coordinate space, where its elements
- 
-\begin_inset Formula $p\in\mathcal{P}$
+ be a the target distribution and 
+\begin_inset Formula $q$
 \end_inset
 
- satisfy two conditions:
+ be an alternative distribution :
 \end_layout
 
 \begin_layout Standard
@@ -1480,11 +1479,13 @@ nabla
 \backslash
 log p(Z) 
 \backslash
-|^2 
+|_1 
 \backslash
 leq 
 \backslash
-infty$ for any random variable.
+infty$ for $Z 
+\backslash
+sim q$.
 \end_layout
 
 \begin_layout Plain Layout
@@ -1530,7 +1531,7 @@ item[(iii)]  $
 \backslash
 mathbb E  
 \backslash
-left( 
+left| 
 \backslash
 frac{
 \backslash
@@ -1540,11 +1541,13 @@ partial x_i
 \backslash
 partial x_{i+d}} 
 \backslash
-right)^2 
+right| 
 \backslash
 leq 
 \backslash
-infty$.
+infty$ for $Z 
+\backslash
+sim q$.
  
 \end_layout
 
@@ -1916,7 +1919,7 @@ We write
  & \left\langle f_{i},\ev\xi_{i}(Z)\right\rangle _{\mathcal{F}}\\
  & =\left\langle f_{i},\ev\left[\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right]\right\rangle _{\mathcal{F}}\\
  & =\ev\left\langle f_{i},\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right\rangle _{\mathcal{F}}\\
- & =\ev\left[\frac{\partial\log p(Z)}{\partial x_{i}}f_{i}(Z)+\frac{\partial f(Z,\cdot)}{\partial x_{i}}\right].
+ & =\ev\left[\frac{\partial\log p(Z)}{\partial x_{i}}f_{i}(Z)+\frac{\partial f_{i}(Z,\cdot)}{\partial x_{i}}\right].
 \end{align*}
 
 \end_inset
@@ -2808,6 +2811,7 @@ As a consequence, if the null hypothesis is true, we can approximate any
 \end_inset
 
 .
+ We discuss specific case of testing MCMC convergence in the Appendix.
 \end_layout
 
 \begin_layout Section
@@ -4886,6 +4890,72 @@ Calculate
 
 .
  
+\end_layout
+
+\begin_layout Section
+MCMC convergence testing
+\end_layout
+
+\begin_layout Paragraph
+Convergence phase.
+ 
+\end_layout
+
+\begin_layout Standard
+We only can show consistency during the convergence phase on the empirical
+ data.
+ During convergence phase the null hypothesis is not true, but can be 'almost'
+ true.
+ For a sequence 
+\begin_inset Formula $Z_{i}$
+\end_inset
+
+ define the test statistic is 
+\begin_inset Formula $\|S_{n}\|^{2},$
+\end_inset
+
+ where 
+\begin_inset Formula $S_{n}=\frac{1}{\sqrt{}n}\sum_{i=1}^{n}\xi_{i}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\ev\|S_{n}\|^{2}\geq\|\ev S_{n}\|^{2}>\frac{1}{n}\sum_{i,j}^{n}\langle\ev\xi_{i},\ev\xi_{i}\rangle
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If it is reasonable to assume that 
+\begin_inset Formula $\ev\xi_{i}\simeq\ev\xi_{j}$
+\end_inset
+
+ the sum diverges, which makes the test consistent.
+ One way to achieve 
+\begin_inset Formula $\ev\xi_{i}=\ev\xi_{j}$
+\end_inset
+
+ it is to introduce an extra level of randomization i.e.
+ sample the sequence without replacement and used the re-sampled sequence
+ in the test.
+ This may however change the structure of temporal dependence.
+\end_layout
+
+\begin_layout Paragraph
+Stationary phase.
+\end_layout
+
+\begin_layout Standard
+In the stationary phase there are number of results which might be used
+ to show that the chain is 
+\begin_inset Formula $\tau$
+\end_inset
+
+-mixing.
 \end_layout
 
 \end_body
