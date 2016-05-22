@@ -1473,15 +1473,9 @@ item[(ii)] $
 \backslash
 mathbb E 
 \backslash
-| 
+| Z 
 \backslash
-nabla 
-\backslash
-log p(Z) 
-\backslash
-|_1 
-\backslash
-leq 
+|_1 < 
 \backslash
 infty$ for $Z 
 \backslash
@@ -1684,41 +1678,67 @@ reference "eq:xi"
 \begin_layout Proof
 
 \lang english
-We use the proof of 
+By 
 \begin_inset CommandInset citation
 LatexCommand citet
-after "Corollary 4.36"
+after "Lemma 4.34"
 key "SteChr08"
 
 \end_inset
 
- to see that for all 
-\begin_inset Formula $x\in R^{d}$
-\end_inset
 
- each entry of 
-\begin_inset Formula $\nabla k(x,\cdot)$
-\end_inset
-
- belongs to 
-\begin_inset Formula $\mathcal{F}$
-\end_inset
-
-.
- 
-\begin_inset Formula $\frac{\partial\log p(x)}{\partial x_{i}}k(x,\cdot)\in\mathcal{F}$
-\end_inset
-
-, since 
-\begin_inset Formula $k(x,\cdot)\in\mathcal{F}$
+\begin_inset Formula $\nabla k(x,\cdot)\in\mathcal{F}$
 \end_inset
 
  and 
 \begin_inset Formula $\frac{\partial\log p(x)}{\partial x_{i}}$
 \end_inset
 
- is a scalar.
+ is just a scalar.
  
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Lemma
+\begin_inset Formula $h(x,y)=\langle\xi(x,\cdot),\xi(y,\cdot)\rangle.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Proof
+We use notation
+\begin_inset Formula 
+\begin{align*}
+\nabla_{x}k(x,\cdot) & =\left(\frac{\partial k(x,\cdot)}{\partial x_{1}},\cdots,\frac{\partial k(x,\cdot)}{\partial x_{d}}\right)\\
+\nabla_{y}k(\cdot,y) & =\left(\frac{\partial k(\cdot,y)}{\partial y_{1}},\cdots,\frac{\partial k(\cdot,y)}{\partial y_{d}}\right),
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+and calculate 
+\begin_inset Formula 
+\begin{align*}
+\langle\xi(x,\cdot),\xi(y,\cdot)\rangle & =\nabla\log p(X)^{\top}\nabla\log p(X')k(X,X')\\
+ & \quad+\nabla\log p(X)\nabla_{x}k(X,X')\\
+ & \quad+\nabla\log p(X){}^{\top}\nabla_{y}k(X,X')\\
+ & \quad+\langle\nabla_{x}k(X,\cdot),\nabla_{y}k(\cdot,X')\rangle_{\mathcal{F}^{d}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
 \end_layout
 
 \begin_layout Standard
@@ -1811,56 +1831,15 @@ key "SteChr08"
 \end_inset
 
 .
- First we check that for any random variable 
-\begin_inset Formula $Z$
-\end_inset
-
-,
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-
-\lang english
-%AG: added subscript to norm.
-\end_layout
-
-\end_inset
-
  
 \begin_inset Formula 
 \[
-\ev\left\Vert \frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)\right\Vert _{\mathcal{F}}<C\ev|\frac{\partial\log p(Z)}{\partial x_{i}}|<\infty,
+\ev\|\xi(Z)\|\leq\ev\|\xi(Z)\|^{2}=\ev h(Z,Z)<\infty
 \]
 
 \end_inset
 
-for some constant 
-\begin_inset Formula $C$
-\end_inset
 
-, which follows from assumption (ii) and boundedness of the kernel.
- Next we check that
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\lang english
-%AG: added subscript to norm.
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Formula 
-\[
-\ev\left\Vert \frac{\partial k(Z,\cdot)}{\partial x}\right\Vert _{\mathcal{F}^{d}}=\ev\sqrt{\left(\frac{\partial^{2}k(Z,Z)}{dx_{i}dx_{i+d}}\right)}<\infty,
-\]
-
-\end_inset
-
-which follows from assumption (iii).
 \end_layout
 
 \begin_layout Standard
@@ -2118,39 +2097,11 @@ reference "th:closed_form_discrepancy"
 
 \end_inset
 
- We use the notation 
+ We use Bohner integrability twice 
 \begin_inset Formula 
 \begin{align*}
-\nabla_{x}k(x,\cdot)=\left(\frac{\partial k(x,\cdot)}{\partial x_{1}},\cdots,\frac{\partial k(x,\cdot)}{\partial x_{d}}\right)\\
-\nabla_{y}k(\cdot,y)=\left(\frac{\partial k(\cdot,y)}{\partial y_{1}},\cdots,\frac{\partial k(\cdot,y)}{\partial y_{d}}\right),
-\end{align*}
-
-\end_inset
-
-giving
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\lang english
-%AG: added subscript to norms.
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Formula 
-\begin{align*}
- & S(X,\mathcal{F},p)^{2}=\langle\ev\xi,\ev\xi\rangle_{\mathcal{F}^{d}}\\
- & =\langle\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{x}k(X,\cdot)\right],\\
- & \quad\quad\ev\left[\nabla\log p(X)k(X,\cdot)+\nabla_{x}k(X,\cdot)\right]\rangle_{\mathcal{F}^{d}}\\
- & =\ev\langle\nabla\log p(X)k(X,\cdot)+\nabla_{x}k(X,\cdot),\\
- & \quad\quad\quad\nabla\log p(X)k(\cdot,X')+\nabla_{y}k(\cdot,X')\rangle_{\mathcal{F}^{d}}\\
- & =\ev\nabla\log p(X)^{\top}\nabla\log p(X')k(X,X')\\
- & \quad+\ev\nabla\log p(X)\nabla_{x}k(X,X')\\
- & \quad+\ev\nabla\log p(X){}^{\top}\nabla_{y}k(X,X')\\
- & \quad+\ev\langle\nabla_{x}k(X,\cdot),\nabla_{y}k(\cdot,X')\rangle_{\mathcal{F}^{d}}.
+S(X,\mathcal{F},p)^{2} & =\langle\ev\xi(X),\ev\xi(X)\rangle_{\mathcal{F}^{d}}=\ev\langle\xi(X),\ev\xi(X)\rangle_{\mathcal{F}^{d}}\\
+ & =\ev\langle\xi(X),\xi(X')\rangle_{\mathcal{F}^{d}}=\ev h(X,X')
 \end{align*}
 
 \end_inset
