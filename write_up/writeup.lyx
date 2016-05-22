@@ -916,7 +916,7 @@ name "th:closed_form_discrepancy"
 \end_inset
 
 , then 
-\begin_inset Formula $S_{p}(Z)^{2}=\|\ev\xi_{p}(Z)\|_{{\cal F}^{d}}=\ev h(Z,Z')$
+\begin_inset Formula $S_{p}(Z)^{2}=\|\ev\xi_{p}(Z)\|_{{\cal F}^{d}}=\ev h_{p}(Z,Z')$
 \end_inset
 
 .
@@ -959,8 +959,8 @@ name "theorem_discrepancy_is_metric"
 \end_inset
 
 .
- If 
-\begin_inset Formula $\mathcal{F}$
+ If the kernel 
+\begin_inset Formula $k$
 \end_inset
 
  is cc-universal 
@@ -1424,7 +1424,7 @@ We first show that
 we calculate 
 \begin_inset Formula 
 \begin{align*}
-\langle\xi(x,\cdot),\xi(y,\cdot)\rangle & =\nabla\log p(x)^{\top}\nabla\log p(x)k(x,y)\\
+\langle\xi_{p}(x,\cdot),\xi_{p}(y,\cdot)\rangle & =\nabla\log p(x)^{\top}\nabla\log p(x)k(x,y)\\
  & \quad+\nabla\log p(x)\nabla_{x}k(x,y)\\
  & \quad+\nabla\log p(x){}^{\top}\nabla_{y}k(x,y)\\
  & \quad+\langle\nabla_{x}k(x,\cdot),\nabla_{y}k(\cdot,y)\rangle_{\mathcal{F}^{d}}.
@@ -1449,7 +1449,7 @@ key "SteChr08"
 )
 \begin_inset Formula 
 \[
-\ev\|\xi(Z)\|\leq\ev\|\xi(Z)\|^{2}=\ev h(Z,Z)<\infty.
+\ev\|\xi_{p}(Z)\|_{\mathcal{F}^{d}}\leq\ev\|\xi_{p}(Z)\|_{\mathcal{F}^{d}}^{2}=\ev h_{p}(Z,Z)<\infty.
 \]
 
 \end_inset
@@ -1471,7 +1471,7 @@ relate expected value of the Stein operator to the inner product of
 , 
 \begin_inset Formula 
 \begin{align}
-\ev Tf(Z)=\langle f,\ev\xi(Z)\rangle_{\mathcal{F}^{d}} & =\sum_{i=1}^{d}\langle f_{i},\ev\xi_{i}(Z)\rangle_{\mathcal{F}}.\label{eq:expectedVauleT}
+\ev T_{p}f(Z)=\langle f,\ev\xi_{p}(Z)\rangle_{\mathcal{F}^{d}} & =\sum_{i=1}^{d}\langle f_{i},\ev\xi_{p,i}(Z)\rangle_{\mathcal{F}}.\label{eq:expectedVauleT}
 \end{align}
 
 \end_inset
@@ -1553,10 +1553,10 @@ reference "eq:expectedVauleT"
  we have 
 \begin_inset Formula 
 \begin{align*}
-S(Z) & :=\sup_{\Vert f\Vert<1}\ev(Tf)(Z)-\ev(Tf)(X)\\
- & =\sup_{\Vert f\Vert<1}\ev(Tf)(Z)\\
- & =\sup_{\Vert f\Vert<1}\langle f,\ev\xi(Z)\rangle_{{\cal F}^{d}}\\
- & =\|\ev\xi(Z)\|_{\mathcal{F}^{d}}
+S_{p}(Z) & :=\sup_{\Vert f\Vert<1}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X)\\
+ & =\sup_{\Vert f\Vert<1}\ev(T_{p}f)(Z)\\
+ & =\sup_{\Vert f\Vert<1}\langle f,\ev\xi_{p}(Z)\rangle_{{\cal F}^{d}}\\
+ & =\|\ev\xi_{p}(Z)\|_{\mathcal{F}^{d}}
 \end{align*}
 
 \end_inset
@@ -1605,7 +1605,7 @@ now calculate closed form formula for
 \color none
 \lang english
 
-\begin_inset Formula $S(Z)^{2}$
+\begin_inset Formula $S_{p}(Z)^{2}$
 \end_inset
 
 
@@ -1616,8 +1616,8 @@ now calculate closed form formula for
 \lang english
 \begin_inset Formula 
 \begin{align*}
-S(Z)^{2} & =\langle\ev\xi(Z),\ev\xi(Z)\rangle_{\mathcal{F}^{d}}=\ev\langle\xi(Z),\ev\xi(Z)\rangle_{\mathcal{F}^{d}}\\
- & =\ev\langle\xi(Z),\xi(Z')\rangle_{\mathcal{F}^{d}}=\ev h(Z,Z').
+S_{p}(Z)^{2} & =\langle\ev\xi_{p}(Z),\ev\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}=\ev\langle\xi_{p}(Z),\ev\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}\\
+ & =\ev\langle\xi_{p}(Z),\xi_{p}(Z')\rangle_{\mathcal{F}^{d}}=\ev h_{p}(Z,Z').
 \end{align*}
 
 \end_inset
@@ -1693,7 +1693,7 @@ reference "lem:easy"
 \end_inset
 
 , but 
-\begin_inset Formula $S(Z)=0$
+\begin_inset Formula $S_{p}(Z)=0$
 \end_inset
 
 .
@@ -1710,11 +1710,42 @@ reference "lem:easy"
 \noun off
 \color none
 
-\begin_inset Formula $S(Z)=0$
+\begin_inset Formula $S_{p}(Z)=0$
 \end_inset
 
- then 
-\begin_inset Formula $\ev\xi(Z)=0.$
+ then, 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+by Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "th:closed_form_discrepancy"
+
+\end_inset
+
+,
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\begin_inset Formula $\ev\xi_{p}(Z)=0.$
 \end_inset
 
 
@@ -1736,7 +1767,8 @@ reference "lem:easy"
 , 
 \begin_inset Formula 
 \begin{align*}
- & \ev\left(\nabla\log p(Z)k(Z,\cdot)+\nabla k(Z,\cdot)\right)\\
+ & \ev\xi_{p}(Z)\\
+ & =\ev\left(\nabla\log p(Z)k(Z,\cdot)+\nabla k(Z,\cdot)\right)\\
  & =\ev\xi_{q}(Z)+\ev\left(\nabla[\log p(Z)-\log q(Y)]k(Z,\cdot)\right)\\
  & =\ev\left(\nabla[\log p(Z)-\log q(Y)]k(Z,\cdot)\right)
 \end{align*}
@@ -1810,7 +1842,7 @@ key "carmeli2010vector"
 \end_inset
 
 .
- This  implies that 
+ This implies that 
 \begin_inset Formula 
 \[
 \nabla\log\frac{p(y)}{q(y)}=(0,\cdots,0).
@@ -4425,6 +4457,301 @@ In the stationary phase there are number of results which might be used
 \end_inset
 
 -mixing.
+\end_layout
+
+\begin_layout Paragraph
+Strong mixing coefficients.
+\end_layout
+
+\begin_layout Standard
+Strong mixing is historically the most studied type of temporal dependence
+ -- a lot of models, example being Markov Chains, are proved to be strongly
+ mixing, therefore it's useful to relate weak mixing to strong mixing.
+\end_layout
+
+\begin_layout Standard
+A process is called absolutely regular (
+\begin_inset Formula $\beta$
+\end_inset
+
+-mixing) if 
+\begin_inset Formula $\beta(m)\rightarrow0$
+\end_inset
+
+, where 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\beta(m)=\frac{1}{2}\sup_{n}\sup\sum_{i=1}^{I}\sum_{j=1}^{J}|P(A_{i}\cap B_{j})-P(A_{i})P(B_{j})|.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The second supremum in the 
+\begin_inset Formula $\beta(m)$
+\end_inset
+
+ definition is taken over all pairs of finite partitions 
+\begin_inset Formula $\{A_{1},\cdots,A_{I}\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\{B_{1},\cdots,B_{J}\}$
+\end_inset
+
+ of the sample space such that 
+\begin_inset Formula $A_{i}\in\mathcal{A}_{1}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $B_{j}\in\mathcal{A}_{n+m}^{\infty}$
+\end_inset
+
+, and 
+\begin_inset Formula $\mathcal{A}_{b}^{c}$
+\end_inset
+
+ is a sigma field spanned by a subsequence, 
+\begin_inset Formula $\mathcal{A}_{b}^{c}=\sigma(X_{b},X_{b+1},...,X_{c})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A process is called strongly mixing (
+\begin_inset Formula $\alpha$
+\end_inset
+
+-mixing) if 
+\begin_inset Formula $\alpha(m)\rightarrow0$
+\end_inset
+
+, where 
+\begin_inset Formula 
+\[
+\alpha(m)=\sup_{n}\sup_{A\in\mathcal{A}_{1}^{n}}\sup_{B\in\mathcal{A}_{n+m}^{\infty}}|P(B\cap A)-P(B)P(A)|.
+\]
+
+\end_inset
+
+ By 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "bradley_basic_2005"
+
+\end_inset
+
+ we have 
+\begin_inset Formula $\alpha(m)\leq\beta(m)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Using another weak mixing coefficient 
+\begin_inset Formula $\tilde{\alpha}(m)$
+\end_inset
+
+ we can relate strong mixing to weak mixing.
+ The process is called 
+\begin_inset Formula $\tilde{\alpha}$
+\end_inset
+
+-mixing if 
+\begin_inset Formula $\tilde{\alpha}(m)\rightarrow0$
+\end_inset
+
+, where 
+\begin_inset Formula 
+\begin{align*}
+\tilde{\alpha}(m) & =\sup_{l\in\mathbb{N}}\frac{1}{l}\sup_{m\leq i_{1}\leq...\leq i_{l}}\tilde{\alpha}(\mathcal{F}_{0},(X_{i_{1}},...,X_{i_{l}}))\overset{r\to\infty}{\longrightarrow}0,\;\text{where}\\
+\tilde{\alpha}(\mathcal{M},X) & =\sup_{g\in\Lambda}\parallel\ev(g(X)|\mathcal{M})-\ev g(X)\parallel_{1}
+\end{align*}
+
+\end_inset
+
+ and 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ is the set of all one-Lipschitz continuous real-valued functions on the
+ domain of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "Remark 2.4"
+key "dedecker2007weak"
+
+\end_inset
+
+ show that 
+\begin_inset Formula $\tilde{\alpha}(m)\leq2\alpha(m)$
+\end_inset
+
+.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "Proposition 2"
+key "dedecker2005new"
+
+\end_inset
+
+ relates 
+\begin_inset Formula $\tau$
+\end_inset
+
+-mixing and 
+\begin_inset Formula $\tilde{\alpha}$
+\end_inset
+
+ mixing, as follows: if 
+\begin_inset Formula $Q_{x}$
+\end_inset
+
+ is the generalized inverse of the tail function 
+\begin_inset Formula 
+\[
+Q_{x}(u)=\inf_{t\in R}\{P(|X|>t)\leq u\},
+\]
+
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+\tau(\mathcal{M},X)\leq2\int_{0}^{\tilde{\alpha}(\mathcal{M},X)}Q_{x}(u)du.
+\]
+
+\end_inset
+
+ While this definition can be hard to interpret, it can be simplified in
+ the case 
+\begin_inset Formula $E|X|^{p}=M$
+\end_inset
+
+ for some 
+\begin_inset Formula $p>1$
+\end_inset
+
+, since via Markov's inequality 
+\begin_inset Formula $P(|X|>t)\leq\frac{M}{t^{p}}$
+\end_inset
+
+, and thus 
+\begin_inset Formula $\frac{M}{t^{p}}\leq u$
+\end_inset
+
+ implies 
+\begin_inset Formula $P(|X|>t)\leq u$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $Q'(u)=\frac{M}{\sqrt[p]{u}}\geq Q_{x}(u)$
+\end_inset
+
+.
+ As a result, we have the following inequality 
+\begin_inset Formula 
+\[
+\frac{\sqrt[p]{\tilde{\alpha}(\mathcal{M},X)}}{M}\geq C\tau(\mathcal{M},X).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand citep
+key "dedecker2005new"
+
+\end_inset
+
+ provides examples of systems that are tau-mixing.
+ In particular, given that certain assumptions are satisfied causal functions
+ of stationary sequences, iterated random functions, Markov chains, expanding
+ maps are all $
+\backslash
+tau$-mixing.
+ 
+\end_layout
+
+\begin_layout Standard
+Of particular interest to this work are Markov chains.
+ The assumptions provided by 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "dedecker2005new"
+
+\end_inset
+
+, under which Markov chains are tau-mixing are somehow difficult to check
+ but we can use classical theorems about the absolute regularity (beta mixing).
+ In particular 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "Corollary 3.6"
+key "bradley_basic_2005"
+
+\end_inset
+
+ states that a Harris recurrent and aperiodic Markov chain satisfies absolute
+ regularity and 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "Theorem 3.7"
+key "bradley_basic_2005"
+
+\end_inset
+
+ states that geometric ergodicity implies geometric decay of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ coefficient.
+ Interestingly 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "Theorem 3.2"
+key "bradley_basic_2005"
+
+\end_inset
+
+ describes situations in which a non-stationary chain 
+\begin_inset Formula $\beta$
+\end_inset
+
+-mixes exponentially.
+ 
+\end_layout
+
+\begin_layout Standard
+Using inequalities between 
+\begin_inset Formula $\tau$
+\end_inset
+
+-mixing coefficient and strong mixing coefficients one can use those classical
+ theorems show that e.g Markov chains are 
+\begin_inset Formula $\tau$
+\end_inset
+
+-mixing sequences.
 \end_layout
 
 \end_body
