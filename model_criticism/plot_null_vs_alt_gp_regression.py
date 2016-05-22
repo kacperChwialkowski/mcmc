@@ -3,10 +3,13 @@ from GPy.models.gp_regression import GPRegression
 from scipy.io.matlab.mio import loadmat
 
 import numpy as np
-from stat_test.quadratic_time import GaussianQuadraticTest
-
 import seaborn as sns
+from stat_test.quadratic_time import GaussianQuadraticTest
 from tools.latex_plot_init import plt
+
+
+from modshogun import QuadraticTimeMMD, GaussianKernel, RealFeatures
+
 sns.set_style("whitegrid")
 
 def prepare_dataset(X, y):
@@ -103,7 +106,6 @@ if __name__ == '__main__':
     plt.xlabel(r"$X$")
     plt.ylabel(r"$y$")
     plt.savefig("gp_regression_data_fit.eps", bbox_inches='tight')
-    plt.show()
     
     s = GaussianQuadraticTest(None)
     gradients = compute_gp_regression_gradients(y_test, pred_mean, pred_std)
@@ -111,12 +113,59 @@ if __name__ == '__main__':
     
     num_test_samples = 10000
     null_samples = bootstrap_null(U_matrix, num_bootstrap=num_test_samples)
+    print "p-value:", 1.-np.mean(null_samples<=stat)
     
+    plt.figure()
     sns.distplot(null_samples, kde=False, norm_hist=True)
     plt.plot([stat, stat], [0, .012], 'black')
     plt.legend([r"$V_n$ test", r"Bootstrapped $B_n$"])
     plt.xlabel(r"$V_n$")
     plt.ylabel(r"Frequency")
     plt.savefig("gp_regression_bootstrap_hist.eps", bbox_inches='tight')
+    
+    # compare to Lloyd & Gharamani
+    # sample from GP, and perform MMD two sample test between test data and sampled data
+    y_rep = np.random.randn(len(X_test))*pred_std.flatten() + pred_mean.flatten()
+    y_rep = np.atleast_2d(y_rep).T
+    
+    # stack together (X_test,y_test) and (X_test, y_pred)
+    A = np.hstack((X_test, y_test))
+    B = np.hstack((X_test, y_rep))
+    
+    # compute MMD between (X_test,y_test) and (X_test, y_pred)
+    feats_p = RealFeatures(A.T)
+    feats_q = RealFeatures(B.T)
+    width=1
+    kernel=GaussianKernel(10, width);
+    mmd=QuadraticTimeMMD(kernel, feats_p, feats_q);
+    mmd_stat=mmd.compute_statistic()
+    
+    # sample from null
+    num_null_samples = 10000
+    mmd_null_samples = np.zeros(num_null_samples)
+    for i in range(num_null_samples):
+        y_rep1 = np.random.randn(len(X_test))*pred_std.flatten() + pred_mean.flatten()
+        y_rep1 = np.atleast_2d(y_rep1).T
+        y_rep2 = np.random.randn(len(X_test))*pred_std.flatten() + pred_mean.flatten()
+        y_rep2 = np.atleast_2d(y_rep2).T
+        
+        A = np.hstack((X_test, y_rep1))
+        B = np.hstack((X_test, y_rep2))
+        
+        feats_p = RealFeatures(A.T)
+        feats_q = RealFeatures(B.T)
+        width=1
+        kernel=GaussianKernel(10, width);
+        mmd=QuadraticTimeMMD(kernel, feats_p, feats_q);
+        mmd_null_samples[i]=mmd.compute_statistic()
+    
+    print "p-value mmd:", 1.-np.mean(mmd_null_samples<=mmd_stat)
+    plt.figure()
+    sns.distplot(mmd_null_samples, kde=False, norm_hist=True)
+    plt.plot([mmd_stat, mmd_stat], [0, 5], 'black')
+    plt.legend([r"MMD$^2$ test", r"Null distribution"])
+    plt.xlabel(r"MMD$^2$")
+    plt.ylabel(r"Frequency")
+    plt.savefig("gp_lloyd_gharamani_mmd.eps", bbox_inches='tight')
     
     plt.show()
