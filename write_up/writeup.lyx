@@ -713,19 +713,7 @@ Our goal is to write the maximum discrepancy between target distribution
 \begin_inset Formula ${\cal F}$
 \end_inset
 
- the RKHS of real-valued functions
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-%AG: added 
-\backslash
-Re^d condition
-\end_layout
-
-\end_inset
-
- on 
+ the RKHS of real-valued functions on 
 \begin_inset Formula $\mathbb{R}^{d}$
 \end_inset
 
@@ -750,18 +738,6 @@ Re^d condition
 \end_inset
 
 .
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-
-\lang english
-%AG: added the inner product.
- Added new citation to Oates.
-\end_layout
-
-\end_inset
-
  Similarly to 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -780,7 +756,7 @@ key "stein1972,gorham2015measuring,OatGirCho15"
  
 \begin_inset Formula 
 \[
-Tf:=\sum_{i=1}^{d}\left(\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right).
+T_{p}f:=\sum_{i=1}^{d}\left(\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right).
 \]
 
 \end_inset
@@ -829,7 +805,7 @@ Throughout the article, all occurrences of
  depends on gradients of the log-density and the kernel, 
 \begin_inset Formula 
 \begin{equation}
-\xi(x,\cdot):=\left[\nabla\log p(x)k(x,\cdot)+\nabla k(x,\cdot)\right],\label{eq:xi}
+\xi_{p}(x,\cdot):=\left[\nabla\log p(x)k(x,\cdot)+\nabla k(x,\cdot)\right],\label{eq:xi}
 \end{equation}
 
 \end_inset
@@ -841,26 +817,17 @@ whose inner product with
  gives exactly the expected value of the Stein operator 
 \begin_inset Formula 
 \[
-\ev Tf(Z)=\langle f,\ev\xi(Z)\rangle_{{\cal F}^{d}}=\sum_{i=1}^{d}\langle f_{i},\ev\xi_{i}(Z)\rangle_{{\cal F}},
+\ev T_{p}f(Z)=\langle f,\ev\xi_{p}(Z)\rangle_{{\cal F}^{d}}=\sum_{i=1}^{d}\langle f_{i},\ev\xi_{p,i}(Z)\rangle_{{\cal F}},
 \]
 
 \end_inset
 
-c.f.
- Lemma 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "lem:SteinIsInner"
-
-\end_inset
-
-.
- For 
+For 
 \begin_inset Formula $X$
 \end_inset
 
  from the target measure, we have 
-\begin_inset Formula $\ev(Tf)(X)=0$
+\begin_inset Formula $\ev(T_{p}f)(X)=0$
 \end_inset
 
 , which can be seen using integration by parts, c.f.
@@ -873,47 +840,26 @@ reference "lem:easy"
 
  in the supplement.
  We can now define a Stein discrepancy and express it in the RKHS,
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\lang english
-%AG: added subscripts to dot products.
-\end_layout
-
-\end_inset
-
-
 \begin_inset Formula 
 \begin{align*}
-S(Z) & :=\sup_{\Vert f\Vert<1}\ev(Tf)(Z)-\ev(Tf)(X)\\
- & =\sup_{\Vert f\Vert<1}\langle f,\ev\xi(Z)-\ev\xi(X)\rangle_{{\cal F}^{d}}\\
- & =\sup_{\Vert f\Vert<1}\langle f,\ev\xi(Z)\rangle_{{\cal F}^{d}}\\
- & =\|\ev\xi(Z)\|_{{\cal F}^{d}},
+S_{p}(Z) & :=\sup_{\Vert f\Vert<1}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X)\\
+ & =\sup_{\Vert f\Vert<1}\ev(T_{p}f)(Z)\\
+ & =\sup_{\Vert f\Vert<1}\langle f,\ev\xi_{p}(Z)\rangle_{{\cal F}^{d}}\\
+ & =\|\ev\xi_{p}(Z)\|_{{\cal F}^{d}},
 \end{align*}
 
 \end_inset
 
-c.f.
- Lemma 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "lem:discprepancy_maximised_by_norm"
-
-\end_inset
-
-.
- This makes it clear why 
-\begin_inset Formula $\ev(Tf)(X)=0$
+This makes it clear why 
+\begin_inset Formula $\ev(T_{p}f)(X)=0$
 \end_inset
 
  is a desirable property: we can compute 
-\begin_inset Formula $S(Z)$
+\begin_inset Formula $S_{p}(Z)$
 \end_inset
 
  by computing 
-\begin_inset Formula $\|\ev\xi(Z)\|$
+\begin_inset Formula $\|\ev\xi_{p}(Z)\|$
 \end_inset
 
 , without the need to access 
@@ -925,12 +871,74 @@ reference "lem:discprepancy_maximised_by_norm"
 \end_inset
 
 .
- We arrive at our first main result, which states that the above discrepancy
- can be used to distinguish two distributions 
-\begin_inset Formula $p,q\in{\cal P}$
+ To sate our first result we define 
+\begin_inset Formula 
+\begin{align*}
+h_{p}(x,y) & :=\nabla\log p(x)^{\top}\nabla\log p(y)k(x,y)\\
+ & \quad+\nabla\log p(y)^{\top}\nabla_{x}k(x,y)\\
+ & \quad+\nabla\log p(x){}^{\top}\nabla_{y}k(x,y)\\
+ & \quad+\langle\nabla_{x}k(x,\cdot),\nabla_{y}k(\cdot,y)\rangle_{{\cal F}^{d}},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+where the last term can be written as a sum 
+\begin_inset Formula $\sum_{\{i=1\}}^{d}\frac{\partial k(x,y)}{\partial x_{i}\partial y_{i}}$
 \end_inset
 
 .
+ 
+\lang british
+The following theorem gives a simple closed form expression for 
+\begin_inset Formula $\|\ev\xi_{p}(Z)\|_{{\cal F}^{d}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "th:closed_form_discrepancy"
+
+\end_inset
+
+ If 
+\begin_inset Formula $Eh_{p}(Z,Z)<\infty$
+\end_inset
+
+, then 
+\begin_inset Formula $S_{p}(Z)^{2}=\|\ev\xi_{p}(Z)\|_{{\cal F}^{d}}=\ev h(Z,Z')$
+\end_inset
+
+.
+
+\lang british
+ 
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Standard
+The second main result, states that the discrepancy 
+\begin_inset Formula $S_{p}(Z)$
+\end_inset
+
+ can be used to distinguish two distributions.
+\end_layout
+
+\begin_layout --Separator--
+
 \end_layout
 
 \begin_layout Theorem
@@ -943,41 +951,19 @@ name "theorem_discrepancy_is_metric"
 \end_inset
 
  Let 
-\begin_inset Formula $q,p\in\mathcal{P}$
+\begin_inset Formula $q,p$
 \end_inset
 
- where the derivatives of elements of 
-\begin_inset Formula $\mathcal{P}$
-\end_inset
-
- satisfy assumption (ii) in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:details_kernel_stein"
-
-\end_inset
-
-, and let 
+ be probability measures and 
 \begin_inset Formula $Z\sim q$
 \end_inset
 
 .
- Let the RKHS 
+ If 
 \begin_inset Formula $\mathcal{F}$
 \end_inset
 
- satisfy properties (iii) and (v) in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:details_kernel_stein"
-
-\end_inset
-
-, which include the requirement that 
-\begin_inset Formula $\mathcal{F}$
-\end_inset
-
- be cc-universal 
+ is cc-universal 
 \begin_inset CommandInset citation
 LatexCommand citep
 after "Definition 4.1"
@@ -985,9 +971,16 @@ key "carmeli2010vector"
 
 \end_inset
 
-.
- Then 
-\begin_inset Formula $S(Z)=0$
+, 
+\begin_inset Formula $\ev h_{q}(Z,Z)<\infty$
+\end_inset
+
+ and 
+\begin_inset Formula $\ev\|\nabla\left(\log\frac{p(Z)}{q(Z)}\right)\|^{2}<\infty$
+\end_inset
+
+ then 
+\begin_inset Formula $S_{p}(Z)=0$
 \end_inset
 
  if and only if 
@@ -995,7 +988,6 @@ key "carmeli2010vector"
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Standard
@@ -1006,77 +998,8 @@ reference "sec:details_kernel_stein"
 
 \end_inset
 
- contains the formal statements of the assumptions on 
-\begin_inset Formula ${\cal P}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathcal{F}$
-\end_inset
-
-, and a proof.
- The following theorem gives a simple closed form expression.
-\end_layout
-
-\begin_layout Theorem
-
-\lang english
-\begin_inset CommandInset label
-LatexCommand label
-name "th:closed_form_discrepancy"
-
-\end_inset
-
- Let
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\lang english
-%AG: added subscript to dot products.
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Formula 
-\begin{align*}
-h(x,y) & :=\nabla\log p(x)^{\top}\nabla\log p(y)k(x,y)\\
- & \quad+\nabla\log p(y)^{\top}\nabla_{x}k(x,y)\\
- & \quad+\nabla\log p(x){}^{\top}\nabla_{y}k(x,y)\\
- & \quad+\langle\nabla_{x}k(x,\cdot),\nabla_{y}k(\cdot,y)\rangle_{{\cal F}^{d}},
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Theorem
-
-\lang english
-where the last term can be written as a sum 
-\begin_inset Formula $\sum_{\{i=1\}}^{d}\frac{\partial k(x,y)}{\partial x_{i}\partial y_{i}}$
-\end_inset
-
-.
- The 
-\lang british
-squared Stein discrepancy is
-\lang english
- 
-\begin_inset Formula $S(Z)^{2}=\ev h(Z,Z')$
-\end_inset
-
-.
-
-\lang british
- 
-\end_layout
-
-\begin_layout Standard
-We now proceed with constructing an estimator for 
+ contains proofs.
+ We now proceed with constructing an estimator for 
 \begin_inset Formula $S(Z)^{2}$
 \end_inset
 
@@ -1417,200 +1340,6 @@ name "sec:details_kernel_stein"
 \begin_layout Standard
 
 \lang english
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\lang english
-revise assumptions.
- 
-\end_layout
-
-\end_inset
-
-We make the following assumptions.
- Let 
-\begin_inset Formula $p$
-\end_inset
-
- be a the target distribution and 
-\begin_inset Formula $q$
-\end_inset
-
- be an alternative distribution :
-\end_layout
-
-\begin_layout Standard
-
-\lang english
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{itemize}
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\backslash
-item[(i)]  $
-\backslash
-nabla 
-\backslash
-log p(x)$ is Lipschitz continuous.
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\backslash
-item[(ii)] $
-\backslash
-mathbb E 
-\backslash
-| Z 
-\backslash
-|_1 < 
-\backslash
-infty$ for $Z 
-\backslash
-sim q$.
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{itemize}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\lang english
-The kernels 
-\begin_inset Formula $k$
-\end_inset
-
- considered in this work satisfy
-\end_layout
-
-\begin_layout Standard
-
-\lang english
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{itemize}
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\backslash
-item[(iii)]  $
-\backslash
-mathbb E  
-\backslash
-left| 
-\backslash
-frac{
-\backslash
-partial^2 k(Z,Z)}{
-\backslash
-partial x_i 
-\backslash
-partial x_{i+d}} 
-\backslash
-right| 
-\backslash
-leq 
-\backslash
-infty$ for $Z 
-\backslash
-sim q$.
- 
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\backslash
-item[(iv)] $
-\backslash
-nabla_x k(x,y)$ is Lipschitz continuous.
-\end_layout
-
-\begin_layout Plain Layout
-
-    
-\backslash
-item[(v)] $k$ is bounded, symmetric and cc-universal 
-\backslash
-citep{carmeli2010vector}.
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{itemize}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Requirements (i) and (iv) are used in Proposition 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "thm:wild_bootstrap_works"
-
-\end_inset
-
- regarding the wild-bootstrap procedure, (ii) and (iii) are needed for Bocher
- integrability of 
-\begin_inset Formula $\xi$
-\end_inset
-
- in Lemma 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "lem:BochnerInt1"
-
-\end_inset
-
-, and (v) is needed in the proof of Theorem 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "theorem_discrepancy_is_metric"
-
-\end_inset
-
-.
-
-\lang english
- 
-\end_layout
-
-\begin_layout Standard
-
-\lang english
 We show in Lemma 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1620,460 +1349,6 @@ reference "lem:easy"
 
  in the Appendix that the expected value of the Stein operator is zero on
  the target measure.
-\end_layout
-
-\begin_layout Standard
-
-\lang english
-The following lemmas are useful in proving our main results, Theorems 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "th:closed_form_discrepancy"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "theorem_discrepancy_is_metric"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Lemma
-
-\lang english
-\begin_inset CommandInset label
-LatexCommand label
-name "lem:WellDefined"
-
-\end_inset
-
- 
-\begin_inset Formula $\xi(x,\cdot)$
-\end_inset
-
- (see 
-\lang british
-Eq.
- 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "eq:xi"
-
-\end_inset
-
-
-\lang english
-) is an element of the reproducing kernel Hilbert space 
-\begin_inset Formula $\mathcal{F}^{d}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Proof
-
-\lang english
-By 
-\begin_inset CommandInset citation
-LatexCommand citet
-after "Lemma 4.34"
-key "SteChr08"
-
-\end_inset
-
-
-\begin_inset Formula $\nabla k(x,\cdot)\in\mathcal{F}$
-\end_inset
-
- and 
-\begin_inset Formula $\frac{\partial\log p(x)}{\partial x_{i}}$
-\end_inset
-
- is just a scalar.
- 
-\end_layout
-
-\begin_layout --Separator--
-
-\end_layout
-
-\begin_layout Lemma
-\begin_inset Formula $h(x,y)=\langle\xi(x,\cdot),\xi(y,\cdot)\rangle.$
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Proof
-We use notation
-\begin_inset Formula 
-\begin{align*}
-\nabla_{x}k(x,\cdot) & =\left(\frac{\partial k(x,\cdot)}{\partial x_{1}},\cdots,\frac{\partial k(x,\cdot)}{\partial x_{d}}\right)\\
-\nabla_{y}k(\cdot,y) & =\left(\frac{\partial k(\cdot,y)}{\partial y_{1}},\cdots,\frac{\partial k(\cdot,y)}{\partial y_{d}}\right),
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Proof
-and calculate 
-\begin_inset Formula 
-\begin{align*}
-\langle\xi(x,\cdot),\xi(y,\cdot)\rangle & =\nabla\log p(X)^{\top}\nabla\log p(X')k(X,X')\\
- & \quad+\nabla\log p(X)\nabla_{x}k(X,X')\\
- & \quad+\nabla\log p(X){}^{\top}\nabla_{y}k(X,X')\\
- & \quad+\langle\nabla_{x}k(X,\cdot),\nabla_{y}k(\cdot,X')\rangle_{\mathcal{F}^{d}}.
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout --Separator--
-
-\end_layout
-
-\begin_layout Standard
-The following lemma shows that the expected value of 
-\begin_inset Formula $\xi$
-\end_inset
-
- is well defined -- it is needed for establishing a link between Stein operator
- 
-\begin_inset Formula $Tf$
-\end_inset
-
- and 
-\begin_inset Formula $\xi$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Lemma
-
-\lang english
-\begin_inset CommandInset label
-LatexCommand label
-name "lem:BochnerInt1"
-
-\end_inset
-
-For any random variable 
-\begin_inset Formula $Z$
-\end_inset
-
-, the expected value of 
-\begin_inset Formula $\xi(Z)$
-\end_inset
-
- is an element of 
-\begin_inset Formula $\mathcal{F}^{d}$
-\end_inset
-
- (
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\xi$
-\end_inset
-
-
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- is Bochner integrable wrt the measure of 
-\begin_inset Formula $Z$
-\end_inset
-
-).
- 
-\end_layout
-
-\begin_layout Proof
-
-\lang english
-It is sufficient to check that coefficients of 
-\begin_inset Formula $\xi$
-\end_inset
-
- are Bochner integrable 
-\begin_inset CommandInset citation
-LatexCommand cite
-after "Definition A.5.20"
-key "SteChr08"
-
-\end_inset
-
-.
- 
-\begin_inset Formula 
-\[
-\ev\|\xi(Z)\|\leq\ev\|\xi(Z)\|^{2}=\ev h(Z,Z)<\infty
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We can now show that the expected value of the Stein operator can be expressed
- as an inner product with an element of 
-\begin_inset Formula $\mathcal{F}^{d}$
-\end_inset
-
-, where this element is the expected value of 
-\begin_inset Formula $\xi$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Lemma
-
-\lang english
-\begin_inset CommandInset label
-LatexCommand label
-name "lem:SteinIsInner"
-
-\end_inset
-
-For any random variable 
-\begin_inset Formula $Z$
-\end_inset
-
-, the expected value of the Stein operator coincides with the inner product
- of 
-\begin_inset Formula $f$
-\end_inset
-
- and the expected value of 
-\begin_inset Formula $\xi(Z)$
-\end_inset
-
-, 
-\begin_inset Formula 
-\begin{align*}
-\ev Tf(Z)=\langle f,\ev\xi(Z)\rangle_{\mathcal{F}^{d}} & =\sum_{i=1}^{d}\langle f_{i},\ev\xi_{i}(Z)\rangle_{\mathcal{F}}.
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Proof
-
-\lang english
-We write
-\begin_inset Formula 
-\begin{align*}
- & \left\langle f_{i},\ev\xi_{i}(Z)\right\rangle _{\mathcal{F}}\\
- & =\left\langle f_{i},\ev\left[\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right]\right\rangle _{\mathcal{F}}\\
- & =\ev\left\langle f_{i},\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right\rangle _{\mathcal{F}}\\
- & =\ev\left[\frac{\partial\log p(Z)}{\partial x_{i}}f_{i}(Z)+\frac{\partial f_{i}(Z,\cdot)}{\partial x_{i}}\right].
-\end{align*}
-
-\end_inset
-
-The second equality follows from the fact that a linear operator 
-\begin_inset Formula $\langle f_{i},\cdot\rangle_{\mathcal{F}}$
-\end_inset
-
- can be interchanged with the Bochner integral, and the fact that 
-\begin_inset Formula $\xi$
-\end_inset
-
- is Bochner integrable (Lemma 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "lem:BochnerInt1"
-
-\end_inset
-
-).
- The last equality is an application of the reproducing property.
- 
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
-From the inner product representation, we get  
-\end_layout
-
-\begin_layout Lemma
-
-\lang english
-\begin_inset CommandInset label
-LatexCommand label
-name "lem:discprepancy_maximised_by_norm"
-
-\end_inset
-
-The discrepancy 
-\begin_inset Formula $S(Y,\mathcal{F},p)$
-\end_inset
-
- is maximized by the expected value of 
-\begin_inset Formula $\xi$
-\end_inset
-
-, i.e.
- 
-\begin_inset Formula $S(Y,\mathcal{F},p)=\|\ev\xi(Y)\|$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Proof
-
-\lang english
-By the Lemma 
-\lang british
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "lem:SteinIsInner"
-
-\end_inset
-
-, 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
-
-\begin_inset Formula $\ev Tf(Y)=\langle f,\ev\xi(Y)\rangle_{\mathcal{F}^{d}}$
-\end_inset
-
- and therefore, 
-\begin_inset Formula $S(Y,\mathcal{F},p)$
-\end_inset
-
- is maximized by 
-\begin_inset Formula $\frac{\ev\xi(Y)}{\|\ev\xi(Y)\|_{\mathcal{F}^{d}}}$
-\end_inset
-
-.
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\lang english
-%AG: added subscript to norms.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
-We are now ready for the proof
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-\lang british
- of the closed form formula for 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
-
-\begin_inset Formula $S(Y,\mathcal{F},p)^{2}$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Proof
@@ -2097,11 +1372,252 @@ reference "th:closed_form_discrepancy"
 
 \end_inset
 
- We use Bohner integrability twice 
+ 
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+\begin_inset Formula $\xi(x,\cdot)$
+\end_inset
+
+ is an element of the reproducing kernel Hilbert space 
+\begin_inset Formula $\mathcal{F}^{d}$
+\end_inset
+
+ -- by 
+\begin_inset CommandInset citation
+LatexCommand citet
+after "Lemma 4.34"
+key "SteChr08"
+
+\end_inset
+
+ 
+\begin_inset Formula $\nabla k(x,\cdot)\in\mathcal{F}$
+\end_inset
+
+, and 
+\begin_inset Formula $\frac{\partial\log p(x)}{\partial x_{i}}$
+\end_inset
+
+ is just a scalar.
+ 
+\lang british
+We first show that 
+\begin_inset Formula $h(x,y)=\langle\xi(x,\cdot),\xi(y,\cdot)\rangle.$
+\end_inset
+
+ Using notation
 \begin_inset Formula 
 \begin{align*}
-S(X,\mathcal{F},p)^{2} & =\langle\ev\xi(X),\ev\xi(X)\rangle_{\mathcal{F}^{d}}=\ev\langle\xi(X),\ev\xi(X)\rangle_{\mathcal{F}^{d}}\\
- & =\ev\langle\xi(X),\xi(X')\rangle_{\mathcal{F}^{d}}=\ev h(X,X')
+\nabla_{x}k(x,\cdot) & =\left(\frac{\partial k(x,\cdot)}{\partial x_{1}},\cdots,\frac{\partial k(x,\cdot)}{\partial x_{d}}\right)\\
+\nabla_{y}k(\cdot,y) & =\left(\frac{\partial k(\cdot,y)}{\partial y_{1}},\cdots,\frac{\partial k(\cdot,y)}{\partial y_{d}}\right),
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+we calculate 
+\begin_inset Formula 
+\begin{align*}
+\langle\xi(x,\cdot),\xi(y,\cdot)\rangle & =\nabla\log p(x)^{\top}\nabla\log p(x)k(x,y)\\
+ & \quad+\nabla\log p(x)\nabla_{x}k(x,y)\\
+ & \quad+\nabla\log p(x){}^{\top}\nabla_{y}k(x,y)\\
+ & \quad+\langle\nabla_{x}k(x,\cdot),\nabla_{y}k(\cdot,y)\rangle_{\mathcal{F}^{d}}.
+\end{align*}
+
+\end_inset
+
+
+\lang english
+Next we show that 
+\begin_inset Formula $\xi(x,\cdot)$
+\end_inset
+
+ is Bochner integrable (see 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "Definition A.5.20"
+key "SteChr08"
+
+\end_inset
+
+)
+\begin_inset Formula 
+\[
+\ev\|\xi(Z)\|\leq\ev\|\xi(Z)\|^{2}=\ev h(Z,Z)<\infty.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+We 
+\lang english
+relate expected value of the Stein operator to the inner product of 
+\begin_inset Formula $f$
+\end_inset
+
+ and the expected value of 
+\begin_inset Formula $\xi(Z)$
+\end_inset
+
+, 
+\begin_inset Formula 
+\begin{align}
+\ev Tf(Z)=\langle f,\ev\xi(Z)\rangle_{\mathcal{F}^{d}} & =\sum_{i=1}^{d}\langle f_{i},\ev\xi_{i}(Z)\rangle_{\mathcal{F}}.\label{eq:expectedVauleT}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+We check the claim for all dimensions 
+\begin_inset Formula 
+\begin{align*}
+ & \left\langle f_{i},\ev\xi_{i}(Z)\right\rangle _{\mathcal{F}}\\
+ & =\left\langle f_{i},\ev\left[\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right]\right\rangle _{\mathcal{F}}\\
+ & =\ev\left\langle f_{i},\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right\rangle _{\mathcal{F}}\\
+ & =\ev\left[\frac{\partial\log p(Z)}{\partial x_{i}}f_{i}(Z)+\frac{\partial f_{i}(Z,\cdot)}{\partial x_{i}}\right].
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+The second equality follows from the fact that a linear operator 
+\begin_inset Formula $\langle f_{i},\cdot\rangle_{\mathcal{F}}$
+\end_inset
+
+ can be interchanged with the Bochner integral, and the fact that 
+\begin_inset Formula $\xi$
+\end_inset
+
+ is Bochner integrable.
+ Using definition of 
+\begin_inset Formula $S(Z)$
+\end_inset
+
+, Lemma 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "lem:easy"
+
+\end_inset
+
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+and Equation 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:expectedVauleT"
+
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\begin{align*}
+S(Z) & :=\sup_{\Vert f\Vert<1}\ev(Tf)(Z)-\ev(Tf)(X)\\
+ & =\sup_{\Vert f\Vert<1}\ev(Tf)(Z)\\
+ & =\sup_{\Vert f\Vert<1}\langle f,\ev\xi(Z)\rangle_{{\cal F}^{d}}\\
+ & =\|\ev\xi(Z)\|_{\mathcal{F}^{d}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+We 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang british
+now calculate closed form formula for 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+
+\begin_inset Formula $S(Z)^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+
+\lang english
+\begin_inset Formula 
+\begin{align*}
+S(Z)^{2} & =\langle\ev\xi(Z),\ev\xi(Z)\rangle_{\mathcal{F}^{d}}=\ev\langle\xi(Z),\ev\xi(Z)\rangle_{\mathcal{F}^{d}}\\
+ & =\ev\langle\xi(Z),\xi(Z')\rangle_{\mathcal{F}^{d}}=\ev h(Z,Z').
 \end{align*}
 
 \end_inset
@@ -2110,7 +1626,7 @@ S(X,\mathcal{F},p)^{2} & =\langle\ev\xi(X),\ev\xi(X)\rangle_{\mathcal{F}^{d}}=\e
 \end_layout
 
 \begin_layout Standard
-Finally, we prove that 
+Next, we prove that 
 \family roman
 \series medium
 \shape up
@@ -2157,7 +1673,7 @@ reference "theorem_discrepancy_is_metric"
 \end_inset
 
  then 
-\begin_inset Formula $S(Y,\mathcal{F},p)$
+\begin_inset Formula $S_{p}(Z)$
 \end_inset
 
  is 
@@ -2177,7 +1693,7 @@ reference "lem:easy"
 \end_inset
 
 , but 
-\begin_inset Formula $S(Y,\mathcal{F},p)=0$
+\begin_inset Formula $S(Z)=0$
 \end_inset
 
 .
@@ -2194,11 +1710,11 @@ reference "lem:easy"
 \noun off
 \color none
 
-\begin_inset Formula $S(Y,\mathcal{F},p)=0$
+\begin_inset Formula $S(Z)=0$
 \end_inset
 
  then 
-\begin_inset Formula $\ev\xi(Y)=0.$
+\begin_inset Formula $\ev\xi(Z)=0.$
 \end_inset
 
 
@@ -2213,49 +1729,59 @@ reference "lem:easy"
 \uwave default
 \noun default
 \color inherit
- For each dimension of 
-\begin_inset Formula $\ev\xi(Y)$
-\end_inset
-
-, we add and subtract 
-\begin_inset Formula $\log q(Y)$
+ In the following we substitute 
+\begin_inset Formula $\log p(Z)=\log q(Y)+[\log p(Z)-\log q(Y)]$
 \end_inset
 
 , 
 \begin_inset Formula 
 \begin{align*}
- & \ev\left(\frac{\partial}{\partial x_{i}}\log p(Y)k(Y,\cdot)+\frac{\partial}{\partial x_{i}}k(Y,\cdot)\right)\\
- & =\ev\left(\frac{\partial}{\partial x_{i}}(\log q(Y))k(Y,\cdot)+\frac{\partial}{\partial x_{i}}k(Y,\cdot)\right)\\
- & \quad+\ev\left(\frac{\partial}{\partial x_{i}}(\log p(Y)-\log q(Y))k(Y,\cdot)\right).
+ & \ev\left(\nabla\log p(Z)k(Z,\cdot)+\nabla k(Z,\cdot)\right)\\
+ & =\ev\xi_{q}(Z)+\ev\left(\nabla[\log p(Z)-\log q(Y)]k(Z,\cdot)\right)\\
+ & =\ev\left(\nabla[\log p(Z)-\log q(Y)]k(Z,\cdot)\right)
 \end{align*}
 
 \end_inset
 
-We have used Lemma 
+We have used Theorem 
 \begin_inset CommandInset ref
 LatexCommand ref
+reference "th:closed_form_discrepancy"
+
+\end_inset
+
+ and Lemma 
+\begin_inset CommandInset ref
+LatexCommand eqref
 reference "lem:easy"
 
 \end_inset
 
  to see that 
-\begin_inset Formula 
-\[
-\ev\left(\frac{\partial}{\partial x_{i}}(\log q(Y))k(Y,\cdot)+\frac{\partial}{\partial x_{i}}k(Y,\cdot)\right)=0.
-\]
-
+\begin_inset Formula $\ev\xi_{q}(Z)=0$
 \end_inset
 
+, since 
+\begin_inset Formula $\|\ev\xi_{q}(Z)\|^{2}=S_{q}(Z)=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+
+\lang english
 We 
 \lang british
 recognise
 \lang english
  that the expected value of 
-\begin_inset Formula $\frac{\partial}{\partial x_{i}}(\log p(Y)-\log q(Y))k(Y,\cdot)$
+\begin_inset Formula $\nabla(\log p(Z)-\log q(Z))k(Z,\cdot)$
 \end_inset
 
  is the mean embedding of a function 
-\begin_inset Formula $g(y)=\frac{\partial}{\partial x_{i}}\left(\log\frac{p(y)}{q(y)}\right)$
+\begin_inset Formula $g(y)=\nabla\left(\log\frac{p(y)}{q(y)}\right)$
 \end_inset
 
  with respect to the measure 
@@ -2263,20 +1789,11 @@ recognise
 \end_inset
 
 .
- By assumption (ii) function 
+ By the assumptions function 
 \begin_inset Formula $g$
 \end_inset
 
- is square integrable, 
-\begin_inset Formula $\ev(\frac{\partial}{\partial x_{i}}\log p(Y))^{2}\leq\infty$
-\end_inset
-
- and 
-\begin_inset Formula $\ev(\frac{\partial}{\partial x_{i}}\log q(Y))^{2}\leq\infty$
-\end_inset
-
- .
- Therefore, since the kernel 
+ is square integrable, therefore, since the kernel 
 \begin_inset Formula $k$
 \end_inset
 
@@ -2288,11 +1805,12 @@ key "carmeli2010vector"
 
 \end_inset
 
- this embedding is zero if and only if 
+ its embedding is zero if and only if 
 \begin_inset Formula $g=0$
 \end_inset
 
-, which implies that 
+.
+ This  implies that 
 \begin_inset Formula 
 \[
 \nabla\log\frac{p(y)}{q(y)}=(0,\cdots,0).
