@@ -68,7 +68,8 @@ def bootstrap_null(U_matrix, num_bootstrap=1000):
 def compute_gp_regression_gradients(y_test, pred_mean, pred_std):
     return -(y_test - pred_mean) / pred_std ** 2
 
-def sample_null_simulated_gp(pred_mean, pred_std, num_samples=1000):
+def sample_null_simulated_gp(s, pred_mean, pred_std, num_samples=1000):
+    # this is slow and doesnt work better than bootstrapping
     samples = np.empty(num_samples)
     N = len(pred_mean)
     for i in range(num_samples):
@@ -81,7 +82,73 @@ def sample_null_simulated_gp(pred_mean, pred_std, num_samples=1000):
     
     return samples
 
+def compare_against_mmd_test():
+    data = loadmat("../data/02-solar.mat")
+    X = data['X']
+    y = data['y']
+    
+    X_train, y_train, X_test, y_test, N, N_test = prepare_dataset(X, y)
+    
+    kernel = RBF(input_dim=1, variance=0.608, lengthscale=0.207)
+    m = GPRegression(X_train, y_train, kernel, noise_var=0.283)
+    m.optimize()
+    pred_mean, pred_std = m.predict(X_test)
+    
+    s = GaussianQuadraticTest(None)
+    gradients = compute_gp_regression_gradients(y_test, pred_mean, pred_std)
+    U_matrix, stat = s.get_statistic_multiple_custom_gradient(y_test[:, 0], gradients[:, 0])
+    num_test_samples = 10000
+    null_samples = bootstrap_null(U_matrix, num_bootstrap=num_test_samples)
+#     null_samples = sample_null_simulated_gp(s, pred_mean, pred_std, num_test_samples)
+    p_value_ours = 1.-np.mean(null_samples<=stat)
+
+    y_rep = np.random.randn(len(X_test))*pred_std.flatten() + pred_mean.flatten()
+    y_rep = np.atleast_2d(y_rep).T
+    A = np.hstack((X_test, y_test))
+    B = np.hstack((X_test, y_rep))
+    feats_p = RealFeatures(A.T)
+    feats_q = RealFeatures(B.T)
+    width=1
+    kernel=GaussianKernel(10, width);
+    mmd=QuadraticTimeMMD();
+    mmd.set_kernel(kernel)
+    mmd.set_p(feats_p)
+    mmd.set_q(feats_q)
+    mmd_stat=mmd.compute_statistic()
+    
+    # sample from null
+    num_null_samples = 10000
+    mmd_null_samples = np.zeros(num_null_samples)
+    for i in range(num_null_samples):
+        # fix y_rep from above, and change the other one (that would replace y_test)
+        y_rep2 = np.random.randn(len(X_test))*pred_std.flatten() + pred_mean.flatten()
+        y_rep2 = np.atleast_2d(y_rep2).T
+        A = np.hstack((X_test, y_rep2))
+        feats_p = RealFeatures(A.T)
+        width=1
+        kernel=GaussianKernel(10, width);
+        mmd=QuadraticTimeMMD();
+        mmd.set_kernel(kernel)
+        mmd.set_p(feats_p)
+        mmd.set_q(feats_q)
+        mmd_null_samples[i]=mmd.compute_statistic()
+    
+    p_value_mmd = 1.-np.mean(mmd_null_samples<=mmd_stat)
+    
+    return p_value_ours, p_value_mmd
+
 if __name__ == '__main__':
+    # repeat computing p.value multiple times for both methods
+    num_repetitions = 100
+    results = np.zeros((num_repetitions, 2))
+    for i in range(num_repetitions):
+        results[i,0], results[i,1] = compare_against_mmd_test()
+        if i>1:
+            print i
+            print np.mean(results[:i], axis=0)
+            print np.std(results[:i], axis=0)
+     
+    
     data = loadmat("../data/02-solar.mat")
     X = data['X']
     y = data['y']
@@ -91,8 +158,8 @@ if __name__ == '__main__':
     print "num_train:", len(X_train)
     print "num_test:", len(X_test)
     
-    kernel = RBF(input_dim=1, variance=1., lengthscale=1.)
-    m = GPRegression(X_train, y_train, kernel)
+    kernel = RBF(input_dim=1, variance=0.608, lengthscale=0.207)
+    m = GPRegression(X_train, y_train, kernel, noise_var=0.283)
     m.optimize()
     
     res = 100
@@ -137,26 +204,29 @@ if __name__ == '__main__':
     feats_q = RealFeatures(B.T)
     width=1
     kernel=GaussianKernel(10, width);
-    mmd=QuadraticTimeMMD(kernel, feats_p, feats_q);
+    mmd=QuadraticTimeMMD();
+    mmd.set_kernel(kernel)
+    mmd.set_p(feats_p)
+    mmd.set_q(feats_q)
     mmd_stat=mmd.compute_statistic()
     
     # sample from null
     num_null_samples = 10000
     mmd_null_samples = np.zeros(num_null_samples)
     for i in range(num_null_samples):
-        y_rep1 = np.random.randn(len(X_test))*pred_std.flatten() + pred_mean.flatten()
-        y_rep1 = np.atleast_2d(y_rep1).T
+        # fix y_rep from above, and change the other one (that would replace y_test)
         y_rep2 = np.random.randn(len(X_test))*pred_std.flatten() + pred_mean.flatten()
         y_rep2 = np.atleast_2d(y_rep2).T
-        
-        A = np.hstack((X_test, y_rep1))
-        B = np.hstack((X_test, y_rep2))
-        
+         
+        A = np.hstack((X_test, y_rep2))
+         
         feats_p = RealFeatures(A.T)
-        feats_q = RealFeatures(B.T)
         width=1
         kernel=GaussianKernel(10, width);
-        mmd=QuadraticTimeMMD(kernel, feats_p, feats_q);
+        mmd=QuadraticTimeMMD();
+        mmd.set_kernel(kernel)
+        mmd.set_p(feats_p)
+        mmd.set_q(feats_q)
         mmd_null_samples[i]=mmd.compute_statistic()
     
     print "p-value mmd:", 1.-np.mean(mmd_null_samples<=mmd_stat)

@@ -3310,16 +3310,23 @@ name "fig:experiment_gp_fit"
 We next apply our test to the problem of statistical model criticism for
  GP regression.
  Our presentation and approach are similar to the non i.i.d.
- case of 
+\begin_inset space ~
+\end_inset
+
+case of 
 \begin_inset CommandInset citation
 LatexCommand citet
-after "Section 6"
+before "Section 6"
 key "lloyd2015statistical"
 
 \end_inset
 
 .
- We used the Solar dataset, consisting of a 1D regression problem with 
+ We use the 
+\family typewriter
+solar
+\family default
+ dataset, consisting of a 1D regression problem with 
 \begin_inset Formula $N=402$
 \end_inset
 
@@ -3333,37 +3340,41 @@ key "lloyd2015statistical"
 \end_inset
 
  data using a GP with a squared exponential kernel and a Gaussian noise
- model, and performed standard maximum likelihood II on the hyperparameters
+ model, and perform standard maximum likelihood II on the hyperparameters
  (length-scale, overall scale, noise-variance).
- We then applied our test to the remaining 
+ We then apply our test to the remaining 
 \begin_inset Formula $N_{\text{test}}=41$
 \end_inset
 
  data.
- Our test attempts to falsify the null hypothesis that the Solar dataset
- was generated from the predictive distribution (conditioned on training
- data and predicted position) of the GP.
+ The test attempts to falsify the null hypothesis that the 
+\family typewriter
+solar
+\family default
+ dataset was generated from the plug-in predictive distribution (conditioned
+ on training data and predicted position) of the GP.
  
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citeauthor
 key "lloyd2015statistical"
 
 \end_inset
 
  refer to this setup as non i.i.d., since the predictive distribution is a
  different univariate Gaussian for every predicted point.
- Note that in contrast to their MMD-based method, our test does 
-\emph on
-not
-\emph default
- need to simulate from the multiple predictive distributions.
- Our particular 
+ %Our particular 
 \begin_inset Formula $N_{\text{train}},N_{\text{test}}$
 \end_inset
 
  were chosen to make sure the GP fit has stabilised, i.e.
- adding more data did not cause further model refinement.
- Figure 
+\begin_inset space ~
+\end_inset
+
+adding more data did not cause further model refinement.
+\end_layout
+
+\begin_layout Standard
+Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:experiment_gp_fit"
@@ -3373,11 +3384,14 @@ reference "fig:experiment_gp_fit"
  shows training and testing data, and the fitted GP.
  Clearly, the Gaussian noise model is a poor fit for this particular dataset,
  e.g.
- around 
+\begin_inset space ~
+\end_inset
+
+around $
 \begin_inset Formula $X=-1$
 \end_inset
 
-.
+$.
  Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3398,29 +3412,80 @@ reference "fig:experiment_gp_test"
 \end_inset
 
 .
- The 
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-bootstrapped 
-\begin_inset Formula $B_{n}$
-\end_inset
-
- are not distributed according to the true null distribution (which is only
- guaranteed when the null holds), however
-\end_layout
-
-\end_inset
-
- test statistic lies in an upper quantile of the bootstrapped null distribution,
- indicating (correctly) that it is unlikely the test points were generated
+ The test statistic lies in an upper quantile of the bootstrapped null distribut
+ion, indicating (correctly) that it is unlikely the test points were generated
  by the fitted GP model, even for the low number of test data observed,
  
 \begin_inset Formula $N_{\text{test}}=41$
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+In a second experiment, we compare against 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "lloyd2015statistical"
+
+\end_inset
+
+: we compute the MMD statistic between test data 
+\begin_inset Formula $(X_{\text{test}},y_{\text{test}})$
+\end_inset
+
+ and 
+\begin_inset Formula $(X_{\text{test}},y_{\text{rep}})$
+\end_inset
+
+, where 
+\begin_inset Formula $y_{\text{rep}}$
+\end_inset
+
+ are samples from the fitted GP.
+ The null distribution is sampled from 10000 times via repeatedly sampling
+ new 
+\begin_inset Formula $\tilde{y}_{\text{rep}}$
+\end_inset
+
+ from the GP plug-in predictive posterior, and comparing 
+\begin_inset Formula $(X_{\text{test}},\tilde{y}_{\text{rep}})$
+\end_inset
+
+ to 
+\begin_inset Formula $(X_{\text{test}},y_{\text{rep}})$
+\end_inset
+
+.
+ Averaged over 100 repetitions of randomly partitioning 
+\begin_inset Formula $(X,y)$
+\end_inset
+
+ for training and testing, our goodness of fit test produces a p-value that
+ is statistically not significantly different from the MMD method (
+\begin_inset Formula $p\approx0.1$
+\end_inset
+
+, note that this result is subject to 
+\begin_inset Formula $N_{\text{train}},N_{\text{test}}$
+\end_inset
+
+).
+ We emphasize, however, that 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "lloyd2015statistical"
+
+\end_inset
+
+'s test requires to sample from the fitted model (here 10000 null samples
+ were required in order to achieve stable p-values).
+ Our test 
+\emph on
+does not
+\emph default
+ sample from the GP at all and completely side-steps this highly costly
+ approach.
 \end_layout
 
 \begin_layout Standard
