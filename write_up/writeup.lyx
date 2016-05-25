@@ -211,8 +211,6 @@ We propose a nonparametric statistical test for goodness-of-fit: given a
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset FormulaMacro
 \newcommand{\ev}{\mathbb{E}}
 {\mathbb{E}}
@@ -251,12 +249,8 @@ key "Kolmogorov33,Smirnov48"
 \begin_inset Formula $p$
 \end_inset
 
-
-\lang english
 , which we assume to be only known up to the normalisation constant.
  Recently, in the multivariate setting, 
-\lang british
-
 \begin_inset CommandInset citation
 LatexCommand citet
 key "gorham2015measuring"
@@ -444,8 +438,6 @@ key "Bar89,Beirlant2,Gyorfi,GyVa02"
 \end_inset
 
 .
-
-\lang english
  Such space partitioning approaches can have attractive theoretical properties
  (e.g.
  distribution-free test thresholds) and work well in low dimensions, however
@@ -458,8 +450,6 @@ key "GreGyo10"
 \end_inset
 
 .
-
-\lang british
  A second popular approach has been to use the smoothed 
 \begin_inset Formula $L_{2}$
 \end_inset
@@ -640,8 +630,6 @@ reference "sec:experiment"
 \end_layout
 
 \begin_layout Section
-
-\lang english
 Test Definition: Statistic and Threshold
 \begin_inset CommandInset label
 LatexCommand label
@@ -653,8 +641,6 @@ name "sec:A-Kernel-Goodness-of-fit"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 We begin with a high-level construction of our divergence discrepancy and
  the statistical test.
  While this section aims to communicate the main ideas, we provide details
@@ -669,14 +655,10 @@ reference "sec:Details"
 \end_layout
 
 \begin_layout Subsection
-
-\lang english
 Stein Operator in RKHS
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Our goal is to write the maximum discrepancy between target distribution
  
 \begin_inset Formula $p$
@@ -867,16 +849,12 @@ h_{p}(x,y) & :=\nabla\log p(x)^{\top}\nabla\log p(y)k(x,y)\\
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 where the last term can be written as a sum 
 \begin_inset Formula $\sum_{\{i=1\}}^{d}\frac{\partial k(x,y)}{\partial x_{i}\partial y_{i}}$
 \end_inset
 
 .
- 
-\lang british
-The following theorem gives a simple closed form expression for 
+ The following theorem gives a simple closed form expression for 
 \begin_inset Formula $\|\ev\xi_{p}(Z)\|_{{\cal F}^{d}}$
 \end_inset
 
@@ -884,8 +862,6 @@ The following theorem gives a simple closed form expression for
 \end_layout
 
 \begin_layout Theorem
-
-\lang english
 \begin_inset CommandInset label
 LatexCommand label
 name "th:closed_form_discrepancy"
@@ -901,8 +877,6 @@ name "th:closed_form_discrepancy"
 \end_inset
 
 .
-
-\lang british
  
 \end_layout
 
@@ -923,8 +897,6 @@ The second main result, states that the discrepancy
 \end_layout
 
 \begin_layout Theorem
-
-\lang english
 \begin_inset CommandInset label
 LatexCommand label
 name "theorem_discrepancy_is_metric"
@@ -1033,13 +1005,8 @@ key "Shao2010,leucht_dependent_2013,FroLauLerRey12"
 \begin_inset Formula $Z_{i}$
 \end_inset
 
- by mimicking it with an 
-\lang english
-auxiliary
-\lang british
- random process: a
-\lang english
- Markov chain taking values in 
+ by mimicking it with an auxiliary random process: a Markov chain taking
+ values in 
 \begin_inset Formula $\{-1,1\}$
 \end_inset
 
@@ -1048,8 +1015,6 @@ auxiliary
 \end_inset
 
 ,
-\lang british
-
 \begin_inset Formula 
 \[
 W_{t,n}=\mathbf{1}(U_{t}>a_{n})W_{t-1,n}-\mathbf{1}(U_{t}<a_{n})W_{t-1,n},
@@ -1057,8 +1022,6 @@ W_{t,n}=\mathbf{1}(U_{t}>a_{n})W_{t-1,n}-\mathbf{1}(U_{t}<a_{n})W_{t-1,n},
 
 \end_inset
 
-
-\lang english
 where the 
 \begin_inset Formula $U_{t}$
 \end_inset
@@ -1084,7 +1047,6 @@ where the
 \begin_layout Standard
 
 \emph on
-\lang english
 \begin_inset Formula 
 \[
 B_{n}=\frac{1}{n^{2}}\sum_{i,j=1}^{n}W_{i,n}W_{j,n}h(Z_{i,}Z_{j}).
@@ -1093,17 +1055,7 @@ B_{n}=\frac{1}{n^{2}}\sum_{i,j=1}^{n}W_{i,n}W_{j,n}h(Z_{i,}Z_{j}).
 \end_inset
 
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\emph default
 Proposition 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1111,61 +1063,11 @@ reference "thm:wild_bootstrap_works"
 
 \end_inset
 
-
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-\lang british
  establishes that, under the null hypothesis, 
 \begin_inset Formula $nB_{n}$
 \end_inset
 
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
- is a good approximation
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-of 
+ is a good approximation of 
 \begin_inset Formula $nV_{n}$
 \end_inset
 
@@ -1183,33 +1085,8 @@ of
 \end_layout
 
 \begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
-We propose the following test
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-\lang british
- procedure for testing the null hypothesis that the 
+We propose the following test procedure for testing the null hypothesis
+ that the 
 \begin_inset Formula $Z_{i}$
 \end_inset
 
@@ -1221,9 +1098,7 @@ We propose the following test
 \end_layout
 
 \begin_layout Itemize
-Calculate 
-\lang english
-the test statistic 
+Calculate the test statistic 
 \begin_inset Formula $V_{n}$
 \end_inset
 
@@ -1231,24 +1106,7 @@ the test statistic
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
-Obtain wild bootstrap samples
-\lang british
- 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
-
+Obtain wild bootstrap samples 
 \begin_inset Formula $\{B_{n}\}_{i=1}^{D}$
 \end_inset
 
@@ -1261,19 +1119,6 @@ Obtain wild bootstrap samples
 \end_layout
 
 \begin_layout Itemize
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
 If 
 \begin_inset Formula $V_{n}$
 \end_inset
@@ -1282,8 +1127,6 @@ If
 \end_layout
 
 \begin_layout Section
-
-\lang english
 Proofs of the Main Results
 \begin_inset CommandInset label
 LatexCommand label
@@ -1295,20 +1138,14 @@ name "sec:Details"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 We now prove the claims made in the previous Section.
 \end_layout
 
 \begin_layout Subsection
-
-\lang english
 Stein Operator in RKHS
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:details_kernel_stein"
@@ -1319,8 +1156,6 @@ name "sec:details_kernel_stein"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 We show in Lemma 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1333,14 +1168,10 @@ reference "lem:easy"
 \end_layout
 
 \begin_layout Proof
-
-\lang english
 \begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Proof of Theorem 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1357,8 +1188,6 @@ reference "th:closed_form_discrepancy"
 \end_layout
 
 \begin_layout Proof
-
-\lang english
 \begin_inset Formula $\xi(x,\cdot)$
 \end_inset
 
@@ -1383,9 +1212,7 @@ key "SteChr08"
 \end_inset
 
  is just a scalar.
- 
-\lang british
-We first show that 
+ We first show that 
 \begin_inset Formula $h(x,y)=\langle\xi(x,\cdot),\xi(y,\cdot)\rangle.$
 \end_inset
 
@@ -1413,8 +1240,6 @@ we calculate
 
 \end_inset
 
-
-\lang english
 Next we show that 
 \begin_inset Formula $\xi(x,\cdot)$
 \end_inset
@@ -1439,9 +1264,7 @@ key "SteChr08"
 \end_layout
 
 \begin_layout Proof
-We 
-\lang english
-relate expected value of the Stein operator to the inner product of 
+We relate expected value of the Stein operator to the inner product of 
 \begin_inset Formula $f$
 \end_inset
 
@@ -1461,8 +1284,6 @@ relate expected value of the Stein operator to the inner product of
 \end_layout
 
 \begin_layout Proof
-
-\lang english
 We check the claim for all dimensions 
 \begin_inset Formula 
 \begin{align*}
@@ -1478,8 +1299,6 @@ We check the claim for all dimensions
 \end_layout
 
 \begin_layout Proof
-
-\lang english
 The second equality follows from the fact that a linear operator 
 \begin_inset Formula $\langle f_{i},\cdot\rangle_{\mathcal{F}}$
 \end_inset
@@ -1500,31 +1319,7 @@ reference "lem:easy"
 
 \end_inset
 
- 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-and Equation 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-
+ and Equation 
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:expectedVauleT"
@@ -1546,46 +1341,7 @@ S_{p}(Z) & :=\sup_{\Vert f\Vert<1}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X)\\
 \end_layout
 
 \begin_layout Proof
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
-We 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-\lang british
-now calculate closed form formula for 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
-
+We now calculate closed form formula for 
 \begin_inset Formula $S_{p}(Z)^{2}$
 \end_inset
 
@@ -1593,8 +1349,6 @@ now calculate closed form formula for
 \end_layout
 
 \begin_layout Proof
-
-\lang english
 \begin_inset Formula 
 \begin{align*}
 S_{p}(Z)^{2} & =\langle\ev\xi_{p}(Z),\ev\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}=\ev\langle\xi_{p}(Z),\ev\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}\\
@@ -1607,20 +1361,7 @@ S_{p}(Z)^{2} & =\langle\ev\xi_{p}(Z),\ev\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}=\ev\
 \end_layout
 
 \begin_layout Standard
-Next, we prove that 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
-the discrepancy 
+Next, we prove that the discrepancy 
 \begin_inset Formula $S$
 \end_inset
 
@@ -1629,14 +1370,10 @@ the discrepancy
 \end_layout
 
 \begin_layout Proof
-
-\lang english
 \begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Proof of Theorem 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1679,68 +1416,20 @@ reference "lem:easy"
 
 .
  If 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
 \begin_inset Formula $S_{p}(Z)=0$
 \end_inset
 
- then, 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-by Theorem 
+ then, by Theorem 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "th:closed_form_discrepancy"
 
 \end_inset
 
-,
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
- 
+, 
 \begin_inset Formula $\ev\xi_{p}(Z)=0.$
 \end_inset
 
-
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
  In the following we substitute 
 \begin_inset Formula $\log p(Z)=\log q(Y)+[\log p(Z)-\log q(Y)]$
 \end_inset
@@ -1783,13 +1472,7 @@ reference "lem:easy"
 \end_layout
 
 \begin_layout Proof
-
-\lang english
-We 
-\lang british
-recognise
-\lang english
- that the expected value of 
+We recognise that the expected value of 
 \begin_inset Formula $\nabla(\log p(Z)-\log q(Z))k(Z,\cdot)$
 \end_inset
 
@@ -1869,8 +1552,6 @@ Wild Bootstrap Testing
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:details_testing"
@@ -1881,8 +1562,6 @@ name "sub:details_testing"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 The two concepts required to derive the distribution of the test statistic
  are: 
 \begin_inset Formula $\tau$
@@ -1907,8 +1586,6 @@ key "serfling80"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -1956,8 +1633,6 @@ key "dedecker2005new,dedecker2007weak"
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 To formally introduce 
 \begin_inset Formula $\tau$
 \end_inset
@@ -2016,8 +1691,6 @@ where
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 A direct application of Theorem 2.1 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -2026,18 +1699,6 @@ key "leucht2012degenerate"
 \end_inset
 
  characterizes the limiting behavior of 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
 \begin_inset Formula $nV_{n}$
 \end_inset
 
@@ -2045,24 +1706,10 @@ key "leucht2012degenerate"
 \begin_inset Formula $\tau$
 \end_inset
 
--mixing processes,
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- 
+-mixing processes, 
 \end_layout
 
 \begin_layout Proposition
-
-\lang english
 \begin_inset CommandInset label
 LatexCommand label
 name "thm: null_dist"
@@ -2070,17 +1717,7 @@ name "thm: null_dist"
 \end_inset
 
 
-\family roman
-\series medium
 \shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
 If 
 \begin_inset Formula $h$
 \end_inset
@@ -2097,72 +1734,17 @@ If
 \end_layout
 
 \begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
 The proof, which is a simple verification of the assumptions, can be found
  in the Appendix.
  Although a formula for a limit distribution of 
-\family default
 \series bold
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
 
 \begin_inset Formula $V_{n}$
 \end_inset
 
 
-\family roman
-\series medium
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
- can be derived explicitly (
-\family default
 \series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-Theorem 2.1
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
- 
+ can be derived explicitly (Theorem 2.1 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "leucht2012degenerate"
@@ -2172,31 +1754,13 @@ key "leucht2012degenerate"
 ), we do not provide it here.
  To our knowledge there are no methods of obtaining quantiles of a limit
  of 
-\family default
 \series bold
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
 
 \begin_inset Formula $V_{n}$
 \end_inset
 
 
-\family roman
-\series medium
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\series default
  in closed form.
  The common solution is to estimate quantiles by a resampling method, as
  described in Section 
@@ -2209,18 +1773,6 @@ reference "sec:A-Kernel-Goodness-of-fit"
 .
  The validity of this resampling method is guaranteed by the following propositi
 on (which follows from Theorem 2.1 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-
 \begin_inset CommandInset citation
 LatexCommand citep
 key "leucht2012degenerate"
@@ -2234,35 +1786,12 @@ key "chwialkowski2014wild"
 
 \end_inset
 
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
  ) , proved in the supplement.
 \end_layout
 
 \begin_layout Proposition
 
-\family roman
-\series medium
 \shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
 \begin_inset CommandInset label
 LatexCommand label
 name "thm:wild_bootstrap_works"
@@ -2312,14 +1841,10 @@ As a consequence, if the null hypothesis is true, we can approximate any
 \end_layout
 
 \begin_layout Section
-
-\lang english
 Experiments
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:experiment"
@@ -2330,8 +1855,6 @@ name "sec:experiment"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 We provide a number of experimental applications for our test.
  We begin with a simple check to establish correct test calibration on non-i.i.d.
  data, followed by a demonstration of statistical model criticism for Gaussian
@@ -2339,9 +1862,8 @@ We provide a number of experimental applications for our test.
  We then apply the proposed test to quantify bias-variance trade-offs in
  MCMC, and demonstrate how to use the test to verify whether MCMC samples
  are drawn from the desired stationary distribution.
- In the final experiment, we move away from the MCMC setting, and
-\lang british
- use the test to evaluate the convergence of a nonparametric density estimator.
+ In the final experiment, we move away from the MCMC setting, and use the
+ test to evaluate the convergence of a nonparametric density estimator.
  Code can be found at 
 \begin_inset CommandInset href
 LatexCommand href
@@ -2354,8 +1876,6 @@ target "https://github.com/karlnapf/kernel_goodness_of_fit"
 \end_layout
 
 \begin_layout Subsubsection*
-
-\lang english
 Student's t vs Normal
 \end_layout
 
@@ -2367,8 +1887,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename img/sgld_student_bad.pdf
 	lyxscale 90
@@ -2382,8 +1900,6 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Large autocovariance, unsuitable bootstrap.
  The parameter 
 \family roman
@@ -2423,7 +1939,6 @@ Large autocovariance, unsuitable bootstrap.
 \uwave default
 \noun default
 \color inherit
-\lang british
 
 \begin_inset CommandInset label
 LatexCommand label
@@ -2445,8 +1960,6 @@ name "fig:student_bad"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 In our first task, we modify experiment 4.1 from 
 \begin_inset CommandInset citation
 LatexCommand citealt
@@ -2498,8 +2011,6 @@ reference "fig:thinning"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Float figure
 wide false
 sideways false
@@ -2507,8 +2018,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename img/sgld_student.pdf
 
@@ -2518,8 +2027,6 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Large autocovariance, suitable bootstrap.
  The parameter 
 \family roman
@@ -2572,9 +2079,7 @@ name "fig:studentst"
 \end_layout
 
 \begin_layout Standard
-The twist on 
-\lang english
-the original experiment 4.1 by 
+The twist on the original experiment 4.1 by 
 \begin_inset CommandInset citation
 LatexCommand citealt
 key "gorham2015measuring"
@@ -2611,33 +2116,9 @@ reference "fig:student_bad"
 \begin_inset Formula $a_{n}$
 \end_inset
 
- is 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-suitable for iid observations, but results in p-values that are too conservative
- for temporally correlated observations.
- 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-In Figure 
+ is suitable for iid observations, but results in p-values that are too
+ conservative for temporally correlated observations.
+ In Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:studentst"
@@ -2645,18 +2126,6 @@ reference "fig:studentst"
 \end_inset
 
 , 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
 \begin_inset Formula $a_{n}=0.02$
 \end_inset
 
@@ -2730,8 +2199,6 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Thinned sample, suitable bootstrap.
  Most of the 
 \family roman
@@ -2765,8 +2232,6 @@ auto-correlation within the sample is canceled by thinning.
 \noun default
 \color inherit
  
-\lang british
-
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:thinning"
@@ -3539,14 +3004,10 @@ name "fig:experiment_gp_test"
 \end_layout
 
 \begin_layout Subsubsection*
-
-\lang english
 Approximate MCMC algorithm 
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Float figure
 wide false
 sideways false
@@ -3554,21 +3015,15 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename img/Heiko1.pdf
 
 \end_inset
 
 
-\lang british
-
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Distribution of p-values as a function of 
 \begin_inset Formula $\epsilon$
 \end_inset
@@ -3595,29 +3050,16 @@ name "p-values"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
-We show how to quantify
-\lang british
- bias-variance trade-offs in an approximate 
-\lang english
-MCMC algorithm
-\lang british
- -- 
-\lang english
-austerity MCMC 
+We show how to quantify bias-variance trade-offs in an approximate MCMC
+ algorithm -- austerity MCMC 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "korattikara2013austerity"
 
 \end_inset
 
-
-\lang british
 .
- 
-\lang english
-For the purpose of illustration we use a simple generative model from 
+ For the purpose of illustration we use a simple generative model from 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "gorham2015measuring,welling2011bayesian"
@@ -3634,8 +3076,6 @@ X_{i}\sim\frac{1}{2}N(\theta_{1},4)+\frac{1}{2}N(\theta_{2},4) & .
 \end_inset
 
 
-\lang british
-
 \begin_inset Float figure
 wide false
 sideways false
@@ -3643,8 +3083,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename img/Heiko2.pdf
 	lyxscale 90
@@ -3652,13 +3090,9 @@ status open
 \end_inset
 
 
-\lang british
-
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Average number of likelihood evaluations a function of 
 \begin_inset Formula $\epsilon$
 \end_inset
@@ -3729,8 +3163,6 @@ name "lik-evals"
 
 \end_inset
 
-
-\lang english
 Austerity MCMC is a Monte Carlo procedure designed to reduce the number
  of likelihood evaluation in the acceptance step of the Metropolis-Hastings
  algorithm.
@@ -3790,8 +3222,6 @@ Austerity MCMC is a Monte Carlo procedure designed to reduce the number
 status collapsed
 
 \begin_layout Plain Layout
-
-\lang english
 elements of
 \end_layout
 
@@ -4176,14 +3606,10 @@ Appendix
 \end_layout
 
 \begin_layout Section
-
-\lang english
 Proofs
 \end_layout
 
 \begin_layout Lemma
-
-\lang english
 \begin_inset CommandInset label
 LatexCommand label
 name "lem:easy"
@@ -4202,8 +3628,6 @@ name "lem:easy"
 \end_layout
 
 \begin_layout Lemma
-
-\lang english
 \begin_inset Formula 
 \begin{align*}
 0 & =\oint_{\partial\mathcal{X}}k(x,x')p(x)n(x)dS(x'),\\
@@ -4229,8 +3653,6 @@ name "lem:easy"
 \end_layout
 
 \begin_layout Proof
-
-\lang english
 This result was proved on bounded domains 
 \begin_inset Formula $\mathcal{X}\subset\mathbb{R}^{d}$
 \end_inset
@@ -4378,19 +3800,11 @@ For the equation (a) we have used integration by parts, fact that
 \end_layout
 
 \begin_layout Proof
-
-\lang english
 \begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
-
-\lang english
-Proof of 
-\lang british
-proposition
-\lang english
- 
+Proof of proposition 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "thm: null_dist"
@@ -4448,8 +3862,6 @@ reference "theorem_discrepancy_is_metric"
 \end_layout
 
 \begin_layout Proof
-
-\lang english
 \begin_inset Formula 
 \[
 h(x,y)=\langle\xi(x),\xi(y)\rangle_{\mathcal{F}^{d}}
@@ -4486,17 +3898,11 @@ reference "th:closed_form_discrepancy"
 \end_layout
 
 \begin_layout Proof
-
-\lang english
 \begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
-
-\lang english
-Proof of 
-\lang british
-proposition 
+Proof of proposition 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "thm:wild_bootstrap_works"
@@ -4515,35 +3921,11 @@ key "leucht2012degenerate"
 
 \end_inset
 
- to see that, 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-under the null hypothesis, 
+ to see that, under the null hypothesis, 
 \begin_inset Formula $f(Z_{1,n},\cdots,Z_{t,n})$
 \end_inset
 
  converges to zero in probability.
-
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
  The condition A1, 
 \begin_inset Formula $\sum_{t=1}^{\infty}\sqrt{\tau(t)}\leq\infty$
 \end_inset
@@ -4690,8 +4072,6 @@ We have
 \end_layout
 
 \begin_layout Proof
-
-\lang english
 We show that, under the alternative hypothesis, 
 \begin_inset Formula $V_{n}$
 \end_inset
@@ -4722,14 +4102,10 @@ key "chwialkowski2014wild"
 \end_layout
 
 \begin_layout Proof
-
-\lang english
 \begin_inset Note Note
 status open
 
 \begin_layout Proof
-
-\lang english
 It is sufficient to check that 
 \family roman
 \series medium
@@ -4750,8 +4126,6 @@ It is sufficient to check that
 \end_layout
 
 \begin_layout Proof
-
-\lang english
 \begin_inset Formula 
 \begin{align*}
 \ev B_{n} & =\frac{1}{n^{2}}\sum_{i,j}\ev W_{i}W_{j}\ev h(Z_{i},Z_{j})\\
@@ -4762,8 +4136,6 @@ It is sufficient to check that
 
 \end_inset
 
-
-\lang british
 for some constant 
 \begin_inset Formula $C=\ev h(Z_{1},Z_{2})$
 \end_inset
@@ -4777,8 +4149,6 @@ for some constant
 \end_layout
 
 \begin_layout Proof
-
-\lang english
 \begin_inset Formula 
 \begin{align*}
 \ev B_{n}^{2} & =\frac{1}{n^{4}}\sum_{i,j,k,l}\ev W_{i}W_{j}W_{k}W_{l}\ev h(Z_{i},Z_{j})h(Z_{k},Z_{l})\\
@@ -4789,8 +4159,6 @@ for some constant
 
 \end_inset
 
-
-\lang british
 where 
 \begin_inset Formula $C'=\ev h(Z_{i},Z_{j})^{2}\ev h(Z_{k},Z_{l})^{2}$
 \end_inset
@@ -4804,14 +4172,10 @@ where
 \end_layout
 
 \begin_layout Subsection
-
-\lang english
 Linear time test 
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 We may use similar reasoning for the quadratic time test to define a linear
  time test, based on the two-sample test of 
 \begin_inset CommandInset citation
@@ -4915,14 +4279,10 @@ The computation of
 \end_layout
 
 \begin_layout Proposition
-
-\lang english
 \begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Asymptotic behavior of 
 \begin_inset Formula $S_{n}$
 \end_inset
@@ -5003,14 +4363,10 @@ name "prop:Hotelling"
 \end_layout
 
 \begin_layout Paragraph
-
-\lang english
 One sample test
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Calculate 
 \begin_inset Formula $S_{n}$
 \end_inset
