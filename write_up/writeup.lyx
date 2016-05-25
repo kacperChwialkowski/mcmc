@@ -29,8 +29,8 @@ theorems-sec
 \end_modules
 \maintain_unincluded_children false
 \language british
-\language_package default
-\inputencoding auto
+\language_package none
+\inputencoding default
 \fontencoding global
 \font_roman default
 \font_sans default
@@ -2860,7 +2860,8 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-Dimension 
+Dim.
+ 
 \end_layout
 
 \end_inset
@@ -3362,7 +3363,7 @@ key "lloyd2015statistical"
 
  refer to this setup as non i.i.d., since the predictive distribution is a
  different univariate Gaussian for every predicted point.
- %Our particular 
+ Our particular 
 \begin_inset Formula $N_{\text{train}},N_{\text{test}}$
 \end_inset
 
@@ -3387,11 +3388,11 @@ reference "fig:experiment_gp_fit"
 \begin_inset space ~
 \end_inset
 
-around $
+around 
 \begin_inset Formula $X=-1$
 \end_inset
 
-$.
+.
  Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
