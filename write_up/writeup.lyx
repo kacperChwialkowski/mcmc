@@ -29,8 +29,8 @@ theorems-sec
 \end_modules
 \maintain_unincluded_children false
 \language british
-\language_package none
-\inputencoding default
+\language_package default
+\inputencoding auto
 \fontencoding global
 \font_roman default
 \font_sans default
