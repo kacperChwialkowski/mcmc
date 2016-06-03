@@ -1015,7 +1015,7 @@ It is straightforward to estimate the squared Stein discrepancy
 : a quadratic time estimator is a V-Statistic, and takes the form
 \begin_inset Formula 
 \[
-V_{n}=\frac{1}{n^{2}}\sum_{i,j=1}^{n}h_p(Z_{i},Z_{j}).
+V_{n}=\frac{1}{n^{2}}\sum_{i,j=1}^{n}h_{p}(Z_{i},Z_{j}).
 \]
 
 \end_inset
@@ -1099,7 +1099,7 @@ where the
 \lang english
 \begin_inset Formula 
 \[
-B_{n}=\frac{1}{n^{2}}\sum_{i,j=1}^{n}W_{i,n}W_{j,n}h_p(Z_{i,}Z_{j}).
+B_{n}=\frac{1}{n^{2}}\sum_{i,j=1}^{n}W_{i,n}W_{j,n}h_{p}(Z_{i,}Z_{j}).
 \]
 
 \end_inset
@@ -1371,7 +1371,7 @@ reference "th:closed_form_discrepancy"
 \begin_layout Proof
 
 \lang english
-\begin_inset Formula $\xi_p(x,\cdot)$
+\begin_inset Formula $\xi_{p}(x,\cdot)$
 \end_inset
 
  is an element of the reproducing kernel Hilbert space 
@@ -1398,7 +1398,7 @@ key "SteChr08"
  
 \lang british
 We first show that 
-\begin_inset Formula $h_p(x,y)=\langle\xi_p(x,\cdot),\xi_p(y,\cdot)\rangle.$
+\begin_inset Formula $h_{p}(x,y)=\langle\xi_{p}(x,\cdot),\xi_{p}(y,\cdot)\rangle.$
 \end_inset
 
  Using notation
@@ -1428,7 +1428,7 @@ we calculate
 
 \lang english
 Next we show that 
-\begin_inset Formula $\xi_p(x,\cdot)$
+\begin_inset Formula $\xi_{p}(x,\cdot)$
 \end_inset
 
  is Bochner integrable (see 
@@ -1458,7 +1458,7 @@ relate expected value of the Stein operator to the inner product of
 \end_inset
 
  and the expected value of 
-\begin_inset Formula $\xi_q(Z)$
+\begin_inset Formula $\xi_{q}(Z)$
 \end_inset
 
 , 
@@ -1497,7 +1497,7 @@ The second equality follows from the fact that a linear operator
 \end_inset
 
  can be interchanged with the Bochner integral, and the fact that 
-\begin_inset Formula $\xi_p$
+\begin_inset Formula $\xi_{p}$
 \end_inset
 
  is Bochner integrable.
@@ -2107,7 +2107,7 @@ If
 \end_inset
 
  is Lipschitz continuous and 
-\begin_inset Formula $\ev_{q}h_p(Z,Z)<\infty$
+\begin_inset Formula $\ev_{q}h_{p}(Z,Z)<\infty$
 \end_inset
 
  then, under the null hypothesis 
@@ -2300,7 +2300,7 @@ Let
 \end_inset
 
  is Lipschitz continuous and 
-\begin_inset Formula $\ev_{q}h_p(Z,Z)^{2}<\infty$
+\begin_inset Formula $\ev_{q}h_{p}(Z,Z)^{2}<\infty$
 \end_inset
 
  then, under the null hypothesis, 
@@ -4447,7 +4447,7 @@ reference "theorem_discrepancy_is_metric"
 \lang english
 \begin_inset Formula 
 \[
-h_p(x,y)=\langle\xi_p(x),\xi_p(y)\rangle_{\mathcal{F}^{d}}
+h_{p}(x,y)=\langle\xi_{p}(x),\xi_{p}(y)\rangle_{\mathcal{F}^{d}}
 \]
 
 \end_inset
@@ -4465,12 +4465,12 @@ reference "th:closed_form_discrepancy"
 \end_inset
 
 ,
-\begin_inset Formula $\ev_{q}\xi_p(Z)=0$
+\begin_inset Formula $\ev_{q}\xi_{p}(Z)=0$
 \end_inset
 
 .
  Finally, condition A2 (iii), 
-\begin_inset Formula $\ev_{p}h_p(X,X)\leq\infty$
+\begin_inset Formula $\ev_{p}h_{p}(X,X)\leq\infty$
 \end_inset
 
  is assumed.
@@ -4660,13 +4660,13 @@ key "chwialkowski2014wild"
  We check the assumption 
 \begin_inset Formula 
 \[
-\sup_{n}\sup_{i,j<n}\ev_{q}h_p(Z_{i},Z_{j})^{2}<\infty.
+\sup_{n}\sup_{i,j<n}\ev_{q}h_{p}(Z_{i},Z_{j})^{2}<\infty.
 \]
 
 \end_inset
 
 We have 
-\begin_inset Formula $\ev_{q}h_p(Z,Z')^{2}\leq\left(\ev_{q}\|\xi_p(Z)\|^{2}\right)^{2}=\left(\ev_{q}h_p(Z,Z)\right)^{2}<\infty$
+\begin_inset Formula $\ev_{q}h_{p}(Z,Z')^{2}\leq\left(\ev_{q}\|\xi_{p}(Z)\|^{2}\right)^{2}=\left(\ev_{q}h_{p}(Z,Z)\right)^{2}<\infty$
 \end_inset
 
  .
@@ -4698,7 +4698,7 @@ key "chwialkowski2014wild"
 
 .
  We checked the  assumption 
-\begin_inset Formula $\sup_{n}\sup_{i,j<n}\ev_{q}h_p(Z_{i},Z_{j})^{2}<\infty$
+\begin_inset Formula $\sup_{n}\sup_{i,j<n}\ev_{q}h_{p}(Z_{i},Z_{j})^{2}<\infty$
 \end_inset
 
  above.
@@ -4737,8 +4737,8 @@ It is sufficient to check that
 \lang english
 \begin_inset Formula 
 \begin{align*}
-\ev B_{n} & =\frac{1}{n^{2}}\sum_{i,j}\ev W_{i}W_{j}\ev_{q}h_p(Z_{i},Z_{j})\\
- & =\frac{1}{n^{2}}\sum_{i\in N^{m}}\rho(|j-i|/l_{n})\ev_{q}h_p(Z_{j},Z_{i})\\
+\ev B_{n} & =\frac{1}{n^{2}}\sum_{i,j}\ev W_{i}W_{j}\ev_{q}h_{p}(Z_{i},Z_{j})\\
+ & =\frac{1}{n^{2}}\sum_{i\in N^{m}}\rho(|j-i|/l_{n})\ev_{q}h_{p}(Z_{j},Z_{i})\\
  & \leq\frac{1}{n^{2}}\sum_{i\in N^{m}}|\rho(|j-i|/l_{n})C\\
  & \to0
 \end{align*}
@@ -4748,7 +4748,7 @@ It is sufficient to check that
 
 \lang british
 for some constant 
-\begin_inset Formula $C=\ev_{q}h_p(Z_{1},Z_{2})$
+\begin_inset Formula $C=\ev_{q}h_{p}(Z_{1},Z_{2})$
 \end_inset
 
 , whose existence follows from assumptions i) and iii).
@@ -4764,8 +4764,8 @@ for some constant
 \lang english
 \begin_inset Formula 
 \begin{align*}
-\ev B_{n}^{2} & =\frac{1}{n^{4}}\sum_{i,j,k,l}\ev W_{i}W_{j}W_{k}W_{l}\ev_{q}h_p(Z_{i},Z_{j})h_p(Z_{k},Z_{l})\\
- & \leq\frac{1}{n^{4}}\sum_{i\neq j,i\neq k,i\neq l,j\neq k,j\neq l,k\neq l}\ev W_{i}W_{j}W_{k}W_{l}\ev_{q}h_p(Z_{i},Z_{j})^{2}\ev_{q}h_p(Z_{k},Z_{l})^{2}+C'\frac{6n^{3}}{n^{4}}\\
+\ev B_{n}^{2} & =\frac{1}{n^{4}}\sum_{i,j,k,l}\ev W_{i}W_{j}W_{k}W_{l}\ev_{q}h_{p}(Z_{i},Z_{j})h_{p}(Z_{k},Z_{l})\\
+ & \leq\frac{1}{n^{4}}\sum_{i\neq j,i\neq k,i\neq l,j\neq k,j\neq l,k\neq l}\ev W_{i}W_{j}W_{k}W_{l}\ev_{q}h_{p}(Z_{i},Z_{j})^{2}\ev_{q}h_{p}(Z_{k},Z_{l})^{2}+C'\frac{6n^{3}}{n^{4}}\\
  & \leq\frac{1}{n^{4}}\sum_{i\neq j,i\neq k,i\neq l,j\neq k,j\neq l,k\neq l}\ev W_{i}W_{j}W_{k}W_{l}C'+\frac{6C'}{n}\\
  & =\frac{6C'}{n}\to0,
 \end{align*}
@@ -4775,7 +4775,7 @@ for some constant
 
 \lang british
 where 
-\begin_inset Formula $C'=\ev_{q}h_p(Z_{i},Z_{j})^{2}\ev_{q}h_p(Z_{k},Z_{l})^{2}$
+\begin_inset Formula $C'=\ev_{q}h_{p}(Z_{i},Z_{j})^{2}\ev_{q}h_{p}(Z_{k},Z_{l})^{2}$
 \end_inset
 
 .
@@ -5044,11 +5044,15 @@ name "sec:MCMC-convergence-testing"
 \end_layout
 
 \begin_layout Paragraph
+\begin_inset Note Note
+status open
+
+\begin_layout Paragraph
 Convergence phase.
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 We only can show consistency during the convergence phase on the empirical
  data.
  During convergence phase the null hypothesis is not true, but can be 'almost'
@@ -5057,12 +5061,12 @@ We only can show consistency during the convergence phase on the empirical
 \begin_inset Formula $Z_{i}$
 \end_inset
 
- define the test statistic is 
-\begin_inset Formula $\|S_{n}\|^{2},$
+ the test statistic is 
+\begin_inset Formula $\|T_{n}\|^{2},$
 \end_inset
 
  where 
-\begin_inset Formula $S_{n}=\frac{1}{\sqrt{}n}\sum_{i=1}^{n}\xi_{i,p}$
+\begin_inset Formula $T_{n}=\frac{1}{\sqrt{n}}\sum_{i=1}^{n}\xi_{p}(Z_{i})$
 \end_inset
 
  
@@ -5076,7 +5080,7 @@ We only can show consistency during the convergence phase on the empirical
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 If it is reasonable to assume that 
 \begin_inset Formula $\ev\xi_{i,p}\simeq\ev\xi_{j,p}$
 \end_inset
@@ -5090,6 +5094,11 @@ If it is reasonable to assume that
  sample the sequence without replacement and used the re-sampled sequence
  in the test.
  This may however change the structure of temporal dependence.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
