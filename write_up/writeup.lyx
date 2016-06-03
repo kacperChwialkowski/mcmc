@@ -810,7 +810,7 @@ whose expected inner product with
  gives exactly the expected value of the Stein operator 
 \begin_inset Formula 
 \[
-\ev T_{p}f(Z)=\langle f,\ev\xi_{p}(Z)\rangle_{{\cal F}^{d}}=\sum_{i=1}^{d}\langle f_{i},\ev\xi_{p,i}(Z)\rangle_{{\cal F}},
+\ev_q T_{p}f(Z)=\langle f,\ev_q\xi_{p}(Z)\rangle_{{\cal F}^{d}}=\sum_{i=1}^{d}\langle f_{i},\ev_q\xi_{p,i}(Z)\rangle_{{\cal F}},
 \]
 
 \end_inset
@@ -820,7 +820,7 @@ For
 \end_inset
 
  from the target measure, we have 
-\begin_inset Formula $\ev(T_{p}f)(X)=0$
+\begin_inset Formula $\ev_p(T_{p}f)(X)=0$
 \end_inset
 
 , which can be seen using integration by parts, c.f.
@@ -835,16 +835,16 @@ reference "lem:easy"
  We can now define a Stein discrepancy and express it in the RKHS,
 \begin_inset Formula 
 \begin{align*}
-S_{p}(Z) & :=\sup_{\Vert f\Vert<1}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X)\\
- & =\sup_{\Vert f\Vert<1}\ev(T_{p}f)(Z)\\
- & =\sup_{\Vert f\Vert<1}\langle f,\ev\xi_{p}(Z)\rangle_{{\cal F}^{d}}\\
- & =\|\ev\xi_{p}(Z)\|_{{\cal F}^{d}},
+S_{p}(Z) & :=\sup_{\Vert f\Vert<1}\ev_q(T_{p}f)(Z)-\ev_p(T_{p}f)(X)\\
+ & =\sup_{\Vert f\Vert<1}\ev_q(T_{p}f)(Z)\\
+ & =\sup_{\Vert f\Vert<1}\langle f,\ev_q\xi_{p}(Z)\rangle_{{\cal F}^{d}}\\
+ & =\|\ev_q\xi_{p}(Z)\|_{{\cal F}^{d}},
 \end{align*}
 
 \end_inset
 
 This makes it clear why 
-\begin_inset Formula $\ev(T_{p}f)(X)=0$
+\begin_inset Formula $\ev_p(T_{p}f)(X)=0$
 \end_inset
 
  is a desirable property: we can compute 
@@ -852,7 +852,7 @@ This makes it clear why
 \end_inset
 
  by computing 
-\begin_inset Formula $\|\ev\xi_{p}(Z)\|$
+\begin_inset Formula $\|\ev_q\xi_{p}(Z)\|$
 \end_inset
 
 , without the need to access 
@@ -889,7 +889,7 @@ where the last term can be written as a sum
  
 \lang british
 The following theorem gives a simple closed form expression for 
-\begin_inset Formula $\|\ev\xi_{p}(Z)\|_{{\cal F}^{d}}$
+\begin_inset Formula $\|\ev_q\xi_{p}(Z)\|_{{\cal F}^{d}}$
 \end_inset
 
 .
@@ -909,7 +909,7 @@ name "th:closed_form_discrepancy"
 \end_inset
 
 , then 
-\begin_inset Formula $S_{p}^{2}(Z)=\|\ev\xi_{p}(Z)\|_{{\cal F}^{d}}^{2}=\ev h_{p}(Z,Z')$
+\begin_inset Formula $S_{p}^{2}(Z)=\|\ev_q\xi_{p}(Z)\|_{{\cal F}^{d}}^{2}=\ev_q h_{p}(Z,Z')$
 \end_inset
 
 .
@@ -965,11 +965,11 @@ key "carmeli2010vector"
 \end_inset
 
 , 
-\begin_inset Formula $\ev h_{q}(Z,Z)<\infty$
+\begin_inset Formula $\ev_q h_{q}(Z,Z)<\infty$
 \end_inset
 
  and 
-\begin_inset Formula $\ev\|\nabla\left(\log\frac{p(Z)}{q(Z)}\right)\|^{2}<\infty$
+\begin_inset Formula $\ev_q\|\nabla\left(\log\frac{p(Z)}{q(Z)}\right)\|^{2}<\infty$
 \end_inset
 
  then 
@@ -1442,7 +1442,7 @@ key "SteChr08"
 ), which allows us to change order of the integration 
 \begin_inset Formula 
 \[
-\ev\|\xi_{p}(Z)\|_{\mathcal{F}^{d}}\leq\ev\|\xi_{p}(Z)\|_{\mathcal{F}^{d}}^{2}=\ev h_{p}(Z,Z)<\infty.
+\ev_q\|\xi_{p}(Z)\|_{\mathcal{F}^{d}}\leq\ev_q\|\xi_{p}(Z)\|_{\mathcal{F}^{d}}^{2}=\ev_q h_{p}(Z,Z)<\infty.
 \]
 
 \end_inset
@@ -1464,7 +1464,7 @@ relate expected value of the Stein operator to the inner product of
 , 
 \begin_inset Formula 
 \begin{align}
-\ev T_{p}f(Z)=\langle f,\ev\xi_{p}(Z)\rangle_{\mathcal{F}^{d}} & =\sum_{i=1}^{d}\langle f_{i},\ev\xi_{p,i}(Z)\rangle_{\mathcal{F}}.\label{eq:expectedVauleT}
+\ev_q T_{p}f(Z)=\langle f,\ev_q\xi_{p}(Z)\rangle_{\mathcal{F}^{d}} & =\sum_{i=1}^{d}\langle f_{i},\ev_q\xi_{p,i}(Z)\rangle_{\mathcal{F}}.\label{eq:expectedVauleT}
 \end{align}
 
 \end_inset
@@ -1478,10 +1478,10 @@ relate expected value of the Stein operator to the inner product of
 We check the claim for all dimensions 
 \begin_inset Formula 
 \begin{align*}
- & \left\langle f_{i},\ev\xi_{i}(Z)\right\rangle _{\mathcal{F}}\\
- & =\left\langle f_{i},\ev\left[\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right]\right\rangle _{\mathcal{F}}\\
- & =\ev\left\langle f_{i},\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right\rangle _{\mathcal{F}}\\
- & =\ev\left[\frac{\partial\log p(Z)}{\partial x_{i}}f_{i}(Z)+\frac{\partial f_{i}(Z,\cdot)}{\partial x_{i}}\right].
+ & \left\langle f_{i},\ev_q\xi_{i}(Z)\right\rangle _{\mathcal{F}}\\
+ & =\left\langle f_{i},\ev_q\left[\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right]\right\rangle _{\mathcal{F}}\\
+ & =\ev_q\left\langle f_{i},\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right\rangle _{\mathcal{F}}\\
+ & =\ev_q\left[\frac{\partial\log p(Z)}{\partial x_{i}}f_{i}(Z)+\frac{\partial f_{i}(Z,\cdot)}{\partial x_{i}}\right].
 \end{align*}
 
 \end_inset
@@ -1546,10 +1546,10 @@ reference "eq:expectedVauleT"
  we have 
 \begin_inset Formula 
 \begin{align*}
-S_{p}(Z) & :=\sup_{\Vert f\Vert<1}\ev(T_{p}f)(Z)-\ev(T_{p}f)(X)\\
- & =\sup_{\Vert f\Vert<1}\ev(T_{p}f)(Z)\\
- & =\sup_{\Vert f\Vert<1}\langle f,\ev\xi_{p}(Z)\rangle_{{\cal F}^{d}}\\
- & =\|\ev\xi_{p}(Z)\|_{\mathcal{F}^{d}}
+S_{p}(Z) & :=\sup_{\Vert f\Vert<1}\ev_q(T_{p}f)(Z)-\ev_p(T_{p}f)(X)\\
+ & =\sup_{\Vert f\Vert<1}\ev_q(T_{p}f)(Z)\\
+ & =\sup_{\Vert f\Vert<1}\langle f,\ev_q\xi_{p}(Z)\rangle_{{\cal F}^{d}}\\
+ & =\|\ev_q\xi_{p}(Z)\|_{\mathcal{F}^{d}}
 \end{align*}
 
 \end_inset
@@ -1609,8 +1609,8 @@ now calculate closed form formula for
 \lang english
 \begin_inset Formula 
 \begin{align*}
-S_{p}(Z)^{2} & =\langle\ev\xi_{p}(Z),\ev\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}=\ev\langle\xi_{p}(Z),\ev\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}\\
- & =\ev\langle\xi_{p}(Z),\xi_{p}(Z')\rangle_{\mathcal{F}^{d}}=\ev h_{p}(Z,Z'),
+S_{p}(Z)^{2} & =\langle\ev_q\xi_{p}(Z),\ev_q\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}=\ev_q\langle\xi_{p}(Z),\ev_q\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}\\
+ & =\ev_q\langle\xi_{p}(Z),\xi_{p}(Z')\rangle_{\mathcal{F}^{d}}=\ev_q h_{p}(Z,Z'),
 \end{align*}
 
 \end_inset
@@ -1747,7 +1747,7 @@ reference "th:closed_form_discrepancy"
 \noun off
 \color none
  
-\begin_inset Formula $\ev\xi_{p}(Z)=0.$
+\begin_inset Formula $\ev_q\xi_{p}(Z)=0.$
 \end_inset
 
 
@@ -1769,10 +1769,10 @@ reference "th:closed_form_discrepancy"
 , 
 \begin_inset Formula 
 \begin{align*}
- & \ev\xi_{p}(Z)\\
- & =\ev\left(\nabla\log p(Z)k(Z,\cdot)+\nabla k(Z,\cdot)\right)\\
- & =\ev\xi_{q}(Z)+\ev\left(\nabla[\log p(Z)-\log q(Y)]k(Z,\cdot)\right)\\
- & =\ev\left(\nabla[\log p(Z)-\log q(Y)]k(Z,\cdot)\right)
+ & \ev_q\xi_{p}(Z)\\
+ & =\ev_q\left(\nabla\log p(Z)k(Z,\cdot)+\nabla k(Z,\cdot)\right)\\
+ & =\ev_q\xi_{q}(Z)+\ev_q\left(\nabla[\log p(Z)-\log q(Y)]k(Z,\cdot)\right)\\
+ & =\ev_q\left(\nabla[\log p(Z)-\log q(Y)]k(Z,\cdot)\right)
 \end{align*}
 
 \end_inset
@@ -1792,11 +1792,11 @@ reference "lem:easy"
 \end_inset
 
  to see that 
-\begin_inset Formula $\ev\xi_{q}(Z)=0$
+\begin_inset Formula $\ev_q\xi_{q}(Z)=0$
 \end_inset
 
 , since 
-\begin_inset Formula $\|\ev\xi_{q}(Z)\|^{2}=S_{q}(Z)=0$
+\begin_inset Formula $\|\ev_q\xi_{q}(Z)\|^{2}=S_{q}(Z)=0$
 \end_inset
 
 .
@@ -2107,7 +2107,7 @@ If
 \end_inset
 
  is Lipschitz continuous and 
-\begin_inset Formula $\ev h(Z,Z)<\infty$
+\begin_inset Formula $\ev_q h(Z,Z)<\infty$
 \end_inset
 
  then, under the null hypothesis 
@@ -2300,7 +2300,7 @@ Let
 \end_inset
 
  is Lipschitz continuous and 
-\begin_inset Formula $\ev h(Z,Z)^{2}<\infty$
+\begin_inset Formula $\ev_q h(Z,Z)^{2}<\infty$
 \end_inset
 
  then, under the null hypothesis, 
@@ -4242,7 +4242,7 @@ name "lem:easy"
 
  is zero, i.e.
  
-\begin_inset Formula $\ev(Tf)(X)=0$
+\begin_inset Formula $\ev_p(Tf)(X)=0$
 \end_inset
 
 .
@@ -4326,7 +4326,7 @@ The density function
 
  vanishes at infinity.
  We check that the expected value 
-\begin_inset Formula $\ev(T_{q})f(Z)$
+\begin_inset Formula $\ev_q(T_{q})f(Z)$
 \end_inset
 
  is zero.
@@ -4337,8 +4337,8 @@ The density function
  
 \begin_inset Formula 
 \begin{align*}
- & \ev\xi_{p}(X)\\
- & \ev\left(\frac{\partial\log p(X)}{\partial x_{i}}f_{i}(X)+\frac{\partial f_{i}(X)}{\partial x_{i}}\right)\\
+ & \ev_p\xi_{p}(X)\\
+ & \ev_p\left(\frac{\partial\log p(X)}{\partial x_{i}}f_{i}(X)+\frac{\partial f_{i}(X)}{\partial x_{i}}\right)\\
  & =\int_{R_{d}}\left[\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right]p(x)dx\\
  & =\int_{R_{d}}\left[\frac{1}{p(x)}\frac{\partial p(x)}{\partial x_{i}}f(x)+\frac{\partial f(x)}{\partial x_{i}}\right]p(x)dx\\
  & =\int_{R_{d}}\left[\frac{\partial p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}p(x)\right]dx\\
@@ -4356,12 +4356,12 @@ For the equation (a) we have used integration by parts, fact that
  vanishes at infinity and Fubini-Toneli theorem to show that we can do iterated
  integration.
  The sufficient condition for the Fubini-Toneli theorem is that 
-\begin_inset Formula $\ev\langle f,\xi_{p}(Z)\rangle^{2}<\infty$
+\begin_inset Formula $\ev_q\langle f,\xi_{p}(Z)\rangle^{2}<\infty$
 \end_inset
 
 .
  This is true since 
-\begin_inset Formula $\ev\|\xi_{p}(X)\|^{2}\leq\ev h_{p}(X,X)<\infty$
+\begin_inset Formula $\ev_p\|\xi_{p}(X)\|^{2}\leq\ev_p h_{p}(X,X)<\infty$
 \end_inset
 
 .
@@ -4465,12 +4465,12 @@ reference "th:closed_form_discrepancy"
 \end_inset
 
 ,
-\begin_inset Formula $\ev\xi(Z)=0$
+\begin_inset Formula $\ev_q\xi(Z)=0$
 \end_inset
 
 .
  Finally, condition A2 (iii), 
-\begin_inset Formula $\ev h(X,X)\leq\infty$
+\begin_inset Formula $\ev_p h(X,X)\leq\infty$
 \end_inset
 
  is assumed.
@@ -4660,13 +4660,13 @@ key "chwialkowski2014wild"
  We check the assumption 
 \begin_inset Formula 
 \[
-\sup_{n}\sup_{i,j<n}\ev h(Z_{i},Z_{j})^{2}<\infty.
+\sup_{n}\sup_{i,j<n}\ev_q h(Z_{i},Z_{j})^{2}<\infty.
 \]
 
 \end_inset
 
 We have 
-\begin_inset Formula $\ev h(Z,Z')^{2}\leq\left(\ev\|\xi(Z)\|^{2}\right)^{2}=\left(\ev h(Z,Z)\right)^{2}<\infty$
+\begin_inset Formula $\ev_q h(Z,Z')^{2}\leq\left(\ev_q\|\xi(Z)\|^{2}\right)^{2}=\left(\ev_q h(Z,Z)\right)^{2}<\infty$
 \end_inset
 
  .
@@ -4698,7 +4698,7 @@ key "chwialkowski2014wild"
 
 .
  We checked the  assumption 
-\begin_inset Formula $\sup_{n}\sup_{i,j<n}\ev h(Z_{i},Z_{j})^{2}<\infty$
+\begin_inset Formula $\sup_{n}\sup_{i,j<n}\ev_q h(Z_{i},Z_{j})^{2}<\infty$
 \end_inset
 
  above.
@@ -4737,8 +4737,8 @@ It is sufficient to check that
 \lang english
 \begin_inset Formula 
 \begin{align*}
-\ev B_{n} & =\frac{1}{n^{2}}\sum_{i,j}\ev W_{i}W_{j}\ev h(Z_{i},Z_{j})\\
- & =\frac{1}{n^{2}}\sum_{i\in N^{m}}\rho(|j-i|/l_{n})\ev h(Z_{j},Z_{i})\\
+\ev B_{n} & =\frac{1}{n^{2}}\sum_{i,j}\ev W_{i}W_{j}\ev_q h(Z_{i},Z_{j})\\
+ & =\frac{1}{n^{2}}\sum_{i\in N^{m}}\rho(|j-i|/l_{n})\ev_q h(Z_{j},Z_{i})\\
  & \leq\frac{1}{n^{2}}\sum_{i\in N^{m}}|\rho(|j-i|/l_{n})C\\
  & \to0
 \end{align*}
@@ -4748,7 +4748,7 @@ It is sufficient to check that
 
 \lang british
 for some constant 
-\begin_inset Formula $C=\ev h(Z_{1},Z_{2})$
+\begin_inset Formula $C=\ev_q h(Z_{1},Z_{2})$
 \end_inset
 
 , whose existence follows from assumptions i) and iii).
@@ -4764,8 +4764,8 @@ for some constant
 \lang english
 \begin_inset Formula 
 \begin{align*}
-\ev B_{n}^{2} & =\frac{1}{n^{4}}\sum_{i,j,k,l}\ev W_{i}W_{j}W_{k}W_{l}\ev h(Z_{i},Z_{j})h(Z_{k},Z_{l})\\
- & \leq\frac{1}{n^{4}}\sum_{i\neq j,i\neq k,i\neq l,j\neq k,j\neq l,k\neq l}\ev W_{i}W_{j}W_{k}W_{l}\ev h(Z_{i},Z_{j})^{2}\ev h(Z_{k},Z_{l})^{2}+C'\frac{6n^{3}}{n^{4}}\\
+\ev B_{n}^{2} & =\frac{1}{n^{4}}\sum_{i,j,k,l}\ev W_{i}W_{j}W_{k}W_{l}\ev_q h(Z_{i},Z_{j})h(Z_{k},Z_{l})\\
+ & \leq\frac{1}{n^{4}}\sum_{i\neq j,i\neq k,i\neq l,j\neq k,j\neq l,k\neq l}\ev W_{i}W_{j}W_{k}W_{l}\ev_q h(Z_{i},Z_{j})^{2}\ev_q h(Z_{k},Z_{l})^{2}+C'\frac{6n^{3}}{n^{4}}\\
  & \leq\frac{1}{n^{4}}\sum_{i\neq j,i\neq k,i\neq l,j\neq k,j\neq l,k\neq l}\ev W_{i}W_{j}W_{k}W_{l}C'+\frac{6C'}{n}\\
  & =\frac{6C'}{n}\to0,
 \end{align*}
@@ -4775,7 +4775,7 @@ for some constant
 
 \lang british
 where 
-\begin_inset Formula $C'=\ev h(Z_{i},Z_{j})^{2}\ev h(Z_{k},Z_{l})^{2}$
+\begin_inset Formula $C'=\ev_q h(Z_{i},Z_{j})^{2}\ev_q h(Z_{k},Z_{l})^{2}$
 \end_inset
 
 .
@@ -4923,7 +4923,7 @@ name "prop:Hotelling"
 \end_inset
 
  If 
-\begin_inset Formula $\ev s(X,y)=0$
+\begin_inset Formula $\ev_p s(X,y)=0$
 \end_inset
 
  for all 
@@ -4961,7 +4961,7 @@ name "prop:Hotelling"
 
  fixed).
  If 
-\begin_inset Formula $\ev s(X,y)\neq0$
+\begin_inset Formula $\ev_p s(X,y)\neq0$
 \end_inset
 
  for almost all 
@@ -5215,7 +5215,7 @@ Using another weak mixing coefficient
 \begin_inset Formula 
 \begin{align*}
 \tilde{\alpha}(m) & =\sup_{l\in\mathbb{N}}\frac{1}{l}\sup_{m\leq i_{1}\leq...\leq i_{l}}\tilde{\alpha}(\mathcal{F}_{0},(X_{i_{1}},...,X_{i_{l}}))\overset{r\to\infty}{\longrightarrow}0,\;\text{where}\\
-\tilde{\alpha}(\mathcal{M},X) & =\sup_{g\in\Lambda}\parallel\ev(g(X)|\mathcal{M})-\ev g(X)\parallel_{1}
+\tilde{\alpha}(\mathcal{M},X) & =\sup_{g\in\Lambda}\parallel\ev_p(g(X)|\mathcal{M})-\ev_p g(X)\parallel_{1}
 \end{align*}
 
 \end_inset
