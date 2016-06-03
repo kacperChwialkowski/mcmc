@@ -717,8 +717,20 @@ Our goal is to write the maximum discrepancy between target distribution
 
 .
  We further assume that all measures considered in this paper supported
- on an open set, equal to zero on the boarder and strictly positive (so
- logarithms are well defined).
+ on an open set, equal to zero on the border and strictly positive (so logarithm
+s are well defined) 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+An example of such a space is the real line
+\end_layout
+
+\end_inset
+
+.
  Similarly to 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -791,7 +803,7 @@ Throughout the article, all occurrences of
 
 \end_inset
 
-whose inner product with 
+whose expected inner product with 
 \begin_inset Formula $f$
 \end_inset
 
@@ -852,7 +864,7 @@ This makes it clear why
 \end_inset
 
 .
- To sate our first result we define 
+ To state our first result we define 
 \begin_inset Formula 
 \begin{align*}
 h_{p}(x,y) & :=\nabla\log p(x)^{\top}\nabla\log p(y)k(x,y)\\
@@ -897,7 +909,7 @@ name "th:closed_form_discrepancy"
 \end_inset
 
 , then 
-\begin_inset Formula $S_{p}(Z)^{2}=\|\ev\xi_{p}(Z)\|_{{\cal F}^{d}}=\ev h_{p}(Z,Z')$
+\begin_inset Formula $S_{p}^{2}(Z)=\|\ev\xi_{p}(Z)\|_{{\cal F}^{d}}^{2}=\ev h_{p}(Z,Z')$
 \end_inset
 
 .
@@ -1321,15 +1333,15 @@ name "sec:details_kernel_stein"
 \begin_layout Standard
 
 \lang english
-We show in Lemma 
+Lemma 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "lem:easy"
 
 \end_inset
 
- in the Appendix that the expected value of the Stein operator is zero on
- the target measure.
+ (in the Appendix) shows that the expected value of the Stein operator is
+ zero on the target measure.
 \end_layout
 
 \begin_layout Proof
@@ -1427,7 +1439,7 @@ key "SteChr08"
 
 \end_inset
 
-)
+), which allows us to change order of the integration 
 \begin_inset Formula 
 \[
 \ev\|\xi_{p}(Z)\|_{\mathcal{F}^{d}}\leq\ev\|\xi_{p}(Z)\|_{\mathcal{F}^{d}}^{2}=\ev h_{p}(Z,Z)<\infty.
@@ -1598,7 +1610,7 @@ now calculate closed form formula for
 \begin_inset Formula 
 \begin{align*}
 S_{p}(Z)^{2} & =\langle\ev\xi_{p}(Z),\ev\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}=\ev\langle\xi_{p}(Z),\ev\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}\\
- & =\ev\langle\xi_{p}(Z),\xi_{p}(Z')\rangle_{\mathcal{F}^{d}}=\ev h_{p}(Z,Z').
+ & =\ev\langle\xi_{p}(Z),\xi_{p}(Z')\rangle_{\mathcal{F}^{d}}=\ev h_{p}(Z,Z'),
 \end{align*}
 
 \end_inset
@@ -1607,7 +1619,16 @@ S_{p}(Z)^{2} & =\langle\ev\xi_{p}(Z),\ev\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}=\ev\
 \end_layout
 
 \begin_layout Standard
-Next, we prove that 
+where 
+\begin_inset Formula $Z'$
+\end_inset
+
+ is an independent copy of 
+\begin_inset Formula $Z$
+\end_inset
+
+.
+ Next, we prove that 
 \family roman
 \series medium
 \shape up
@@ -4205,13 +4226,13 @@ name "lem:easy"
 \lang english
 \begin_inset Formula 
 \begin{align*}
-0 & =\oint_{\partial\mathcal{X}}k(x,x')p(x)n(x)dS(x'),\\
-0 & =\oint_{\partial\mathcal{X}}\nabla_{x}k(x,x')^{\top}n(x')p(x')dS(x'),
+0 & =\oint_{\partial\mathcal{X}}k(x,x')q(x)n(x)dS(x'),\\
+0 & =\oint_{\partial\mathcal{X}}\nabla_{x}k(x,x')^{\top}n(x')q(x')dS(x'),
 \end{align*}
 
 \end_inset
 
- then for all 
+ and then for all 
 \begin_inset Formula $f\in\mathcal{F}$
 \end_inset
 
@@ -4269,18 +4290,18 @@ key "OatGirCho15"
 
 .
  Here we provide an alternative, elementary proof for the latter case.
- First we show that the functions 
-\begin_inset Formula $g_{i}=p\cdot f_{i}$
+ First we show that the function
+\begin_inset Formula $p\cdot f_{i}$
 \end_inset
 
- vanish at infinity, by which we mean that for all dimensions 
+ vanishes at infinity, by which we mean that for all dimensions 
 \begin_inset Formula $j$
 \end_inset
 
  
 \begin_inset Formula 
 \[
-\lim_{x_{j}\to\infty}g_{i}(x_{1},\cdots,x_{d})=0.
+\lim_{x_{j}\to\infty}p(x_{1},\cdots,x_{d})\cdot f_{i}(x_{1},\cdots,x_{d})=0.
 \]
 
 \end_inset
@@ -4294,81 +4315,56 @@ The density function
 \begin_inset Formula $f$
 \end_inset
 
- is bounded, which is implied by Cauchy-Schwarz inequality -- 
+ is bounded, which is implied by Cauchy-Schwarz inequality, 
 \begin_inset Formula $\left|f(x)\right|\le\left\Vert f\right\Vert \sqrt{k(x,x)}$
 \end_inset
 
 .
  This implies that the function 
-\begin_inset Formula $g$
+\begin_inset Formula $p\cdot f_{i}$
 \end_inset
 
  vanishes at infinity.
- To show the expected value 
-\begin_inset Formula $\ev(T_{p})f(X)$
-\end_inset
-
- is zero, it is sufficient to show that for all dimensions 
-\begin_inset Formula $i$
-\end_inset
-
-, the expected value of 
-\begin_inset Formula $\frac{\partial\log p(X)}{\partial x_{i}}f_{i}(X)+\frac{\partial f_{i}(X)}{\partial x_{i}}$
+ We check that the expected value 
+\begin_inset Formula $\ev(T_{q})f(Z)$
 \end_inset
 
  is zero.
+ For all dimensions 
+\begin_inset Formula $i$
+\end_inset
+
  
 \begin_inset Formula 
 \begin{align*}
- & \ev\left(\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right)\\
- & =\int_{R_{d}}\left[\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right]q(x)dx\\
- & =\int_{R_{d}}\left[\frac{1}{p(x)}\frac{\partial q(x)}{\partial x_{i}}f(x)+\frac{\partial f(x)}{\partial x_{i}}\right]q(x)dx\\
- & =\int_{R_{d}}\left[\frac{\partial p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}q(x)\right]dx\\
+ & \ev\xi_{p}(X)\\
+ & \ev\left(\frac{\partial\log p(X)}{\partial x_{i}}f_{i}(X)+\frac{\partial f_{i}(X)}{\partial x_{i}}\right)\\
+ & =\int_{R_{d}}\left[\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right]p(x)dx\\
+ & =\int_{R_{d}}\left[\frac{1}{p(x)}\frac{\partial p(x)}{\partial x_{i}}f(x)+\frac{\partial f(x)}{\partial x_{i}}\right]p(x)dx\\
+ & =\int_{R_{d}}\left[\frac{\partial p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}p(x)\right]dx\\
  & \overset{(a)}{=}\int_{R_{d-1}}\left(\lim_{R\to\infty}p(x)f_{i}(x)\bigg|_{x_{i}=-R}^{x_{i}=R}\right)dx_{1}\cdots dx_{i-1}\cdots dx_{i+1}\cdots d{x_{d}}\\
- & =\int_{R_{d-1}}0dx_{1}\cdots dx_{i-1}\cdots dx_{i+1}\cdots d{x_{d}}\\
+ & =\int_{R_{d-1}}0dx_{1}\cdots dx_{i-1}\cdots dx_{i+1}\cdots dx_{d}\\
  & =0.
 \end{align*}
 
 \end_inset
 
 For the equation (a) we have used integration by parts, fact that 
-\begin_inset Formula $g_{i}$
+\begin_inset Formula $p(x)f_{i}(x)$
 \end_inset
 
  vanishes at infinity and Fubini-Toneli theorem to show that we can do iterated
  integration.
  The sufficient condition for the Fubini-Toneli theorem is that 
-\begin_inset Formula $\int|g_{i}f(x)|q(x)dx$
-\end_inset
-
- exists.
- This is implied by existence of 
-\begin_inset Formula $\ev|\frac{\partial\log p(X)}{\partial x_{i}}f_{i}(X)|$
-\end_inset
-
- and 
-\begin_inset Formula $\ev|\frac{\partial f_{i}(X)}{\partial x_{i}}|$
+\begin_inset Formula $\ev\langle f,\xi_{p}(Z)\rangle^{2}<\infty$
 \end_inset
 
 .
- Since 
-\begin_inset Formula $f_{i}$
+ This is true since 
+\begin_inset Formula $\ev\|\xi_{p}(X)\|^{2}\leq\ev h_{p}(X,X)<\infty$
 \end_inset
 
- is bounded and 
-\begin_inset Formula $\ev|\frac{\partial\log p(X)}{\partial x_{i}}|\leq\ev\|\nabla\log p(Z)\|^{2}$
-\end_inset
-
-, condition ii) guarantees that 
-\begin_inset Formula $\ev|\frac{\partial\log p(X)}{\partial x_{i}}f_{i}(X)|$
-\end_inset
-
- is finite.
- For the second term we have 
-\begin_inset Formula $\ev|\frac{\partial f_{i}(X)}{\partial x_{i}}|=\ev|\langle\frac{\partial k(X,cdot)}{\partial x_{i}},f_{i}|\rangle\leq\|f_{i}\|_{\mathcal{F}}\ev\sqrt{\frac{\partial^{2}k(X,X)}{dx_{i}dx_{i+d}}}$
-\end_inset
-
-, which is guaranteed by the condition iv).
+.
  
 \end_layout
 
@@ -4647,7 +4643,7 @@ reference "sec:Details"
  converges to zero - we use 
 \begin_inset CommandInset citation
 LatexCommand citep
-after "Theorem 3"
+after "Theorem 2"
 key "chwialkowski2014wild"
 
 \end_inset
@@ -4664,28 +4660,16 @@ key "chwialkowski2014wild"
  We check the assumption 
 \begin_inset Formula 
 \[
-\sup_{N}\sup_{i,j\in N^{2}}\ev h(Z_{i})h(Z_{j})<\infty.
+\sup_{n}\sup_{i,j<n}\ev h(Z_{i},Z_{j})^{2}<\infty.
 \]
 
 \end_inset
 
 We have 
-\begin_inset Formula $\ev h(Z,Z')^{2}=\ev\langle\xi(Z,\xi(Z')\rangle^{2}\leq\ev\|\xi(Z)\|^{2}\|\xi(Z')\|^{2}\leq\sqrt{\ev\|\xi(Z)\|^{4}\ev\|\xi(Z')\|^{4}}\leq\ev h^{2}(Z,Z)<\infty$
+\begin_inset Formula $\ev h(Z,Z')^{2}\leq\left(\ev\|\xi(Z)\|^{2}\right)^{2}=\left(\ev h(Z,Z)\right)^{2}<\infty$
 \end_inset
 
- and so for 
-\begin_inset Formula $i,j\in N^{2}$
-\end_inset
-
- 
-\begin_inset Formula 
-\[
-\ev h(Z_{i})h(Z_{j})\leq\ev h(Z_{i})^{2}\ev h(Z_{j})^{2}\leq(\ev h^{2}(Z,Z))^{2}<\infty.
-\]
-
-\end_inset
-
-
+ .
 \end_layout
 
 \begin_layout Proof
@@ -4708,13 +4692,13 @@ key "chwialkowski2014wild"
 \begin_inset Formula $h$
 \end_inset
 
- is positive sine 
-\begin_inset Formula $S(Z)^{2}>0$
+ is positive since 
+\begin_inset Formula $S_{p}(Z)^{2}>0$
 \end_inset
 
 .
  We checked the  assumption 
-\begin_inset Formula $\sup_{N}\sup_{i,j\in N^{2}}\ev h(Z_{i})h(Z_{j})<\infty$
+\begin_inset Formula $\sup_{n}\sup_{i,j<n}\ev h(Z_{i},Z_{j})^{2}<\infty$
 \end_inset
 
  above.
