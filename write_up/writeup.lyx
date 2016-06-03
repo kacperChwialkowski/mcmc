@@ -1015,7 +1015,7 @@ It is straightforward to estimate the squared Stein discrepancy
 : a quadratic time estimator is a V-Statistic, and takes the form
 \begin_inset Formula 
 \[
-V_{n}=\frac{1}{n^{2}}\sum_{i,j=1}^{n}h(Z_{i},Z_{j}).
+V_{n}=\frac{1}{n^{2}}\sum_{i,j=1}^{n}h_p(Z_{i},Z_{j}).
 \]
 
 \end_inset
@@ -1099,7 +1099,7 @@ where the
 \lang english
 \begin_inset Formula 
 \[
-B_{n}=\frac{1}{n^{2}}\sum_{i,j=1}^{n}W_{i,n}W_{j,n}h(Z_{i,}Z_{j}).
+B_{n}=\frac{1}{n^{2}}\sum_{i,j=1}^{n}W_{i,n}W_{j,n}h_p(Z_{i,}Z_{j}).
 \]
 
 \end_inset
@@ -1371,7 +1371,7 @@ reference "th:closed_form_discrepancy"
 \begin_layout Proof
 
 \lang english
-\begin_inset Formula $\xi(x,\cdot)$
+\begin_inset Formula $\xi_p(x,\cdot)$
 \end_inset
 
  is an element of the reproducing kernel Hilbert space 
@@ -1398,7 +1398,7 @@ key "SteChr08"
  
 \lang british
 We first show that 
-\begin_inset Formula $h(x,y)=\langle\xi(x,\cdot),\xi(y,\cdot)\rangle.$
+\begin_inset Formula $h_p(x,y)=\langle\xi_p(x,\cdot),\xi_p(y,\cdot)\rangle.$
 \end_inset
 
  Using notation
@@ -1428,7 +1428,7 @@ we calculate
 
 \lang english
 Next we show that 
-\begin_inset Formula $\xi(x,\cdot)$
+\begin_inset Formula $\xi_p(x,\cdot)$
 \end_inset
 
  is Bochner integrable (see 
@@ -1458,7 +1458,7 @@ relate expected value of the Stein operator to the inner product of
 \end_inset
 
  and the expected value of 
-\begin_inset Formula $\xi(Z)$
+\begin_inset Formula $\xi_q(Z)$
 \end_inset
 
 , 
@@ -1478,7 +1478,7 @@ relate expected value of the Stein operator to the inner product of
 We check the claim for all dimensions 
 \begin_inset Formula 
 \begin{align*}
- & \left\langle f_{i},\ev_{q}\xi_{i}(Z)\right\rangle _{\mathcal{F}}\\
+ & \left\langle f_{i},\ev_{q}\xi_{i,p}(Z)\right\rangle _{\mathcal{F}}\\
  & =\left\langle f_{i},\ev_{q}\left[\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right]\right\rangle _{\mathcal{F}}\\
  & =\ev_{q}\left\langle f_{i},\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right\rangle _{\mathcal{F}}\\
  & =\ev_{q}\left[\frac{\partial\log p(Z)}{\partial x_{i}}f_{i}(Z)+\frac{\partial f_{i}(Z,\cdot)}{\partial x_{i}}\right].
@@ -1497,7 +1497,7 @@ The second equality follows from the fact that a linear operator
 \end_inset
 
  can be interchanged with the Bochner integral, and the fact that 
-\begin_inset Formula $\xi$
+\begin_inset Formula $\xi_p$
 \end_inset
 
  is Bochner integrable.
@@ -1598,7 +1598,7 @@ now calculate closed form formula for
 \color none
 \lang english
 
-\begin_inset Formula $S_{p}(Z)^{2}$
+\begin_inset Formula $S_{p}^{2}(Z)$
 \end_inset
 
 
@@ -1609,7 +1609,7 @@ now calculate closed form formula for
 \lang english
 \begin_inset Formula 
 \begin{align*}
-S_{p}(Z)^{2} & =\langle\ev_{q}\xi_{p}(Z),\ev_{q}\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}=\ev_{q}\langle\xi_{p}(Z),\ev_{q}\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}\\
+S_{p}^{2}(Z) & =\langle\ev_{q}\xi_{p}(Z),\ev_{q}\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}=\ev_{q}\langle\xi_{p}(Z),\ev_{q}\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}\\
  & =\ev_{q}\langle\xi_{p}(Z),\xi_{p}(Z')\rangle_{\mathcal{F}^{d}}=\ev_{q}h_{p}(Z,Z'),
 \end{align*}
 
@@ -2107,7 +2107,7 @@ If
 \end_inset
 
  is Lipschitz continuous and 
-\begin_inset Formula $\ev_{q}h(Z,Z)<\infty$
+\begin_inset Formula $\ev_{q}h_p(Z,Z)<\infty$
 \end_inset
 
  then, under the null hypothesis 
@@ -2300,7 +2300,7 @@ Let
 \end_inset
 
  is Lipschitz continuous and 
-\begin_inset Formula $\ev_{q}h(Z,Z)^{2}<\infty$
+\begin_inset Formula $\ev_{q}h_p(Z,Z)^{2}<\infty$
 \end_inset
 
  then, under the null hypothesis, 
@@ -4447,7 +4447,7 @@ reference "theorem_discrepancy_is_metric"
 \lang english
 \begin_inset Formula 
 \[
-h(x,y)=\langle\xi(x),\xi(y)\rangle_{\mathcal{F}^{d}}
+h_p(x,y)=\langle\xi_p(x),\xi_p(y)\rangle_{\mathcal{F}^{d}}
 \]
 
 \end_inset
@@ -4465,12 +4465,12 @@ reference "th:closed_form_discrepancy"
 \end_inset
 
 ,
-\begin_inset Formula $\ev_{q}\xi(Z)=0$
+\begin_inset Formula $\ev_{q}\xi_p(Z)=0$
 \end_inset
 
 .
  Finally, condition A2 (iii), 
-\begin_inset Formula $\ev_{p}h(X,X)\leq\infty$
+\begin_inset Formula $\ev_{p}h_p(X,X)\leq\infty$
 \end_inset
 
  is assumed.
@@ -4660,13 +4660,13 @@ key "chwialkowski2014wild"
  We check the assumption 
 \begin_inset Formula 
 \[
-\sup_{n}\sup_{i,j<n}\ev_{q}h(Z_{i},Z_{j})^{2}<\infty.
+\sup_{n}\sup_{i,j<n}\ev_{q}h_p(Z_{i},Z_{j})^{2}<\infty.
 \]
 
 \end_inset
 
 We have 
-\begin_inset Formula $\ev_{q}h(Z,Z')^{2}\leq\left(\ev_{q}\|\xi(Z)\|^{2}\right)^{2}=\left(\ev_{q}h(Z,Z)\right)^{2}<\infty$
+\begin_inset Formula $\ev_{q}h_p(Z,Z')^{2}\leq\left(\ev_{q}\|\xi_p(Z)\|^{2}\right)^{2}=\left(\ev_{q}h_p(Z,Z)\right)^{2}<\infty$
 \end_inset
 
  .
@@ -4693,12 +4693,12 @@ key "chwialkowski2014wild"
 \end_inset
 
  is positive since 
-\begin_inset Formula $S_{p}(Z)^{2}>0$
+\begin_inset Formula $S_{p}^{2(Z)}>0$
 \end_inset
 
 .
  We checked the  assumption 
-\begin_inset Formula $\sup_{n}\sup_{i,j<n}\ev_{q}h(Z_{i},Z_{j})^{2}<\infty$
+\begin_inset Formula $\sup_{n}\sup_{i,j<n}\ev_{q}h_p(Z_{i},Z_{j})^{2}<\infty$
 \end_inset
 
  above.
@@ -4737,8 +4737,8 @@ It is sufficient to check that
 \lang english
 \begin_inset Formula 
 \begin{align*}
-\ev B_{n} & =\frac{1}{n^{2}}\sum_{i,j}\ev W_{i}W_{j}\ev_{q}h(Z_{i},Z_{j})\\
- & =\frac{1}{n^{2}}\sum_{i\in N^{m}}\rho(|j-i|/l_{n})\ev_{q}h(Z_{j},Z_{i})\\
+\ev B_{n} & =\frac{1}{n^{2}}\sum_{i,j}\ev W_{i}W_{j}\ev_{q}h_p(Z_{i},Z_{j})\\
+ & =\frac{1}{n^{2}}\sum_{i\in N^{m}}\rho(|j-i|/l_{n})\ev_{q}h_p(Z_{j},Z_{i})\\
  & \leq\frac{1}{n^{2}}\sum_{i\in N^{m}}|\rho(|j-i|/l_{n})C\\
  & \to0
 \end{align*}
@@ -4748,7 +4748,7 @@ It is sufficient to check that
 
 \lang british
 for some constant 
-\begin_inset Formula $C=\ev_{q}h(Z_{1},Z_{2})$
+\begin_inset Formula $C=\ev_{q}h_p(Z_{1},Z_{2})$
 \end_inset
 
 , whose existence follows from assumptions i) and iii).
@@ -4764,8 +4764,8 @@ for some constant
 \lang english
 \begin_inset Formula 
 \begin{align*}
-\ev B_{n}^{2} & =\frac{1}{n^{4}}\sum_{i,j,k,l}\ev W_{i}W_{j}W_{k}W_{l}\ev_{q}h(Z_{i},Z_{j})h(Z_{k},Z_{l})\\
- & \leq\frac{1}{n^{4}}\sum_{i\neq j,i\neq k,i\neq l,j\neq k,j\neq l,k\neq l}\ev W_{i}W_{j}W_{k}W_{l}\ev_{q}h(Z_{i},Z_{j})^{2}\ev_{q}h(Z_{k},Z_{l})^{2}+C'\frac{6n^{3}}{n^{4}}\\
+\ev B_{n}^{2} & =\frac{1}{n^{4}}\sum_{i,j,k,l}\ev W_{i}W_{j}W_{k}W_{l}\ev_{q}h_p(Z_{i},Z_{j})h_p(Z_{k},Z_{l})\\
+ & \leq\frac{1}{n^{4}}\sum_{i\neq j,i\neq k,i\neq l,j\neq k,j\neq l,k\neq l}\ev W_{i}W_{j}W_{k}W_{l}\ev_{q}h_p(Z_{i},Z_{j})^{2}\ev_{q}h_p(Z_{k},Z_{l})^{2}+C'\frac{6n^{3}}{n^{4}}\\
  & \leq\frac{1}{n^{4}}\sum_{i\neq j,i\neq k,i\neq l,j\neq k,j\neq l,k\neq l}\ev W_{i}W_{j}W_{k}W_{l}C'+\frac{6C'}{n}\\
  & =\frac{6C'}{n}\to0,
 \end{align*}
@@ -4775,7 +4775,7 @@ for some constant
 
 \lang british
 where 
-\begin_inset Formula $C'=\ev_{q}h(Z_{i},Z_{j})^{2}\ev_{q}h(Z_{k},Z_{l})^{2}$
+\begin_inset Formula $C'=\ev_{q}h_p(Z_{i},Z_{j})^{2}\ev_{q}h_p(Z_{k},Z_{l})^{2}$
 \end_inset
 
 .
@@ -5062,13 +5062,13 @@ We only can show consistency during the convergence phase on the empirical
 \end_inset
 
  where 
-\begin_inset Formula $S_{n}=\frac{1}{\sqrt{}n}\sum_{i=1}^{n}\xi_{i}$
+\begin_inset Formula $S_{n}=\frac{1}{\sqrt{}n}\sum_{i=1}^{n}\xi_{i,p}$
 \end_inset
 
  
 \begin_inset Formula 
 \[
-\ev\|S_{n}\|^{2}\geq\|\ev S_{n}\|^{2}>\frac{1}{n}\sum_{i,j}^{n}\langle\ev\xi_{i},\ev\xi_{i}\rangle
+\ev\|S_{n}\|^{2}\geq\|\ev S_{n}\|^{2}>\frac{1}{n}\sum_{i,j}^{n}\langle\ev\xi_{i,p},\ev\xi_{i,p}\rangle
 \]
 
 \end_inset
@@ -5078,12 +5078,12 @@ We only can show consistency during the convergence phase on the empirical
 
 \begin_layout Standard
 If it is reasonable to assume that 
-\begin_inset Formula $\ev\xi_{i}\simeq\ev\xi_{j}$
+\begin_inset Formula $\ev\xi_{i,p}\simeq\ev\xi_{j,p}$
 \end_inset
 
  the sum diverges, which makes the test consistent.
  One way to achieve 
-\begin_inset Formula $\ev\xi_{i}=\ev\xi_{j}$
+\begin_inset Formula $\ev\xi_{i,p}=\ev\xi_{j,p}$
 \end_inset
 
  it is to introduce an extra level of randomization i.e.
