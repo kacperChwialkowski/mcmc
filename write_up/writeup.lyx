@@ -29,8 +29,8 @@ theorems-sec
 \end_modules
 \maintain_unincluded_children false
 \language british
-\language_package none
-\inputencoding default
+\language_package default
+\inputencoding auto
 \fontencoding global
 \font_roman default
 \font_sans default
@@ -207,7 +207,7 @@ We propose a nonparametric statistical test for goodness-of-fit: given a
  bootstrap procedure.
  We apply our test to quantifying convergence of approximate Markov Chain
  Monte Carlo methods, statistical model criticism, and evaluating quality
- of fit vs model complexity in nonparametric density estimation.
+ of fit vs model complexity in nonparametric density estimation.1
 \end_layout
 
 \begin_layout Standard
@@ -2861,7 +2861,6 @@ status open
 
 \begin_layout Plain Layout
 Dim.
- 
 \end_layout
 
 \end_inset
@@ -3620,7 +3619,7 @@ key "korattikara2013austerity"
 For the purpose of illustration we use a simple generative model from 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "gorham2015measuring,welling2011bayesian"
+key "gorham2015measuring,Welling2011"
 
 \end_inset
 
@@ -5344,11 +5343,9 @@ key "dedecker2005new"
  provides examples of systems that are tau-mixing.
  In particular, given that certain assumptions are satisfied causal functions
  of stationary sequences, iterated random functions, Markov chains, expanding
- maps are all 
-\begin_inset Formula $\tau$
-\end_inset
-
--mixing.
+ maps are all $
+\backslash
+tau$-mixing.
  
 \end_layout
 
