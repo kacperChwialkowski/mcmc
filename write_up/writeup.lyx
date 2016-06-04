@@ -207,7 +207,7 @@ We propose a nonparametric statistical test for goodness-of-fit: given a
  bootstrap procedure.
  We apply our test to quantifying convergence of approximate Markov Chain
  Monte Carlo methods, statistical model criticism, and evaluating quality
- of fit vs model complexity in nonparametric density estimation.1
+ of fit vs model complexity in nonparametric density estimation.
 \end_layout
 
 \begin_layout Standard
@@ -4137,7 +4137,13 @@ FloatBarrier
 
 \end_layout
 
+\begin_layout Paragraph
+Acknowledgement.
+ 
+\end_layout
+
 \begin_layout Standard
+Arthur Gretton has ORCID 0000-0003-3169-7624.
 \begin_inset Newpage newpage
 \end_inset
 
