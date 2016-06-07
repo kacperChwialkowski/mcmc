@@ -197,7 +197,7 @@ We propose a nonparametric statistical test for goodness-of-fit: given a
  set of samples, the test determines how likely it is that these were generated
  from a target density function.
  The measure of goodness-of-fit is a divergence constructed via Stein's
- method using functions from a Reproducing Kernel Hilbert Space.
+ method using functions from a reproducing kernel Hilbert space.
  Our test statistic is based on an empirical estimate of this divergence,
  taking the form of a V-statistic in terms of the log gradients of the target
  density and the kernel.
@@ -205,7 +205,7 @@ We propose a nonparametric statistical test for goodness-of-fit: given a
  and non-i.i.d.
  samples, where we estimate the null distribution quantiles using a wild
  bootstrap procedure.
- We apply our test to quantifying convergence of approximate Markov Chain
+ We apply our test to quantifying convergence of approximate Markov chain
  Monte Carlo methods, statistical model criticism, and evaluating quality
  of fit vs model complexity in nonparametric density estimation.
 \end_layout
@@ -277,9 +277,12 @@ key "gorham2015measuring"
  of such integrals).
  By contrast, many earlier discrepancy measures require integrals with respect
  to the target (see below for a review).
- This is problematic if the intention is to perform benchmarks for assessing
- Markov Chain Monte Carlo, since these integrals will certainly not be known
- to the practitioner.
+ This is problematic e.g.
+\begin_inset space ~
+\end_inset
+
+if the intention is to perform benchmarks for assessing Markov Chain Monte
+ Carlo, since these integrals are certainly not be known to the practitioner.
 \end_layout
 
 \begin_layout Standard
@@ -317,15 +320,15 @@ An important application of a goodness-of-fit measure is in statistical
 
 -Sobolev Stein discrepancies remains a challenging open problem, due to
  the complexity of the function class used.
- It is not clear how one would compute p-values for this statistic, or determine
- when the goodness of fit test would allow us to accept the null hypothesis
- (at the user-specified test level).
+ It is not clear how one would compute p-values for this statistic, or to
+ determine when the goodness of fit test would allow to accept the null
+ hypothesis at a user-specified test level.
 \end_layout
 
 \begin_layout Standard
 The key contribution of this work is to define a statistical test of goodness-of
--fit, based on a Stein discrepancy computed in a Reproducing Kernel Hilbert
- Space (RKHS).
+-fit, based on a Stein discrepancy computed in a reproducing kernel Hilbert
+ space (RKHS).
  
 \begin_inset Note Note
 status open
@@ -356,8 +359,8 @@ key "OatGirCho15"
 
 \end_inset
 
- addressed the problem variance reduction in Monte Carlo integration, using
- the Stein operator to avoid bias.
+ addressed the problem of variance reduction in Monte Carlo integration,
+ using the Stein operator to avoid bias.
  
 \end_layout
 
@@ -367,7 +370,7 @@ key "OatGirCho15"
  of functions between empirical sample expectations and target expectations
  (the latter being zero, due to the effect of the Stein operator).
  The approach is a natural extension to goodness-of-fit testing of the earlier
- two-sample tests 
+ kernel two-sample tests 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "gretton2012kernel"
@@ -381,24 +384,28 @@ key "gretton_kernel_2008"
 
 \end_inset
 
- based on the maximum mean discrepancy, which is an integral probability
- metric.
+, which are based on the integral probability metric 
+\emph on
+maximum mean discrepancy
+\emph default
+.
  As with these earlier tests, our statistic is a simple V-statistic, and
- can be computed in closed form and in quadratic time; moreover, it is an
- unbiased estimate of the corresponding population discrepancy.
+ can be computed in closed form and in quadratic time.
+ Moreover, it is an unbiased estimate of the corresponding population discrepanc
+y.
  As with all Stein-based discrepancies, only the gradient of the log-density
  of the target density is needed; we do not require integrals with respect
  to the target density -- including the normalisation constant.
- Given that our test statistic is a V-statistic, we may make use of the
- extensive literature on asymptotics of V-statistics to formulate a hypothesis
- test 
+ Given that our test statistic is a V-statistic, we make use of the extensive
+ literature on asymptotics of V-statistics to formulate a hypothesis test
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "serfling80,leucht_dependent_2013"
 
 \end_inset
 
- 
+.
 \begin_inset Foot
 status open
 
@@ -424,10 +431,9 @@ key "chwialkowski2016kernel"
 
 \end_inset
 
- .
- We are able to provide statistical tests for both uncorrelated and correlated
- samples, where the latter is essential if the test is to be used in assessing
- the quality of output of an MCMC procedure.
+ We provide statistical tests for both uncorrelated and correlated samples,
+ where the latter is essential if the test is used in assessing the quality
+ of output of an MCMC procedure.
  
 \begin_inset Note Note
 status open
@@ -485,25 +491,24 @@ key "GreGyo10"
  This dates back to the test of Gaussianity of 
 \begin_inset CommandInset citation
 LatexCommand citet
+after "Eq. 2.1"
 key "BaringhausHenze88"
 
 \end_inset
 
-, who used an exponentiated quadratic  smoothing function (see Eq.
- 2.1 in their paper).
+, who used an exponentiated quadratic  smoothing function.
  For this choice of smoothing function, their statistic is identical to
  the maximum mean discrepancy (MMD) with the exponentiated quadratic kernel,
- which can be shown using the Bochner representation of the kernel (compare
- with 
+ which can be shown using the Bochner representation of the kernel 
 \begin_inset CommandInset citation
-LatexCommand citealt
+LatexCommand citep
 after "Corollary 4"
 key "SriGreFukLanetal10"
 
 \end_inset
 
-).
- It is essential in this case that the target distribution be Gaussian,
+.
+ It is essential in this case that the target distribution is Gaussian,
  since the convolution with the kernel (or in the Fourier domain, the smoothing
  function) must be available in closed form.
  An 
@@ -589,9 +594,9 @@ key "Korattikara2014,Welling2011,Bardenet2014"
 
 .
  These methods use modifications to Markov transition kernels that improve
- mixing speed at the cost of worsening the asymptotic bias.
- The bias-variance trade-off can usually be tuned with parameters of the
- sampling algorithms.
+ mixing speed at the cost of introducing asymptotic bias.
+ The resulting bias-variance trade-off can usually be tuned with parameters
+ of the sampling algorithms.
  It is therefore important to test whether for a particular parameter setting
  and run-time, the samples are of the desired quality.
  This question cannot be answered with classical MCMC convergence statistics,
@@ -603,7 +608,11 @@ key "gelman1992inference"
 \end_inset
 
  or the effective sample size, since these assume that the Markov chain
- reaches its equilibrium distribution.
+ reaches the true equilibrium distribution i.e.
+\begin_inset space ~
+\end_inset
+
+absence of asymptotic bias.
  By contrast, our test exactly quantifies the asymptotic bias of approximate
  MCMC.
  
@@ -673,8 +682,8 @@ name "sec:A-Kernel-Goodness-of-fit"
 \lang english
 We begin with a high-level construction of our divergence discrepancy and
  the statistical test.
- While this section aims to communicate the main ideas, we provide details
- and proofs in Section 
+ While this section aims to outline the main ideas, we provide details and
+ proofs in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Details"
@@ -732,21 +741,20 @@ Our goal is to write the maximum discrepancy between target distribution
 \end_inset
 
 .
- We further assume that all measures considered in this paper supported
- on an open set, equal to zero on the border and strictly positive (so logarithm
-s are well defined) 
+ We further assume that all measures considered in this paper are supported
+ on an open set, equal to zero on the border, and strictly positive
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
 
 \lang english
-An example of such a space is the real line
+An example of such a space is the positive real line
 \end_layout
 
 \end_inset
 
-.
+ (so logarithms are well defined).
  Similarly to 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -755,7 +763,7 @@ key "stein1972,gorham2015measuring,OatGirCho15"
 \end_inset
 
 , we begin by defining a Stein operator 
-\begin_inset Formula $T$
+\begin_inset Formula $T_{p}$
 \end_inset
 
  acting on 
@@ -826,7 +834,7 @@ whose expected inner product with
  gives exactly the expected value of the Stein operator 
 \begin_inset Formula 
 \[
-\ev_{q}T_{p}f(Z)=\langle f,\ev_{q}\xi_{p}(Z)\rangle_{{\cal F}^{d}}=\sum_{i=1}^{d}\langle f_{i},\ev_{q}\xi_{p,i}(Z)\rangle_{{\cal F}},
+\ev_{q}T_{p}f(Z)=\langle f,\ev_{q}\xi_{p}(Z)\rangle_{{\cal F}^{d}}=\sum_{i=1}^{d}\langle f_{i},\ev_{q}\xi_{p,i}(Z)\rangle_{{\cal F}}.
 \]
 
 \end_inset
@@ -906,6 +914,10 @@ where the last term can be written as a sum
 \lang british
 The following theorem gives a simple closed form expression for 
 \begin_inset Formula $\|\ev_{q}\xi_{p}(Z)\|_{{\cal F}^{d}}$
+\end_inset
+
+ in terms of 
+\begin_inset Formula $h_{p}$
 \end_inset
 
 .
@@ -1000,14 +1012,14 @@ key "carmeli2010vector"
 \end_layout
 
 \begin_layout Standard
-Section 
+The following Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:details_kernel_stein"
 
 \end_inset
 
- contains proofs.
+ contains all necessary proofs.
  We now proceed with constructing an estimator for 
 \begin_inset Formula $S(Z)^{2}$
 \end_inset
@@ -1045,8 +1057,8 @@ V_{n}=\frac{1}{n^{2}}\sum_{i,j=1}^{n}h_{p}(Z_{i},Z_{j}).
 \begin_inset Formula $Z_{i}$
 \end_inset
 
- exhibit correlation structure, as the null distribution significantly changes,
- impacting test significance.
+ exhibit correlation structure, as the null distribution might significantly
+ change, impacting test significance.
  The wild bootstrap technique 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -1055,8 +1067,8 @@ key "Shao2010,leucht_dependent_2013,FroLauLerRey12"
 \end_inset
 
  addresses both problems.
- First, it allows to simulate from the null distribution to compute test
- thresholds.
+ First, it allows to estimate quantiles of the null distribution in order
+ to compute test thresholds.
  Second, it accounts for correlation structure in the 
 \begin_inset Formula $Z_{i}$
 \end_inset
@@ -1067,7 +1079,7 @@ auxiliary
 \lang british
  random process: a
 \lang english
- Markov chain taking values in 
+ simple Markov chain taking values in 
 \begin_inset Formula $\{-1,1\}$
 \end_inset
 
@@ -1101,7 +1113,10 @@ where the
 \end_inset
 
  changing sign (for i.i.d.
- data we may set 
+\begin_inset space ~
+\end_inset
+
+data we set 
 \begin_inset Formula $a_{n}=0.5$
 \end_inset
 
@@ -1199,7 +1214,7 @@ of
 
 , so it is possible to approximate quantiles of the null distribution by
  sampling from it.
- Under the alternative, however, 
+ Under the alternative, 
 \begin_inset Formula $V_{n}$
 \end_inset
 
@@ -1248,7 +1263,7 @@ We propose the following test
 .
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 Calculate 
 \lang english
 the test statistic 
@@ -1258,7 +1273,7 @@ the test statistic
 .
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 
 \lang english
 Obtain wild bootstrap samples
@@ -1288,7 +1303,7 @@ Obtain wild bootstrap samples
  
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 
 \family roman
 \series medium
@@ -1325,7 +1340,7 @@ name "sec:Details"
 \begin_layout Standard
 
 \lang english
-We now prove the claims made in the previous Section.
+We now prove the claims made in the previous section.
 \end_layout
 
 \begin_layout Subsection
@@ -1632,9 +1647,7 @@ S_{p}^{2}(Z) & =\langle\ev_{q}\xi_{p}(Z),\ev_{q}\xi_{p}(Z)\rangle_{\mathcal{F}^{
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
+\lang british
 where 
 \begin_inset Formula $Z'$
 \end_inset
@@ -1644,7 +1657,10 @@ where
 \end_inset
 
 .
- Next, we prove that 
+\end_layout
+
+\begin_layout Standard
+Next, we prove that 
 \family roman
 \series medium
 \shape up
@@ -1898,7 +1914,7 @@ A constant vector field of derivatives can only be generated by a constant
 \begin_inset Formula $p=q$
 \end_inset
 
- -- a contradiction.
+, which is a contradiction.
 \end_layout
 
 \begin_layout Subsection
@@ -1952,7 +1968,10 @@ key "serfling80"
 -mixing is a notion of dependence within the observations, weak enough for
  most practical applications.
  Trivially, i.i.d.
- observations are 
+\begin_inset space ~
+\end_inset
+
+observations are 
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -1963,14 +1982,7 @@ key "serfling80"
 \end_inset
 
 -mixing (given that the stationary distribution has a finite moment of some
- order: see 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:MCMC-convergence-testing"
-
-\end_inset
-
- for more discussion.
+ order -- see the Appendix for further discussion.
  For further details on 
 \begin_inset Formula $\tau$
 \end_inset
@@ -1983,7 +1995,7 @@ key "dedecker2005new,dedecker2007weak"
 \end_inset
 
 .
- For this work we will assume a technical condition 
+ For this work, we assume a technical condition 
 \begin_inset Formula $\sum_{t=1}^{\infty}t^{2}\sqrt{\tau(t)}\leq\infty$
 \end_inset
 
@@ -2049,20 +2061,14 @@ where
 
 \end_inset
 
- 
-\end_layout
-
-\begin_layout Standard
-
-\lang english
-A direct application of Theorem 2.1 
+ A direct application of Theorem 2.1 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "leucht2012degenerate"
 
 \end_inset
 
- characterizes the limiting behavior of 
+ characterises the limiting behavior of 
 \family roman
 \series medium
 \shape up
@@ -2082,7 +2088,8 @@ key "leucht2012degenerate"
 \begin_inset Formula $\tau$
 \end_inset
 
--mixing processes,
+-mixing processes.
+
 \family default
 \series default
 \shape default
@@ -2371,8 +2378,11 @@ name "sec:experiment"
 \lang english
 We provide a number of experimental applications for our test.
  We begin with a simple check to establish correct test calibration on non-i.i.d.
- data, followed by a demonstration of statistical model criticism for Gaussian
- Process (GP) regression.
+\begin_inset space ~
+\end_inset
+
+data, followed by a demonstration of statistical model criticism for Gaussian
+ process (GP) regression.
  We then apply the proposed test to quantify bias-variance trade-offs in
  MCMC, and demonstrate how to use the test to verify whether MCMC samples
  are drawn from the desired stationary distribution.
@@ -2393,7 +2403,11 @@ target "https://github.com/karlnapf/kernel_goodness_of_fit"
 \begin_layout Subsubsection*
 
 \lang english
-Student's t vs Normal
+Student's t vs.
+\begin_inset space ~
+\end_inset
+
+Normal
 \end_layout
 
 \begin_layout Standard
@@ -2442,8 +2456,8 @@ Large autocovariance, unsuitable bootstrap.
 \begin_inset Formula $B_{n}$
 \end_inset
 
- are, on average, too low.
- Therefore it is very likely that 
+ are too low on average.
+ Therefore, it is very likely that 
 \begin_inset Formula $V_{n}>B_{n}$
 \end_inset
 
@@ -2497,7 +2511,7 @@ key "gorham2015measuring"
  We study the power of the test against samples from a Student's t distribution.
  We expect to observe low p-values when testing against a Student's t distributi
 on with few degrees of freedom.
- We considered 1, 5, 10 or 
+ We consider 1, 5, 10 or 
 \begin_inset Formula $\infty$
 \end_inset
 
@@ -2506,10 +2520,10 @@ on with few degrees of freedom.
 \end_inset
 
  is equivalent to sampling from a standard normal distribution.
- For a fixed number of degrees of freedom we drew 1400 samples and calculated
+ For a fixed number of degrees of freedom we draw 1400 samples and calculate
  the p-value.
- This procedure was repeated one hundred times, and the bar plots of p-values
- are shown in Figures 
+ This procedure is repeated 100 times, and the bar plots of p-values are
+ shown in Figures 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:student_bad"
@@ -2609,7 +2623,7 @@ name "fig:studentst"
 \end_layout
 
 \begin_layout Standard
-The twist on 
+Our twist on 
 \lang english
 the original experiment 4.1 by 
 \begin_inset CommandInset citation
@@ -2618,16 +2632,16 @@ key "gorham2015measuring"
 
 \end_inset
 
- is that in our case, the draws from the Student's t distribution were given
- temporal correlation.
- The samples were generated using a Metropolis–Hastings algorithm, with
- a Gaussian random walk (variance equal to 0.5).
- We emphasize the need for an appropriate choice of the wild bootstrap process
- parameter, 
+ is that the draws from the Student's t distribution exhibit temporal correlatio
+n.
+ We generate samples using a Metropolis–Hastings algorithm, with a Gaussian
+ random walk with variance 1/2.
+ We emphasise the need for an appropriate choice of the wild bootstrap process
+ parameter 
 \begin_inset Formula $a_{n}$
 \end_inset
 
-, which indicates the probability of a sign flip.
+.
  In Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2660,8 +2674,12 @@ reference "fig:student_bad"
 \uwave off
 \noun off
 \color none
-suitable for iid observations, but results in p-values that are too conservative
- for temporally correlated observations.
+suitable for i.i.d.
+\begin_inset space ~
+\end_inset
+
+observations, but results in p-values that are too conservative for temporally
+ correlated observations.
  
 \family default
 \series default
@@ -2681,7 +2699,7 @@ reference "fig:studentst"
 
 \end_inset
 
-, 
+, we set 
 \family roman
 \series medium
 \shape up
@@ -2698,8 +2716,7 @@ reference "fig:studentst"
 \end_inset
 
 , which gives a well calibrated distribution of the p-values under the null
- hypothesis (see box plot for an infinite number degrees of freedom), however
- the power of the test is reduced.
+ hypothesis, however, the test power is reduced.
  Indeed, p-values for five degrees of freedom are already large.
  The solution that we recommend is a mixture of thinning and adjusting 
 \begin_inset Formula $a_{n},$
@@ -2713,14 +2730,14 @@ reference "fig:thinning"
 \end_inset
 
 .
- We have thinned the observations by a factor of 20 and set 
+ We here thin the observations by a factor of 20 and set 
 \begin_inset Formula $a_{n}=0.1$
 \end_inset
 
 , thus preserving both good statistical power and correct calibration of
  p-values under the null hypothesis.
  In a general, we recommend to thin a chain so that 
-\begin_inset Formula $Cor(X_{t},X_{t-1})<0.5$
+\begin_inset Formula $\text{Cor}(X_{t},X_{t-1})<0.5$
 \end_inset
 
 , set 
@@ -2728,23 +2745,11 @@ reference "fig:thinning"
 \end_inset
 
 , and run test with at least 
-\begin_inset Formula $max(500k,d100)$
+\begin_inset Formula $\max(500k,d100)$
 \end_inset
 
  data points, where 
 \begin_inset Formula $k<10$
-\end_inset
-
-, and d is data dimensionality
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-We recommend men should drink no more than 68 units of alcohol per week,
- no more than 34 units in any given day, and have at least 1 alcohol-free
- day.
-\end_layout
-
 \end_inset
 
 .
@@ -2782,7 +2787,7 @@ Thinned sample, suitable bootstrap.
 \uwave off
 \noun off
 \color none
-auto-correlation within the sample is canceled by thinning.
+autocorrelation within the sample is canceled by thinning.
  To guarantee that the remaining autocorrelation is handled properly, the
  flip probability is set at 
 \begin_inset Formula $0.1$
@@ -2824,37 +2829,51 @@ name "fig:thinning"
 \end_layout
 
 \begin_layout Subsubsection*
-Higher dimension and other one sample test.
+Comparing to a parametric test in increasing dimensions
 \end_layout
 
 \begin_layout Standard
-In this experiment we make comparison with the test proposed by 
+In this experiment, we compare with the test proposed by 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "BaringhausHenze88"
 
 \end_inset
 
-, which is basically MMD test for normality i.e.
- the null hypothesis is that 
+, which essentially is a MMD test for normality, i.e.
+\begin_inset space ~
+\end_inset
+
+the null hypothesis is that 
 \begin_inset Formula $Z$
 \end_inset
 
- is d-dimensional standard normal random variable.
- Sample size was set to 500/1000, a_n=0.5.
- In this experiment we study power of the test and we generate 
-\begin_inset Formula $Z$
+ is a 
+\begin_inset Formula $d$
 \end_inset
 
- using the following procedure: 
+-dimensional standard normal random variable.
+ We set the sample size to 
+\begin_inset Formula $n=500,1000$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{n}=0.5$
+\end_inset
+
+, generate 
 \begin_inset Formula 
 \[
-Z\sim N(0,I_{d});Y\sim U[0,1];Z_{0}+=Y;
+Z\sim{\cal N}(0,I_{d})\qquad Y\sim U[0,1]
 \]
 
 \end_inset
 
- we modify only the first dimension.
+and modify 
+\begin_inset Formula $Z_{0}\leftarrow Z_{0}+Y$
+\end_inset
+
+.
  Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2862,9 +2881,9 @@ reference "tab:Power-vs-Sample"
 
 \end_inset
 
- shows power as a function of the sample size.
- Indeed, for high dimensions, if the expectation of the kernel exists in
- closed form, an MMD-type test like 
+ shows the power as a function of the sample size.
+ Indeed, for higher dimensions, if the expectation of the kernel exists
+ in closed form, a MMD-type test like 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "BaringhausHenze88"
@@ -2897,15 +2916,6 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-Dim.
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -2915,6 +2925,22 @@ Dim.
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
+\begin_inset Formula $d$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
 2
 \end_layout
 
@@ -2924,6 +2950,8 @@ Dim.
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 5
 \end_layout
 
@@ -2933,6 +2961,8 @@ Dim.
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 10
 \end_layout
 
@@ -2942,6 +2972,8 @@ Dim.
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 15
 \end_layout
 
@@ -2951,6 +2983,8 @@ Dim.
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 20
 \end_layout
 
@@ -2960,6 +2994,8 @@ Dim.
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 25
 \end_layout
 
@@ -2972,33 +3008,20 @@ Dim.
 
 \begin_layout Plain Layout
 
+\series bold
+B&H
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-n=500
-\end_layout
-
+\begin_inset Formula $n=500$
 \end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
 
-\begin_layout Plain Layout
-1
-\end_layout
 
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1
 \end_layout
 
 \end_inset
@@ -3016,6 +3039,28 @@ n=500
 \begin_inset Text
 
 \begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
 0.86
 \end_layout
 
@@ -3025,6 +3070,8 @@ n=500
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 0.29
 \end_layout
 
@@ -3034,6 +3081,8 @@ n=500
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 0.24
 \end_layout
 
@@ -3041,155 +3090,18 @@ n=500
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-B&H
-\end_layout
 
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-n=1000
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.87
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.62
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
+\series bold
 Stein
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-n=500
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.86
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.39
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.05
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.05
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3202,7 +3114,159 @@ n=500
 \begin_inset Text
 
 \begin_layout Plain Layout
-n=1000
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.86
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.39
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.05
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+B&H
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n=1000$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+0.87
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+0.62
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Stein
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -3279,14 +3343,18 @@ name "tab:Power-vs-Sample"
 
 \end_inset
 
-Power vs Sample size for test by 
+Test power vs.
+\begin_inset space ~
+\end_inset
+
+sample size for the test by 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "BaringhausHenze88"
 
 \end_inset
 
- and Stein based test.
+ (B&H) and our Stein based test.
 \end_layout
 
 \end_inset
@@ -3363,7 +3431,11 @@ key "lloyd2015statistical"
 \family typewriter
 solar
 \family default
- dataset, consisting of a 1D regression problem with 
+ dataset, consisting of a 
+\begin_inset Formula $d=1$
+\end_inset
+
+ regression problem with 
 \begin_inset Formula $N=402$
 \end_inset
 
@@ -3450,10 +3522,10 @@ reference "fig:experiment_gp_test"
 
 .
  The test statistic lies in an upper quantile of the bootstrapped null distribut
-ion, indicating (correctly) that it is unlikely the test points were generated
+ion, correctly indicating that it is unlikely the test points were generated
  by the fitted GP model, even for the low number of test data observed,
  
-\begin_inset Formula $N_{\text{test}}=41$
+\begin_inset Formula $n=41$
 \end_inset
 
 .
@@ -3508,7 +3580,7 @@ key "lloyd2015statistical"
 \end_inset
 
 ).
- We emphasize, however, that 
+ We emphasise, however, that 
 \begin_inset CommandInset citation
 LatexCommand citeauthor
 key "lloyd2015statistical"
@@ -3577,12 +3649,49 @@ name "fig:experiment_gp_test"
 \begin_layout Subsubsection*
 
 \lang english
-Approximate MCMC algorithm 
+Bias quantification in Approximate MCMC
 \end_layout
 
 \begin_layout Standard
 
 \lang english
+We now illustrate how to quantify
+\lang british
+ bias-variance trade-offs in an approximate 
+\lang english
+MCMC algorithm
+\lang british
+ -- 
+\lang english
+austerity MCMC 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "korattikara2013austerity"
+
+\end_inset
+
+
+\lang british
+.
+ 
+\lang english
+For the purpose of illustration we use a simple generative model from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "gorham2015measuring,Welling2011"
+
+\end_inset
+
+, 
+\begin_inset Formula 
+\begin{align*}
+\theta_{1}\sim{\cal N}(0,10);\theta_{2}\sim{\cal N}(0,1)\\
+X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{2},4) & .
+\end{align*}
+
+\end_inset
+
+
 \begin_inset Float figure
 wide false
 sideways false
@@ -3624,48 +3733,6 @@ name "p-values"
 
 
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\lang english
-We show how to quantify
-\lang british
- bias-variance trade-offs in an approximate 
-\lang english
-MCMC algorithm
-\lang british
- -- 
-\lang english
-austerity MCMC 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "korattikara2013austerity"
-
-\end_inset
-
-
-\lang british
-.
- 
-\lang english
-For the purpose of illustration we use a simple generative model from 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "gorham2015measuring,Welling2011"
-
-\end_inset
-
-, 
-\begin_inset Formula 
-\begin{align*}
-\theta_{1}\sim N(0,10);\theta_{2}\sim N(0,1)\\
-X_{i}\sim\frac{1}{2}N(\theta_{1},4)+\frac{1}{2}N(\theta_{2},4) & .
-\end{align*}
 
 \end_inset
 
@@ -3778,13 +3845,13 @@ Austerity MCMC is a Monte Carlo procedure designed to reduce the number
 \end_inset
 
  .
- This parameter influences the time complexity of Austerity MCMC: when 
+ This parameter influences the time complexity of austerity MCMC: when 
 \begin_inset Formula $\epsilon$
 \end_inset
 
  is larger, i.e., when there is a greater tolerance for error, the expected
  computational cost is lower.
- We simulated 
+ We simulate 
 \begin_inset Formula $\{X_{i}\}_{1\leq i\leq400}$
 \end_inset
 
@@ -3797,7 +3864,7 @@ Austerity MCMC is a Monte Carlo procedure designed to reduce the number
 \end_inset
 
 .
- In this setting there were two modes in the posterior distribution: one
+ In our experiment, there are two modes in the posterior distribution: one
  at 
 \begin_inset Formula $(0,1)$
 \end_inset
@@ -3807,7 +3874,7 @@ Austerity MCMC is a Monte Carlo procedure designed to reduce the number
 \end_inset
 
 .
- We ran the Austerity algorithm with 
+ We run the algorithm with 
 \begin_inset Formula $\epsilon$
 \end_inset
 
@@ -3820,7 +3887,7 @@ Austerity MCMC is a Monte Carlo procedure designed to reduce the number
 \begin_inset Formula $\epsilon$
 \end_inset
 
- we calculated an individual thinning factor, such that correlation between
+ we calculate an individual thinning factor, such that correlation between
  consecutive 
 \begin_inset Note Note
 status collapsed
@@ -3833,7 +3900,7 @@ elements of
 
 \end_inset
 
- samples from the chains was smaller than 
+ samples from the chains is smaller than 
 \begin_inset Formula $0.5$
 \end_inset
 
@@ -3846,13 +3913,13 @@ elements of
 \begin_inset Formula $\epsilon$
 \end_inset
 
- we tested the hypothesis that 
+ we test the hypothesis that 
 \begin_inset Formula $\{\theta_{i}\}_{1\leq i\leq500}$
 \end_inset
 
- were drawn from the true stationary posterior, using our goodness of fit
+ is drawn from the true stationary posterior, using our goodness of fit
  test.
- We generated 100 p-values for each 
+ We generate 100 p-values for each 
 \begin_inset Formula $\epsilon$
 \end_inset
 
@@ -3864,7 +3931,7 @@ reference "p-values"
 \end_inset
 
 .
- It is seems that 
+ 
 \begin_inset Formula $\epsilon=0.4$
 \end_inset
 
@@ -3906,11 +3973,16 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Density estimation: P-values for an increasing number of data 
+Density estimation: p-values for an increasing number of data 
 \begin_inset Formula $N$
 \end_inset
 
  for the non-parametric model.
+ Fixed 
+\begin_inset Formula $n=500$
+\end_inset
+
+.
 \end_layout
 
 \end_inset
@@ -3962,7 +4034,7 @@ key "strathmann2015gradient"
 \begin_inset Formula $f$
 \end_inset
 
- lies in an RKHS induced by a Gaussian kernel with bandwidth 
+ lies in a RKHS induced by a Gaussian kernel with bandwidth 
 \begin_inset Formula $1$
 \end_inset
 
@@ -3971,18 +4043,18 @@ key "strathmann2015gradient"
 \begin_inset Formula $N$
 \end_inset
 
- observations drawn from a standard Gaussian, and performed our quadratic
- time test on a separate evaluation dataset of fixed size, 
-\begin_inset Formula $N_{\text{test}}=500$
+ observations drawn from a standard Gaussian, and perform our quadratic
+ time test on a separate evaluation dataset of fixed size 
+\begin_inset Formula $n=500$
 \end_inset
 
 .
- Our goal was to identify 
+ Our goal is to identify 
 \begin_inset Formula $N$
 \end_inset
 
- sufficiently large that the goodness of fit test did not reject the null
- hypothesis (i.e., the model had learned the density sufficiently well, bearning
+ sufficiently large that the goodness of fit test does not reject the null
+ hypothesis (i.e., the model has learned the density sufficiently well, bearning
  in mind that it is guaranteed to converge for sufficiently large 
 \begin_inset Formula $N$
 \end_inset
@@ -4011,8 +4083,8 @@ reference "fig:density_estimation_increasing_data"
 \end_layout
 
 \begin_layout Standard
-We next consider the random fourier feature approximation to this model,
- where the log pdf, 
+We next consider the random Fourier feature approximation to this model,
+ where the log pdf 
 \begin_inset Formula $f$
 \end_inset
 
@@ -4028,12 +4100,12 @@ key "Rahimi2007"
 \begin_inset Quotes eld
 \end_inset
 
-How many random features do it I need?
+How many random features are needed?
 \begin_inset Quotes erd
 \end_inset
 
- Using the same test power 
-\begin_inset Formula $N_{\text{test}}=500$
+ Using the same test set size 
+\begin_inset Formula $n=500$
 \end_inset
 
  as above, and a large number of available samples 
@@ -4053,7 +4125,7 @@ reference "fig:density_estimation_increasing_features"
 \end_inset
 
 .
- From about 
+ From 
 \begin_inset Formula $m=50$
 \end_inset
 
@@ -4109,9 +4181,14 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Approximate density estimation: P-values for an increasing number of random
+Approximate density estimation: p-values for an increasing number of random
  features 
 \begin_inset Formula $m$
+\end_inset
+
+.
+ Fixed 
+\begin_inset Formula $n=500$
 \end_inset
 
 .
@@ -4312,7 +4389,7 @@ key "OatGirCho15"
 
 .
  Here we provide an alternative, elementary proof for the latter case.
- First we show that the function
+ First we show that the function 
 \begin_inset Formula $p\cdot f_{i}$
 \end_inset
 
@@ -4486,7 +4563,7 @@ reference "th:closed_form_discrepancy"
 
 \end_inset
 
-,
+, 
 \begin_inset Formula $\ev_{q}\xi_{p}(Z)=0$
 \end_inset
 
@@ -4619,7 +4696,7 @@ reference "sec:Details"
 \end_inset
 
 .
- The auto-covariance of the process is given by 
+ The autocovariance of the process is given by 
 \begin_inset Formula $\ev W_{s,n}W_{t,n}=(1-2p_{n})^{-|s-t|}$
 \end_inset
 
@@ -4697,11 +4774,11 @@ We have
 \begin_layout Proof
 
 \lang english
-We show that, under the alternative hypothesis, 
+We show that under the alternative hypothesis, 
 \begin_inset Formula $V_{n}$
 \end_inset
 
- converges to a positive constant - we use 
+ converges to a positive constant -- using 
 \begin_inset CommandInset citation
 LatexCommand citep
 after "Theorem 3"
@@ -5141,9 +5218,13 @@ Strong mixing coefficients.
 \end_layout
 
 \begin_layout Standard
-Strong mixing is historically the most studied type of temporal dependence
- -- a lot of models, example being Markov Chains, are proved to be strongly
- mixing, therefore it's useful to relate weak mixing to strong mixing.
+Strong mixing is historically the most frequently studied type of temporal
+ dependence -- a lot of models, e.g.
+\begin_inset space ~
+\end_inset
+
+ Markov chains, are proved to be strongly mixing, therefore it's useful
+ to relate weak mixing to strong mixing.
 \end_layout
 
 \begin_layout Standard
@@ -5251,7 +5332,7 @@ Using another weak mixing coefficient
 \begin_inset Formula 
 \begin{align*}
 \tilde{\alpha}(m) & =\sup_{l\in\mathbb{N}}\frac{1}{l}\sup_{m\leq i_{1}\leq...\leq i_{l}}\tilde{\alpha}(\mathcal{F}_{0},(X_{i_{1}},...,X_{i_{l}}))\overset{r\to\infty}{\longrightarrow}0,\;\text{where}\\
-\tilde{\alpha}(\mathcal{M},X) & =\sup_{g\in\Lambda}\parallel\ev_{p}(g(X)|\mathcal{M})-\ev_{p}g(X)\parallel_{1}
+\tilde{\alpha}(\mathcal{M},X) & =\sup_{g\in\Lambda}\parallel\ev_{p}(g(X)|\mathcal{M})-\ev_{p}g(X)\parallel_{1},
 \end{align*}
 
 \end_inset
@@ -5299,7 +5380,7 @@ key "dedecker2005new"
 \begin_inset Formula $Q_{x}$
 \end_inset
 
- is the generalized inverse of the tail function 
+ is the generalised inverse of the tail function 
 \begin_inset Formula 
 \[
 Q_{x}(u)=\inf_{t\in R}\{P(|X|>t)\leq u\},
@@ -5360,12 +5441,18 @@ key "dedecker2005new"
 
 \end_inset
 
- provides examples of systems that are tau-mixing.
+ provide examples of systems that are 
+\begin_inset Formula $\tau$
+\end_inset
+
+-mixing.
  In particular, given that certain assumptions are satisfied causal functions
  of stationary sequences, iterated random functions, Markov chains, expanding
- maps are all $
-\backslash
-tau$-mixing.
+ maps are all 
+\begin_inset Formula $\tau$
+\end_inset
+
+-mixing.
  
 \end_layout
 
@@ -5378,8 +5465,16 @@ key "dedecker2005new"
 
 \end_inset
 
-, under which Markov chains are tau-mixing are somehow difficult to check
- but we can use classical theorems about the absolute regularity (beta mixing).
+, under which Markov chains are 
+\begin_inset Formula $\tau$
+\end_inset
+
+-mixing are difficult to check.
+ We can, however, use classical theorems about the absolute regularity (
+\begin_inset Formula $\beta$
+\end_inset
+
+-mixing).
  In particular 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -5424,7 +5519,11 @@ Using inequalities between
 \end_inset
 
 -mixing coefficient and strong mixing coefficients one can use those classical
- theorems show that e.g Markov chains are 
+ theorems show that e.g.
+\begin_inset space ~
+\end_inset
+
+Markov chains are 
 \begin_inset Formula $\tau$
 \end_inset
 
