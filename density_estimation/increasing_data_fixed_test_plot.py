@@ -46,7 +46,7 @@ for field in fields:
     current[x_field] = current[x_field].astype(int)
     
     sns.set_style("whitegrid")
-    sns.boxplot(x=x_field, y=field, data=current.sort(x_field))
+    sns.boxplot(x=x_field, y=field, data=current.sort(x_field), color='gray')
 
     plt.xlabel(field_plot_names[x_field])
     plt.ylabel(field_plot_names[field])
