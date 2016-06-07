@@ -906,7 +906,7 @@ h_{p}(x,y) & :=\nabla\log p(x)^{\top}\nabla\log p(y)k(x,y)\\
 
 \lang english
 where the last term can be written as a sum 
-\begin_inset Formula $\sum_{\{i=1\}}^{d}\frac{\partial k(x,y)}{\partial x_{i}\partial y_{i}}$
+\begin_inset Formula $\sum_{i=1}^{d}\frac{\partial k(x,y)}{\partial x_{i}\partial y_{i}}$
 \end_inset
 
 .
