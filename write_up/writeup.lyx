@@ -834,12 +834,25 @@ whose expected inner product with
  gives exactly the expected value of the Stein operator 
 \begin_inset Formula 
 \[
-\ev_{q}T_{p}f(Z)=\langle f,\ev_{q}\xi_{p}(Z)\rangle_{{\cal F}^{d}}=\sum_{i=1}^{d}\langle f_{i},\ev_{q}\xi_{p,i}(Z)\rangle_{{\cal F}}.
+\ev_{q}T_{p}f(Z)=\langle f,\ev_{q}\xi_{p}(Z)\rangle_{{\cal F}^{d}}=\sum_{i=1}^{d}\langle f_{i},\ev_{q}\xi_{p,i}(Z)\rangle_{{\cal F}},
 \]
 
 \end_inset
 
-For 
+where 
+\begin_inset Formula $\xi_{p,i}(x,\cdot)$
+\end_inset
+
+ is the 
+\begin_inset Formula $i$
+\end_inset
+
+-th component of 
+\begin_inset Formula $\xi_{p}(x,\cdot)$
+\end_inset
+
+.
+ For 
 \begin_inset Formula $X$
 \end_inset
 
@@ -1509,7 +1522,7 @@ relate expected value of the Stein operator to the inner product of
 We check the claim for all dimensions 
 \begin_inset Formula 
 \begin{align*}
- & \left\langle f_{i},\ev_{q}\xi_{i,p}(Z)\right\rangle _{\mathcal{F}}\\
+ & \left\langle f_{i},\ev_{q}\xi_{p,i}(Z)\right\rangle _{\mathcal{F}}\\
  & =\left\langle f_{i},\ev_{q}\left[\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right]\right\rangle _{\mathcal{F}}\\
  & =\ev_{q}\left\langle f_{i},\frac{\partial\log p(Z)}{\partial x_{i}}k(Z,\cdot)+\frac{\partial k(Z,\cdot)}{\partial x_{i}}\right\rangle _{\mathcal{F}}\\
  & =\ev_{q}\left[\frac{\partial\log p(Z)}{\partial x_{i}}f_{i}(Z)+\frac{\partial f_{i}(Z,\cdot)}{\partial x_{i}}\right].
@@ -1580,7 +1593,7 @@ reference "eq:expectedVauleT"
 S_{p}(Z) & :=\sup_{\Vert f\Vert<1}\ev_{q}(T_{p}f)(Z)-\ev_{p}(T_{p}f)(X)\\
  & =\sup_{\Vert f\Vert<1}\ev_{q}(T_{p}f)(Z)\\
  & =\sup_{\Vert f\Vert<1}\langle f,\ev_{q}\xi_{p}(Z)\rangle_{{\cal F}^{d}}\\
- & =\|\ev_{q}\xi_{p}(Z)\|_{\mathcal{F}^{d}}
+ & =\|\ev_{q}\xi_{p}(Z)\|_{\mathcal{F}^{d}}.
 \end{align*}
 
 \end_inset
