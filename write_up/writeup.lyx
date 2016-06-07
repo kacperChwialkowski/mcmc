@@ -398,17 +398,33 @@ key "serfling80,leucht_dependent_2013"
 
 \end_inset
 
-.
  
-\begin_inset Note Note
+\begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-%AG
+An alternative linear-time test, based on differences in analytic functions
+ of the sample and following the recent work of 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Chwialkowski2015"
+
+\end_inset
+
+, is provided in 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "Appendix 5.1"
+key "chwialkowski2016kernel"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
 
+ .
  We are able to provide statistical tests for both uncorrelated and correlated
  samples, where the latter is essential if the test is to be used in assessing
  the quality of output of an MCMC procedure.
@@ -473,10 +489,10 @@ key "BaringhausHenze88"
 
 \end_inset
 
-, who used a squared exponential smoothing function (see Eq.
+, who used an exponentiated quadratic  smoothing function (see Eq.
  2.1 in their paper).
  For this choice of smoothing function, their statistic is identical to
- the maximum mean discrepancy (MMD) with the squared exponential kernel,
+ the maximum mean discrepancy (MMD) with the exponentiated quadratic kernel,
  which can be shown using the Bochner representation of the kernel (compare
  with 
 \begin_inset CommandInset citation
