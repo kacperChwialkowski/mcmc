@@ -1,0 +1,177 @@
+\documentclass{beamer}
+\usepackage{movie15}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usetheme{metropolis}           % Use metropolis theme
+\title{ A Kernel Test of Goodness of Fit}
+\date{\today}
+\author{Kacper Chwialkowski$^*$, Heiko Strathmann$^*$, Arthur Gretton}
+\institute{}
+\titlegraphic{
+    %\includegraphics[width=2cm]{csml_logo_vector2.pdf}\hspace*{4.75cm}~%
+   \includegraphics[width=2cm]{./img/csml_logo_vector2.pdf}
+}
+\begin{document}
+\frame{\titlepage}
+  \setbeamercolor{background canvas}{bg=white}
+ \begin{frame}{What is one sample testing }
+ \begin{center}
+Are $\quad Z_i \sim p \quad$ where $\quad \log p \approx -|x|^{1.8} \quad$?\\
+ \includegraphics[width=0.9\textwidth]{./img/mixtureOfNormal.pdf} 
+ \end{center}
+ 
+ \end{frame} 
+  \begin{frame}{Building blocks}
+\begin{center}
+$k_t(x) = k(x,t)$ and density known up to a normalization constant $C \log' p(x)$
+ \includegraphics[width=0.9\textwidth]{./img/kp.pdf} 
+ \end{center}
+
+ 
+ \end{frame} 
+  \begin{frame}{Main idea}
+In a minute we will use a cornerstone of modern ML.
+
+\bf{Integration by parts.}
+ \end{frame} 
+
+  \begin{frame}{Cornerstone of modern ML: integration by parts}
+\begin{align*}
+ 0= & ( k_t(x) p(x) ) \|_{-\infty}^{\infty} \\
+   = &  \int ( k_t(x) p(x) )' dx \\
+   = &  \int  k_t(x)' p(x)   + \log' p(x)k_t(x) p(x) \\
+   = & E k_t(X)'    + \log' p(X)k_t(X) =E \xi_t(X) 
+\end{align*}
+ \end{frame} 
+  
+ \begin{frame}{Cornerstone of modern ML cont}
+$\xi_t(x) =k_t(x)'    + \log' p(x)k_t(x) $ \\
+ \includegraphics[width=0.9\textwidth]{./img/xi.pdf} 
+ \end{frame} 
+  
+  
+\begin{frame}{Learning density}
+The aim is to learn distribution $p$.
+We want to  learn a generative model $G$, such that for a random variable $Z$, $G(Z) \sim p$.
+Or, $p = p_G$, where $p_G$ is distribution of $G(Z)$.
+\end{frame}
+  
+\section{Generative Adversarial Networks}
+  
+\begin{frame}{artificial  labels}
+  \begin{itemize}
+   \item Random variable  $X$, distributed according to distribution $p$. 
+   \item Some noise random variable $Z$.
+   \item A generative model $G$, which transforms $Z$ to $X' = G(Z)$, in other words  $X' \sim p_{G}$.
+\end{itemize}
+
+Consider an artificial  label   $Y \in \{ -1,1 \}$, distributed according to Bernoulli distribution. 
+Consider a random vector $W$, such that $W_1 = Y$.  
+
+if $Y=1$  then  $W_2 =X \sim p$.
+
+if $Y=-1$  then $W_2 =X' \sim p_G$.
+
+I probably could have written $W  = (1,X) | (-1,X')$.
+
+\end{frame}
+  
+  
+   
+\begin{frame}{Classifier}
+
+Let $D$ be discriminative function which is suppose to figure out if $W_2$ comes from $p$ or $p_G$ (if $W_2 = X'$ or $W_2=X$). 
+
+For a random variable  $V$,  $D(W_2)$ a probability that $W_1 =1$ (label is one).  
+
+\end{frame}
+  
+  
+  
+  
+\begin{frame}{Learning density}
+
+Consider an expression  
+$$
+E \left( \log(D(W_2)) | Y=1 \right)  + E \left( \log(1 - D(W_2))| Y=-1  \right).
+$$
+It can be written using $X$,$G(Z)$, as a function of $D,G$
+$$
+V(D,G) = E \log(D(X)) + E \log(1 - D(G(Z)))
+$$
+For each generator  $G$ there exists an optimal  discriminator $D$ that maximizes the above function (we will show). 
+$$C(G) = \sup_{D} V(D,G)$$
+
+We are going to show that $G$ that minimizes $C(G)$ is the best generator, i.e. $p_G = p$.
+\end{frame}
+  
+\begin{frame}{Optimal discriminator}
+For each generator  $G$ there exists an optimal  discriminator $D$ that maximizes the above function (as we will show).
+\begin{align}
+V(D,G) =& E \left[ \log D(X) +  \log(1 - D(G(Z)))  \right] \\ 
+       =& E\left[  \log D(X) +  \log(1 - D(X')) \right] \\
+       =& \int p(x)  \log D(x) +  p_G(x) \log(1 - D(x))
+\end{align}
+which, for a fixed $G$, $V(D,G)$ reaches  maximum  at $D = \frac{p}{p+p_g}$
+
+
+\end{frame}
+
+
+  
+\begin{frame}{Optimal generator }
+For a fixed, optimal $D = \frac{p}{p+p_g} $, $V$ is a divergence 
+\begin{align}
+V(D,G) =& E \left(  \log D(X) + \log(1 - D(X')) \right) \\ 
+&E \left(   \log \frac{p(X)}{p(X)+p_g(X)} + \log \frac{p_g(X')}{p(X')+p_g(X')} \right) =\\
+&D_{KL}(p || \frac{p+p_g}{2} ) + D_{KL}(p_g ||  \frac{p+p_g}{2})
+\end{align}
+
+\end{frame}  
+
+\begin{frame}{Experiments}
+All the experimental results will be discussed at the end.
+ 
+\end{frame}
+
+
+\section{Training generative neural networks via Maximum Mean Discrepancy optimization}
+
+\begin{frame}{Relating to distance between measures}
+The discrepancy presented in the previous paper was $C(G) = \sup_{D} V(D,G)$. This paper suggests to put 
+\[
+ C(G) = MMD(G(Z),X) 
+\]
+and the rest remains the same, we solve 
+\begin{align}
+\arg \min C(G)
+\end{align}
+\end{frame}
+
+\begin{frame}{Details}
+Suppose  $\theta$ is parameter  of the network $G$. The gradient of MMD  w.r.t. to $\theta$ on the  smallest minibatch batch 
+$y_1 = G(z_1), y_2 = G(z_2),x_1,x_2$, is
+
+\begin{align*}
+\nabla MMD \sim & \frac{ \partial k(y_1,y_2) } {\partial (y_1,y_2) } (\frac{\partial y_1}{\partial \theta } ,\frac{ \partial y_2} {\partial \theta }) + \\
+   &-\frac{ \partial k(x_1,y_1) }{2\partial y_1} \frac{\partial y_1}{\partial \theta } -  \frac{ \partial k(x_2,y_1) }{2\partial y_1} \frac{\partial y_1}{\partial \theta }+ \\
+   & -\frac{ \partial k(x_1,y_2) }{2\partial y_1} \frac{\partial y_1}{\partial \theta } - \frac{ \partial k(x_2,y_2) }{2\partial y_1} \frac{\partial y_1}{\partial \theta }
+ \end{align*}
+
+
+\end{frame}
+ 
+
+
+
+\begin{frame}{Training algorithm}
+% \begin{figure}
+%  \includegraphics[width=\textwidth]{./img/alg1.png}
+% \end{figure}
+\end{frame}  
+
+
+
+\end{document}
