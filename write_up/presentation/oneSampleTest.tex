@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
+\global\long\def\ev{\mathbb{E}}
 \usetheme{metropolis}           % Use metropolis theme
 \title{ A Kernel Test of Goodness of Fit}
 \date{\today}
@@ -25,153 +26,176 @@ Are $\quad Z_i \sim p \quad$ where $\quad \log p \approx -|x|^{1.8} \quad$?\\
  \end{frame} 
   \begin{frame}{Building blocks}
 \begin{center}
-$k_t(x) = k(x,t)$ and density known up to a normalization constant $C \log' p(x)$
+Kernel $k(x,t)$ and derivative of log density  $\partial_{x} \log p(x)$.
  \includegraphics[width=0.9\textwidth]{./img/kp.pdf} 
  \end{center}
-
- 
  \end{frame} 
-  \begin{frame}{Main idea}
-In a minute we will use a cornerstone of modern ML.
+ 
+ 
+ \begin{frame}{Main idea}
+We will use a cornerstone of modern ML.\\
 
+
+\pause
 \bf{Integration by parts.}
  \end{frame} 
 
   \begin{frame}{Cornerstone of modern ML: integration by parts}
 \begin{align*}
- 0= & ( k_t(x) p(x) ) \|_{-\infty}^{\infty} \\
-   = &  \int ( k_t(x) p(x) )' dx \\
-   = &  \int  k_t(x)' p(x)   + \log' p(x)k_t(x) p(x) \\
-   = & E k_t(X)'    + \log' p(X)k_t(X) =E \xi_t(X) 
+ 0= & \big( k(x,t) p(x) \big) \bigg |_{x=-\infty}^{x=\infty} \\
+   = &  \int_{-\infty}^{\infty} \partial_{x} \big( k(x,t) p(x) \big)  dx \\
+   = &  \int  \partial_{x} k(x,t) p(x)   + \big( \partial_{x} \log p(x) \big) p(x) k(x,t)  \\
+   = &  \ev_p \partial_{x} k(X,t)   + \big( \partial_{x} \log p(X) \big)  k(X,t)\\
+   = & \ev_p \xi_p(X,t)
 \end{align*}
+
+with $\xi_p(x,t) = \partial_{x} k(x,t)   + \big( \partial_{x} \log p(x) \big)  k(x,t)$
  \end{frame} 
   
  \begin{frame}{Cornerstone of modern ML cont}
-$\xi_t(x) =k_t(x)'    + \log' p(x)k_t(x) $ \\
+$\xi_p(x,t) = \partial_{x} k(x,t)   + \big( \partial_{x} \log p(x) \big)  k(x,t)$ \\
+$\ev_p \xi_p(X,t)=0$
  \includegraphics[width=0.9\textwidth]{./img/xi.pdf} 
  \end{frame} 
-  
-  
-\begin{frame}{Learning density}
-The aim is to learn distribution $p$.
-We want to  learn a generative model $G$, such that for a random variable $Z$, $G(Z) \sim p$.
-Or, $p = p_G$, where $p_G$ is distribution of $G(Z)$.
-\end{frame}
-  
-\section{Generative Adversarial Networks}
-  
-\begin{frame}{artificial  labels}
-  \begin{itemize}
-   \item Random variable  $X$, distributed according to distribution $p$. 
-   \item Some noise random variable $Z$.
-   \item A generative model $G$, which transforms $Z$ to $X' = G(Z)$, in other words  $X' \sim p_{G}$.
-\end{itemize}
-
-Consider an artificial  label   $Y \in \{ -1,1 \}$, distributed according to Bernoulli distribution. 
-Consider a random vector $W$, such that $W_1 = Y$.  
-
-if $Y=1$  then  $W_2 =X \sim p$.
-
-if $Y=-1$  then $W_2 =X' \sim p_G$.
-
-I probably could have written $W  = (1,X) | (-1,X')$.
-
-\end{frame}
-  
-  
-   
-\begin{frame}{Classifier}
-
-Let $D$ be discriminative function which is suppose to figure out if $W_2$ comes from $p$ or $p_G$ (if $W_2 = X'$ or $W_2=X$). 
-
-For a random variable  $V$,  $D(W_2)$ a probability that $W_1 =1$ (label is one).  
-
-\end{frame}
-  
-  
-  
-  
-\begin{frame}{Learning density}
-
-Consider an expression  
-$$
-E \left( \log(D(W_2)) | Y=1 \right)  + E \left( \log(1 - D(W_2))| Y=-1  \right).
-$$
-It can be written using $X$,$G(Z)$, as a function of $D,G$
-$$
-V(D,G) = E \log(D(X)) + E \log(1 - D(G(Z)))
-$$
-For each generator  $G$ there exists an optimal  discriminator $D$ that maximizes the above function (we will show). 
-$$C(G) = \sup_{D} V(D,G)$$
-
-We are going to show that $G$ that minimizes $C(G)$ is the best generator, i.e. $p_G = p$.
-\end{frame}
-  
-\begin{frame}{Optimal discriminator}
-For each generator  $G$ there exists an optimal  discriminator $D$ that maximizes the above function (as we will show).
-\begin{align}
-V(D,G) =& E \left[ \log D(X) +  \log(1 - D(G(Z)))  \right] \\ 
-       =& E\left[  \log D(X) +  \log(1 - D(X')) \right] \\
-       =& \int p(x)  \log D(x) +  p_G(x) \log(1 - D(x))
-\end{align}
-which, for a fixed $G$, $V(D,G)$ reaches  maximum  at $D = \frac{p}{p+p_g}$
-
-
-\end{frame}
-
-
-  
-\begin{frame}{Optimal generator }
-For a fixed, optimal $D = \frac{p}{p+p_g} $, $V$ is a divergence 
-\begin{align}
-V(D,G) =& E \left(  \log D(X) + \log(1 - D(X')) \right) \\ 
-&E \left(   \log \frac{p(X)}{p(X)+p_g(X)} + \log \frac{p_g(X')}{p(X')+p_g(X')} \right) =\\
-&D_{KL}(p || \frac{p+p_g}{2} ) + D_{KL}(p_g ||  \frac{p+p_g}{2})
-\end{align}
-
-\end{frame}  
-
-\begin{frame}{Experiments}
-All the experimental results will be discussed at the end.
  
-\end{frame}
+\begin{frame}{Main results I}
+\begin{center}
+If $X \sim p$ then $\ev_ p\xi_p(X,t)=0$
+\\
+\vspace{1cm}
+If $Z \sim q \neq p$ then $\ev_q \xi_p(Z,t) \neq 0$
+\end{center}
+\end{frame} 
 
-
-\section{Training generative neural networks via Maximum Mean Discrepancy optimization}
-
-\begin{frame}{Relating to distance between measures}
-The discrepancy presented in the previous paper was $C(G) = \sup_{D} V(D,G)$. This paper suggests to put 
-\[
- C(G) = MMD(G(Z),X) 
-\]
-and the rest remains the same, we solve 
-\begin{align}
-\arg \min C(G)
-\end{align}
-\end{frame}
-
-\begin{frame}{Details}
-Suppose  $\theta$ is parameter  of the network $G$. The gradient of MMD  w.r.t. to $\theta$ on the  smallest minibatch batch 
-$y_1 = G(z_1), y_2 = G(z_2),x_1,x_2$, is
-
+\begin{frame}{Main results II}
+\begin{center}
+$\ev_p \xi_p(X,\cdot)  \in \mathcal{H}_k$ \\ 
+and \\
+$\|\ev_p \xi_p(X,\cdot) \|_{\mathcal{H}_k}  = \ev_{p}h_p(X,X')$ \\
+where 
 \begin{align*}
-\nabla MMD \sim & \frac{ \partial k(y_1,y_2) } {\partial (y_1,y_2) } (\frac{\partial y_1}{\partial \theta } ,\frac{ \partial y_2} {\partial \theta }) + \\
-   &-\frac{ \partial k(x_1,y_1) }{2\partial y_1} \frac{\partial y_1}{\partial \theta } -  \frac{ \partial k(x_2,y_1) }{2\partial y_1} \frac{\partial y_1}{\partial \theta }+ \\
-   & -\frac{ \partial k(x_1,y_2) }{2\partial y_1} \frac{\partial y_1}{\partial \theta } - \frac{ \partial k(x_2,y_2) }{2\partial y_1} \frac{\partial y_1}{\partial \theta }
- \end{align*}
-
-
+h_{p}(x,y) & := \partial_{x} \log p(x) \partial_{x} \log p(y) k(x,y)\\
+ & \quad+\partial_{y}\log p(y) \partial_{x}  k(x,y)\\
+ & \quad+\partial_{x}\log p(x) \partial_{y}k(x,y)\\
+ & \quad+\partial_{x} \partial_{y} k(x,y),
+\end{align*}
+\end{center}
 \end{frame}
+
+\begin{frame}{Function $h_p$}
+\
+ \begin{columns}
+        \begin{column}{.5\textwidth}
+        \vspace{1cm}
+        \begin{figure}
+%          \advance\leftskip-3cm
+\advance\rightskip-2cm
+
+           \includegraphics[width=\textwidth]{./img/h.pdf} 
+        \end{figure}
+        \end{column}
+        \begin{column}{.5\textwidth}
+        \vspace{-2cm}
+           \begin{align*}
+h_{p}(x,y) & := \partial_{x} \log p(x) \partial_{x} \log p(y) k(x,y)\\
+ & \quad+\partial_{y}\log p(y) \partial_{x}  k(x,y)\\
+ & \quad+\partial_{x}\log p(x) \partial_{y}k(x,y)\\
+ & \quad+\partial_{x} \partial_{y} k(x,y),
+\end{align*}
+        \end{column}
+    \end{columns}
  
 
+ \end{frame}
+ 
+ \begin{frame}{$V$-statistics}
+An estimator of $\ev h_p(X,X')$ is
+\[
+ V_n(h_p) = \frac {1} {n^2} \sum_{i,j=1}^n h_p(X_i,X_j).
+\]
+Our test statistic is $ n V_n(h_p)$.
+
+If $X_i \sim p$ then $ n V_n(h_p)$  converges weakly. 
+
+Otherwise it does not,  it explodes, $P(n V_n(h_p) <C) \to 0$.
+ \end{frame}
+ 
+ 
+  \begin{frame}{$V$-statistics}
+To estimate quantiles of $ V_n(h_p)$  
+\[
+ V_n(h_p) = \frac {1} {n^2} \sum_{i,j=1}^n h_p(X_i,X_j).
+\]
+under the null, we use wild bootstrap
+\[
+ B_n(h_p) = \frac {1} {n^2} \sum_{i,j=1}^n W_i W_j h_p(X_i,X_j).
+\]
+  where $W_i$ is a specific series of zero valued random variables.
+\end{frame}
+
+  \begin{frame}{Student's t vs.~Normal}
+\begin{columns}
+        \begin{column}{.5\textwidth}
+        \begin{figure}
+           \includegraphics[width=\textwidth]{img/sgld_student_bad} 
+           
+           
+            \includegraphics[width=\textwidth]{img/sgld_student} 
+        \end{figure}
+        \end{column}
+        \begin{column}{.5\textwidth}
+            \begin{figure}
+           \includegraphics[width=\textwidth]{img/sgld_student_opt} 
+        \end{figure}
+       Null -- samples are from normal distribution. Draws from the Student's t distribution exhibit temporal correlation.
+        \end{column}
+    \end{columns}
+ 
+
+\end{frame}
 
 
-\begin{frame}{Training algorithm}
-% \begin{figure}
-%  \includegraphics[width=\textwidth]{./img/alg1.png}
-% \end{figure}
-\end{frame}  
 
+  \begin{frame}{Bias quantification in Approximate MCMC}
+\begin{columns}
+        \begin{column}{.55\textwidth}
+        \begin{figure}
+           \includegraphics[width=\textwidth]{img/Heiko1} 
+           
+            \includegraphics[width=\textwidth]{img/Heiko2}
+        \end{figure}
+        \end{column}
+        \begin{column}{.45\textwidth}
+        \begin{align*}
+\theta_{1}\sim{\cal N}(0,10);\theta_{2}\sim{\cal N}(0,1)\\
+X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{2},4) & .
+\end{align*}
+
+            \begin{figure}
+           \includegraphics[width=\textwidth]{img/sgld_sample} 
+        \end{figure}
+
+        \end{column}
+    \end{columns}
+ \end{frame}
+
+  \begin{frame}{Experiment 3}
+\begin{columns}
+        \begin{column}{.5\textwidth}
+        \begin{figure}
+           \includegraphics[width=\textwidth]{img/gp_regression_data_fit} 
+             
+             \includegraphics[width=\textwidth]{img/gp_regression_bootstrap_hist} 
+        \end{figure}
+        \end{column}
+        \begin{column}{.5\textwidth}
+       We use the \texttt{solar} dataset. We fit $N_{\text{train}}=361$
+data using a GP, and perform  maximum likelihood. We then apply our test
+to the remaining $N_{\text{test}}=41$ data.
+        \end{column}
+    \end{columns}
+ 
+ \end{frame}
 
 
 \end{document}
