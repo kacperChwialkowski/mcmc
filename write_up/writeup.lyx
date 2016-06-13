@@ -3678,7 +3678,7 @@ key "gorham2015measuring,Welling2011"
 \begin_inset Formula 
 \begin{align*}
 \theta_{1}\sim{\cal N}(0,10);\theta_{2}\sim{\cal N}(0,1)\\
-X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{2},4) & .
+X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{2}+\theta_{1},4) & .
 \end{align*}
 
 \end_inset
