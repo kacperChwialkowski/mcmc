@@ -2,7 +2,7 @@
 \usepackage{movie15}
 \usepackage{multirow}
 \usepackage{amsmath}
-\usepackage{amsthm}
+\usepackage{amsthm,amsthm}
 \usepackage{amssymb}
 \global\long\def\ev{\mathbb{E}}
 \usetheme{metropolis}           % Use metropolis theme
@@ -14,76 +14,131 @@
     %\includegraphics[width=2cm]{csml_logo_vector2.pdf}\hspace*{4.75cm}~%
    \includegraphics[width=2cm]{./img/csml_logo_vector2.pdf}
 }
+
+
+\newtheorem{thm}{Theorem}
+
+
+
 \begin{document}
 \frame{\titlepage}
   \setbeamercolor{background canvas}{bg=white}
- \begin{frame}{What is one sample testing }
+ \begin{frame}{What is one sample testing?}
  \begin{center}
-Are $\quad Z_i \sim p \quad$ where $\quad \log p \approx -|x|^{1.8} \quad$?\\
- \includegraphics[width=0.9\textwidth]{./img/mixtureOfNormal.pdf} 
+$\theta_{1}\sim{\cal N}(0,10);\theta_{2}\sim{\cal N}(0,1)$\\
+$ X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\theta_{2},4) $.
+ \includegraphics[width=0.6\textwidth]{./img/sgld_sample_wth_trace.pdf} 
  \end{center}
+ \end{frame}
  
- \end{frame} 
-  \begin{frame}{Building blocks}
-\begin{center}
-Kernel $k(x,t)$ and derivative of log density  $\partial_{x} \log p(x)$.
- \includegraphics[width=0.9\textwidth]{./img/kp.pdf} 
+ \begin{frame}{Maximum mean discrepancy}
+ \begin{center}
+$MMD(p,q,F) = \sup_{f \in F} [\ev_{q}f - \ev_{p} f]  $\\
+\vspace{0.5cm}
+ \includegraphics[width=0.6\textwidth]{./img/mmd.pdf} 
  \end{center}
  \end{frame} 
  
  
- \begin{frame}{Main idea}
-We will use a cornerstone of modern ML.\\
-
+ 
+ \begin{frame}{Main idea (by Stein)}
+To get rid of $\ev_{p}f$  in $$ \sup_{f \in F} [\ev_{q}f - \ev_{p} f ] $$we will use the cornerstone of modern ML
 
 \pause
-\bf{Integration by parts.}
- \end{frame} 
+\textbf{integration by parts}
 
-  \begin{frame}{Cornerstone of modern ML: integration by parts}
-\begin{align*}
- 0= & \big( k(x,t) p(x) \big) \bigg |_{x=-\infty}^{x=\infty} \\
-   = &  \int_{-\infty}^{\infty} \partial_{x} \big( k(x,t) p(x) \big)  dx \\
-   = &  \int  \partial_{x} k(x,t) p(x)   + \big( \partial_{x} \log p(x) \big) p(x) k(x,t)  \\
-   = &  \ev_p \partial_{x} k(X,t)   + \big( \partial_{x} \log p(X) \big)  k(X,t)\\
-   = & \ev_p \xi_p(X,t)
-\end{align*}
+\pause 
+not the chain rule
 
-with $\xi_p(x,t) = \partial_{x} k(x,t)   + \big( \partial_{x} \log p(x) \big)  k(x,t)$
- \end{frame} 
-  
- \begin{frame}{Cornerstone of modern ML cont}
-$\xi_p(x,t) = \partial_{x} k(x,t)   + \big( \partial_{x} \log p(x) \big)  k(x,t)$ \\
-$\ev_p \xi_p(X,t)=0$
- \includegraphics[width=0.9\textwidth]{./img/xi.pdf} 
- \end{frame} 
- 
-\begin{frame}{Main results I}
-\begin{center}
-If $X \sim p$ then $\ev_ p\xi_p(X,t)=0$
-\\
-\vspace{1cm}
-If $Z \sim q \neq p$ then $\ev_q \xi_p(Z,t) \neq 0$
-\end{center}
+\pause
+I got you
+
+\pause 
+\begin{flushright}
+\small \textit{Kacper} 
+\end{flushright}
+
+
+
 \end{frame} 
 
-\begin{frame}{Main results II}
-\begin{center}
-$\ev_p \xi_p(X,\cdot)  \in \mathcal{H}_k$ \\ 
-and \\
-$\|\ev_p \xi_p(X,\cdot) \|_{\mathcal{H}_k}  = \ev_{p}h_p(X,X')$ \\
-where 
+  \begin{frame}{Cornerstone of modern ML: integration by parts}
+  \begin{center}
+  Consider the  class  \scalebox{1.3}{ $G = \{ f  +  \log' q \cdot  f | f \in F \}$} justified by 
 \begin{align*}
-h_{p}(x,y) & := \partial_{x} \log p(x) \partial_{x} \log p(y) k(x,y)\\
- & \quad+\partial_{y}\log p(y) \partial_{x}  k(x,y)\\
- & \quad+\partial_{x}\log p(x) \partial_{y}k(x,y)\\
- & \quad+\partial_{x} \partial_{y} k(x,y),
+ 0= &  f(x) p(x)  \big|_{x=-\infty}^{x=\infty} \\
+   = &  \int_{-\infty}^{\infty} (f(x) p(x) )'  dx \\
+   = &  \int   f(x)' q(x)   + f(x)p'(x)  \\
+   = &  \ev_p f(X)  +  \log' p(X) f(X) \\
+   = & \ev_p g(X), \\
+    & \quad \quad \quad  \quad  \text{ where } g \in G
+\end{align*}
+\end{center}
+
+ \end{frame} 
+  
+
+ \begin{frame}{Stein discrepancy }
+ \begin{center}
+ \scalebox{0.8}{ $G = \{ f  +  \log' p f | f \in F \}$}
+ 
+$MMD(p,q,G) = \sup_{g\in G} \ev_{q}g - \ev_{p} g - = \sup_{g \in G} \ev_{q} g $  \\
+\vspace{0.5cm}
+ \includegraphics[width=0.6\textwidth]{./img/s1.pdf} 
+ \end{center}
+ \end{frame} 
+  
+  
+ \begin{frame}{Stein discrepancy}
+ \begin{center}
+ \scalebox{0.8}{ $G = \{ f  +  \log' p f | f \in F \}$}
+ 
+$MMD(p,q,G) = \sup_{g\in G} \ev_{q}g - \ev_{p} g - = \sup_{g \in G} \ev_{q} g $  \\
+\vspace{0.5cm}
+ \includegraphics[width=0.6\textwidth]{./img/s05.pdf} 
+ \end{center}
+ \end{frame} 
+ 
+ 
+ \begin{frame}{Stein discrepancy}
+ \begin{center}
+ \scalebox{0.8}{ $G = \{ f  +  \log' p f | f \in F \}$}
+ 
+$MMD(p,q,G) = \sup_{g\in G} \ev_{q}g - \ev_{p} g - = \sup_{g \in G} \ev_{q} g $  \\
+\vspace{0.5cm}
+ \includegraphics[width=0.6\textwidth]{./img/s01.pdf} 
+ \end{center}
+ \end{frame} 
+
+ 
+\begin{frame}{Main results}
+\begin{center}
+ Let $F$ be the RKHS associated with the kernel $k$. Consider a friendly looking function
+\begin{align*}
+h_{q}(x,y) & := \partial_{x} \log p(x) \partial_{x} \log p(y) k(x,y)\\
+ & \quad+\partial_{y} \log p(y) \partial_{x}  k(x,y)\\
+ & \quad+\partial_{x} \log p(x) \partial_{y}k(x,y)\\
+ & \quad+\partial_{x} \partial_{y} k(x,y).
 \end{align*}
 \end{center}
 \end{frame}
+ 
+\begin{frame}{Main results}
+
+Let $q,p$ be probability measures and $Z\sim q$. 
+\begin{thm}
+If $\ev_{q} h_p(Z,Z)<\infty$, then $MMD(p,q,G) = \ev_{q} h_{p}(Z,Z')$.
+\end{thm}
+\begin{thm}
+ If the kernel $k$ is cc-universal, $\ev_{q} h_{q}(Z,Z)<\infty$ and $\ev_{q} (\log' \frac{p(Z)}{q(Z)})^{2}<\infty$
+then $MMD(p,q,G) =0$ if and only if $p=q$.
+\end{thm}
+
+\end{frame} 
+
 
 \begin{frame}{Function $h_p$}
-\
+
  \begin{columns}
         \begin{column}{.5\textwidth}
         \vspace{1cm}
@@ -168,7 +223,7 @@ under the null, we use wild bootstrap
         \begin{column}{.45\textwidth}
         \begin{align*}
 \theta_{1}\sim{\cal N}(0,10);\theta_{2}\sim{\cal N}(0,1)\\
-X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{2},4) & .
+X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\theta_{2},4) & .
 \end{align*}
 
             \begin{figure}
