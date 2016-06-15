@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{amsthm,amsthm}
 \usepackage{amssymb}
+
 \global\long\def\ev{\mathbb{E}}
 \usetheme{metropolis}           % Use metropolis theme
 \title{ A Kernel Test of Goodness of Fit}
@@ -14,6 +15,21 @@
     %\includegraphics[width=2cm]{csml_logo_vector2.pdf}\hspace*{4.75cm}~%
    \includegraphics[width=2cm]{./img/csml_logo_vector2.pdf}
 }
+
+\definecolor{mpigreen}{rgb}{0,0.31,0}
+
+
+\definecolor{1}{rgb}{ 0.9000,0.4909,0}
+\definecolor{2}{rgb}{ 0.8182 ,   0.9000,         0}
+\definecolor{3}{rgb}{ 0.3273,    0.9000    ,     0}
+\definecolor{4}{rgb}{    0  ,  0.9000 ,   0.1636}
+\definecolor{5}{rgb}{   0  ,  0.9000  ,  0.6545}
+\definecolor{6}{rgb}{   0  ,  0.6545   , 0.9000}
+\definecolor{7}{rgb}{  0  ,  0.1636 ,   0.9000}
+\definecolor{8}{rgb}{ 0.3273  ,       0  ,  0.9000}
+\definecolor{9}{rgb}{ 0.8182  ,       0  ,  0.9000}
+\definecolor{10}{rgb}{  0.9000  ,       0  ,  0.4909}
+
 
 
 \newtheorem{thm}{Theorem}
@@ -33,7 +49,7 @@ $ X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\the
  
  \begin{frame}{Maximum mean discrepancy}
  \begin{center}
-$MMD(p,q,F) = \sup_{f \in F} [\ev_{q}f - \ev_{p} f]  $\\
+$MMD({\color{red} p},{ \color{blue} q},F) = \sup_{ f\in F} [\ev_{{ \color{blue} q}}f - \ev_{{\color{red} p}} f]  $\\
 \vspace{0.5cm}
  \includegraphics[width=0.6\textwidth]{./img/mmd.pdf} 
  \end{center}
@@ -42,7 +58,7 @@ $MMD(p,q,F) = \sup_{f \in F} [\ev_{q}f - \ev_{p} f]  $\\
  
  
  \begin{frame}{Main idea (by Stein)}
-To get rid of $\ev_{p}f$  in $$ \sup_{f \in F} [\ev_{q}f - \ev_{p} f ] $$we will use the cornerstone of modern ML
+To get rid of $\ev_{{\color{red} p}}f$  in $$ \sup_{f \in F} [\ev_{{ \color{blue} q}}f - \ev_{{\color{red} p}} f ] $$we will use the cornerstone of modern ML
 
 \pause
 \textbf{integration by parts}
@@ -64,13 +80,13 @@ I got you
 
   \begin{frame}{Cornerstone of modern ML: integration by parts}
   \begin{center}
-  Consider the  class  \scalebox{1.3}{ $G = \{ f  +  \log' q \cdot  f | f \in F \}$} justified by 
+  Consider the  class  \scalebox{1.3}{ $G = \{ f  +  \log' { \color{blue} q} \cdot  f | f \in F \}$} justified by 
 \begin{align*}
- 0= &  f(x) p(x)  \big|_{x=-\infty}^{x=\infty} \\
-   = &  \int_{-\infty}^{\infty} (f(x) p(x) )'  dx \\
-   = &  \int   f(x)' q(x)   + f(x)p'(x)  \\
-   = &  \ev_p f(X)  +  \log' p(X) f(X) \\
-   = & \ev_p g(X), \\
+ 0= &  f(x) {\color{red} p}(x)  \big|_{x=-\infty}^{x=\infty} \\
+   = &  \int_{-\infty}^{\infty} (f(x) {\color{red} p}(x) )'  dx \\
+   = &  \int   f(x)' { \color{blue} q}(x)   + f(x){\color{red} p}'(x)  \\
+   = &  \ev_{\color{red} p} f(X)  +  \log' {\color{red} p}(X) f(X) \\
+   = & \ev_{\color{red} p} g(X), \\
     & \quad \quad \quad  \quad  \text{ where } g \in G
 \end{align*}
 \end{center}
@@ -80,9 +96,9 @@ I got you
 
  \begin{frame}{Stein discrepancy }
  \begin{center}
- \scalebox{0.8}{ $G = \{ f  +  \log' p f | f \in F \}$}
+ \scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
  
-$MMD(p,q,G) = \sup_{g\in G} \ev_{q}g - \ev_{p} g - = \sup_{g \in G} \ev_{q} g $  \\
+$MMD({\color{red} p},{ \color{blue} q},G) = \sup_{g\in G} \ev_{{ \color{blue} q}}g - \ev_{{\color{red} p}} g - = \sup_{g \in G} \ev_{{ \color{blue} q}} g $  \\
 \vspace{0.5cm}
  \includegraphics[width=0.6\textwidth]{./img/s1.pdf} 
  \end{center}
@@ -91,9 +107,9 @@ $MMD(p,q,G) = \sup_{g\in G} \ev_{q}g - \ev_{p} g - = \sup_{g \in G} \ev_{q} g $ 
   
  \begin{frame}{Stein discrepancy}
  \begin{center}
- \scalebox{0.8}{ $G = \{ f  +  \log' p f | f \in F \}$}
+ \scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
  
-$MMD(p,q,G) = \sup_{g\in G} \ev_{q}g - \ev_{p} g - = \sup_{g \in G} \ev_{q} g $  \\
+$MMD({\color{red} p},{ \color{blue} q},G) = \sup_{g\in G} \ev_{{ \color{blue} q}}g - \ev_{{\color{red} p}} g - = \sup_{g \in G} \ev_{{ \color{blue} q}} g $  \\
 \vspace{0.5cm}
  \includegraphics[width=0.6\textwidth]{./img/s05.pdf} 
  \end{center}
@@ -102,9 +118,9 @@ $MMD(p,q,G) = \sup_{g\in G} \ev_{q}g - \ev_{p} g - = \sup_{g \in G} \ev_{q} g $ 
  
  \begin{frame}{Stein discrepancy}
  \begin{center}
- \scalebox{0.8}{ $G = \{ f  +  \log' p f | f \in F \}$}
+ \scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
  
-$MMD(p,q,G) = \sup_{g\in G} \ev_{q}g - \ev_{p} g - = \sup_{g \in G} \ev_{q} g $  \\
+$MMD({\color{red} p},{ \color{blue} q},G) = \sup_{g\in G} \ev_{{ \color{blue} q}}g - \ev_{{\color{red} p}} g - = \sup_{g \in G} \ev_{{ \color{blue} q}} g $  \\
 \vspace{0.5cm}
  \includegraphics[width=0.6\textwidth]{./img/s01.pdf} 
  \end{center}
@@ -115,9 +131,9 @@ $MMD(p,q,G) = \sup_{g\in G} \ev_{q}g - \ev_{p} g - = \sup_{g \in G} \ev_{q} g $ 
 \begin{center}
  Let $F$ be the RKHS associated with the kernel $k$. Consider a friendly looking function
 \begin{align*}
-h_{q}(x,y) & := \partial_{x} \log p(x) \partial_{x} \log p(y) k(x,y)\\
- & \quad+\partial_{y} \log p(y) \partial_{x}  k(x,y)\\
- & \quad+\partial_{x} \log p(x) \partial_{y}k(x,y)\\
+h_{{\color{red} p}}(x,y) & := \partial_{x} \log {\color{red} p}(x) \partial_{x} \log {\color{red} p}(y) k(x,y)\\
+ & \quad+\partial_{y} \log {\color{red} p}(y) \partial_{x}  k(x,y)\\
+ & \quad+\partial_{x} \log {\color{red} p}(x) \partial_{y}k(x,y)\\
  & \quad+\partial_{x} \partial_{y} k(x,y).
 \end{align*}
 \end{center}
@@ -125,68 +141,57 @@ h_{q}(x,y) & := \partial_{x} \log p(x) \partial_{x} \log p(y) k(x,y)\\
  
 \begin{frame}{Main results}
 
-Let $q,p$ be probability measures and $Z\sim q$. 
+Let ${ \color{blue} q},{\color{red} p}$ be probability measures and $Z\sim { \color{blue} q}$. 
 \begin{thm}
-If $\ev_{q} h_p(Z,Z)<\infty$, then $MMD(p,q,G) = \ev_{q} h_{p}(Z,Z')$.
+If $\ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z)<\infty$, then $MMD({\color{red} p},{ \color{blue} q},G) = \ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z')$.
 \end{thm}
 \begin{thm}
- If the kernel $k$ is cc-universal, $\ev_{q} h_{q}(Z,Z)<\infty$ and $\ev_{q} (\log' \frac{p(Z)}{q(Z)})^{2}<\infty$
-then $MMD(p,q,G) =0$ if and only if $p=q$.
+ If the kernel $k$ is cc-universal, $\ev_{{ \color{blue} q}} h_{{ \color{blue} q}}(Z,Z)<\infty$ and $\ev_{{ \color{blue} q}} (\log' \frac{{\color{red} p}(Z)}{{ \color{blue} q}(Z)})^{2}<\infty$
+then $MMD({\color{red} p},{ \color{blue} q},G) =0$ if and only if ${\color{red} p}={ \color{blue} q}$.
 \end{thm}
 
 \end{frame} 
 
 
-\begin{frame}{Function $h_p$}
-
- \begin{columns}
-        \begin{column}{.5\textwidth}
-        \vspace{1cm}
-        \begin{figure}
-%          \advance\leftskip-3cm
-\advance\rightskip-2cm
-
-           \includegraphics[width=\textwidth]{./img/h.pdf} 
-        \end{figure}
-        \end{column}
-        \begin{column}{.5\textwidth}
-        \vspace{-2cm}
-           \begin{align*}
-h_{p}(x,y) & := \partial_{x} \log p(x) \partial_{x} \log p(y) k(x,y)\\
- & \quad+\partial_{y}\log p(y) \partial_{x}  k(x,y)\\
- & \quad+\partial_{x}\log p(x) \partial_{y}k(x,y)\\
- & \quad+\partial_{x} \partial_{y} k(x,y),
-\end{align*}
-        \end{column}
-    \end{columns}
- 
-
- \end{frame}
  
  \begin{frame}{$V$-statistics}
-An estimator of $\ev h_p(X,X')$ is
+An estimator of $\ev h_{\color{red} p}(X,X')$ is
 \[
- V_n(h_p) = \frac {1} {n^2} \sum_{i,j=1}^n h_p(X_i,X_j).
+ V_n(h_{\color{red} p}) = \frac {1} {n^2} \sum_{i,j=1}^n h_{\color{red} p}(X_i,X_j).
 \]
-Our test statistic is $ n V_n(h_p)$.
+Our test statistic is $ n V_n(h_{\color{red} p})$.
 
-If $X_i \sim p$ then $ n V_n(h_p)$  converges weakly. 
+If $X_i \sim {\color{red} p}$ then $ n V_n(h_{\color{red} p})$  converges weakly. 
 
-Otherwise it does not,  it explodes, $P(n V_n(h_p) <C) \to 0$.
+Otherwise it does not,  it explodes, $P(n V_n(h_{\color{red} p}) <C) \to 0$.
  \end{frame}
  
  
   \begin{frame}{$V$-statistics}
-To estimate quantiles of $ V_n(h_p)$  
+To estimate quantiles of $ V_n(h_{\color{red} p})$  
 \[
- V_n(h_p) = \frac {1} {n^2} \sum_{i,j=1}^n h_p(X_i,X_j).
+ V_n(h_{\color{red} p}) = \frac {1} {n^2} \sum_{i,j=1}^n h_{\color{red} p}(X_i,X_j).
 \]
 under the null, we use wild bootstrap
 \[
- B_n(h_p) = \frac {1} {n^2} \sum_{i,j=1}^n W_i W_j h_p(X_i,X_j).
+ B_n(h_{\color{red} p}) = \frac {1} {n^2} \sum_{i,j=1}^n W_i W_j h_{\color{red} p}(X_i,X_j).
 \]
   where $W_i$ is a specific series of zero valued random variables.
 \end{frame}
+
+ \begin{frame}{Wild bootstrapping}
+ \includegraphics[width=0.9\textwidth]{./img/bootstrapWorks1.pdf}
+\end{frame}
+
+ \begin{frame}{Wild bootstrapping}
+ \includegraphics[width=0.9\textwidth]{./img/bootstrapWorks4.pdf}
+\end{frame}
+
+ \begin{frame}{Wild bootstrapping}
+ \includegraphics[width=0.9\textwidth]{./img/bootstrapWorks8.pdf}
+\end{frame}
+
+
 
   \begin{frame}{Student's t vs.~Normal}
 \begin{columns}
