@@ -1,0 +1,90 @@
+\ProvidesPackage{beamerthemeUCL} % by Jan Gasthaus
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\selectcolormodel{cmyk}
+\mode<presentation>
+\input{ucl_logo}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% custom colors
+\definecolor{ucl_darkblue_100}{cmyk}{0.898,0.5373,0.3294,0.70}
+\definecolor{titlec@l@r}{cmyk}{0.898,0.5373,0.3294,0.70}
+\definecolor{ucl_darkblue_50}{HTML}{5C86A7}
+\colorlet{ucl_darkblue_20}{ucl_darkblue_100!20}
+\definecolor{ucl_yellow_100}{HTML}{F6C100}
+
+
+% headline colors and fonts
+\setbeamercolor{headline}{fg=white,bg=ucl_darkblue_100}
+\setbeamercolor{footline}{fg=lightgrey,bg=ucl_darkblue_100}
+\setbeamercolor{title in headline}{fg=white}
+\setbeamercolor{author in headline}{fg=lightgray}
+\setbeamercolor{institute in headline}{fg=lightgray}
+\setbeamercolor{logo in headline}{fg=black,bg=lightgray}
+\setbeamercolor{separation line}{bg=white}
+
+% footline colors and fonts
+\setbeamercolor{footline}{fg=white,bg=ucl_darkblue_100}
+\setbeamerfont{footline}{fg=white, size=\normalsize}
+
+% body colors and fonts
+\setbeamercolor*{normal text}{fg=black,bg=ucl_darkblue_20}
+
+% block environment
+\setbeamercolor*{block body}{bg=white,fg=black}
+\setbeamercolor*{block title}{fg=ucl_yellow_100,bg=ucl_darkblue_100}
+\setbeamerfont{block title}{size=\large,series=\bf}
+
+
+\setbeamercolor{alerted text}{fg=ucl_yellow_100}
+
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{navigation symbols}{}  % no navigation on a poster
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{block begin}{
+  \vskip1cm
+  \begin{beamercolorbox}[sep=0.5ex,leftskip=1cm,rounded=true,shadow=true]{block title}%
+    \usebeamerfont*{block title}\insertblocktitle
+  \end{beamercolorbox}%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[sep=.75ex,rounded=true,shadow=true]{block body}%
+}
+
+\setbeamertemplate{block end}{
+  \end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{headline}{  
+  \makebox(0,0)[lt]{\pgfucllogo{\paperwidth}{8cm}{1cm}{3cm}}%
+  \raisebox{-0.8in}{\hbox to \textwidth{%
+    \hspace{3.2cm}%
+    \parbox[t]{0.9\paperwidth}{%
+         \usebeamercolor{title in headline}{
+         \color{fg}\textbf{\huge{\inserttitle}}}\\ \vskip 0.5cm%
+         \usebeamercolor{author in headline}{\color{white}\large{\textbf{\insertauthor}}}
+\vskip 0.3cm
+
+         \usebeamercolor{author in headline}{\color{fg}\normalsize{\insertinstitute}}
+}}}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{footline}{
+\begin{beamercolorbox}[ht=4ex,leftskip=1cm,rightskip=1cm,sep=0.6cm]{footline}%
+ \hskip 1.9cm 
+ \hfill Contact: \texttt{}
+\end{beamercolorbox}
+}
+
+\setbeamertemplate{footline}{
+\begin{beamercolorbox}[ht=4ex,leftskip=1cm,rightskip=1cm,sep=0.6cm]{footline}%
+ \hskip 1.9cm \vspace{-0.3cm}This work was funded by the Gatsby Charitable Foundation.
+ \hfill Code: \texttt{https://github.com/karlnapf/kernel\_goodness\_of\_fit}\hspace{25cm} Contact: \texttt{heiko.strathmann@gmail.com}
+\end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<all>

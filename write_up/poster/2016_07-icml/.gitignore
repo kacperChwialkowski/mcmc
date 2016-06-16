@@ -1,0 +1,10 @@
+*.aux
+*.bbl
+*.tmp
+*.swp
+*.out
+*.snm
+*.toc
+*.nav
+main.pdf
+*.dvi

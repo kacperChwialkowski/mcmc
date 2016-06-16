@@ -1,0 +1,53 @@
+\documentclass[final,t,overlay]{beamer}
+\mode<presentation>
+{
+  \usetheme{UCL}
+}
+\usepackage[size=a0,scale=1,debug]{beamerposter}
+
+% additional packages
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{pstool}
+\usepackage{calc}
+\usepackage{import}
+\usepackage{color}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amsthm,amsthm}
+\usepackage{amssymb}
+\usetikzlibrary{arrows,shapes}
+\tikzstyle{square}=[draw, minimum size=2.5em]
+\tikzstyle{round}=[draw,circle, minimum size=2.5em]
+
+ \def\mm#1{\ensuremath{\boldsymbol{#1}}} % version: amsmath
+ 
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\med}{Median}
+\DeclareMathOperator{\chol}{cholesky}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator*{\minimise}{minimise}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\global\long\def\Mz{M_{\mathbf{z},y}}
+\global\long\def\muz{\mu_{\mathbf{z}}}
+\global\long\def\aj{\alpha^{(j)}}
+\global\long\def\ajt{\left(\alpha^{(j)}\right)^{\top}}
+
+%empf is red now
+%\renewcommand{\emph}[1]{{\color{red}{#1}}}
+
+\title{A Kernel Test of Goodness of Fit}
+\author[SHORTAUTHOR]
+{Kacper Chwialkowski$^*$ Heiko Strathmann$^*$ Arthur Gretton}
+\institute[SHORTINSTITUTE]{Gatsby Unit, University College London.}
+
+\date[SHORTDATE]{DATE}
+
+\global\long\def\ev{\mathbb{E}}
+
+\newtheorem{thm}{Theorem}
