@@ -170,15 +170,15 @@ if __name__ == '__main__':
     X_test_plot = X_test[:,0]* 116.502738394 + 1815.93213296
     
     fig, ax = plt.subplots()
-    plt.plot(X_test_plot, pred_mean, 'b-')
+    plt.plot(X_test_plot, pred_mean, 'r-')
 #     plt.plot(X_test, pred_mean + 2 * pred_std, 'b--')
 #     plt.plot(X_test, pred_mean - 2 * pred_std, 'b--')
     # some hacks to make x axis ok again
     lower = (pred_mean - 2 * pred_std)[:,0]
     upper = (pred_mean + 2 * pred_std)[:,0]
-    plt.fill_between(X_test_plot, lower, upper, color='b', alpha=0.3)
-    plt.plot(X_train* 116.502738394 + 1815.93213296, y_train, 'b.', markersize=3)
-    plt.plot(X_test_plot, y_test, 'r.', markersize=5)
+    plt.fill_between(X_test_plot, lower, upper, color='r', alpha=0.3)
+    plt.plot(X_train* 116.502738394 + 1815.93213296,  y_train,  'b.', markersize=3)
+    plt.plot(X_test_plot, y_test, '*', color='black', markersize=5)
     plt.grid(True)
     plt.xlabel(r"Year")
     plt.ylabel(r"Solar activity (normalised)")
