@@ -202,10 +202,23 @@ under the null, we use wild bootstrap
  B_n(h_{\color{red} p}) = \frac {1} {n^2} \sum_{i,j=1}^n W_i W_j h_{\color{red} p}(X_i,X_j).
 \]
   where $W_i$ is a specific series of zero mean valued random variables.
-  $$
+  
+\begin{columns}
+        \begin{column}{.5\textwidth}
+         $$
   Cov(W_i,W_j) = (1-\frac{2}{\log n})^{-|i-j|}
   $$
-\end{frame}
+        \end{column}
+        \begin{column}{.5\textwidth}
+            \begin{figure}
+            \vspace{-0.5cm}
+           \includegraphics[width=0.7\textwidth, angle =-90 ]{./img/W_graphicalModel.pdf} 
+        \end{figure}
+        \end{column}
+    \end{columns}
+
+  
+  \end{frame}
 
  \begin{frame}{Wild bootstrapping; small correlation }
 \centering
