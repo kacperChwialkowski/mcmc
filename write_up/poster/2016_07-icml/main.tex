@@ -7,26 +7,43 @@
 \vspace{-0.75cm}
 \begin{block}{Motivation: One sample testing for non i.i.d.\ data}
 \begin{minipage}{.57\linewidth}
-\begin{itemize}
-\item TODO Intro
-\end{itemize}
+
+\begin{align*}
+ \theta_{1}&\sim{\cal N}(0,10);\theta_{2}\sim{\cal N}(0,1) \\
+ X_{i} &\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\theta_{2},4)
+\end{align*}
+ \vspace{1cm} 
+
+And so we turn the Bayesian Crank  to  obtain samples form the posteriori distribution. It obviously matters which matter which method we use, since quality of sample depends on it. However, once we are one  done one question remains...  
 \end{minipage}
 \begin{minipage}{.37\linewidth}
 \includegraphics[scale=0.8]{img/sgld_trace_and_density.pdf}
 \end{minipage}
 \vspace{1cm}
 \begin{center}
-\emph{Punch line 1}
+\Large
+\emph{How to check if we sampled form the stationary distribution?}
 \end{center}
 \end{block}
 \vspace{-0.75cm}
 \begin{block}{So far: Maximum Mean Discrepancy}
-\begin{center}Idea: Function in RKHS to reveal difference in distributions\end{center}
+\begin{center}We turn the Kernel Crank, we find a function in RKHS to reveal difference in distributions\end{center}
 \begin{minipage}{.60\linewidth}
-\begin{itemize}
-\item Cite paper?
-\item Intuition MMD
-\end{itemize}
+
+
+\vspace{1cm}
+\large
+\begin{align*}
+MMD({\color{red} p},{ \color{blue} q},F) = \sup_{   \| {\color{mg}f} \|_F<1} [\ev_{{ \color{blue} q}}{\color{mg}f}- \ev_{{\color{red} p}}{\color{mg} f}]   
+\end{align*}
+\normalsize
+\vspace{1cm}
+ \begin{itemize}
+  \item $F$ is an Reproducing Kernel Hilbert Space.
+  \item ${\color{mg} f^*}$ is the function that attains the supremum.
+  \item We want to get rid of  $\ev_{ {\color{red} p} }f$ . Hoe?
+ \end{itemize}
+
 \end{minipage}
 \begin{minipage}{.35\linewidth}
 \begin{center}
@@ -40,31 +57,31 @@
 \end{block}
 \vspace{-0.75cm}
 \begin{block}{Stein's trick in RKHS}
-\begin{itemize}
-\item Get rid of $\ev_{{\color{red} p}}f$  in
+
+Consider the  class \large
+$$G = \{ f  +  \log' { \color{blue} q} \cdot  f | f \in F \}$$
+\normalsize
+justified by integration by parts
 \begin{align*}
-\sup_{f \in F} [\ev_{{ \color{blue} q}}f - \ev_{{\color{red} p}} f ]
-\end{align*}
- \item Consider the  class $G = \{ f  +  \log' { \color{blue} q} \cdot  f | f \in F \}$ justified by 
-\begin{align*}
- 0= &  f(x) {\color{red} p}(x)  \big|_{x=-\infty}^{x=\infty} \\
-   = &  \int_{-\infty}^{\infty} (f(x) {\color{red} p}(x) )'  dx \\
-   = &  \int   f(x)' { \color{blue} q}(x)   + f(x){\color{red} p}'(x)  \\
-   = &  \ev_{\color{red} p} f(X)  +  \log' {\color{red} p}(X) f(X) \\
+ 0= &  f(x) {\color{red} p}(x)  \big|_{x=-\infty}^{x=\infty} =  \int_{-\infty}^{\infty} (f(x) {\color{red} p}(x) )'  dx  =   \int   f(x)' { \color{blue} q}(x)   + f(x){\color{red} p}'(x)  = \ev_{\color{red} p} f(X)  +  \log' {\color{red} p}(X) f(X) \\
    = & \ev_{\color{red} p} g(X), \\
     & \quad \quad \quad  \quad  \text{ where } g \in G
 \end{align*}
-\end{itemize}
+
 \end{block}
 \vspace{-0.75cm}
-\begin{block}{Stein discrepancy}
- \begin{align*}
-G = \{ f  +  \log' {\color{red} p} f | f \in F \}
-\end{align*}
-\includegraphics[scale=1]{./img/s1.pdf}
-\includegraphics[scale=1]{./img/s05.pdf}
-\includegraphics[scale=1]{./img/s01.pdf}
 
+\begin{block}{Stein discrepancy}
+\large
+\begin{align*}
+MMD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}}{\color{mg}g} - \ev_{{\color{red} p}} {\color{mg}g}  = \sup_{ \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}} {\color{mg}g} 
+\end{align*}
+\vspace{2cm}
+\centering
+\includegraphics[scale=1.2]{./img/s1.pdf}
+\includegraphics[scale=1.2]{./img/s05.pdf}\\
+\includegraphics[scale=1.2]{./img/s01.pdf}
+\includegraphics[scale=1.2]{./img/s0.pdf}
 %%\includegraphics[width=10cm, height=7cm]{./img/old/figures/kmc/gaussian_trajectories_momentum_hmc}
 %\includegraphics[scale=1.2]{./img/old/figures/kmc/gaussian_trajectories_acceptance_hmc}\\
 
@@ -133,7 +150,7 @@ under the null, we use wild bootstrap
 
  \includegraphics[width=0.3\textwidth]{./img/bootstrapWorks1.pdf}
  \includegraphics[width=0.3\textwidth]{./img/bootstrapWorks4.pdf}
- \includegraphics[width=0.3\textwidth]{./img/bootstrapWorks8.pdf}
+ \includegraphics[width=0.3\textwidth]{./img/bootstrapWorks7.pdf}
 \end{block}
 \end{column}
 
