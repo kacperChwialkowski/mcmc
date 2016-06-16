@@ -4,7 +4,7 @@
 \begin{frame}
 \begin{columns}
 \begin{column}{.33\linewidth}
-\vspace{-0.75cm}
+%\vspace{-0.75cm}
 \begin{block}{Motivation: One sample testing for non i.i.d.\ data}
 \begin{minipage}{.57\linewidth}
 
@@ -17,7 +17,7 @@
 And so we turn the Bayesian Crank  to  obtain samples form the posteriori distribution. It obviously matters which matter which method we use, since quality of sample depends on it. However, once we are one  done one question remains...  
 \end{minipage}
 \begin{minipage}{.37\linewidth}
-\includegraphics[scale=0.8]{img/sgld_trace_and_density.pdf}
+\includegraphics[scale=0.8]{../../presentation/img/sgld_trace_and_density.pdf}
 \end{minipage}
 \vspace{1cm}
 \begin{center}
@@ -47,7 +47,7 @@ MMD({\color{red} p},{ \color{blue} q},F) = \sup_{   \| {\color{mg}f} \|_F<1} [\e
 \end{minipage}
 \begin{minipage}{.35\linewidth}
 \begin{center}
-\includegraphics[width=12cm,height=6cm]{./img/mmd.pdf}
+\includegraphics[width=12cm,height=6cm]{../../presentation/img/mmd.pdf}
 \end{center}
 \end{minipage}
 \vspace{1cm}
@@ -78,16 +78,16 @@ MMD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_G<1} \e
 \end{align*}
 \vspace{2cm}
 \centering
-\includegraphics[scale=1.2]{./img/s1.pdf}
-\includegraphics[scale=1.2]{./img/s05.pdf}\\
-\includegraphics[scale=1.2]{./img/s01.pdf}
-\includegraphics[scale=1.2]{./img/s0.pdf}
-%%\includegraphics[width=10cm, height=7cm]{./img/old/figures/kmc/gaussian_trajectories_momentum_hmc}
-%\includegraphics[scale=1.2]{./img/old/figures/kmc/gaussian_trajectories_acceptance_hmc}\\
+\includegraphics[scale=1.2]{../../presentation/img/s1.pdf}
+\includegraphics[scale=1.2]{../../presentation/img/s05.pdf}\\
+\includegraphics[scale=1.2]{../../presentation/img/s01.pdf}
+\includegraphics[scale=1.2]{../../presentation/img/s0.pdf}
+%%\includegraphics[width=10cm, height=7cm]{../../presentation/img/old/figures/kmc/gaussian_trajectories_momentum_hmc}
+%\includegraphics[scale=1.2]{../../presentation/img/old/figures/kmc/gaussian_trajectories_acceptance_hmc}\\
 
-%\includegraphics[scale=.5]{./img/old/figures/kmc/kmc_banana_bbox}
-%%\includegraphics[width=10cm, height=7cm]{./img/old/figures/kmc/gaussian_trajectories_momentum_kmc}
-%\includegraphics[scale=1.2]{./img/old/figures/kmc/gaussian_trajectories_acceptance_kmc}
+%\includegraphics[scale=.5]{../../presentation/img/old/figures/kmc/kmc_banana_bbox}
+%%\includegraphics[width=10cm, height=7cm]{../../presentation/img/old/figures/kmc/gaussian_trajectories_momentum_kmc}
+%\includegraphics[scale=1.2]{../../presentation/img/old/figures/kmc/gaussian_trajectories_acceptance_kmc}
 \vspace{1cm}
 \begin{center}
 \emph{Bam!}
@@ -99,7 +99,7 @@ MMD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_G<1} \e
 \hspace{-1.45cm}
 \begin{column}{.33\linewidth}
 
-\vspace{-0.75cm}
+%\vspace{-0.75cm}
 \begin{block}{Closed form expression}
  Let $F$ be the RKHS associated with the kernel $k$. Consider a friendly looking function
 \begin{align*}
@@ -150,9 +150,9 @@ under the null, we use wild bootstrap
   where $W_i$ is a specific series of zero valued random variables.
 
 
- \includegraphics[width=0.3\textwidth]{./img/bootstrapWorks1.pdf}
- \includegraphics[width=0.3\textwidth]{./img/bootstrapWorks4.pdf}
- \includegraphics[width=0.3\textwidth]{./img/bootstrapWorks7.pdf}
+ \includegraphics[width=0.3\textwidth]{../../presentation/img/bootstrapWorks1.pdf}
+ \includegraphics[width=0.3\textwidth]{../../presentation/img/bootstrapWorks4.pdf}
+ \includegraphics[width=0.3\textwidth]{../../presentation/img/bootstrapWorks7.pdf}
 \end{block}
 \end{column}
 
@@ -160,17 +160,17 @@ under the null, we use wild bootstrap
 % column 3
 \hspace{-1.45cm}
 \begin{column}{.32\linewidth}
-\vspace{-0.75cm}
+%\vspace{-0.75cm}
 \begin{block}{Experiment: Student's T vs.\ Normal}
 \begin{minipage}{.60\linewidth}
 \begin{itemize}
 \item TODO Describe
 \end{itemize}
-\includegraphics[width=.7\textwidth]{img/sgld_student_bad}
+\includegraphics[width=.7\textwidth]{../../presentation/img/sgld_student_bad}
 \end{minipage}
 \begin{minipage}{.35\linewidth}
-\includegraphics[width=1\textwidth]{img/sgld_student}\\
- \includegraphics[width=1\textwidth]{img/sgld_student_opt} 
+\includegraphics[width=1\textwidth]{../../presentation/img/sgld_student}\\
+ \includegraphics[width=1\textwidth]{../../presentation/img/sgld_student_opt} 
 \end{minipage}
 \end{block}
 \vspace{-0.75cm}
@@ -181,12 +181,12 @@ under the null, we use wild bootstrap
 X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\theta_{2},4) & .
 \end{align*}
 \begin{center}
-\includegraphics[width=0.5\textwidth]{img/sgld_trace_and_density.pdf}
+\includegraphics[width=0.5\textwidth]{../../presentation/img/sgld_trace_and_density.pdf}
 \end{center}
 \end{minipage}
 \begin{minipage}{.35\linewidth}
-           \includegraphics[width=.6\textwidth]{img/Heiko1}\\
-            \includegraphics[width=.6\textwidth]{img/Heiko2}
+           \includegraphics[width=.6\textwidth]{../../presentation/img/Heiko1}\\
+            \includegraphics[width=.6\textwidth]{../../presentation/img/Heiko2}
 \end{minipage}
 \end{block}
 \vspace{-0.75cm}
@@ -194,7 +194,7 @@ X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\theta
 \begin{center}
 \item We test the hypothesis that a Gaussian process generated {\color{red}training data} using for fitting -- without simulating from the generative model, but only using {\color{blue} test data}.
 \end{center}
-\includegraphics[width=0.48\textwidth]{img/gp_regression_data_fit.pdf} \includegraphics[width=0.48\textwidth]{img/gp_regression_bootstrap_hist} 
+\includegraphics[width=0.48\textwidth]{../../presentation/img/gp_regression_data_fit.pdf} \includegraphics[width=0.48\textwidth]{../../presentation/img/gp_regression_bootstrap_hist} 
 \begin{minipage}{.35\linewidth}
 
 \end{minipage}
