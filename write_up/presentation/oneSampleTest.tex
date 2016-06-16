@@ -241,7 +241,7 @@ under the null, we use wild bootstrap
         \end{figure}
         \end{column}
     \end{columns}
-
+Student's distributions was generated using MCMC.
 \end{frame}
 
 
@@ -266,9 +266,18 @@ under the null, we use wild bootstrap
 \end{align*}
  \end{frame}
 
-  \begin{frame}{Experiment 3: Statistical model criticism}
+    \begin{frame}{Experiment 3: Statistical model criticism}
         \begin{figure}
-           \includegraphics[width=0.48\textwidth]{img/gp_regression_data_fit.pdf} \includegraphics[width=0.48\textwidth]{img/gp_regression_bootstrap_hist} 
+           \includegraphics[width= 0.7\textwidth]{img/gp_regression_data_fit.pdf}  
+        \end{figure}
+      We test the hypothesis that a Gaussian process generated {\color{red}training data} using for fitting -- without simulating from the generative model, but only using {\color{blue} test data}.
+
+  \end{frame}
+
+
+   \begin{frame}{Experiment 3: Statistical model criticism}
+        \begin{figure}
+           \includegraphics[width=0.7\textwidth]{img/gp_regression_bootstrap_hist} 
         \end{figure}
       We test the hypothesis that a Gaussian process generated {\color{red}training data} using for fitting -- without simulating from the generative model, but only using {\color{blue} test data}.
 
