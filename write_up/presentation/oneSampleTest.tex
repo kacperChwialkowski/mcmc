@@ -262,23 +262,13 @@ under the null, we use wild bootstrap
 \end{align*}
  \end{frame}
 
-  \begin{frame}{Experiment 3}
-\begin{columns}
-        \begin{column}{.5\textwidth}
+  \begin{frame}{Experiment 3: Statistical model criticism}
         \begin{figure}
-           \includegraphics[width=\textwidth]{img/gp_regression_data_fit} 
-             
-             \includegraphics[width=\textwidth]{img/gp_regression_bootstrap_hist} 
+           \includegraphics[width=0.48\textwidth]{img/gp_regression_data_fit.pdf} \includegraphics[width=0.48\textwidth]{img/gp_regression_bootstrap_hist} 
         \end{figure}
-        \end{column}
-        \begin{column}{.5\textwidth}
-       We use the \texttt{solar} dataset. We fit $N_{\text{train}}=361$
-data using a GP, and perform  maximum likelihood. We then apply our test
-to the remaining $N_{\text{test}}=41$ data.
-        \end{column}
-    \end{columns}
- 
- \end{frame}
+      We test the hypothesis that a Gaussian process generated {\color{red}training data} using for fitting -- without simulating from the generative model, but only using {\color{blue} test data}.
+
+  \end{frame}
 
 
 \end{document}

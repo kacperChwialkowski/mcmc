@@ -38,11 +38,14 @@ def prepare_dataset(X, y):
     
     # normalise by training data statistics
     X_mean = np.mean(X_train)
+    print X_mean
     X_std = np.std(X_train)
+    print X_std
     X_train -= X_mean
     X_train /= X_std
     X_test -= X_mean
     X_test /= X_std
+    
     
     y_mean = np.mean(y_train)
     y_std = np.std(y_train)
@@ -164,15 +167,29 @@ if __name__ == '__main__':
     
     res = 100
     pred_mean, pred_std = m.predict(X_test)
-    plt.plot(X_test, pred_mean, 'b-')
-    plt.plot(X_test, pred_mean + 2 * pred_std, 'b--')
-    plt.plot(X_test, pred_mean - 2 * pred_std, 'b--')
-    plt.plot(X_train, y_train, 'b.', markersize=3)
-    plt.plot(X_test, y_test, 'r.', markersize=5)
+    X_test_plot = X_test[:,0]* 116.502738394 + 1815.93213296
+    
+    fig, ax = plt.subplots()
+    plt.plot(X_test_plot, pred_mean, 'b-')
+#     plt.plot(X_test, pred_mean + 2 * pred_std, 'b--')
+#     plt.plot(X_test, pred_mean - 2 * pred_std, 'b--')
+    # some hacks to make x axis ok again
+    lower = (pred_mean - 2 * pred_std)[:,0]
+    upper = (pred_mean + 2 * pred_std)[:,0]
+    plt.fill_between(X_test_plot, lower, upper, color='b', alpha=0.3)
+    plt.plot(X_train* 116.502738394 + 1815.93213296, y_train, 'b.', markersize=3)
+    plt.plot(X_test_plot, y_test, 'r.', markersize=5)
     plt.grid(True)
-    plt.xlabel(r"$X$")
-    plt.ylabel(r"$y$")
+    plt.xlabel(r"Year")
+    plt.ylabel(r"Solar activity (normalised)")
+    
+    start, end = ax.get_xlim()
+    ax.xaxis.set_ticks(np.arange(start, end, 100))
+    
     plt.savefig("gp_regression_data_fit.eps", bbox_inches='tight')
+    plt.savefig("gp_regression_data_fit.pdf", bbox_inches='tight')
+    exit()
+    
     
     s = GaussianQuadraticTest(None)
     gradients = compute_gp_regression_gradients(y_test, pred_mean, pred_std)
