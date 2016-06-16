@@ -16,7 +16,7 @@
    \includegraphics[width=2cm]{./img/csml_logo_vector2.pdf}
 }
 
-\definecolor{mpigreen}{rgb}{0,0.31,0}
+\definecolor{mg}{rgb}{0,0.44,0}
 
 
 \definecolor{1}{rgb}{ 0.9000,0.4909,0}
@@ -49,16 +49,21 @@ $ X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\the
  
  \begin{frame}{Maximum mean discrepancy}
  \begin{center}
-$MMD({\color{red} p},{ \color{blue} q},F) = \sup_{ f\in F} [\ev_{{ \color{blue} q}}f - \ev_{{\color{red} p}} f]  $\\
+$MMD({\color{red} p},{ \color{blue} q},F) = \sup_{   \| {\color{mg}f} \|_F<1} [\ev_{{ \color{blue} q}}{\color{mg}f}- \ev_{{\color{red} p}}{\color{mg} f}]  $\\
 \vspace{0.5cm}
  \includegraphics[width=0.6\textwidth]{./img/mmd.pdf} 
  \end{center}
+ \begin{itemize}
+  \item $F$ is an Reproducing Kernel Hilbert Space.
+  \item ${\color{mg} f^*}$ is the function that attains the supremum.
+ \end{itemize}
+
  \end{frame} 
  
  
  
  \begin{frame}{Main idea (by Stein)}
-To get rid of $\ev_{{\color{red} p}}f$  in $$ \sup_{f \in F} [\ev_{{ \color{blue} q}}f - \ev_{{\color{red} p}} f ] $$we will use the cornerstone of modern ML
+To get rid of $\ev_{ {\color{red} p} }f$  in $$ \sup_{    \| {\color{mg}f} \|_F<1} [\ev_{{ \color{blue} q}}{\color{mg}f}- \ev_{{\color{red} p}} {\color{mg}f}] $$we will use the cornerstone of modern ML
 
 \pause
 \textbf{integration by parts}
@@ -98,7 +103,7 @@ I got you
  \begin{center}
  \scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
  
-$MMD({\color{red} p},{ \color{blue} q},G) = \sup_{g\in G} \ev_{{ \color{blue} q}}g - \ev_{{\color{red} p}} g - = \sup_{g \in G} \ev_{{ \color{blue} q}} g $  \\
+$MMD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}}{\color{mg}g} - \ev_{{\color{red} p}} {\color{mg}g}  = \sup_{ \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}} {\color{mg}g} $  \\
 \vspace{0.5cm}
  \includegraphics[width=0.6\textwidth]{./img/s1.pdf} 
  \end{center}
@@ -109,9 +114,9 @@ $MMD({\color{red} p},{ \color{blue} q},G) = \sup_{g\in G} \ev_{{ \color{blue} q}
  \begin{center}
  \scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
  
-$MMD({\color{red} p},{ \color{blue} q},G) = \sup_{g\in G} \ev_{{ \color{blue} q}}g - \ev_{{\color{red} p}} g - = \sup_{g \in G} \ev_{{ \color{blue} q}} g $  \\
+$MMD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}}{\color{mg}g} - \ev_{{\color{red} p}} {\color{mg}g}  = \sup_{ \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}} {\color{mg}g} $  \\
 \vspace{0.5cm}
- \includegraphics[width=0.6\textwidth]{./img/s05.pdf} 
+\includegraphics[width=0.6\textwidth]{./img/s05.pdf} 
  \end{center}
  \end{frame} 
  
@@ -120,12 +125,23 @@ $MMD({\color{red} p},{ \color{blue} q},G) = \sup_{g\in G} \ev_{{ \color{blue} q}
  \begin{center}
  \scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
  
-$MMD({\color{red} p},{ \color{blue} q},G) = \sup_{g\in G} \ev_{{ \color{blue} q}}g - \ev_{{\color{red} p}} g - = \sup_{g \in G} \ev_{{ \color{blue} q}} g $  \\
+$MMD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}}{\color{mg}g} - \ev_{{\color{red} p}} {\color{mg}g}  = \sup_{ \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}} {\color{mg}g} $  \\
 \vspace{0.5cm}
  \includegraphics[width=0.6\textwidth]{./img/s01.pdf} 
  \end{center}
  \end{frame} 
 
+ \begin{frame}{Stein discrepancy}
+ \begin{center}
+ \scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
+ 
+$MMD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}}{\color{mg}g} - \ev_{{\color{red} p}} {\color{mg}g}  = \sup_{ \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}} {\color{mg}g} $  \\
+\vspace{0.5cm}
+ \includegraphics[width=0.6\textwidth]{./img/s0.pdf} 
+ \end{center}
+ \end{frame} 
+ 
+ 
  
 \begin{frame}{Main results}
 \begin{center}
@@ -136,19 +152,24 @@ h_{{\color{red} p}}(x,y) & := \partial_{x} \log {\color{red} p}(x) \partial_{x} 
  & \quad+\partial_{x} \log {\color{red} p}(x) \partial_{y}k(x,y)\\
  & \quad+\partial_{x} \partial_{y} k(x,y).
 \end{align*}
+Let ${ \color{blue} q},{\color{red} p}$ be probability measures and $Z\sim { \color{blue} q}$. 
+
 \end{center}
+\begin{thm}
+If $\ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z)<\infty$, then $MMD({\color{red} p},{ \color{blue} q},G) = \ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z')$.
+\end{thm}
 \end{frame}
  
 \begin{frame}{Main results}
 
 Let ${ \color{blue} q},{\color{red} p}$ be probability measures and $Z\sim { \color{blue} q}$. 
 \begin{thm}
-If $\ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z)<\infty$, then $MMD({\color{red} p},{ \color{blue} q},G) = \ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z')$.
-\end{thm}
-\begin{thm}
  If the kernel $k$ is cc-universal, $\ev_{{ \color{blue} q}} h_{{ \color{blue} q}}(Z,Z)<\infty$ and $\ev_{{ \color{blue} q}} (\log' \frac{{\color{red} p}(Z)}{{ \color{blue} q}(Z)})^{2}<\infty$
 then $MMD({\color{red} p},{ \color{blue} q},G) =0$ if and only if ${\color{red} p}={ \color{blue} q}$.
 \end{thm}
+\small{
+Kernel is $C_0$-universal if  $f \to \int_X f(x) k(x,\cdot) d\mu(x)$ if is injective for all probability measures $\mu$ and  $f \in L^p(X,\mu)$ for some $p \in [1,\infty] $. The assumption $\ev_{{ \color{blue} q}} (\log' \frac{{\color{red} p}(Z)}{{ \color{blue} q}(Z)})^{2}<\infty$ states that difference between scores is square integrable. 
+}
 
 \end{frame} 
 
@@ -176,19 +197,29 @@ under the null, we use wild bootstrap
 \[
  B_n(h_{\color{red} p}) = \frac {1} {n^2} \sum_{i,j=1}^n W_i W_j h_{\color{red} p}(X_i,X_j).
 \]
-  where $W_i$ is a specific series of zero valued random variables.
+  where $W_i$ is a specific series of zero mean valued random variables.
+  $$
+  Cov(W_i,W_j) = (1-\frac{2}{\log n})^{-|s-t|}
+  $$
 \end{frame}
 
- \begin{frame}{Wild bootstrapping}
+ \begin{frame}{Wild bootstrapping; small correlation }
+\centering
+ $$X_t = 0.1 X_{t-1} + \sqrt{1 - 0.1^2}\epsilon_t$$
  \includegraphics[width=0.9\textwidth]{./img/bootstrapWorks1.pdf}
-\end{frame}
 
- \begin{frame}{Wild bootstrapping}
+ \end{frame}
+
+ \begin{frame}{Wild bootstrapping, medium correlation}
+\centering
+ $$X_t = 0.4 X_{t-1} + \sqrt{1 - 0.4^2}\epsilon_t$$
  \includegraphics[width=0.9\textwidth]{./img/bootstrapWorks4.pdf}
 \end{frame}
 
- \begin{frame}{Wild bootstrapping}
- \includegraphics[width=0.9\textwidth]{./img/bootstrapWorks8.pdf}
+ \begin{frame}{Wild bootstrapping; huge correlation}
+\centering
+ $$X_t = 0.7 X_{t-1} + \sqrt{1 - 0.7^2}\epsilon_t$$
+ \includegraphics[width=0.9\textwidth]{./img/bootstrapWorks7.pdf}
 \end{frame}
 
 
@@ -197,46 +228,38 @@ under the null, we use wild bootstrap
 \begin{columns}
         \begin{column}{.5\textwidth}
         \begin{figure}
-           \includegraphics[width=\textwidth]{img/sgld_student_bad} 
-           
-           
-            \includegraphics[width=\textwidth]{img/sgld_student} 
+           \includegraphics[width=\textwidth]{img/nt}   
         \end{figure}
         \end{column}
         \begin{column}{.5\textwidth}
             \begin{figure}
            \includegraphics[width=\textwidth]{img/sgld_student_opt} 
         \end{figure}
-       Null -- samples are from normal distribution. Draws from the Student's t distribution exhibit temporal correlation.
         \end{column}
     \end{columns}
- 
 
 \end{frame}
 
 
 
-  \begin{frame}{Bias quantification in Approximate MCMC}
+  \begin{frame}{Austerity in MCMC Land}
 \begin{columns}
-        \begin{column}{.55\textwidth}
+        \begin{column}{.5\textwidth}
         \begin{figure}
            \includegraphics[width=\textwidth]{img/Heiko1} 
-           
-            \includegraphics[width=\textwidth]{img/Heiko2}
         \end{figure}
         \end{column}
-        \begin{column}{.45\textwidth}
-        \begin{align*}
-\theta_{1}\sim{\cal N}(0,10);\theta_{2}\sim{\cal N}(0,1)\\
-X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\theta_{2},4) & .
-\end{align*}
-
+        \begin{column}{.5\textwidth}
             \begin{figure}
-           \includegraphics[width=\textwidth]{img/sgld_sample} 
+           \includegraphics[width=\textwidth]{img/sgld_sample_wth_trace.pdf} 
         \end{figure}
-
         \end{column}
     \end{columns}
+ \begin{align*}
+ \theta_{1}\sim{\cal N}(0,10);\theta_{2}\sim{\cal N}(0,1)\\
+ X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\theta_{2},4) & .
+\end{align*}
+$\epsilon$ is the bias you wish to accept in your MCMC. 
  \end{frame}
 
   \begin{frame}{Experiment 3}
