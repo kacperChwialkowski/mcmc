@@ -85,11 +85,11 @@ I got you
 
   \begin{frame}{Cornerstone of modern ML: integration by parts}
   \begin{center}
-  Consider the  class  \scalebox{1.3}{ $G = \{ f  +  \log' { \color{blue} q} \cdot  f | f \in F \}$} justified by 
+  Consider the  class  \scalebox{1.3}{ $G = \{ f  +  \log' { \color{red} p} \cdot  f | f \in F \}$} justified by 
 \begin{align*}
  0= &  f(x) {\color{red} p}(x)  \big|_{x=-\infty}^{x=\infty} \\
    = &  \int_{-\infty}^{\infty} (f(x) {\color{red} p}(x) )'  dx \\
-   = &  \int   f(x)' { \color{blue} q}(x)   + f(x){\color{red} p}'(x)  \\
+   = &  \int   f(x)' { \color{red} p}(x)   + f(x){\color{red} p}'(x)  \\
    = &  \ev_{\color{red} p} f(X)  +  \log' {\color{red} p}(X) f(X) \\
    = & \ev_{\color{red} p} g(X), \\
     & \quad \quad \quad  \quad  \text{ where } g \in G
@@ -167,8 +167,12 @@ Let ${ \color{blue} q},{\color{red} p}$ be probability measures and $Z\sim { \co
  If the kernel $k$ is cc-universal, $\ev_{{ \color{blue} q}} h_{{ \color{blue} q}}(Z,Z)<\infty$ and $\ev_{{ \color{blue} q}} (\log' \frac{{\color{red} p}(Z)}{{ \color{blue} q}(Z)})^{2}<\infty$
 then $MMD({\color{red} p},{ \color{blue} q},G) =0$ if and only if ${\color{red} p}={ \color{blue} q}$.
 \end{thm}
-\small{
-Kernel is $C_0$-universal if  $f \to \int_X f(x) k(x,\cdot) d\mu(x)$ if is injective for all probability measures $\mu$ and  $f \in L^p(X,\mu)$ for some $p \in [1,\infty] $. The assumption $\ev_{{ \color{blue} q}} (\log' \frac{{\color{red} p}(Z)}{{ \color{blue} q}(Z)})^{2}<\infty$ states that difference between scores is square integrable. 
+
+\vspace{10mm}
+\footnotesize{
+Kernel is $C_0$-universal if  $f \to \int_X f(x) k(x,\cdot) d\mu(x)$ if is injective for all probability measures $\mu$ and all  $f \in L^p(X,\mu)$, where  $p \in [1,\infty] $. 
+
+The assumption $\ev_{{ \color{blue} q}} (\log' \frac{{\color{red} p}(Z)}{{ \color{blue} q}(Z)})^{2}<\infty$ states that difference between scores $\log' \color{red} p$ and $\log' \color{blue} q$  is square integrable. 
 }
 
 \end{frame} 
@@ -199,26 +203,26 @@ under the null, we use wild bootstrap
 \]
   where $W_i$ is a specific series of zero mean valued random variables.
   $$
-  Cov(W_i,W_j) = (1-\frac{2}{\log n})^{-|s-t|}
+  Cov(W_i,W_j) = (1-\frac{2}{\log n})^{-|i-j|}
   $$
 \end{frame}
 
  \begin{frame}{Wild bootstrapping; small correlation }
 \centering
- $$X_t = 0.1 X_{t-1} + \sqrt{1 - 0.1^2}\epsilon_t$$
+ $$X_t = 0.1 X_{t-1} + \sqrt{1 - 0.1^2}\epsilon_t, \quad \epsilon_t \sim N(0,1)$$
  \includegraphics[width=0.9\textwidth]{./img/bootstrapWorks1.pdf}
 
  \end{frame}
 
  \begin{frame}{Wild bootstrapping, medium correlation}
 \centering
- $$X_t = 0.4 X_{t-1} + \sqrt{1 - 0.4^2}\epsilon_t$$
+ $$X_t = 0.4 X_{t-1} + \sqrt{1 - 0.4^2}\epsilon_t, \quad \epsilon_t \sim N(0,1)$$
  \includegraphics[width=0.9\textwidth]{./img/bootstrapWorks4.pdf}
 \end{frame}
 
  \begin{frame}{Wild bootstrapping; huge correlation}
 \centering
- $$X_t = 0.7 X_{t-1} + \sqrt{1 - 0.7^2}\epsilon_t$$
+ $$X_t = 0.7 X_{t-1} + \sqrt{1 - 0.7^2}\epsilon_t, \quad \epsilon_t \sim N(0,1)$$
  \includegraphics[width=0.9\textwidth]{./img/bootstrapWorks7.pdf}
 \end{frame}
 
