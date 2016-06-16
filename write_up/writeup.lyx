@@ -997,7 +997,11 @@ name "theorem_discrepancy_is_metric"
 \begin_inset Formula $k$
 \end_inset
 
- is cc-universal 
+ is 
+\begin_inset Formula $C_{0}$
+\end_inset
+
+-universal 
 \begin_inset CommandInset citation
 LatexCommand citep
 after "Definition 4.1"
@@ -1497,7 +1501,7 @@ key "SteChr08"
 ), which allows us to change order of the integration 
 \begin_inset Formula 
 \[
-\ev_{q}\|\xi_{p}(Z)\|_{\mathcal{F}^{d}}\leq\ev_{q}\|\xi_{p}(Z)\|_{\mathcal{F}^{d}}^{2}=\ev_{q}h_{p}(Z,Z)<\infty.
+\ev_{q}\|\xi_{p}(Z)\|_{\mathcal{F}^{d}}\leq\sqrt{\ev_{q}\|\xi_{p}(Z)\|_{\mathcal{F}^{d}}^{2}}=\sqrt{\ev_{q}h_{p}(Z,Z)}<\infty.
 \]
 
 \end_inset
@@ -1801,7 +1805,7 @@ reference "th:closed_form_discrepancy"
 \noun default
 \color inherit
  In the following we substitute 
-\begin_inset Formula $\log p(Z)=\log q(Y)+[\log p(Z)-\log q(Y)]$
+\begin_inset Formula $\log p(Z)=\log q(Z)+[\log p(Z)-\log q(Z)]$
 \end_inset
 
 , 
@@ -1809,8 +1813,8 @@ reference "th:closed_form_discrepancy"
 \begin{align*}
  & \ev_{q}\xi_{p}(Z)\\
  & =\ev_{q}\left(\nabla\log p(Z)k(Z,\cdot)+\nabla k(Z,\cdot)\right)\\
- & =\ev_{q}\xi_{q}(Z)+\ev_{q}\left(\nabla[\log p(Z)-\log q(Y)]k(Z,\cdot)\right)\\
- & =\ev_{q}\left(\nabla[\log p(Z)-\log q(Y)]k(Z,\cdot)\right)
+ & =\ev_{q}\xi_{q}(Z)+\ev_{q}\left(\nabla[\log p(Z)-\log q(Z)]k(Z,\cdot)\right)\\
+ & =\ev_{q}\left(\nabla[\log p(Z)-\log q(Z)]k(Z,\cdot)\right)
 \end{align*}
 
 \end_inset
@@ -1869,10 +1873,14 @@ recognise
 \begin_inset Formula $k$
 \end_inset
 
- is cc-universal, by 
+ is 
+\begin_inset Formula $C_{o}$
+\end_inset
+
+-universal, by 
 \begin_inset CommandInset citation
 LatexCommand citet
-after " Theorem 4.4 c"
+after " Theorem 4.2 b"
 key "carmeli2010vector"
 
 \end_inset
