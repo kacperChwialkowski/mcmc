@@ -203,10 +203,11 @@ under the null, we use wild bootstrap
 \]
   where $W_i$ is a specific series of zero mean valued random variables.
   
+ \vspace{-1cm} 
 \begin{columns}
         \begin{column}{.5\textwidth}
          $$
-  Cov(W_i,W_j) = (1-\frac{2}{\log n})^{-|i-j|}
+  Cov(W_i,W_j) = (1-2p_n)^{-|i-j|}
   $$
         \end{column}
         \begin{column}{.5\textwidth}
@@ -216,8 +217,8 @@ under the null, we use wild bootstrap
         \end{figure}
         \end{column}
     \end{columns}
-
-  
+\vspace{-1cm}
+    $p_n$ is  the probability of the change  and should be set to $o(n)$.
   \end{frame}
 
  \begin{frame}{Wild bootstrapping; small correlation }
