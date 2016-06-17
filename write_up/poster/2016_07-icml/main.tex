@@ -62,7 +62,7 @@ MMD({\color{red} p},{ \color{blue} q},F) = \sup_{   \| {\color{mg}f} \|_F<1} [\e
 \begin{block}{Stein's trick in RKHS}
 
 Consider the  class \large
-$$G = \{ f  +  \log' { \color{blue} q} \cdot  f | f \in F \}$$
+$$G = \{ f  +  \log' { \color{red} p} \cdot  f | f \in F \}$$
 \normalsize
 justified by integration by parts
 \begin{align*}
@@ -73,8 +73,11 @@ justified by integration by parts
    = & \ev_{\color{red} p} g(X), \\
     & \quad \quad \quad  \quad  \text{ where } g \in G
 \end{align*}
-
-
+With an aid of the Stein operator 
+\[
+ T_{p}f =  f  +  \log' { \color{red} p} \cdot  f
+\]
+the function class is $G = \{ T_{p}f | f \in F \}$
 \end{block}
 \vspace{-0.75cm}
 
@@ -97,6 +100,7 @@ MMD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_G<1} \e
 
 
 
+\vspace{-0.75cm}
 \begin{block}{Closed form expression}
  Let $F$ be the RKHS associated with the kernel $k$ and 
 \large
@@ -119,11 +123,14 @@ h_{{\color{red} p}}(x,y) & = \partial_{x} \log {\color{red} p}(x) \partial_{x} \
  \center{\emph{which only depends on kernel and $\partial_{x} \log {\color{red} p}(x)$}}
 \end{block}
 
+\vspace{-0.75cm}
 
 \begin{block}{Theorem}
 \large
 Let ${ \color{blue} q},{\color{red} p}$ be probability measures and $Z\sim { \color{blue} q}$. 
-If $\ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z)<\infty$, then $MMD({\color{red} p},{ \color{blue} q},G) = \ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z')$.
+If $\ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z)<\infty$, then 
+$$MMD({\color{red} p},{ \color{blue} q},G) = \ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z'),$$
+where $Z'$ is an independent copy of $Z$.
 \end{block}
 
 
@@ -147,31 +154,25 @@ of $\xi_{q}(Z)$,
 \begin{align*}
   \left\langle f,\ev_{q} \xi_{p}(Z) \right\rangle _{\mathcal{F}}& =\left\langle f,\ev_{q} \left[  \log' p(Z) k(Z,\cdot)+\ k'(Z,\cdot) \right] \right \rangle _{\mathcal{F}}\\
  & = \ev_{q}  \left\langle f,\left[  \log' p(Z) k(Z,\cdot)+\ k'(Z,\cdot) \right] \right \rangle _{\mathcal{F}}\\
- & =\ev_{q}\left[\log' p(Z) f(Z)+ f'(X) \right].
+ & =\ev_{q}(T_{p}f)(Z).
 \end{align*}
 The second equality follows from  Bochner integrability of $\xi_{p}$.
 We have 
 \begin{align*}
-MMD(p,q,F) & :=\sup_{\Vert f\Vert<1}\ev_{q}(T_{p}f)(Z)-\ev_{p}(T_{p}f)(X)\\
+MMD(p,q,G) & :=\sup_{\Vert f\Vert<1}\ev_{q}(T_{p}f)(Z)-\ev_{p}(T_{p}f)(X)\\
  & =\sup_{\Vert f\Vert<1}\ev_{q}(T_{p}f)(Z)\\
  & =\sup_{\Vert f\Vert<1}\langle f,\ev_{q}\xi_{p}(Z)\rangle_{{\cal F}^{d}}\\
  & =\|\ev_{q}\xi_{p}(Z)\|_{\mathcal{F}^{d}}.
 \end{align*}
-We now calculate closed form formula for $S_{p}^{2}(Z)$,
-
+We now calculate closed form formula for $MMD(p,q,G)^{2}$,
 \begin{align*}
-MMD(p,q,F)^{2} & =\langle\ev_{q}\xi_{p}(Z),\ev_{q}\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}=\ev_{q}\langle\xi_{p}(Z),\ev_{q}\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}\\
+MMD(p,q,G)^{2} & =\langle\ev_{q}\xi_{p}(Z),\ev_{q}\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}=\ev_{q}\langle\xi_{p}(Z),\ev_{q}\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}\\
  & =\ev_{q}\langle\xi_{p}(Z),\xi_{p}(Z')\rangle_{\mathcal{F}^{d}}=\ev_{q}h_{p}(Z,Z'),
 \end{align*}
-where $Z'$ is an independent copy of $Z$.
-
-
-
-
 \end{block}
 
 
-
+\vspace{-0.75cm}
 \begin{block}{Theorem}
 \large
 If the kernel $k$ is cc-universal, $\ev_{{ \color{blue} q}} h_{{ \color{blue} q}}(Z,Z)<\infty$ and $\ev_{{ \color{blue} q}} (\log' \frac{{\color{red} p}(Z)}{{ \color{blue} q}(Z)})^{2}<\infty$
