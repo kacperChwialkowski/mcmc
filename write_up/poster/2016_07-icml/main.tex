@@ -143,7 +143,7 @@ h_{{\color{red} p}}(x,y) & = \partial_{x} \log {\color{red} p}(x) \partial_{x} \
 \large
 Let ${ \color{blue} q},{\color{red} p}$ be probability measures and ${ \color{blue} Z}\sim { \color{blue} q}$. 
 If $\ev_{{ \color{blue} q}} h_{{\color{red} p}}({ \color{blue} Z},{ \color{blue} Z})<\infty$, then 
-$$MMD({\color{red} p},{ \color{blue} q},G) = \ev_{{ \color{blue} q}} h_{{\color{red} p}}({ \color{blue} Z},{ \color{blue} Z}'),$$
+$MMD({\color{red} p},{ \color{blue} q},G) = \ev_{{ \color{blue} q}} h_{{\color{red} p}}({ \color{blue} Z},{ \color{blue} Z}')$,
 where ${ \color{blue} Z}'$ is an independent copy of ${ \color{blue} Z}$.
 \end{block}
 
@@ -384,14 +384,9 @@ See \cite{lloyd2015statistical}.
 
  
 
-we apply our goodness of fit test to measuring
-quality-of-fit in nonparametric density estimation. We evaluate two
-density models: the infinite dimensional exponential family \cite{SriFukKumGreHyv14},
-and a recent approximation to this model using random Fourier features
-\cite{strathmann2015gradient}.
+We apply our goodness of fit test to measuring quality-of-fit in nonparametric density estimation. We evaluate two
+density models: the infinite dimensional exponential family \cite{SriFukKumGreHyv14}, and a  approximation to this model \cite{strathmann2015gradient}.
 % 
-\footnotesize
-
 
 \begin{center}
 \begin{minipage}{.450\linewidth}
@@ -402,6 +397,14 @@ and a recent approximation to this model using random Fourier features
 \end{minipage}
 \end{center}
 
+\footnotesize
+Our implementation of the model assumes
+the log density to take the form $f(x)$, where $f$ lies in a RKHS
+induced by a Gaussian kernel with bandwidth $1$. We fit the model
+using $N$ observations drawn from a standard Gaussian, and perform
+our quadratic time test on a separate evaluation dataset of fixed
+size $n=500$. Our goal is to identify $N$ sufficiently large that
+the goodness of fit test does not reject the null hypothesis.
 
 \end{block}
 
