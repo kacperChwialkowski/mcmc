@@ -17,7 +17,7 @@
 %AG: changed text
 
 MCMC: samples from distributions where normalization can't be computed.
-Recent work on MCMC  incorporates tradeoff between bias/accuracy, e.g. \cite{korattikara2013austerity}.
+Recent work on MCMC  incorporates tradeoff between bias/computation, e.g. \cite{korattikara2013austerity}.
 %And so we turn the Bayesian Crank  to  obtain samples form the posteriori distribution. It obviously matters which matter which method we use, since quality of sample depends on it. 
 \end{minipage}
 \begin{minipage}{.4\linewidth}
@@ -44,7 +44,7 @@ MMD({\color{red} p},{ \color{blue} q},\mathcal{F}) = \sup_{   \| {\color{mg}f} \
  \begin{itemize}
   \item $\mathcal{F}$ -- reproducing kernel Hilbert space.
   \item ${\color{mg} f^*}$ -- function that attains the supremum.
-  \item We want to get rid of  $\ev_{ {\color{red} p} }f$ (usually can't compute in closed form)..
+  \item We want to get rid of  $\ev_{ {\color{red} p} }f$ (usually can't compute in closed form).
  \end{itemize}
 
 \end{minipage}
@@ -82,14 +82,14 @@ Define the {\bf Stein operator}
 \[
  T_{\color{red} p}f =  f'  +  \log' { \color{red} p} \cdot  f
 \]
-the function class is $G = \{ T_{\color{red} p}f | f \in \mathcal{F} \}$.
+The function class is therefore $G = \{ T_{\color{red} p}f | f \in \mathcal{F} \}$.
 
-Inspired by \cite{gorham2015measuring}, related to \cite{OatGirCho15}, and independently developed in \cite{LiuLeeJor16}.
+Inspired by \cite{gorham2015measuring}, related to \cite{OatGirCho15}, and independently developed in \cite{LiuLeeJor16_icml}.
 \end{block} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-0.75cm}
 
 
-\begin{block}{Maximum Stein discrepancy}
+\begin{block}{Maximum Stein Discrepancy}
 \large
 \begin{align*}
 MSD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} f} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} f} - \ev_{{\color{red} p}} T_{\color{red} p} {\color{mg} f}  = \sup_{ \| {\color{mg} f} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} f} 
@@ -109,10 +109,10 @@ MSD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} f} \|_\mathca
 
 \vspace{-0.75cm}
 \begin{block}{RKHS element for Stein operator}
-%\Large
-Given $f\in \mathcal{F}$, action of Stein operator $T_{\color{red} p}$ can be written as dot product with Stein element $\xi_{{ \color{red} p}}$,
+\large
+Given $f\in \mathcal{F}$, the action of the Stein operator $T_{\color{red} p}$ can be written as a dot product with the {\em Stein element} $\xi_{{ \color{red} p}}$,
  \begin{equation*}
-T_{\color{red} p}[f](x) = \langle f, \xi_{{ \color{red} p}}(x,\cdot) \rangle_{\mathcal{F}}
+(T_{\color{red} p} f)(x) = \langle f, \xi_{{ \color{red} p}}(x,\cdot) \rangle_{\mathcal{F}}
 \end{equation*}
 where
  \begin{equation*}
@@ -120,6 +120,7 @@ where
 \end{equation*}
 and $k$ is kernel associated with RKHS $\mathcal{F}$.
 
+\vspace{2cm}
 %\large
 Define $h_{{ \color{red} p}}$ as dot product of  $\xi$ at points $x$ and $y$, 
 \[
@@ -153,7 +154,7 @@ to normalise {\color{red} p}, or sample from it. }}}
 \begin{column}{.33\linewidth}
 
 
-\begin{block}{Theorem}
+\begin{block}{Theorem 1: population Maximum Stein Discrepancy}
 \large
 Let ${ \color{blue} q},{\color{red} p}$ be probability measures and ${ \color{blue} Z}\sim { \color{blue} q}$. 
 If $\ev_{{ \color{blue} q}} h_{{\color{red} p}}({ \color{blue} Z},{ \color{blue} Z})<\infty$, then 
@@ -162,18 +163,23 @@ where ${ \color{blue} Z}'$ is an independent copy of ${ \color{blue} Z}$.
 \end{block}
 
 \vspace{-0.73cm}
-\begin{block}{Proof}
+\begin{block}{Proof ideas (Theorem 1)}
 
-First show that $\xi_{{ \color{red} p}}(x,\cdot)$ is Bochner integrable
+First, $\xi_{{ \color{red} p}}(x,\cdot)$ is Bochner integrable by assumption,
 \[
 \ev_{{ \color{blue} q}}\|\xi_{{ \color{red} p}}({ \color{blue} Z})\|_{\mathcal{\mathcal{F}}}^{2}=\ev_{{ \color{blue} q}}h_{{ \color{red} p}}({ \color{blue} Z},{ \color{blue} Z})<\infty.
 \]
-We next relate the expected value of the Stein operator to the inner product of $f$ and the expected value
-of $\xi_{{ \color{red} p}}({ \color{blue} Z})$,  
+%We next relate the expected value of the Stein operator to the inner product of $f$ and the expected value
+%of $\xi_{{ \color{red} p}}({ \color{blue} Z})$,
+Bochner integrable $\implies$ can exchange order of expectation and dot product,
 \begin{align*}
-  \left\langle f,\ev_{{ \color{blue} q}} \xi_{{ \color{red} p}}({ \color{blue} Z}) \right\rangle _{\mathcal{\mathcal{F}}}& =\left\langle f,\ev_{{ \color{blue} q}} \left[  \log' { \color{red} p}({ \color{blue} Z}) k({ \color{blue} Z},\cdot)+\ k'({ \color{blue} Z},\cdot) \right] \right \rangle _{\mathcal{\mathcal{F}}}\\
- & = \ev_{{ \color{blue} q}}  \left\langle f,\left[  \log' { \color{red} p}({ \color{blue} Z}) k({ \color{blue} Z},\cdot)+\ k'({ \color{blue} Z},\cdot) \right] \right \rangle _{\mathcal{\mathcal{F}}}\\
- & =\ev_{{ \color{blue} q}}(T_{{ \color{red} p}}f)({ \color{blue} Z}).
+\ev_{{ \color{blue} q}}(T_{{ \color{red} p}}f)({ \color{blue} Z})
+&=
+\ev_{{ \color{blue} q}}  \left\langle f,\left[  \log' { \color{red} p}({ \color{blue} Z}) k({ \color{blue} Z},\cdot)+\ k'({ \color{blue} Z},\cdot) \right] \right \rangle _{\mathcal{\mathcal{F}}}\\
+&=
+\left\langle f,\ev_{{ \color{blue} q}} \left[  \log' { \color{red} p}({ \color{blue} Z}) k({ \color{blue} Z},\cdot)+\ k'({ \color{blue} Z},\cdot) \right] \right \rangle _{\mathcal{\mathcal{F}}}\\
+&=
+\left\langle f,\ev_{{ \color{blue} q}} \xi_{{ \color{red} p}}({ \color{blue} Z}) \right\rangle _{\mathcal{\mathcal{F}}}&
 \end{align*}
 The second equality follows from  Bochner integrability of $\xi_{{ \color{red} p}}$.
 We have 
@@ -183,7 +189,7 @@ MSD({ \color{red} p},{ \color{blue} q},G) & :=\sup_{\Vert f\Vert<1}\ev_{{ \color
  & =\sup_{\Vert f\Vert<1}\langle f,\ev_{{ \color{blue} q}}\xi_{{ \color{red} p}}({ \color{blue} Z})\rangle_{{\cal \mathcal{F}}}\\
  & =\|\ev_{{ \color{blue} q}}\xi_{{ \color{red} p}}({ \color{blue} Z})\|_{\mathcal{\mathcal{F}}}.
 \end{align*}
-We now calculate closed form formula for $MSD({ \color{red} p},{ \color{blue} q},G)^{2}$,
+We now calculate the closed form formula for $MSD({ \color{red} p},{ \color{blue} q},G)^{2}$,
 \begin{align*}
 MSD({ \color{red} p},{ \color{blue} q},G)^{2}  =\ev_{{ \color{blue} q}}\langle\xi_{{ \color{red} p}}({ \color{blue} Z}),\xi_{{ \color{red} p}}({ \color{blue} Z}')\rangle_{\mathcal{\mathcal{F}}}=\ev_{{ \color{blue} q}}h_{{ \color{red} p}}({ \color{blue} Z},{ \color{blue} Z}'),
 \end{align*}
@@ -191,25 +197,27 @@ MSD({ \color{red} p},{ \color{blue} q},G)^{2}  =\ev_{{ \color{blue} q}}\langle\x
 
 
 \vspace{-0.75cm}
-\begin{block}{Theorem}
+\begin{block}{Theorem 2: Stein discrepancy zero $\iff$ ${ \color{red} p} =  {\color{lightblue} q}$}
 \vspace{1cm}
 
 
 \large
-If the kernel $k$ is $C_0$-universal, $\ev_{{ \color{blue} { \color{blue} q}}} h_{{ \color{blue} { \color{blue} q}}}({ \color{blue} Z},{ \color{blue} Z})<\infty$ and $\ev_{{ \color{blue} { \color{blue} q}}} (\log' \frac{{\color{red} p}({ \color{blue} Z})}{{ \color{blue} q}({ \color{blue} Z})})^{2}<\infty$
+If the kernel $k$ is $C_0$-universal,
+$\ev_{{ \color{blue} { \color{blue} q}}} h_{{ \color{blue} { \color{blue} q}}}({ \color{blue} Z},{ \color{blue} Z})<\infty$,
+and $\ev_{{ \color{blue} { \color{blue} q}}} \left( \log' \frac{{\color{red} p}({ \color{blue} Z})}{{ \color{blue} q}({ \color{blue} Z})} \right)^{2}  < \infty$,
 then $MSD({\color{red} p},{ \color{blue} q},G) =0$ if and only if ${\color{red} p}={ \color{blue} q}$.
 
 \vspace{1cm}
 \normalsize
 Remarks.\\
-Kernel is $C_0$-universal if  $f \to \int_X f(x) k(x,\cdot) d\mu(x)$ if is injective for all probability measures $\mu$ and all  $f \in L^p(X,\mu)$, where  $p \in [1,\infty] $. 
+Kernel is $C_0$-universal:  $f \to \int_X f(x) k(x,\cdot) d\mu(x)$ if is injective for all probability measures $\mu$ and all  $f \in L^p(X,\mu)$, where  $p \in [1,\infty] $. 
 \vspace{0.5cm}
 
-The assumption $\ev_{{ \color{blue} q}} (\log' \frac{{\color{red} p}({ \color{blue} Z})}{{ \color{blue} q}({ \color{blue} Z})})^{2}<\infty$ states that difference between scores $\log' \color{red} p$ and $\log' \color{blue} q$  is square integrable.
+Assumption $\ev_{{ \color{blue} q}} \left(\log' \frac{{\color{red} p}({ \color{blue} Z})}{{ \color{blue} q}({ \color{blue} Z})}  \right)^{2}<\infty$ $\iff$ difference between scores $\log' \color{red} p$ and $\log' \color{blue} q$  is square integrable.
 \end{block}
 
 \vspace{-0.75cm}
-\begin{block}{Proof}
+\begin{block}{Proof ideas (Theorem 2)}
  If ${ \color{red} p}={ \color{blue} q}$ then $MSD({\color{red} p},{ \color{red} p},G) =0$ is $0$. Suppose
 ${ \color{red} p}\neq { \color{blue} q}$, but $MSD({\color{red} p},{ \color{blue} q},G) =0$. If $MSD({\color{red} p},{ \color{blue} q},G) =0$ then, by Theorem 1 
 $\ev_{{ \color{blue} q}}\xi_{{ \color{red} p}}({ \color{blue} Z})=0$. We substitute $\log { \color{red} p}({ \color{blue} Z})=\log { \color{blue} q}(Y)+[\log { \color{red} p}({ \color{blue} Z})-\log { \color{blue} q}(Y)]$,
@@ -228,20 +236,24 @@ its embedding is zero if and only if $g=0$. This implies that
 \log'\frac{{ \color{red} p}(y)}{{ \color{blue} q}(y)}=(0,\cdots,0).
 \]
 Consequently  $\log\frac{{ \color{red} p}(y)}{{ \color{blue} q}(y)}=C$, for some $C$, and so  ${ \color{red} p}(y)=e^{C}{ \color{blue} q}(y)$. Since ${ \color{red} p}$ and ${ \color{blue} q}$ both integrate
-to one, $C=0$ then ${ \color{red} p}={ \color{blue} q}$, which is a contradiction.
+to one, $C=0$ $\implies$ ${ \color{red} p}={ \color{blue} q}$,  a contradiction.
 \end{block}
 
 \vspace{-0.75cm}
-\begin{block}{Non i.i.d.\ extension: the wild bootstrap}
-An estimator of $\ev_{\color{red} p} h_{\color{red} p}(X,X')$ is  
+\begin{block}{Empirical Maximum Stein Discrepancy and Statistical Test}
+Empirical estimate  of $\ev_{\color{blue} q} h_{\color{red} p}(Z,Z')$ is
+a {\em V-statistic}: 
 \[
- V_n(h_{\color{red} p}) = \frac {1} {n^2} \sum_{i,j=1}^n h_{\color{red} p}(X_i,X_j).
+ V_n(h_{\color{red} p}) = \frac {1} {n^2} \sum_{i,j=1}^n h_{\color{red} p}(Z_i,Z_j),
+ \qquad
+ \{ Z_i \}_{i=1}^{n} \:\mathrm{from}\: {\color{blue} q}
 \]
-To estimate quantiles of $ V_n(h_{\color{red} p})$ we use wild bootstrap
+Quantiles of distribution of $ V_n(h_{\color{red} p})$ under $\mathcal{H}_0\::\:{\color{red} p}={\color{blue}q}$,  using {\em wild bootstrap}
 \[
  B_n(h_{\color{red} p}) = \frac {1} {n^2} \sum_{i,j=1}^n W_i W_j h_{\color{red} p}(X_i,X_j).
 \]
-  where $W_i$ is a  series  random variables.
+  where $W_i$ are correlated user-generated\\ random variables,
+  \vspace{-1.3cm}
 \begin{center}
   \begin{minipage}{.49\linewidth}
        $$
@@ -281,10 +293,12 @@ To estimate quantiles of $ V_n(h_{\color{red} p})$ we use wild bootstrap
   \begin{minipage}{.49\linewidth}
 \begin{figure}
  \includegraphics[width=\textwidth]{../../presentation/img/bootstrapWorks7.pdf}
- \caption{Brobdingnagian correlation in $W_t$} 
+ \caption{%Brobdingnagian
+ Large correlation in $W_t$} 
 \end{figure}
   \end{minipage}
 \begin{minipage}{.49\linewidth}
+Null distrib. examples, ${\color{red} p}$ generated as
 \begin{align*}
  X_t =& \beta X_{t-1} + \sqrt{1 - \beta^2}\epsilon_t\\
  & \epsilon_t \sim {\cal N}(0,1)
@@ -293,7 +307,7 @@ To estimate quantiles of $ V_n(h_{\color{red} p})$ we use wild bootstrap
 \end{minipage}
 \end{center}
 
- See also \cite{leucht_dependent_2013}.
+ Wild bootstrap for positive definite V-statistics under $\tau$-mixing from \cite{leucht_dependent_2013}.
 \end{block}
 \end{column}
 
@@ -304,7 +318,7 @@ To estimate quantiles of $ V_n(h_{\color{red} p})$ we use wild bootstrap
 
 \begin{column}{.32\linewidth}
 %\vspace{-0.75cm}
-\begin{block}{Consistency}
+\begin{block}{Consistency of MSD-based test}
 \large
  Suppose  $h$ is Lipschitz continuous and
 $\ev h_{{ \color{red} p}}({ \color{blue} Z},{ \color{blue} Z})<\infty$. Under the null hypothesis $nV_n$ and $nB_n$ have the same limiting distribution (in a weak sense). Under the alternative hypothesis,
@@ -326,11 +340,11 @@ constant.
 \end{minipage}
 \end{center}
 
+%%EXPT 1: changed  a_{n} to P_n - prob. of changing sign
 
-
-We modify an experiment on comparing two densities from \cite{gorham2015measuring}. Our samples are non-iid and are generated using a random walk Metropolis algorithm.  We thin the observations by a factor of 20 and
-set $a_{n}=0.1$. Our test both attains good statistical test power and
-correct calibration of p-values under the null hypothesis.
+Comparison of two marginal densities from MCMC. Samples are non-iid, generated using a random walk Metropolis algorithm.  Observations thinned by a factor of 20 and
+set $p_{n}=0.1$. Our test both attains good statistical test power and
+correct calibration of p-values under the null hypothesis. Experiment adapted from \cite{gorham2015measuring}. 
 
 \end{block}
 \vspace{-0.75cm}
@@ -353,16 +367,16 @@ X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\theta
 
 \footnotesize
 Austerity MCMC is designed to reduce the number
-of likelihood evaluation. The crux of method is to look at only a subset of the data,
-and make an acceptance/rejection decision based on this subset. The
+of likelihood evaluations. The method looks at only a subset of the data,
+and makes an accept/reject decision based on this subset. The
 probability of making a wrong decision is proportional to a parameter
-$\epsilon\in[0,1]$. We simulate $\{X_{i}\}_{1\leq i\leq400}$ points from the model
-with $\theta_{1}=0$ and $\theta_{2}=1$. We run the algorithm with $\epsilon$ varying
-over the range $[0.001,0.2]$. For each $\epsilon$ we calculate an
+$\epsilon\in[0,1]$. We simulated $\{X_{i}\}_{1\leq i\leq400}$ points from the model
+with $\theta_{1}=0$ and $\theta_{2}=1$. We ran the algorithm with $\epsilon$ varying
+over the range $[0.001,0.2]$. For each $\epsilon$ we calculated an
 individual thinning factor, such that correlation between consecutive
- samples from the chains is smaller than $0.5$. For each $\epsilon$ we test the
-hypothesis that $\{\theta_{i}\}_{1\leq i\leq500}$ is drawn from the
-true stationary posterior, using our goodness of fit test. We generate
+ samples from the chains was smaller than $0.5$. For each $\epsilon$ we tested the
+hypothesis that $\{\theta_{i}\}_{1\leq i\leq500}$ was drawn from the
+true stationary posterior, using our goodness of fit test. We generated
 100 p-values for each $\epsilon$.
 
 
@@ -379,7 +393,8 @@ true stationary posterior, using our goodness of fit test. We generate
 \end{block}
 \vspace{-0.75cm}
 \begin{block}{Experiment: Statistical model criticism}
-We test the hypothesis that a Gaussian process generated \textbf{training data}, previously using for fitting -- without simulating from the generative model, but only using {\color{red} test data}. This is in contrast to the test in \cite{lloyd2015statistical} that relies on sgenerative models.
+We test the hypothesis that a Gaussian process {\color{red} model}, learned from \textbf{training data} $\star$,
+is a good fit for the {\color{blue} test data}. We do {\em not} need to simulate from the generative model, in contrast to  the test in \cite{lloyd2015statistical} that relies on sampling the generative model. The GP model shows problems (e.g. heteroskedastic noise), reflected in the low $p$-value.
 \includegraphics[width=0.48\textwidth]{../../presentation/img/gp_regression_data_fit.pdf} \includegraphics[width=0.48\textwidth]{../../presentation/img/gp_regression_bootstrap_hist} 
 \begin{minipage}{.35\linewidth}
 
@@ -414,7 +429,8 @@ using $N$ observations drawn from a standard Gaussian, and perform
 our quadratic time test on a separate evaluation dataset of fixed
 size $n=500$. Our goal is to identify $N$ sufficiently large that
 the goodness of fit test does not reject the null hypothesis.
-\textbf{(Right)} is the same experiment, with a random Fourier features kernel approximation. We here are interested in convergence in terms of the number of basis terms $m$ for a fixed $N=5\cdot10^4$.
+\textbf{(Right)} same experiment,  random Fourier features kernel approximation,  convergence in terms of the number of basis terms $m$ for a fixed $N=5\cdot10^4$. The $p$-value distribution is {\em not} uniform
+due to oversmoothing, which is detected by test.
 
 \end{block}
 
