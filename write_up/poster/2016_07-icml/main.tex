@@ -247,23 +247,38 @@ under the null, we use wild bootstrap
 \end{center}
   $p_n$ is  the probability of the change  and should be set to $o(n)$.
 
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+\begin{center}
+
+  \begin{minipage}{.49\linewidth}
+\begin{figure}
+ \includegraphics[width=\textwidth]{../../presentation/img/bootstrapWorks1.pdf}
+ \caption{Small correlation in $W_t$} 
+\end{figure}
+ \end{minipage}
+  \begin{minipage}{.49\linewidth}
+\begin{figure}
+ \includegraphics[width=\textwidth]{../../presentation/img/bootstrapWorks4.pdf}
+ \caption{Medium correlation in $W_t$} 
+\end{figure}
+  \end{minipage}
+\end{center}
 
 
 
-
- \includegraphics[width=0.45\textwidth]{../../presentation/img/bootstrapWorks1.pdf}
- \includegraphics[width=0.45\textwidth]{../../presentation/img/bootstrapWorks4.pdf}
 
  \begin{center}
   \begin{minipage}{.49\linewidth}
+\begin{figure}
  \includegraphics[width=\textwidth]{../../presentation/img/bootstrapWorks7.pdf}
+ \caption{Brobdingnagian correlation in $W_t$} 
+\end{figure}
   \end{minipage}
 \begin{minipage}{.49\linewidth}
 \begin{align*}
  X_t =& \beta X_{t-1} + \sqrt{1 - \beta^2}\epsilon_t\\
- & \epsilon_t \sim \cal N(0,1
+ & \epsilon_t \sim {\cal N}(0,1)
 \end{align*}
-
  where $\beta$ controls the amount of autocorrelation in the process
 \end{minipage}
 \end{center}
