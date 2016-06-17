@@ -231,28 +231,51 @@ under the null, we use wild bootstrap
 \[
  B_n(h_{\color{red} p}) = \frac {1} {n^2} \sum_{i,j=1}^n W_i W_j h_{\color{red} p}(X_i,X_j).
 \]
-  where $W_i$ is a specific series of zero mean valued random variables.
-\begin{minipage}{.49\linewidth}
+  where $W_i$ is a  series  random variables.
+\begin{center}
+  \begin{minipage}{.49\linewidth}
        $$
   Cov(W_i,W_j) = (1-2p_n)^{-|i-j|}
   $$
 \end{minipage}
-
 \begin{minipage}{.49\linewidth}
  \begin{figure}
             \vspace{-0.5cm}
-           \includegraphics[width=0.7\textwidth, angle =0 ]{./img/W_graphicalModel.pdf} 
+           \includegraphics[width=0.7\textwidth, angle =0 ]{../../presentation/img/W_graphicalModel.pdf} 
         \end{figure}
+\end{minipage}
+\end{center}
+  $p_n$ is  the probability of the change  and should be set to $o(n)$.
+
+
+\begin{center}
+  \begin{minipage}{.49\linewidth}
+  Small 
+ \includegraphics[width=\textwidth]{../../presentation/img/bootstrapWorks1.pdf}
+  \end{minipage}
+\begin{minipage}{.49\linewidth}
+ \begin{minipage}{.49\linewidth}
+ \includegraphics[width=\textwidth]{../../presentation/img/bootstrapWorks4.pdf}
+  \end{minipage}
 \end{minipage}
 
 
 
+ \begin{center}
+  \begin{minipage}{.49\linewidth}
+ \includegraphics[width=\textwidth]{../../presentation/img/bootstrapWorks7.pdf}
+  \end{minipage}
+\begin{minipage}{.49\linewidth}
+\begin{align*}
+ X_t =& \beta X_{t-1} + \sqrt{1 - \beta^2}\epsilon_t\\
+ & \epsilon_t \sim \cal N(0,1
+\end{align*}
 
+ where $\beta$ controls the amount of autocorrelation in the process
+\end{minipage}
+\end{center}
 
-
- \includegraphics[width=0.3\textwidth]{../../presentation/img/bootstrapWorks1.pdf}
- \includegraphics[width=0.3\textwidth]{../../presentation/img/bootstrapWorks4.pdf}
- \includegraphics[width=0.3\textwidth]{../../presentation/img/bootstrapWorks7.pdf}
+ 
 \end{block}
 \end{column}
 
