@@ -1,5 +1,5 @@
 \include{header}
-
+%\usepackage{placeins}
 \begin{document}
 \begin{frame}
 \begin{columns}
@@ -319,25 +319,48 @@ correct calibration of p-values under the null hypothesis.
 
 \end{block}
 \vspace{-0.75cm}
+
 \begin{block}{Experiment: Bias quantification in Approximate MCMC}
+
+ 
+% 
 \begin{minipage}{.45\linewidth}
 \begin{align*}
 \theta_{1}\sim{\cal N}(0,10);\theta_{2}\sim{\cal N}(0,1)\\
 X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\theta_{2},4) & .
 \end{align*}
+\end{minipage}
+\begin{minipage}{.45\linewidth}
+\includegraphics[width=\textwidth]{../../presentation/img/sgld_trace_and_density.pdf}
+\end{minipage}
 
-\end{minipage}
-\begin{minipage}{.45\linewidth}
+We  illustrate how to quantify bias-variance trade-offs in an approximate MCMC algorithm austerity MCMC \cite{korattikara2013austerity}.
+For the purpose of illustration we use a simple generative model from \cite{gorham2015measuring,Welling2011}.
+
+% 
+\footnotesize
+Austerity MCMC is designed to reduce the number
+of likelihood evaluation. The crux of method is to look at only a subset of the data,
+and make an acceptance/rejection decision based on this subset. The
+probability of making a wrong decision is proportional to a parameter
+$\epsilon\in[0,1]$. We simulate $\{X_{i}\}_{1\leq i\leq400}$ points from the model
+with $\theta_{1}=0$ and $\theta_{2}=1$. We run the algorithm with $\epsilon$ varying
+over the range $[0.001,0.2]$. For each $\epsilon$ we calculate an
+individual thinning factor, such that correlation between consecutive
+ samples from the chains is smaller than $0.5$. For each $\epsilon$ we test the
+hypothesis that $\{\theta_{i}\}_{1\leq i\leq500}$ is drawn from the
+true stationary posterior, using our goodness of fit test. We generate
+100 p-values for each $\epsilon$.
+
+
 \begin{center}
-\includegraphics[width=0.5\textwidth]{../../presentation/img/sgld_trace_and_density.pdf}
-\end{center}
-\end{minipage}
 \begin{minipage}{.450\linewidth}
-\includegraphics[width=.6\textwidth]{../../presentation/img/Heiko1}\\
+\includegraphics[width=\textwidth]{../../presentation/img/Heiko1}\\
 \end{minipage}
 \begin{minipage}{.45\linewidth}
-            \includegraphics[width=.6\textwidth]{../../presentation/img/Heiko2}
+            \includegraphics[width=\textwidth]{../../presentation/img/Heiko2}
 \end{minipage}
+\end{center}
 
 
 \end{block}
@@ -351,6 +374,34 @@ X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\theta
 
 \end{minipage}
 \end{block}
+
+\vspace{-0.75cm}
+
+\begin{block}{Experiment: Convergence in nonparametric density estimation}
+
+ 
+
+we apply our goodness of fit test to measuring
+quality-of-fit in nonparametric density estimation. We evaluate two
+density models: the infinite dimensional exponential family \cite{SriFukKumGreHyv14},
+and a recent approximation to this model using random Fourier features
+\cite{strathmann2015gradient}.
+% 
+\footnotesize
+
+
+\begin{center}
+\begin{minipage}{.450\linewidth}
+\includegraphics[width=\textwidth]{../../presentation/img/increasing_features_fixed_test}\\
+\end{minipage}
+\begin{minipage}{.45\linewidth}
+            \includegraphics[width=\textwidth]{../../presentation/img/increasing_data_fixed_test}
+\end{minipage}
+\end{center}
+
+
+\end{block}
+
 \vspace{-0.75cm}
 \begin{block}{References}
 \begin{minipage}{.9\linewidth}
