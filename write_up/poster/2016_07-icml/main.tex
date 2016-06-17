@@ -55,7 +55,7 @@ MMD({\color{red} p},{ \color{blue} q},F) = \sup_{   \| {\color{mg}f} \|_F<1} [\e
 \end{minipage}
 \vspace{1cm}
 \begin{center}
-\emph{Can we do this without sampling from $p$?}
+\emph{Can we do this without sampling from ${ \color{red} p}$?}
 \end{center}
 \end{block}
 \vspace{-0.75cm}
@@ -75,9 +75,9 @@ justified by integration by parts
 \end{align*}
 With an aid of the Stein operator 
 \[
- T_{p}f =  f  +  \log' { \color{red} p} \cdot  f
+ T_{{ \color{red} p}}f =  f  +  \log' { \color{red} p} \cdot  f
 \]
-the function class is $G = \{ T_{p}f | f \in F \}$
+the function class is $G = \{ T_{{ \color{red} p}}f | f \in F \}$
 \end{block}
 \vspace{-0.75cm}
 
@@ -105,12 +105,12 @@ MMD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_G<1} \e
  Let $F$ be the RKHS associated with the kernel $k$ and 
 \large
  \begin{equation*}
-\xi_{p}(x,\cdot):=\log' p(x) k(x,\cdot)+  k'(x,\cdot).
+\xi_{{ \color{red} p}}(x,\cdot):=\log' { \color{red} p}(x) k(x,\cdot)+  k'(x,\cdot).
 \end{equation*}
- $\xi_{p}(x,\cdot)$ is an element of the reproducing kernel Hilbert
+ $\xi_{{ \color{red} p}}(x,\cdot)$ is an element of the reproducing kernel Hilbert
 space $F$.  $h$ is an  inner product between $\xi$, 
 \[
-h_{{\color{red} p}}(x,y)   = \langle\xi_{p}(x,\cdot),\xi_{p}(y,\cdot)\rangle. 
+h_{{\color{red} p}}(x,y)   = \langle\xi_{{ \color{red} p}}(x,\cdot),\xi_{{ \color{red} p}}(y,\cdot)\rangle. 
 \]
 $h$ can be written in close form
 \large
@@ -139,37 +139,37 @@ h_{{\color{red} p}}(x,y) & = \partial_{x} \log {\color{red} p}(x) \partial_{x} \
 
 \begin{block}{Theorem}
 \large
-Let ${ \color{blue} q},{\color{red} p}$ be probability measures and $Z\sim { \color{blue} q}$. 
-If $\ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z)<\infty$, then 
-$$MMD({\color{red} p},{ \color{blue} q},G) = \ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z'),$$
-where $Z'$ is an independent copy of $Z$.
+Let ${ \color{blue} q},{\color{red} p}$ be probability measures and ${ \color{blue} Z}\sim { \color{blue} q}$. 
+If $\ev_{{ \color{blue} q}} h_{{\color{red} p}}({ \color{blue} Z},{ \color{blue} Z})<\infty$, then 
+$$MMD({\color{red} p},{ \color{blue} q},G) = \ev_{{ \color{blue} q}} h_{{\color{red} p}}({ \color{blue} Z},{ \color{blue} Z}'),$$
+where ${ \color{blue} Z}'$ is an independent copy of ${ \color{blue} Z}$.
 \end{block}
 
 \vspace{-0.73cm}
 \begin{block}{Proof}
 
-Next we show that $\xi_{p}(x,\cdot)$ is Bochner integrable
+Next we show that $\xi_{{ \color{red} p}}(x,\cdot)$ is Bochner integrable
 \[
-\ev_{q}\|\xi_{p}(Z)\|_{\mathcal{F}}^{2}=\ev_{q}h_{p}(Z,Z)<\infty.
+\ev_{{ \color{blue} q}}\|\xi_{{ \color{red} p}}({ \color{blue} Z})\|_{\mathcal{F}}^{2}=\ev_{{ \color{blue} q}}h_{{ \color{red} p}}({ \color{blue} Z},{ \color{blue} Z})<\infty.
 \]
 We next relate the expected value of the Stein operator to the inner product of $f$ and the expected value
-of $\xi_{q}(Z)$,  
+of $\xi_{{ \color{red} p}}({ \color{blue} Z})$,  
 \begin{align*}
-  \left\langle f,\ev_{q} \xi_{p}(Z) \right\rangle _{\mathcal{F}}& =\left\langle f,\ev_{q} \left[  \log' p(Z) k(Z,\cdot)+\ k'(Z,\cdot) \right] \right \rangle _{\mathcal{F}}\\
- & = \ev_{q}  \left\langle f,\left[  \log' p(Z) k(Z,\cdot)+\ k'(Z,\cdot) \right] \right \rangle _{\mathcal{F}}\\
- & =\ev_{q}(T_{p}f)(Z).
+  \left\langle f,\ev_{{ \color{blue} q}} \xi_{{ \color{red} p}}({ \color{blue} Z}) \right\rangle _{\mathcal{F}}& =\left\langle f,\ev_{{ \color{blue} q}} \left[  \log' { \color{red} p}({ \color{blue} Z}) k({ \color{blue} Z},\cdot)+\ k'({ \color{blue} Z},\cdot) \right] \right \rangle _{\mathcal{F}}\\
+ & = \ev_{{ \color{blue} q}}  \left\langle f,\left[  \log' { \color{red} p}({ \color{blue} Z}) k({ \color{blue} Z},\cdot)+\ k'({ \color{blue} Z},\cdot) \right] \right \rangle _{\mathcal{F}}\\
+ & =\ev_{{ \color{blue} q}}(T_{{ \color{red} p}}f)({ \color{blue} Z}).
 \end{align*}
-The second equality follows from  Bochner integrability of $\xi_{p}$.
+The second equality follows from  Bochner integrability of $\xi_{{ \color{red} p}}$.
 We have 
 \begin{align*}
-MMD(p,q,G) & :=\sup_{\Vert f\Vert<1}\ev_{q}(T_{p}f)(Z)-\ev_{p}(T_{p}f)(X)\\
- & =\sup_{\Vert f\Vert<1}\ev_{q}(T_{p}f)(Z)\\
- & =\sup_{\Vert f\Vert<1}\langle f,\ev_{q}\xi_{p}(Z)\rangle_{{\cal F}^{d}}\\
- & =\|\ev_{q}\xi_{p}(Z)\|_{\mathcal{F}^{d}}.
+MMD({ \color{red} p},{ \color{blue} q},G) & :=\sup_{\Vert f\Vert<1}\ev_{{ \color{blue} q}}(T_{{ \color{red} p}}f)({ \color{blue} Z})-\ev_{{ \color{red} p}}(T_{{ \color{red} p}}f)(X)\\
+ & =\sup_{\Vert f\Vert<1}\ev_{{ \color{blue} q}}(T_{{ \color{red} p}}f)({ \color{blue} Z})\\
+ & =\sup_{\Vert f\Vert<1}\langle f,\ev_{{ \color{blue} q}}\xi_{{ \color{red} p}}({ \color{blue} Z})\rangle_{{\cal F}^{d}}\\
+ & =\|\ev_{{ \color{blue} q}}\xi_{{ \color{red} p}}({ \color{blue} Z})\|_{\mathcal{F}^{d}}.
 \end{align*}
-We now calculate closed form formula for $MMD(p,q,G)^{2}$,
+We now calculate closed form formula for $MMD({ \color{red} p},{ \color{blue} q},G)^{2}$,
 \begin{align*}
-MMD(p,q,G)^{2}  =\ev_{q}\langle\xi_{p}(Z),\xi_{p}(Z')\rangle_{\mathcal{F}^{d}}=\ev_{q}h_{p}(Z,Z'),
+MMD({ \color{red} p},{ \color{blue} q},G)^{2}  =\ev_{{ \color{blue} q}}\langle\xi_{{ \color{red} p}}({ \color{blue} Z}),\xi_{{ \color{red} p}}({ \color{blue} Z}')\rangle_{\mathcal{F}^{d}}=\ev_{{ \color{blue} q}}h_{{ \color{red} p}}({ \color{blue} Z},{ \color{blue} Z}'),
 \end{align*}
 \end{block}
 
@@ -180,7 +180,7 @@ MMD(p,q,G)^{2}  =\ev_{q}\langle\xi_{p}(Z),\xi_{p}(Z')\rangle_{\mathcal{F}^{d}}=\
 
 
 \large
-If the kernel $k$ is $C_0$-universal, $\ev_{{ \color{blue} q}} h_{{ \color{blue} q}}(Z,Z)<\infty$ and $\ev_{{ \color{blue} q}} (\log' \frac{{\color{red} p}(Z)}{{ \color{blue} q}(Z)})^{2}<\infty$
+If the kernel $k$ is $C_0$-universal, $\ev_{{ \color{blue} { \color{blue} q}}} h_{{ \color{blue} { \color{blue} q}}}({ \color{blue} Z},{ \color{blue} Z})<\infty$ and $\ev_{{ \color{blue} { \color{blue} q}}} (\log' \frac{{\color{red} p}({ \color{blue} Z})}{{ \color{blue} q}({ \color{blue} Z})})^{2}<\infty$
 then $MMD({\color{red} p},{ \color{blue} q},G) =0$ if and only if ${\color{red} p}={ \color{blue} q}$.
 
 \vspace{1cm}
@@ -189,30 +189,30 @@ Remarks.\\
 Kernel is $C_0$-universal if  $f \to \int_X f(x) k(x,\cdot) d\mu(x)$ if is injective for all probability measures $\mu$ and all  $f \in L^p(X,\mu)$, where  $p \in [1,\infty] $. 
 \vspace{0.5cm}
 
-The assumption $\ev_{{ \color{blue} q}} (\log' \frac{{\color{red} p}(Z)}{{ \color{blue} q}(Z)})^{2}<\infty$ states that difference between scores $\log' \color{red} p$ and $\log' \color{blue} q$  is square integrable.
+The assumption $\ev_{{ \color{blue} q}} (\log' \frac{{\color{red} p}({ \color{blue} Z})}{{ \color{blue} q}({ \color{blue} Z})})^{2}<\infty$ states that difference between scores $\log' \color{red} p$ and $\log' \color{blue} q$  is square integrable.
 \end{block}
 
 \vspace{-0.75cm}
 \begin{block}{Proof}
- If $p=q$ then $MMD({\color{red} p},{ \color{red} p},G) =0$ is $0$. Suppose
-$p\neq q$, but $MMD({\color{red} p},{ \color{blue} q},G) =0$. If $MMD({\color{red} p},{ \color{blue} q},G) =0$ then, by Theorem 1 
-$\ev_{q}\xi_{p}(Z)=0$. We substitute $\log p(Z)=\log q(Y)+[\log p(Z)-\log q(Y)]$,
+ If ${ \color{red} p}={ \color{blue} q}$ then $MMD({\color{red} p},{ \color{red} p},G) =0$ is $0$. Suppose
+${ \color{red} p}\neq { \color{blue} q}$, but $MMD({\color{red} p},{ \color{blue} q},G) =0$. If $MMD({\color{red} p},{ \color{blue} q},G) =0$ then, by Theorem 1 
+$\ev_{{ \color{blue} q}}\xi_{{ \color{red} p}}({ \color{blue} Z})=0$. We substitute $\log { \color{red} p}({ \color{blue} Z})=\log { \color{blue} q}(Y)+[\log { \color{red} p}({ \color{blue} Z})-\log { \color{blue} q}(Y)]$,
 \begin{align*}
- & \ev_{q}\xi_{p}(Z)\\
- & =\ev_{q}\left( \log' p(Z)k(Z,\cdot)+ k'(Z,\cdot)\right)\\
- & =\ev_{q}\xi_{q}(Z)+\ev_{q}\left([\log p(Z)-\log q(Y)]'k(Z,\cdot)\right)\\
- & =\ev_{q}\left( [\log p(Z)-\log q(Y)]' k(Z,\cdot)\right)
+ & \ev_{{ \color{blue} q}}\xi_{{ \color{red} p}}({ \color{blue} Z})\\
+ & =\ev_{{ \color{blue} q}}\left( \log' { \color{red} p}({ \color{blue} Z})k({ \color{blue} Z},\cdot)+ k'({ \color{blue} Z},\cdot)\right)\\
+ & =\ev_{{ \color{blue} q}}\xi_{{ \color{blue} q}}({ \color{blue} Z})+\ev_{{ \color{blue} q}}\left([\log { \color{red} p}({ \color{blue} Z})-\log { \color{blue} q}(Y)]'k({ \color{blue} Z},\cdot)\right)\\
+ & =\ev_{{ \color{blue} q}}\left( [\log { \color{red} p}({ \color{blue} Z})-\log { \color{blue} q}(Y)]' k({ \color{blue} Z},\cdot)\right)
 \end{align*}
-The expected value of $(\log p(Z)-\log q(Z))' k(Z,\cdot)$ is the mean embedding of
-a function $g(y)=\left(\log\frac{p(y)}{q(y)}\right)'$ with respect
-to the measure $q$.  $g$ is square integrable,
+The expected value of $(\log { \color{red} p}({ \color{blue} Z})-\log { \color{blue} q}({ \color{blue} Z}))' k({ \color{blue} Z},\cdot)$ is the mean embedding of
+a function $g(y)=\left(\log\frac{{ \color{red} p}(y)}{{ \color{blue} q}(y)}\right)'$ with respect
+to the measure ${ \color{blue} q}$.  $g$ is square integrable,
 therefore, since the kernel $k$ is $C_0$-universal, %by \citet[ Theorem 4.4 c]{carmeli2010vector}
 its embedding is zero if and only if $g=0$. This implies that 
 \[
-\log'\frac{p(y)}{q(y)}=(0,\cdots,0).
+\log'\frac{{ \color{red} p}(y)}{{ \color{blue} q}(y)}=(0,\cdots,0).
 \]
-Consequently  $\log\frac{p(y)}{q(y)}=C$, for some $C$, and so  $p(y)=e^{C}q(y)$. Since $p$ and $q$ both integrate
-to one, $C=0$ then $p=q$, which is a contradiction.
+Consequently  $\log\frac{{ \color{red} p}(y)}{{ \color{blue} q}(y)}=C$, for some $C$, and so  ${ \color{red} p}(y)=e^{C}{ \color{blue} q}(y)$. Since ${ \color{red} p}$ and ${ \color{blue} q}$ both integrate
+to one, $C=0$ then ${ \color{red} p}={ \color{blue} q}$, which is a contradiction.
 \end{block}
 
 \vspace{-0.75cm}
@@ -291,7 +291,7 @@ To estimate quantiles of $ V_n(h_{\color{red} p})$ we use wild bootstrap
 \begin{block}{Consistency}
 \large
  Suppose  $h$ is Lipschitz continuous and
-$\ev h(Z,Z)<\infty$. Under the null hypothesis $nV_n$ and $nB_n$ have the same limiting distribution (in a weak sense). Under the alternative hypothesis,
+$\ev h_{{ \color{red} p}}({ \color{blue} Z},{ \color{blue} Z})<\infty$. Under the null hypothesis $nV_n$ and $nB_n$ have the same limiting distribution (in a weak sense). Under the alternative hypothesis,
 $B_{n}$ converges to zero, while $V_{n}$ converges to a positive
 constant.
 
