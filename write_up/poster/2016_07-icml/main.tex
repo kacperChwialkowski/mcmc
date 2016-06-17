@@ -21,32 +21,30 @@ Recent work on MCMC  incorporates tradeoff between bias/accuracy, e.g. \cite{kor
 %And so we turn the Bayesian Crank  to  obtain samples form the posteriori distribution. It obviously matters which matter which method we use, since quality of sample depends on it. 
 \end{minipage}
 \begin{minipage}{.4\linewidth}
-\includegraphics[scale=0.7]{../../presentation/img/sgld_trace_and_density.pdf}
+\includegraphics[scale=0.65]{../../presentation/img/sgld_trace_and_density.pdf}
 \end{minipage}
 \vspace{1cm}
 \begin{center}
-\Large
-\emph{How to check if MCMC samples match target distribution?}
+{\large\emph{How to check if MCMC samples match target distribution?}}
 \end{center}
 \end{block}
-\vspace{-0.75cm}  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-0.75cm}
 \begin{block}{Maximum Mean Discrepancy for comparing two samples}
-\begin{center}Maximum mean discrepancy: norm of function in RKHS revealing difference in distributions\end{center}
+Maximum mean discrepancy: norm of function in RKHS revealing difference in distributions, \cite{gretton2012kernel}.
+
+{\large\begin{align*}
+MMD({\color{red} p},{ \color{blue} q},\mathcal{F}) = \sup_{   \| {\color{mg}f} \|_\mathcal{F}<1} [\ev_{{ \color{blue} q}}{\color{mg}f}- \ev_{{\color{red} p}}{\color{mg} f}]   
+\end{align*}}
 \begin{minipage}{.60\linewidth}
 
-%AG: changed text
-
 \vspace{1cm}
-\large
-\begin{align*}
-MMD({\color{red} p},{ \color{blue} q},\mathcal{F}) = \sup_{   \| {\color{mg}f} \|_\mathcal{F}<1} [\ev_{{ \color{blue} q}}{\color{mg}f}- \ev_{{\color{red} p}}{\color{mg} f}]   
-\end{align*}
+
 \normalsize
 \vspace{1cm}
  \begin{itemize}
-  \item $\mathcal{F}$ is a Reproducing Kernel Hilbert Space.
-  \item ${\color{mg} f^*}$ is the function that attains the supremum.
-  \item We want to get rid of  $\ev_{ {\color{red} p} }f$  (usually can't compute in closed form).
+  \item $\mathcal{F}$ -- reproducing kernel Hilbert space.
+  \item ${\color{mg} f^*}$ -- function that attains the supremum.
+  \item We want to get rid of  $\ev_{ {\color{red} p} }f$ (usually can't compute in closed form)..
  \end{itemize}
 
 \end{minipage}
@@ -55,12 +53,12 @@ MMD({\color{red} p},{ \color{blue} q},\mathcal{F}) = \sup_{   \| {\color{mg}f} \
 \begin{center}
 \vspace{-1cm}
 \hspace{-2.5cm}
-\includegraphics[width=12cm,height=6cm]{../../presentation/img/mmd.pdf}
+\includegraphics[scale=1.0]{../../presentation/img/mmd.pdf}
 \end{center}
 \end{minipage}
 \vspace{1cm}
 \begin{center}
-\emph{Can we do this without sampling from ${\color{red} p}$?}
+{\large\emph{Can we do this without sampling from ${\color{red} p}$?}}
 \end{center}
 \end{block}
 \vspace{-0.75cm}  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -330,9 +328,8 @@ constant.
 
 
 
-We modify experiment 4.1 from \cite{gorham2015measuring} by  generating samples using
-a Metropolis\textendash Hastings algorithm, with a Gaussian random walk with variance 1/2. We thin the observations by a factor of 20 and
-set $a_{n}=0.1$, thus preserving both good statistical power and
+We modify an experiment on comparing two densities from \cite{gorham2015measuring}. Our samples are non-iid and are generated using a random walk Metropolis algorithm.  We thin the observations by a factor of 20 and
+set $a_{n}=0.1$. Our test both attains good statistical test power and
 correct calibration of p-values under the null hypothesis.
 
 \end{block}
@@ -341,10 +338,11 @@ correct calibration of p-values under the null hypothesis.
 
 \begin{block}{Experiment: Bias quantification in Approximate MCMC}
 
- 
+ We  illustrate how to quantify bias-variance trade-offs in the (approximate) MCMC algorithm `austerity MCMC' \cite{korattikara2013austerity} on a simple generative model.
+
 \begin{minipage}{.45\linewidth}
 \begin{align*}
-\theta_{1}\sim{\cal N}(0,10);\theta_{2}\sim{\cal N}(0,1)\\
+\theta_{1}\sim{\cal N}(0,10)\quad\theta_{2}\sim{\cal N}(0,1)\\\\
 X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\theta_{2},4) & .
 \end{align*}
 \end{minipage}
@@ -352,10 +350,7 @@ X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\theta
 \includegraphics[width=\textwidth]{../../presentation/img/sgld_trace_and_density.pdf}
 \end{minipage}
 
-We  illustrate how to quantify bias-variance trade-offs in an approximate MCMC algorithm austerity MCMC \cite{korattikara2013austerity}.
-For the purpose of illustration we use a simple generative model from \cite{gorham2015measuring,Welling2011}.
 
-% 
 \footnotesize
 Austerity MCMC is designed to reduce the number
 of likelihood evaluation. The crux of method is to look at only a subset of the data,
@@ -384,10 +379,7 @@ true stationary posterior, using our goodness of fit test. We generate
 \end{block}
 \vspace{-0.75cm}
 \begin{block}{Experiment: Statistical model criticism}
-See \cite{lloyd2015statistical}.
-\begin{center}
-\item We test the hypothesis that a Gaussian process generated \textbf{training data} using for fitting -- without simulating from the generative model, but only using {\color{red} test data}.
-\end{center}
+We test the hypothesis that a Gaussian process generated \textbf{training data}, previously using for fitting -- without simulating from the generative model, but only using {\color{red} test data}. This is in contrast to the test in \cite{lloyd2015statistical} that relies on sgenerative models.
 \includegraphics[width=0.48\textwidth]{../../presentation/img/gp_regression_data_fit.pdf} \includegraphics[width=0.48\textwidth]{../../presentation/img/gp_regression_bootstrap_hist} 
 \begin{minipage}{.35\linewidth}
 
