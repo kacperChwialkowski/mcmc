@@ -34,12 +34,12 @@ And so we turn the Bayesian Crank  to  obtain samples form the posteriori distri
 \vspace{1cm}
 \large
 \begin{align*}
-MMD({\color{red} p},{ \color{blue} q},F) = \sup_{   \| {\color{mg}f} \|_F<1} [\ev_{{ \color{blue} q}}{\color{mg}f}- \ev_{{\color{red} p}}{\color{mg} f}]   
+MMD({\color{red} p},{ \color{blue} q},\mathcal{F}) = \sup_{   \| {\color{mg}f} \|_\mathcal{F}<1} [\ev_{{ \color{blue} q}}{\color{mg}f}- \ev_{{\color{red} p}}{\color{mg} f}]   
 \end{align*}
 \normalsize
 \vspace{1cm}
  \begin{itemize}
-  \item $F$ is an Reproducing Kernel Hilbert Space.
+  \item $\mathcal{F}$ is an Reproducing Kernel Hilbert Space.
   \item ${\color{mg} f^*}$ is the function that attains the supremum.
   \item We want to get rid of  $\ev_{ {\color{red} p} }f$ . How?
  \end{itemize}
@@ -62,7 +62,7 @@ MMD({\color{red} p},{ \color{blue} q},F) = \sup_{   \| {\color{mg}f} \|_F<1} [\e
 \begin{block}{Stein's trick in RKHS}
 
 Consider the  class \large
-$$G = \{ f  +  \log' { \color{red} p} \cdot  f | f \in F \}$$
+$$G = \{ f  +  \log' { \color{red} p} \cdot  f | f \in \mathcal{F} \}$$
 \normalsize
 justified by integration by parts
 \begin{align*}
@@ -77,7 +77,7 @@ With an aid of the Stein operator
 \[
  T_{{ \color{red} p}}f =  f  +  \log' { \color{red} p} \cdot  f
 \]
-the function class is $G = \{ T_{{ \color{red} p}}f | f \in F \}$
+the function class is $G = \{ T_{{ \color{red} p}}f | f \in \mathcal{F} \}$
 \end{block}
 \vspace{-0.75cm}
 
@@ -102,13 +102,13 @@ MMD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_G<1} \e
 
 \vspace{-0.75cm}
 \begin{block}{Closed form expression}
- Let $F$ be the RKHS associated with the kernel $k$ and 
+ Let $\mathcal{F}$ be the RKHS associated with the kernel $k$ and 
 \large
  \begin{equation*}
 \xi_{{ \color{red} p}}(x,\cdot):=\log' { \color{red} p}(x) k(x,\cdot)+  k'(x,\cdot).
 \end{equation*}
  $\xi_{{ \color{red} p}}(x,\cdot)$ is an element of the reproducing kernel Hilbert
-space $F$.  $h$ is an  inner product between $\xi$, 
+space $\mathcal{F}$.  $h$ is an  inner product between $\xi$, 
 \[
 h_{{\color{red} p}}(x,y)   = \langle\xi_{{ \color{red} p}}(x,\cdot),\xi_{{ \color{red} p}}(y,\cdot)\rangle. 
 \]
@@ -150,13 +150,13 @@ where ${ \color{blue} Z}'$ is an independent copy of ${ \color{blue} Z}$.
 
 Next we show that $\xi_{{ \color{red} p}}(x,\cdot)$ is Bochner integrable
 \[
-\ev_{{ \color{blue} q}}\|\xi_{{ \color{red} p}}({ \color{blue} Z})\|_{\mathcal{F}}^{2}=\ev_{{ \color{blue} q}}h_{{ \color{red} p}}({ \color{blue} Z},{ \color{blue} Z})<\infty.
+\ev_{{ \color{blue} q}}\|\xi_{{ \color{red} p}}({ \color{blue} Z})\|_{\mathcal{\mathcal{F}}}^{2}=\ev_{{ \color{blue} q}}h_{{ \color{red} p}}({ \color{blue} Z},{ \color{blue} Z})<\infty.
 \]
 We next relate the expected value of the Stein operator to the inner product of $f$ and the expected value
 of $\xi_{{ \color{red} p}}({ \color{blue} Z})$,  
 \begin{align*}
-  \left\langle f,\ev_{{ \color{blue} q}} \xi_{{ \color{red} p}}({ \color{blue} Z}) \right\rangle _{\mathcal{F}}& =\left\langle f,\ev_{{ \color{blue} q}} \left[  \log' { \color{red} p}({ \color{blue} Z}) k({ \color{blue} Z},\cdot)+\ k'({ \color{blue} Z},\cdot) \right] \right \rangle _{\mathcal{F}}\\
- & = \ev_{{ \color{blue} q}}  \left\langle f,\left[  \log' { \color{red} p}({ \color{blue} Z}) k({ \color{blue} Z},\cdot)+\ k'({ \color{blue} Z},\cdot) \right] \right \rangle _{\mathcal{F}}\\
+  \left\langle f,\ev_{{ \color{blue} q}} \xi_{{ \color{red} p}}({ \color{blue} Z}) \right\rangle _{\mathcal{\mathcal{F}}}& =\left\langle f,\ev_{{ \color{blue} q}} \left[  \log' { \color{red} p}({ \color{blue} Z}) k({ \color{blue} Z},\cdot)+\ k'({ \color{blue} Z},\cdot) \right] \right \rangle _{\mathcal{\mathcal{F}}}\\
+ & = \ev_{{ \color{blue} q}}  \left\langle f,\left[  \log' { \color{red} p}({ \color{blue} Z}) k({ \color{blue} Z},\cdot)+\ k'({ \color{blue} Z},\cdot) \right] \right \rangle _{\mathcal{\mathcal{F}}}\\
  & =\ev_{{ \color{blue} q}}(T_{{ \color{red} p}}f)({ \color{blue} Z}).
 \end{align*}
 The second equality follows from  Bochner integrability of $\xi_{{ \color{red} p}}$.
@@ -164,12 +164,12 @@ We have
 \begin{align*}
 MMD({ \color{red} p},{ \color{blue} q},G) & :=\sup_{\Vert f\Vert<1}\ev_{{ \color{blue} q}}(T_{{ \color{red} p}}f)({ \color{blue} Z})-\ev_{{ \color{red} p}}(T_{{ \color{red} p}}f)(X)\\
  & =\sup_{\Vert f\Vert<1}\ev_{{ \color{blue} q}}(T_{{ \color{red} p}}f)({ \color{blue} Z})\\
- & =\sup_{\Vert f\Vert<1}\langle f,\ev_{{ \color{blue} q}}\xi_{{ \color{red} p}}({ \color{blue} Z})\rangle_{{\cal F}^{d}}\\
- & =\|\ev_{{ \color{blue} q}}\xi_{{ \color{red} p}}({ \color{blue} Z})\|_{\mathcal{F}^{d}}.
+ & =\sup_{\Vert f\Vert<1}\langle f,\ev_{{ \color{blue} q}}\xi_{{ \color{red} p}}({ \color{blue} Z})\rangle_{{\cal \mathcal{F}}}\\
+ & =\|\ev_{{ \color{blue} q}}\xi_{{ \color{red} p}}({ \color{blue} Z})\|_{\mathcal{\mathcal{F}}}.
 \end{align*}
 We now calculate closed form formula for $MMD({ \color{red} p},{ \color{blue} q},G)^{2}$,
 \begin{align*}
-MMD({ \color{red} p},{ \color{blue} q},G)^{2}  =\ev_{{ \color{blue} q}}\langle\xi_{{ \color{red} p}}({ \color{blue} Z}),\xi_{{ \color{red} p}}({ \color{blue} Z}')\rangle_{\mathcal{F}^{d}}=\ev_{{ \color{blue} q}}h_{{ \color{red} p}}({ \color{blue} Z},{ \color{blue} Z}'),
+MMD({ \color{red} p},{ \color{blue} q},G)^{2}  =\ev_{{ \color{blue} q}}\langle\xi_{{ \color{red} p}}({ \color{blue} Z}),\xi_{{ \color{red} p}}({ \color{blue} Z}')\rangle_{\mathcal{\mathcal{F}}}=\ev_{{ \color{blue} q}}h_{{ \color{red} p}}({ \color{blue} Z},{ \color{blue} Z}'),
 \end{align*}
 \end{block}
 
