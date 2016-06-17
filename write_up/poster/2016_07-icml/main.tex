@@ -14,7 +14,7 @@
 \end{align*}
  \vspace{1cm} 
 
-And so we turn the Bayesian Crank  to  obtain samples form the posteriori distribution. It obviously matters which matter which method we use, since quality of sample depends on it. 
+And so we turn the Bayesian crank  to  obtain samples form the posteriori distribution. It obviously matters which matter which method we use, since quality of sample depends on it. 
 \end{minipage}
 \begin{minipage}{.4\linewidth}
 \includegraphics[scale=0.7]{../../presentation/img/sgld_trace_and_density.pdf}
@@ -26,8 +26,9 @@ And so we turn the Bayesian Crank  to  obtain samples form the posteriori distri
 \end{center}
 \end{block}
 \vspace{-0.75cm}
-\begin{block}{So far: Maximum Mean Discrepancy}
-\begin{center}We turn the Kernel Crank, we find a function in RKHS to reveal difference in distributions\end{center}
+\begin{block}{So far: Maximum mean discrepancy}
+\begin{center}We turn the kernel crank, we find a function in RKHS to reveal difference in distributions\end{center}
+See also \cite{gretton2012kernel}
 \begin{minipage}{.60\linewidth}
 
 
@@ -39,7 +40,7 @@ MMD({\color{red} p},{ \color{blue} q},\mathcal{F}) = \sup_{   \| {\color{mg}f} \
 \normalsize
 \vspace{1cm}
  \begin{itemize}
-  \item $\mathcal{F}$ is an Reproducing Kernel Hilbert Space.
+  \item $\mathcal{F}$ is an Reproducing kernel Hilbert space.
   \item ${\color{mg} f^*}$ is the function that attains the supremum.
   \item We want to get rid of  $\ev_{ {\color{red} p} }f$ . How?
  \end{itemize}
@@ -77,7 +78,8 @@ With an aid of the Stein operator
 \[
  T_{{ \color{red} p}}f =  f  +  \log' { \color{red} p} \cdot  f
 \]
-the function class is $G = \{ T_{{ \color{red} p}}f | f \in \mathcal{F} \}$
+the function class is $G = \{ T_{{ \color{red} p}}f | f \in \mathcal{F} \}$.
+Inspired by \cite{gorham2015measuring}, related to \cite{OatGirCho15}, and independently developed in \cite{LiuLeeJor16}.
 \end{block}
 \vspace{-0.75cm}
 
@@ -277,7 +279,7 @@ To estimate quantiles of $ V_n(h_{\color{red} p})$ we use wild bootstrap
 \end{minipage}
 \end{center}
 
- 
+ See also \cite{leucht_dependent_2013}.
 \end{block}
 \end{column}
 
@@ -320,10 +322,10 @@ correct calibration of p-values under the null hypothesis.
 \end{block}
 \vspace{-0.75cm}
 
+
 \begin{block}{Experiment: Bias quantification in Approximate MCMC}
 
  
-% 
 \begin{minipage}{.45\linewidth}
 \begin{align*}
 \theta_{1}\sim{\cal N}(0,10);\theta_{2}\sim{\cal N}(0,1)\\
@@ -366,6 +368,7 @@ true stationary posterior, using our goodness of fit test. We generate
 \end{block}
 \vspace{-0.75cm}
 \begin{block}{Experiment: Statistical model criticism}
+See \cite{lloyd2015statistical}.
 \begin{center}
 \item We test the hypothesis that a Gaussian process generated \textbf{training data} using for fitting -- without simulating from the generative model, but only using {\color{red} test data}.
 \end{center}
@@ -402,8 +405,11 @@ and a recent approximation to this model using random Fourier features
 
 \end{block}
 
+
 \vspace{-0.75cm}
 \begin{block}{References}
+
+
 \begin{minipage}{.9\linewidth}
 {\footnotesize
 \begin{multicols}{2}
