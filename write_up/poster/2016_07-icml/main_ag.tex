@@ -1,0 +1,343 @@
+\include{header}
+
+\begin{document}
+\begin{frame}
+\begin{columns}
+\begin{column}{.33\linewidth}
+%\vspace{-0.75cm}
+\begin{block}{Motivation: testing output of approximate MCMC}
+\begin{minipage}{.49\linewidth}
+
+\begin{align*}
+ \theta_{1}&\sim{\cal N}(0,10);\theta_{2}\sim{\cal N}(0,1) \\
+ X_{i} &\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\theta_{2},4)
+\end{align*}
+ \vspace{1cm} 
+
+%AG: changed text
+
+MCMC: samples from distributions where normalization can't be computed.
+Recent work on MCMC  incorporates tradeoff between bias/accuracy, e.g. \cite{korattikara2013austerity}.
+%And so we turn the Bayesian Crank  to  obtain samples form the posteriori distribution. It obviously matters which matter which method we use, since quality of sample depends on it. 
+\end{minipage}
+\begin{minipage}{.4\linewidth}
+\includegraphics[scale=0.7]{../../presentation/img/sgld_trace_and_density.pdf}
+\end{minipage}
+\vspace{1cm}
+\begin{center}
+\Large
+\emph{How to check if MCMC samples match target distribution?}
+\end{center}
+\end{block}
+\vspace{-0.75cm}
+\begin{block}{Maximum Mean Discrepancy for comparing two samples}
+\begin{center}Maximum mean discrepancy: norm of function in RKHS revealing difference in distributions\end{center}
+\begin{minipage}{.60\linewidth}
+
+%AG: changed text
+
+\vspace{1cm}
+\large
+\begin{align*}
+MMD({\color{red} p},{ \color{blue} q},F) = \sup_{   \| {\color{mg}f} \|_F<1} [\ev_{{ \color{blue} q}}{\color{mg}f}- \ev_{{\color{red} p}}{\color{mg} f}]   
+\end{align*}
+\normalsize
+\vspace{1cm}
+ \begin{itemize}
+  \item $F$ is an Reproducing Kernel Hilbert Space.
+  \item ${\color{mg} f^*}$ is the function that attains the supremum.
+  \item We want to get rid of  $\ev_{ {\color{red} p} }f$  (usually can't compute in closed form).
+ \end{itemize}
+
+\end{minipage}
+\begin{minipage}{.35\linewidth}
+
+\begin{center}
+\vspace{-1cm}
+\hspace{-2.5cm}
+\includegraphics[width=12cm,height=6cm]{../../presentation/img/mmd.pdf}
+\end{center}
+\end{minipage}
+\vspace{1cm}
+\begin{center}
+\emph{Can we do this without sampling from ${\color{red} p}$?}
+\end{center}
+\end{block}
+\vspace{-0.75cm}
+\begin{block}{Stein's trick in RKHS}
+
+%AG: fixed errors in proof
+
+Consider the  class \large
+$$G = \{ f'  +  \log' { \color{red} p} \cdot  f | f \in F \}$$
+\normalsize
+Given $g\in G$, then (integration by parts)
+\begin{align*}
+\ev_{\color{red} p} g(X) &=
+\ev_{\color{red} p} \left[ f'(X)  +  \log' {\color{red} p}(X) f(X) \right] \\
+&= \int   f(x)' { \color{red} p}(x)   + f(x){\color{red} p}'(x) dx \\
+&= \int_{-\infty}^{\infty} (f(x) {\color{red} p}(x) )'  dx \\
+&= f(x) {\color{red} p}(x)  \big|_{x=-\infty}^{x=\infty} \\
+&= 0
+\end{align*}
+Define the {\bf Stein operator}
+\[
+ T_{\color{red} p}f =  f'  +  \log' { \color{red} p} \cdot  f
+\]
+the function class is $G = \{ T_{\color{red} p}f | f \in F \}$
+\end{block}
+\vspace{-0.75cm}
+
+\begin{block}{Maximum Stein discrepancy}
+\large
+\begin{align*}
+MSD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} f} \|_F<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} f} - \ev_{{\color{red} p}} T_{\color{red} p} {\color{mg} f}  = \sup_{ \| {\color{mg} f} \|_F<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} f} 
+\end{align*}
+\vspace{2cm}
+\centering
+\includegraphics[scale=1.2]{../../presentation/img/s1.pdf}
+\includegraphics[scale=1.2]{../../presentation/img/s05.pdf}\\
+\includegraphics[scale=1.2]{../../presentation/img/s01.pdf}
+\includegraphics[scale=1.2]{../../presentation/img/s0.pdf}
+%\vspace{1cm}
+%\begin{center}
+%\emph{Bam!}
+%\end{center}
+\end{block}
+
+
+
+\vspace{-0.75cm}
+\begin{block}{Closed form expression}
+ Let $F$ be the RKHS associated with the kernel $k$ and 
+\large
+ \begin{equation*}
+\xi_{p}(x,\cdot):=\log' p(x) k(x,\cdot)+  k'(x,\cdot).
+\end{equation*}
+ $\xi_{p}(x,\cdot)$ is an element of the reproducing kernel Hilbert
+space $F$.  $h$ is an  inner product between $\xi$, 
+\[
+h_{{\color{red} p}}(x,y)   = \langle\xi_{p}(x,\cdot),\xi_{p}(y,\cdot)\rangle. 
+\]
+$h$ can be written in closed form
+\large
+\begin{align*}
+h_{{\color{red} p}}(x,y) & = \partial_{x} \log {\color{red} p}(x) \partial_{x} \log {\color{red} p}(y) k(x,y)\\
+ & \quad+\partial_{y} \log {\color{red} p}(y) \partial_{x}  k(x,y)\\
+ & \quad+\partial_{x} \log {\color{red} p}(x) \partial_{y}k(x,y)\\
+ & \quad+\partial_{x} \partial_{y} k(x,y).
+\end{align*}
+ \center{\emph{which only depends on kernel and $\partial_{x} \log {\color{red} p}(x)$}}
+\end{block}
+
+\vspace{-0.75cm}
+
+\begin{block}{Theorem}
+\large
+Let ${ \color{blue} q},{\color{red} p}$ be probability measures and $Z\sim { \color{blue} q}$. 
+If $\ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z)<\infty$, then 
+$$MSD({\color{red} p},{ \color{blue} q},G) = \ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z'),$$
+where $Z'$ is an independent copy of $Z$.
+\end{block}
+
+
+ 
+
+
+\end{column}
+
+%%%-----------------column 2
+\hspace{-1.45cm}
+\begin{column}{.33\linewidth}
+
+\begin{block}{Proof}
+
+Next we show that $\xi_{p}(x,\cdot)$ is Bochner integrable
+\[
+\ev_{q}\|\xi_{p}(Z)\|_{\mathcal{F}}^{2}=\ev_{q}h_{p}(Z,Z)<\infty.
+\]
+We next relate the expected value of the Stein operator to the inner product of $f$ and the expected value
+of $\xi_{q}(Z)$,  
+\begin{align*}
+  \left\langle f,\ev_{q} \xi_{p}(Z) \right\rangle _{\mathcal{F}}& =\left\langle f,\ev_{q} \left[  \log' p(Z) k(Z,\cdot)+\ k'(Z,\cdot) \right] \right \rangle _{\mathcal{F}}\\
+ & = \ev_{q}  \left\langle f,\left[  \log' p(Z) k(Z,\cdot)+\ k'(Z,\cdot) \right] \right \rangle _{\mathcal{F}}\\
+ & =\ev_{q}(T_{p}f)(Z).
+\end{align*}
+The second equality follows from  Bochner integrability of $\xi_{p}$.
+We have 
+\begin{align*}
+MSD(p,q,G) & :=\sup_{\Vert f\Vert<1}\ev_{q}(T_{p}f)(Z)-\ev_{p}(T_{p}f)(X)\\
+ & =\sup_{\Vert f\Vert<1}\ev_{q}(T_{p}f)(Z)\\
+ & =\sup_{\Vert f\Vert<1}\langle f,\ev_{q}\xi_{p}(Z)\rangle_{{\cal F}^{d}}\\
+ & =\|\ev_{q}\xi_{p}(Z)\|_{\mathcal{F}^{d}}.
+\end{align*}
+We now calculate closed form formula for $MSD(p,q,G)^{2}$,
+\begin{align*}
+MSD(p,q,G)^{2} & =\langle\ev_{q}\xi_{p}(Z),\ev_{q}\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}=\ev_{q}\langle\xi_{p}(Z),\ev_{q}\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}\\
+ & =\ev_{q}\langle\xi_{p}(Z),\xi_{p}(Z')\rangle_{\mathcal{F}^{d}}=\ev_{q}h_{p}(Z,Z'),
+\end{align*}
+\end{block}
+
+
+\vspace{-0.75cm}
+\begin{block}{Theorem}
+\large
+If the kernel $k$ is cc-universal, $\ev_{{ \color{blue} q}} h_{{ \color{blue} q}}(Z,Z)<\infty$ and $\ev_{{ \color{blue} q}} (\log' \frac{{\color{red} p}(Z)}{{ \color{blue} q}(Z)})^{2}<\infty$
+then $MSD({\color{red} p},{ \color{blue} q},G) =0$ if and only if ${\color{red} p}={ \color{blue} q}$.
+
+\end{block}
+
+\vspace{-0.75cm}
+\begin{block}{Proof}
+
+ If $p=q$ then $MSD({\color{red} p},{ \color{red} p},G) =0$ is $0$. Suppose
+$p\neq q$, but $MSD({\color{red} p},{ \color{blue} q},G) =0$. If $MSD({\color{red} p},{ \color{blue} q},G) =0$ then, by Theorem \ref{th:closed_form_discrepancy},
+$\ev_{q}\xi_{p}(Z)=0.$ In the following we substitute $\log p(Z)=\log q(Y)+[\log p(Z)-\log q(Y)]$,
+\begin{align*}
+ & \ev_{q}\xi_{p}(Z)\\
+ & =\ev_{q}\left( \log' p(Z)k(Z,\cdot)+ k'(Z,\cdot)\right)\\
+ & =\ev_{q}\xi_{q}(Z)+\ev_{q}\left([\log p(Z)-\log q(Y)]'k(Z,\cdot)\right)\\
+ & =\ev_{q}\left( [\log p(Z)-\log q(Y)]' k(Z,\cdot)\right)
+\end{align*}
+We have used Theorem 1 to see that $\ev_{q}\xi_{q}(Z)=0$. 
+
+The expected value of $(\log p(Z)-\log q(Z))' k(Z,\cdot)$ is the mean embedding of
+a function $g(y)=\left(\log\frac{p(y)}{q(y)}\right)'$ with respect
+to the measure $q$. By the assumptions function $g$ is square integrable,
+therefore, since the kernel $k$ is $C_0$-universal, %by \citet[ Theorem 4.4 c]{carmeli2010vector}
+its embedding is zero if and only if $g=0$. This implies that 
+\[
+\log'\frac{p(y)}{q(y)}=(0,\cdots,0).
+\]
+A zero vector field of derivatives can only be generated by a
+constant function, so $\log\frac{p(y)}{q(y)}=C$, for some $C$, which
+implies that $p(y)=e^{C}q(y)$. Since $p$ and $q$ both integrate
+to one, $C=0$ then $p=q$, which is a contradiction.
+\end{block}
+
+
+\vspace{-0.75cm}
+\begin{block}{Estimation: V-statistics}
+An estimator of $\ev h_{\color{red} p}(X,X')$ is
+\begin{align*}
+ V_n(h_{\color{red} p}) = \frac {1} {n^2} \sum_{i,j=1}^n h_{\color{red} p}(X_i,X_j).
+\end{align*}
+Our test statistic is $ n V_n(h_{\color{red} p})$.
+
+If $X_i \sim {\color{red} p}$ then $ n V_n(h_{\color{red} p})$  converges weakly. 
+
+Otherwise it does not,  it explodes, $P(n V_n(h_{\color{red} p}) <C) \to 0$.
+\end{block}
+\vspace{-0.75cm}
+\begin{block}{Non i.i.d.\ extension: the wild bootstrap}
+To estimate quantiles of $ V_n(h_{\color{red} p})$  
+\[
+ V_n(h_{\color{red} p}) = \frac {1} {n^2} \sum_{i,j=1}^n h_{\color{red} p}(X_i,X_j).
+\]
+under the null, we use wild bootstrap
+\[
+ B_n(h_{\color{red} p}) = \frac {1} {n^2} \sum_{i,j=1}^n W_i W_j h_{\color{red} p}(X_i,X_j).
+\]
+  where $W_i$ is a  series  random variables.
+\begin{center}
+  \begin{minipage}{.49\linewidth}
+       $$
+  Cov(W_i,W_j) = (1-2p_n)^{-|i-j|}
+  $$
+\end{minipage}
+\begin{minipage}{.49\linewidth}
+ \begin{figure}
+            \vspace{-0.5cm}
+           \includegraphics[width=0.7\textwidth, angle =0 ]{../../presentation/img/W_graphicalModel.pdf} 
+        \end{figure}
+\end{minipage}
+\end{center}
+  $p_n$ is  the probability of the change  and should be set to $o(n)$.
+
+
+
+
+
+ \includegraphics[width=0.45\textwidth]{../../presentation/img/bootstrapWorks1.pdf}
+ \includegraphics[width=0.45\textwidth]{../../presentation/img/bootstrapWorks4.pdf}
+
+ \begin{center}
+  \begin{minipage}{.49\linewidth}
+ \includegraphics[width=\textwidth]{../../presentation/img/bootstrapWorks7.pdf}
+  \end{minipage}
+\begin{minipage}{.49\linewidth}
+\begin{align*}
+ X_t =& \beta X_{t-1} + \sqrt{1 - \beta^2}\epsilon_t\\
+ & \epsilon_t \sim \cal N(0,1
+\end{align*}
+
+ where $\beta$ controls the amount of autocorrelation in the process
+\end{minipage}
+\end{center}
+
+ 
+\end{block}
+\end{column}
+
+
+% column 3
+\hspace{-1.45cm}
+\begin{column}{.32\linewidth}
+%\vspace{-0.75cm}
+\begin{block}{Experiment: Student's T vs.\ Normal}
+\begin{minipage}{.60\linewidth}
+\begin{itemize}
+\item TODO Describe
+\end{itemize}
+\includegraphics[width=.7\textwidth]{../../presentation/img/sgld_student_bad}
+\end{minipage}
+\begin{minipage}{.35\linewidth}
+\includegraphics[width=1\textwidth]{../../presentation/img/sgld_student}\\
+ \includegraphics[width=1\textwidth]{../../presentation/img/sgld_student_opt} 
+\end{minipage}
+\end{block}
+\vspace{-0.75cm}
+\begin{block}{Experiment: Bias quantification in Approximate MCMC}
+\begin{minipage}{.60\linewidth}
+\begin{align*}
+\theta_{1}\sim{\cal N}(0,10);\theta_{2}\sim{\cal N}(0,1)\\
+X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\theta_{2},4) & .
+\end{align*}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{../../presentation/img/sgld_trace_and_density.pdf}
+\end{center}
+\end{minipage}
+\begin{minipage}{.35\linewidth}
+           \includegraphics[width=.6\textwidth]{../../presentation/img/Heiko1}\\
+            \includegraphics[width=.6\textwidth]{../../presentation/img/Heiko2}
+\end{minipage}
+\end{block}
+\vspace{-0.75cm}
+\begin{block}{Experiment: Statistical model criticism}
+\begin{center}
+\item We test the hypothesis that a Gaussian process generated \textbf{training data} using for fitting -- without simulating from the generative model, but only using {\color{red} test data}.
+\end{center}
+\includegraphics[width=0.48\textwidth]{../../presentation/img/gp_regression_data_fit.pdf} \includegraphics[width=0.48\textwidth]{../../presentation/img/gp_regression_bootstrap_hist} 
+\begin{minipage}{.35\linewidth}
+
+\end{minipage}
+\end{block}
+\vspace{-0.75cm}
+\begin{block}{References}
+\begin{minipage}{.9\linewidth}
+{\footnotesize
+\begin{multicols}{2}
+\setbeamertemplate{bibliography item}[text] 
+\bibliographystyle{plain} 
+\scriptsize
+\bibliography{../../biblio.bib} \ 
+\end{multicols}
+} 
+\end{minipage}
+\end{block}
+
+\end{column}
+\end{columns}
+
+\end{frame}
+\end{document}
