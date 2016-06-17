@@ -6,7 +6,7 @@
 \begin{column}{.33\linewidth}
 %\vspace{-0.75cm}
 \begin{block}{Motivation: One sample testing for non i.i.d.\ data}
-\begin{minipage}{.57\linewidth}
+\begin{minipage}{.49\linewidth}
 
 \begin{align*}
  \theta_{1}&\sim{\cal N}(0,10);\theta_{2}\sim{\cal N}(0,1) \\
@@ -14,10 +14,10 @@
 \end{align*}
  \vspace{1cm} 
 
-And so we turn the Bayesian Crank  to  obtain samples form the posteriori distribution. It obviously matters which matter which method we use, since quality of sample depends on it. However, once we are one  done one question remains...  
+And so we turn the Bayesian Crank  to  obtain samples form the posteriori distribution. It obviously matters which matter which method we use, since quality of sample depends on it. 
 \end{minipage}
-\begin{minipage}{.37\linewidth}
-\includegraphics[scale=0.8]{../../presentation/img/sgld_trace_and_density.pdf}
+\begin{minipage}{.4\linewidth}
+\includegraphics[scale=0.7]{../../presentation/img/sgld_trace_and_density.pdf}
 \end{minipage}
 \vspace{1cm}
 \begin{center}
@@ -41,12 +41,15 @@ MMD({\color{red} p},{ \color{blue} q},F) = \sup_{   \| {\color{mg}f} \|_F<1} [\e
  \begin{itemize}
   \item $F$ is an Reproducing Kernel Hilbert Space.
   \item ${\color{mg} f^*}$ is the function that attains the supremum.
-  \item We want to get rid of  $\ev_{ {\color{red} p} }f$ . Hoe?
+  \item We want to get rid of  $\ev_{ {\color{red} p} }f$ . How?
  \end{itemize}
 
 \end{minipage}
 \begin{minipage}{.35\linewidth}
+
 \begin{center}
+\vspace{-1cm}
+\hspace{-2.5cm}
 \includegraphics[width=12cm,height=6cm]{../../presentation/img/mmd.pdf}
 \end{center}
 \end{minipage}
@@ -63,10 +66,14 @@ $$G = \{ f  +  \log' { \color{blue} q} \cdot  f | f \in F \}$$
 \normalsize
 justified by integration by parts
 \begin{align*}
- 0= &  f(x) {\color{red} p}(x)  \big|_{x=-\infty}^{x=\infty} =  \int_{-\infty}^{\infty} (f(x) {\color{red} p}(x) )'  dx  =   \int   f(x)' { \color{blue} q}(x)   + f(x){\color{red} p}'(x)  = \ev_{\color{red} p} f(X)  +  \log' {\color{red} p}(X) f(X) \\
+ 0= &  f(x) {\color{red} p}(x)  \big|_{x=-\infty}^{x=\infty} \\
+   = &  \int_{-\infty}^{\infty} (f(x) {\color{red} p}(x) )'  dx \\
+   = &  \int   f(x)' { \color{red} p}(x)   + f(x){\color{red} p}'(x)  \\
+   = &  \ev_{\color{red} p} f(X)  +  \log' {\color{red} p}(X) f(X) \\
    = & \ev_{\color{red} p} g(X), \\
     & \quad \quad \quad  \quad  \text{ where } g \in G
 \end{align*}
+
 
 \end{block}
 \vspace{-0.75cm}
@@ -82,43 +89,89 @@ MMD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_G<1} \e
 \includegraphics[scale=1.2]{../../presentation/img/s05.pdf}\\
 \includegraphics[scale=1.2]{../../presentation/img/s01.pdf}
 \includegraphics[scale=1.2]{../../presentation/img/s0.pdf}
-%%\includegraphics[width=10cm, height=7cm]{../../presentation/img/old/figures/kmc/gaussian_trajectories_momentum_hmc}
-%\includegraphics[scale=1.2]{../../presentation/img/old/figures/kmc/gaussian_trajectories_acceptance_hmc}\\
-
-%\includegraphics[scale=.5]{../../presentation/img/old/figures/kmc/kmc_banana_bbox}
-%%\includegraphics[width=10cm, height=7cm]{../../presentation/img/old/figures/kmc/gaussian_trajectories_momentum_kmc}
-%\includegraphics[scale=1.2]{../../presentation/img/old/figures/kmc/gaussian_trajectories_acceptance_kmc}
 \vspace{1cm}
 \begin{center}
 \emph{Bam!}
 \end{center}
 \end{block}
+
+
+
+\begin{block}{Closed form expression}
+ Let $F$ be the RKHS associated with the kernel $k$ and 
+\large
+ \begin{equation*}
+\xi_{p}(x,\cdot):=\log' p(x) k(x,\cdot)+  k'(x,\cdot).
+\end{equation*}
+ $\xi_{p}(x,\cdot)$ is an element of the reproducing kernel Hilbert
+space $F$.  $h$ is an  inner product between $\xi$, 
+\[
+h_{{\color{red} p}}(x,y)   = \langle\xi_{p}(x,\cdot),\xi_{p}(y,\cdot)\rangle. 
+\]
+$h$ can be written in close form
+\large
+\begin{align*}
+h_{{\color{red} p}}(x,y) & = \partial_{x} \log {\color{red} p}(x) \partial_{x} \log {\color{red} p}(y) k(x,y)\\
+ & \quad+\partial_{y} \log {\color{red} p}(y) \partial_{x}  k(x,y)\\
+ & \quad+\partial_{x} \log {\color{red} p}(x) \partial_{y}k(x,y)\\
+ & \quad+\partial_{x} \partial_{y} k(x,y).
+\end{align*}
+ \center{\emph{which only depends on kernel and $\partial_{x} \log {\color{red} p}(x)$}}
+\end{block}
+
+
+\begin{block}{Theorem}
+\large
+Let ${ \color{blue} q},{\color{red} p}$ be probability measures and $Z\sim { \color{blue} q}$. 
+If $\ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z)<\infty$, then $MMD({\color{red} p},{ \color{blue} q},G) = \ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z')$.
+\end{block}
+
+
+ 
+
+
 \end{column}
 
 %%%-----------------column 2
 \hspace{-1.45cm}
 \begin{column}{.33\linewidth}
 
-%\vspace{-0.75cm}
-\begin{block}{Closed form expression}
- Let $F$ be the RKHS associated with the kernel $k$. Consider a friendly looking function
+\begin{block}{Proof}
+
+Next we show that $\xi_{p}(x,\cdot)$ is Bochner integrable
+\[
+\ev_{q}\|\xi_{p}(Z)\|_{\mathcal{F}}^{2}=\ev_{q}h_{p}(Z,Z)<\infty.
+\]
+We next relate the expected value of the Stein operator to the inner product of $f$ and the expected value
+of $\xi_{q}(Z)$,  
 \begin{align*}
-h_{{\color{red} p}}(x,y) & := \partial_{x} \log {\color{red} p}(x) \partial_{x} \log {\color{red} p}(y) k(x,y)\\
- & \quad+\partial_{y} \log {\color{red} p}(y) \partial_{x}  k(x,y)\\
- & \quad+\partial_{x} \log {\color{red} p}(x) \partial_{y}k(x,y)\\
- & \quad+\partial_{x} \partial_{y} k(x,y).
+  \left\langle f,\ev_{q} \xi_{p}(Z) \right\rangle _{\mathcal{F}}& =\left\langle f,\ev_{q} \left[  \log' p(Z) k(Z,\cdot)+\ k'(Z,\cdot) \right] \right \rangle _{\mathcal{F}}\\
+ & = \ev_{q}  \left\langle f,\left[  \log' p(Z) k(Z,\cdot)+\ k'(Z,\cdot) \right] \right \rangle _{\mathcal{F}}\\
+ & =\ev_{q}\left[\log' p(Z) f(Z)+ f'(X) \right].
 \end{align*}
- \center{\emph{Only depends on kernel and $\partial_{x} \log {\color{red} p}(x)$}}
- 
+The second equality follows from  Bochner integrability of $\xi_{p}$.
+We have 
+\begin{align*}
+MMD(p,q,F) & :=\sup_{\Vert f\Vert<1}\ev_{q}(T_{p}f)(Z)-\ev_{p}(T_{p}f)(X)\\
+ & =\sup_{\Vert f\Vert<1}\ev_{q}(T_{p}f)(Z)\\
+ & =\sup_{\Vert f\Vert<1}\langle f,\ev_{q}\xi_{p}(Z)\rangle_{{\cal F}^{d}}\\
+ & =\|\ev_{q}\xi_{p}(Z)\|_{\mathcal{F}^{d}}.
+\end{align*}
+We now calculate closed form formula for $S_{p}^{2}(Z)$,
+
+\begin{align*}
+MMD(p,q,F)^{2} & =\langle\ev_{q}\xi_{p}(Z),\ev_{q}\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}=\ev_{q}\langle\xi_{p}(Z),\ev_{q}\xi_{p}(Z)\rangle_{\mathcal{F}^{d}}\\
+ & =\ev_{q}\langle\xi_{p}(Z),\xi_{p}(Z')\rangle_{\mathcal{F}^{d}}=\ev_{q}h_{p}(Z,Z'),
+\end{align*}
+where $Z'$ is an independent copy of $Z$.
+
+
+
+
 \end{block}
 
-\vspace{-0.75cm}
-\begin{block}{Theorem}
-\large
-Let ${ \color{blue} q},{\color{red} p}$ be probability measures and $Z\sim { \color{blue} q}$. 
-If $\ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z)<\infty$, then $MMD({\color{red} p},{ \color{blue} q},G) = \ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z')$.
-\end{block}
-\vspace{-0.75cm}
+
+
 \begin{block}{Theorem}
 \large
 If the kernel $k$ is cc-universal, $\ev_{{ \color{blue} q}} h_{{ \color{blue} q}}(Z,Z)<\infty$ and $\ev_{{ \color{blue} q}} (\log' \frac{{\color{red} p}(Z)}{{ \color{blue} q}(Z)})^{2}<\infty$
