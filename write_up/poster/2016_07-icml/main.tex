@@ -5,7 +5,7 @@
 \begin{columns}
 \begin{column}{.33\linewidth}
 %\vspace{-0.75cm}
-\begin{block}{Motivation: One sample testing for non i.i.d.\ data}
+\begin{block}{Motivating example: testing output of approximate MCMC}
 \begin{minipage}{.49\linewidth}
 
 \begin{align*}
@@ -14,7 +14,11 @@
 \end{align*}
  \vspace{1cm} 
 
-And so we turn the Bayesian crank  to  obtain samples form the posteriori distribution. It obviously matters which matter which method we use, since quality of sample depends on it. 
+%AG: changed text
+
+MCMC: samples from distributions where normalization can't be computed.
+Recent work on MCMC  incorporates tradeoff between bias/accuracy, e.g. \cite{korattikara2013austerity}.
+%And so we turn the Bayesian Crank  to  obtain samples form the posteriori distribution. It obviously matters which matter which method we use, since quality of sample depends on it. 
 \end{minipage}
 \begin{minipage}{.4\linewidth}
 \includegraphics[scale=0.7]{../../presentation/img/sgld_trace_and_density.pdf}
@@ -22,15 +26,15 @@ And so we turn the Bayesian crank  to  obtain samples form the posteriori distri
 \vspace{1cm}
 \begin{center}
 \Large
-\emph{How to check if we sampled from the stationary distribution?}
+\emph{How to check if MCMC samples match target distribution?}
 \end{center}
 \end{block}
-\vspace{-0.75cm}
-\begin{block}{So far: Maximum mean discrepancy}
-\begin{center}We turn the kernel crank, we find a function in RKHS to reveal difference in distributions\end{center}
-See also \cite{gretton2012kernel}
+\vspace{-0.75cm}  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{block}{Maximum Mean Discrepancy for comparing two samples}
+\begin{center}Maximum mean discrepancy: norm of function in RKHS revealing difference in distributions\end{center}
 \begin{minipage}{.60\linewidth}
 
+%AG: changed text
 
 \vspace{1cm}
 \large
@@ -40,9 +44,9 @@ MMD({\color{red} p},{ \color{blue} q},\mathcal{F}) = \sup_{   \| {\color{mg}f} \
 \normalsize
 \vspace{1cm}
  \begin{itemize}
-  \item $\mathcal{F}$ is an Reproducing kernel Hilbert space.
+  \item $\mathcal{F}$ is a Reproducing Kernel Hilbert Space.
   \item ${\color{mg} f^*}$ is the function that attains the supremum.
-  \item We want to get rid of  $\ev_{ {\color{red} p} }f$ . How?
+  \item We want to get rid of  $\ev_{ {\color{red} p} }f$  (usually can't compute in closed form).
  \end{itemize}
 
 \end{minipage}
@@ -56,37 +60,41 @@ MMD({\color{red} p},{ \color{blue} q},\mathcal{F}) = \sup_{   \| {\color{mg}f} \
 \end{minipage}
 \vspace{1cm}
 \begin{center}
-\emph{Can we do this without sampling from ${ \color{red} p}$?}
+\emph{Can we do this without sampling from ${\color{red} p}$?}
 \end{center}
 \end{block}
-\vspace{-0.75cm}
-\begin{block}{Stein's trick in RKHS}
+\vspace{-0.75cm}  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{block}{Stein's trick in the RKHS}
+
+%AG: fixed errors in proof
 
 Consider the  class \large
-$$G = \{ f  +  \log' { \color{red} p} \cdot  f | f \in \mathcal{F} \}$$
+$$G = \{ f'  +  \log' { \color{red} p} \cdot  f | f \in \mathcal{F} \}$$
 \normalsize
-justified by integration by parts
+Given $g\in G$, then (integration by parts)
 \begin{align*}
- 0= &  f(x) {\color{red} p}(x)  \big|_{x=-\infty}^{x=\infty} \\
-   = &  \int_{-\infty}^{\infty} (f(x) {\color{red} p}(x) )'  dx \\
-   = &  \int   f(x)' { \color{red} p}(x)   + f(x){\color{red} p}'(x)  \\
-   = &  \ev_{\color{red} p} f(X)  +  \log' {\color{red} p}(X) f(X) \\
-   = & \ev_{\color{red} p} g(X), \\
-    & \quad \quad \quad  \quad  \text{ where } g \in G
+\ev_{\color{red} p} g(X) &=
+\ev_{\color{red} p} \left[ f'(X)  +  \log' {\color{red} p}(X) f(X) \right] \\
+&= \int   f(x)' { \color{red} p}(x)   + f(x){\color{red} p}'(x) dx \\
+&= \int_{-\infty}^{\infty} (f(x) {\color{red} p}(x) )'  dx \\
+&= f(x) {\color{red} p}(x)  \big|_{x=-\infty}^{x=\infty} \\
+&= 0
 \end{align*}
-With an aid of the Stein operator 
+Define the {\bf Stein operator}
 \[
- T_{{ \color{red} p}}f =  f  +  \log' { \color{red} p} \cdot  f
+ T_{\color{red} p}f =  f'  +  \log' { \color{red} p} \cdot  f
 \]
-the function class is $G = \{ T_{{ \color{red} p}}f | f \in \mathcal{F} \}$.
+the function class is $G = \{ T_{\color{red} p}f | f \in \mathcal{F} \}$.
+
 Inspired by \cite{gorham2015measuring}, related to \cite{OatGirCho15}, and independently developed in \cite{LiuLeeJor16}.
-\end{block}
+\end{block} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-0.75cm}
 
-\begin{block}{Stein discrepancy}
+
+\begin{block}{Maximum Stein discrepancy}
 \large
 \begin{align*}
-MMD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}}{\color{mg}g} - \ev_{{\color{red} p}} {\color{mg}g}  = \sup_{ \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}} {\color{mg}g} 
+MSD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} f} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} f} - \ev_{{\color{red} p}} T_{\color{red} p} {\color{mg} f}  = \sup_{ \| {\color{mg} f} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} f} 
 \end{align*}
 \vspace{2cm}
 \centering
@@ -96,33 +104,41 @@ MMD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_G<1} \e
 \includegraphics[scale=1.2]{../../presentation/img/s0.pdf}
 \vspace{1cm}
 \begin{center}
-\emph{Bam!}
+\emph{As { \color{blue} q} approaches {\color{red} p}, the {\color{mg} witness function} goes to 0. }
 \end{center}
-\end{block}
-
+\end{block} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \vspace{-0.75cm}
-\begin{block}{Closed form expression}
- Let $\mathcal{F}$ be the RKHS associated with the kernel $k$ and 
-\large
+\begin{block}{RKHS element for Stein operator}
+%\Large
+Given $f\in \mathcal{F}$, action of Stein operator $T_{\color{red} p}$ can be written as dot product with Stein element $\xi_{{ \color{red} p}}$,
+ \begin{equation*}
+T_{\color{red} p}[f](x) = \langle f, \xi_{{ \color{red} p}}(x,\cdot) \rangle_{\mathcal{F}}
+\end{equation*}
+where
  \begin{equation*}
 \xi_{{ \color{red} p}}(x,\cdot):=\log' { \color{red} p}(x) k(x,\cdot)+  k'(x,\cdot).
 \end{equation*}
- $\xi_{{ \color{red} p}}(x,\cdot)$ is an element of the reproducing kernel Hilbert
-space $\mathcal{F}$.  $h$ is an  inner product between $\xi$, 
+and $k$ is kernel associated with RKHS $\mathcal{F}$.
+
+%\large
+Define $h_{{ \color{red} p}}$ as dot product of  $\xi$ at points $x$ and $y$, 
 \[
 h_{{\color{red} p}}(x,y)   = \langle\xi_{{ \color{red} p}}(x,\cdot),\xi_{{ \color{red} p}}(y,\cdot)\rangle. 
 \]
-$h$ can be written in close form
-\large
+$h_{{ \color{red} p}}$ can be written in closed form,
+%\large
 \begin{align*}
 h_{{\color{red} p}}(x,y) & = \partial_{x} \log {\color{red} p}(x) \partial_{x} \log {\color{red} p}(y) k(x,y)\\
  & \quad+\partial_{y} \log {\color{red} p}(y) \partial_{x}  k(x,y)\\
  & \quad+\partial_{x} \log {\color{red} p}(x) \partial_{y}k(x,y)\\
  & \quad+\partial_{x} \partial_{y} k(x,y).
 \end{align*}
- \center{\emph{which only depends on kernel and $\partial_{x} \log {\color{red} p}(x)$}}
+
+\vspace{0.5cm}
+\center{{\bf\emph{Only depends on kernel and $\partial_{x} \log {\color{red} p}(x)$, \\ do not need
+to normalise {\color{red} p}, or sample from it. }}}
 \end{block}
 
 \vspace{-0.75cm}
@@ -143,14 +159,14 @@ h_{{\color{red} p}}(x,y) & = \partial_{x} \log {\color{red} p}(x) \partial_{x} \
 \large
 Let ${ \color{blue} q},{\color{red} p}$ be probability measures and ${ \color{blue} Z}\sim { \color{blue} q}$. 
 If $\ev_{{ \color{blue} q}} h_{{\color{red} p}}({ \color{blue} Z},{ \color{blue} Z})<\infty$, then 
-$MMD({\color{red} p},{ \color{blue} q},G) = \ev_{{ \color{blue} q}} h_{{\color{red} p}}({ \color{blue} Z},{ \color{blue} Z}')$,
+$MSD({\color{red} p},{ \color{blue} q},G) = \ev_{{ \color{blue} q}} h_{{\color{red} p}}({ \color{blue} Z},{ \color{blue} Z}')$,
 where ${ \color{blue} Z}'$ is an independent copy of ${ \color{blue} Z}$.
 \end{block}
 
 \vspace{-0.73cm}
 \begin{block}{Proof}
 
-Next we show that $\xi_{{ \color{red} p}}(x,\cdot)$ is Bochner integrable
+First show that $\xi_{{ \color{red} p}}(x,\cdot)$ is Bochner integrable
 \[
 \ev_{{ \color{blue} q}}\|\xi_{{ \color{red} p}}({ \color{blue} Z})\|_{\mathcal{\mathcal{F}}}^{2}=\ev_{{ \color{blue} q}}h_{{ \color{red} p}}({ \color{blue} Z},{ \color{blue} Z})<\infty.
 \]
@@ -164,14 +180,14 @@ of $\xi_{{ \color{red} p}}({ \color{blue} Z})$,
 The second equality follows from  Bochner integrability of $\xi_{{ \color{red} p}}$.
 We have 
 \begin{align*}
-MMD({ \color{red} p},{ \color{blue} q},G) & :=\sup_{\Vert f\Vert<1}\ev_{{ \color{blue} q}}(T_{{ \color{red} p}}f)({ \color{blue} Z})-\ev_{{ \color{red} p}}(T_{{ \color{red} p}}f)(X)\\
+MSD({ \color{red} p},{ \color{blue} q},G) & :=\sup_{\Vert f\Vert<1}\ev_{{ \color{blue} q}}(T_{{ \color{red} p}}f)({ \color{blue} Z})-\ev_{{ \color{red} p}}(T_{{ \color{red} p}}f)(X)\\
  & =\sup_{\Vert f\Vert<1}\ev_{{ \color{blue} q}}(T_{{ \color{red} p}}f)({ \color{blue} Z})\\
  & =\sup_{\Vert f\Vert<1}\langle f,\ev_{{ \color{blue} q}}\xi_{{ \color{red} p}}({ \color{blue} Z})\rangle_{{\cal \mathcal{F}}}\\
  & =\|\ev_{{ \color{blue} q}}\xi_{{ \color{red} p}}({ \color{blue} Z})\|_{\mathcal{\mathcal{F}}}.
 \end{align*}
-We now calculate closed form formula for $MMD({ \color{red} p},{ \color{blue} q},G)^{2}$,
+We now calculate closed form formula for $MSD({ \color{red} p},{ \color{blue} q},G)^{2}$,
 \begin{align*}
-MMD({ \color{red} p},{ \color{blue} q},G)^{2}  =\ev_{{ \color{blue} q}}\langle\xi_{{ \color{red} p}}({ \color{blue} Z}),\xi_{{ \color{red} p}}({ \color{blue} Z}')\rangle_{\mathcal{\mathcal{F}}}=\ev_{{ \color{blue} q}}h_{{ \color{red} p}}({ \color{blue} Z},{ \color{blue} Z}'),
+MSD({ \color{red} p},{ \color{blue} q},G)^{2}  =\ev_{{ \color{blue} q}}\langle\xi_{{ \color{red} p}}({ \color{blue} Z}),\xi_{{ \color{red} p}}({ \color{blue} Z}')\rangle_{\mathcal{\mathcal{F}}}=\ev_{{ \color{blue} q}}h_{{ \color{red} p}}({ \color{blue} Z},{ \color{blue} Z}'),
 \end{align*}
 \end{block}
 
@@ -183,7 +199,7 @@ MMD({ \color{red} p},{ \color{blue} q},G)^{2}  =\ev_{{ \color{blue} q}}\langle\x
 
 \large
 If the kernel $k$ is $C_0$-universal, $\ev_{{ \color{blue} { \color{blue} q}}} h_{{ \color{blue} { \color{blue} q}}}({ \color{blue} Z},{ \color{blue} Z})<\infty$ and $\ev_{{ \color{blue} { \color{blue} q}}} (\log' \frac{{\color{red} p}({ \color{blue} Z})}{{ \color{blue} q}({ \color{blue} Z})})^{2}<\infty$
-then $MMD({\color{red} p},{ \color{blue} q},G) =0$ if and only if ${\color{red} p}={ \color{blue} q}$.
+then $MSD({\color{red} p},{ \color{blue} q},G) =0$ if and only if ${\color{red} p}={ \color{blue} q}$.
 
 \vspace{1cm}
 \normalsize
@@ -196,8 +212,8 @@ The assumption $\ev_{{ \color{blue} q}} (\log' \frac{{\color{red} p}({ \color{bl
 
 \vspace{-0.75cm}
 \begin{block}{Proof}
- If ${ \color{red} p}={ \color{blue} q}$ then $MMD({\color{red} p},{ \color{red} p},G) =0$ is $0$. Suppose
-${ \color{red} p}\neq { \color{blue} q}$, but $MMD({\color{red} p},{ \color{blue} q},G) =0$. If $MMD({\color{red} p},{ \color{blue} q},G) =0$ then, by Theorem 1 
+ If ${ \color{red} p}={ \color{blue} q}$ then $MSD({\color{red} p},{ \color{red} p},G) =0$ is $0$. Suppose
+${ \color{red} p}\neq { \color{blue} q}$, but $MSD({\color{red} p},{ \color{blue} q},G) =0$. If $MSD({\color{red} p},{ \color{blue} q},G) =0$ then, by Theorem 1 
 $\ev_{{ \color{blue} q}}\xi_{{ \color{red} p}}({ \color{blue} Z})=0$. We substitute $\log { \color{red} p}({ \color{blue} Z})=\log { \color{blue} q}(Y)+[\log { \color{red} p}({ \color{blue} Z})-\log { \color{blue} q}(Y)]$,
 \begin{align*}
  & \ev_{{ \color{blue} q}}\xi_{{ \color{red} p}}({ \color{blue} Z})\\
@@ -219,7 +235,7 @@ to one, $C=0$ then ${ \color{red} p}={ \color{blue} q}$, which is a contradictio
 
 \vspace{-0.75cm}
 \begin{block}{Non i.i.d.\ extension: the wild bootstrap}
-An estimator of $\ev h_{\color{red} p}(X,X')$ is  
+An estimator of $\ev_{\color{red} p} h_{\color{red} p}(X,X')$ is  
 \[
  V_n(h_{\color{red} p}) = \frac {1} {n^2} \sum_{i,j=1}^n h_{\color{red} p}(X_i,X_j).
 \]
