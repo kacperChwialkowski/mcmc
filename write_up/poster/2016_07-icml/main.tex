@@ -397,22 +397,24 @@ density models: the infinite dimensional exponential family \cite{SriFukKumGreHy
 % 
 
 \begin{center}
-\begin{minipage}{.450\linewidth}
-\includegraphics[width=\textwidth]{../../presentation/img/increasing_features_fixed_test}\\
-\end{minipage}
 \begin{minipage}{.45\linewidth}
             \includegraphics[width=\textwidth]{../../presentation/img/increasing_data_fixed_test}
 \end{minipage}
+\begin{minipage}{.450\linewidth}
+\includegraphics[width=\textwidth]{../../presentation/img/increasing_features_fixed_test}\\
+\end{minipage}
+
 \end{center}
 
 \footnotesize
-Our implementation of the model assumes
+\textbf{(Left)} assumes
 the log density to take the form $f(x)$, where $f$ lies in a RKHS
 induced by a Gaussian kernel with bandwidth $1$. We fit the model
 using $N$ observations drawn from a standard Gaussian, and perform
 our quadratic time test on a separate evaluation dataset of fixed
 size $n=500$. Our goal is to identify $N$ sufficiently large that
 the goodness of fit test does not reject the null hypothesis.
+\textbf{(Right)} is the same experiment, with a random Fourier features kernel approximation. We here are interested in convergence in terms of the number of basis terms $m$ for a fixed $N=5\cdot10^4$.
 
 \end{block}
 
