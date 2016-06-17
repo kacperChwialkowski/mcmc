@@ -300,32 +300,46 @@ constant.
 
 \vspace{-0.75cm}
 \begin{block}{Experiment: Student's T vs.\ Normal}
-\begin{minipage}{.60\linewidth}
-\begin{itemize}
-\item TODO Describe
-\end{itemize}
-\includegraphics[width=.7\textwidth]{../../presentation/img/sgld_student_bad}
+
+\begin{center}
+\begin{minipage}{.45\linewidth}
+\includegraphics[width=\textwidth]{../../presentation/img/nt}
 \end{minipage}
-\begin{minipage}{.35\linewidth}
-\includegraphics[width=1\textwidth]{../../presentation/img/sgld_student}\\
- \includegraphics[width=1\textwidth]{../../presentation/img/sgld_student_opt} 
+\begin{minipage}{.45\linewidth}
+ \includegraphics[width=\textwidth]{../../presentation/img/sgld_student_opt} 
 \end{minipage}
+\end{center}
+
+
+
+We modify experiment 4.1 from \cite{gorham2015measuring} by  generating samples using
+a Metropolis\textendash Hastings algorithm, with a Gaussian random walk with variance 1/2. We thin the observations by a factor of 20 and
+set $a_{n}=0.1$, thus preserving both good statistical power and
+correct calibration of p-values under the null hypothesis.
+
 \end{block}
 \vspace{-0.75cm}
 \begin{block}{Experiment: Bias quantification in Approximate MCMC}
-\begin{minipage}{.60\linewidth}
+\begin{minipage}{.45\linewidth}
 \begin{align*}
 \theta_{1}\sim{\cal N}(0,10);\theta_{2}\sim{\cal N}(0,1)\\
 X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\theta_{2},4) & .
 \end{align*}
+
+\end{minipage}
+\begin{minipage}{.45\linewidth}
 \begin{center}
 \includegraphics[width=0.5\textwidth]{../../presentation/img/sgld_trace_and_density.pdf}
 \end{center}
 \end{minipage}
-\begin{minipage}{.35\linewidth}
-           \includegraphics[width=.6\textwidth]{../../presentation/img/Heiko1}\\
+\begin{minipage}{.450\linewidth}
+\includegraphics[width=.6\textwidth]{../../presentation/img/Heiko1}\\
+\end{minipage}
+\begin{minipage}{.45\linewidth}
             \includegraphics[width=.6\textwidth]{../../presentation/img/Heiko2}
 \end{minipage}
+
+
 \end{block}
 \vspace{-0.75cm}
 \begin{block}{Experiment: Statistical model criticism}
