@@ -4,13 +4,16 @@
 \usepackage{amsmath}
 \usepackage{amsthm,amsthm}
 \usepackage{amssymb}
+\usepackage{multicol}
+
+\definecolor{lightblue}{rgb}{0,0.7,0.7}
 
 \global\long\def\ev{\mathbb{E}}
 \usetheme{metropolis}           % Use metropolis theme
 \title{ A Kernel Test of Goodness of Fit}
 \date{\today}
-\author{Kacper Chwialkowski$^*$, Heiko Strathmann$^*$, Arthur Gretton}
-\institute{}
+\author{Kacper Chwialkowski, Heiko Strathmann, Arthur Gretton}
+\institute{Gatsby Unit and CS Department, UCL}
 \titlegraphic{
     %\includegraphics[width=2cm]{csml_logo_vector2.pdf}\hspace*{4.75cm}~%
    \includegraphics[width=2cm]{./img/csml_logo_vector2.pdf}
@@ -39,15 +42,26 @@
 \begin{document}
 \frame{\titlepage}
   \setbeamercolor{background canvas}{bg=white}
- \begin{frame}{What is one sample testing?}
+ \begin{frame}{Motivating example: testing output of approximate MCMC}
  \begin{center}
+   Approximate MCMC: tradeoff between bias and computation\\ (e.g. {\em Austerity in MCMC Land} \cite{korattikara2013austerity})
+   \end{center}
+\begin{columns}
+        \begin{column}{.7\textwidth}
+   \includegraphics[width=\textwidth]{./img/sgld_trace_and_density.pdf} 
+        \end{column}
+        \begin{column}{.3\textwidth}
 $\theta_{1}\sim{\cal N}(0,10);\theta_{2}\sim{\cal N}(0,1)$\\
 $ X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\theta_{2},4) $.
- \includegraphics[width=.9\textwidth]{./img/sgld_trace_and_density.pdf} 
+        \end{column}
+\end{columns}
+ \vspace{0.3cm}
+\begin{center}
+ {\large\emph{{\color{red} How to check if MCMC samples match target distribution?}}}
  \end{center}
  \end{frame}
  
- \begin{frame}{Maximum mean discrepancy}
+ \begin{frame}{Maximum mean discrepancy: metric between ${ \color{red} p}$ and ${\color{lightblue} q}$ }
  \begin{center}
 $MMD({\color{red} p},{ \color{blue} q},F) = \sup_{   \| {\color{mg}f} \|_F<1} [\ev_{{ \color{blue} q}}{\color{mg}f}- \ev_{{\color{red} p}}{\color{mg} f}]  $\\
 \vspace{0.5cm}
@@ -58,6 +72,15 @@ $MMD({\color{red} p},{ \color{blue} q},F) = \sup_{   \| {\color{mg}f} \|_F<1} [\
   \item ${\color{mg} f^*}$ is the function that attains the supremum.
  \end{itemize}
 
+Can we compute $MMD$ when ${\color{blue} q}$ are MCMC samples, ${\color{red} p}$ is model?
+
+\pause
+
+ \vspace{0.1cm}
+\begin{center}
+ {\large\emph{ {\color{red} Problem:} don't have $\ev_{{\color{red} p}}{\color{mg} f}$ in closed form }}
+ \end{center}
+ 
  \end{frame} 
  
  
@@ -66,138 +89,257 @@ $MMD({\color{red} p},{ \color{blue} q},F) = \sup_{   \| {\color{mg}f} \|_F<1} [\
 To get rid of $\ev_{ {\color{red} p} }f$  in $$ \sup_{    \| {\color{mg}f} \|_F<1} [\ev_{{ \color{blue} q}}{\color{mg}f}- \ev_{{\color{red} p}} {\color{mg}f}] $$we will use the cornerstone of modern ML
 
 \pause
-\textbf{integration by parts}
+\textbf{Integration by parts}
 
-\pause 
-not the chain rule
+%\pause 
+%not the chain rule
 
-\pause
-I got you
+%\pause
+%I got you
 
-\pause 
-\begin{flushright}
-\small \textit{Kacper} 
-\end{flushright}
+%\pause 
+%\begin{flushright}
+%\small \textit{Kacper} 
+%\end{flushright}
 
 
 
 \end{frame} 
 
-  \begin{frame}{Cornerstone of modern ML: integration by parts}
-  \begin{center}
-  Consider the  class  \scalebox{1.3}{ $G = \{ f  +  \log' { \color{red} p} \cdot  f | f \in F \}$} justified by 
+  \begin{frame}{Stein's trick in the RKHS}
+%  \begin{center}
+Consider the  class \large
+$$G = \{ f'  +  \log' { \color{red} p} \cdot  f | f \in \mathcal{F} \}$$
+\normalsize
+
+\pause
+
+Given $g\in G$, then (integration by parts)
 \begin{align*}
- 0= &  f(x) {\color{red} p}(x)  \big|_{x=-\infty}^{x=\infty} \\
-   = &  \int_{-\infty}^{\infty} (f(x) {\color{red} p}(x) )'  dx \\
-   = &  \int   f(x)' { \color{red} p}(x)   + f(x){\color{red} p}'(x)  \\
-   = &  \ev_{\color{red} p} f(X)  +  \log' {\color{red} p}(X) f(X) \\
-   = & \ev_{\color{red} p} g(X), \\
-    & \quad \quad \quad  \quad  \text{ where } g \in G
+\ev_{\color{red} p} g(X) &=
+\ev_{\color{red} p} \left[ f'(X)  +  \log' {\color{red} p}(X) f(X) \right] \\
+&= \int   f(x)' { \color{red} p}(x)   + f(x){\color{red} p}'(x) dx \\
+&= \int_{-\infty}^{\infty} (f(x) {\color{red} p}(x) )'  dx \\
+&= f(x) {\color{red} p}(x)  \big|_{x=-\infty}^{x=\infty} \\
+&= 0
 \end{align*}
-\end{center}
 
+\scriptsize
+See  \cite{gorham2015measuring,OatGirCho15}.
+\normalsize
+%  \end{center}
  \end{frame} 
   
-
- \begin{frame}{Stein discrepancy }
- \begin{center}
- \scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
- 
-$MMD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}}{\color{mg}g} - \ev_{{\color{red} p}} {\color{mg}g}  = \sup_{ \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}} {\color{mg}g} $  \\
-\vspace{0.5cm}
- \includegraphics[width=0.6\textwidth]{./img/s1.pdf} 
- \end{center}
- \end{frame} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   
-  
- \begin{frame}{Stein discrepancy}
- \begin{center}
- \scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
- 
-$MMD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}}{\color{mg}g} - \ev_{{\color{red} p}} {\color{mg}g}  = \sup_{ \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}} {\color{mg}g} $  \\
-\vspace{0.5cm}
-\includegraphics[width=0.6\textwidth]{./img/s05.pdf} 
- \end{center}
- \end{frame} 
- 
- 
- \begin{frame}{Stein discrepancy}
- \begin{center}
- \scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
- 
-$MMD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}}{\color{mg}g} - \ev_{{\color{red} p}} {\color{mg}g}  = \sup_{ \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}} {\color{mg}g} $  \\
-\vspace{0.5cm}
- \includegraphics[width=0.6\textwidth]{./img/s01.pdf} 
- \end{center}
- \end{frame} 
+ \begin{frame}{Maximum Stein Discrepancy }
+Define the {\bf Stein operator}
+\[
+ T_{\color{red} p}f =  f'  +  \log' { \color{red} p} \cdot  f
+\]
 
- \begin{frame}{Stein discrepancy}
- \begin{center}
- \scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
- 
-$MMD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}}{\color{mg}g} - \ev_{{\color{red} p}} {\color{mg}g}  = \sup_{ \| {\color{mg} g} \|_G<1} \ev_{{ \color{blue} q}} {\color{mg}g} $  \\
-\vspace{0.5cm}
- \includegraphics[width=0.6\textwidth]{./img/s0.pdf} 
- \end{center}
- \end{frame} 
- 
- 
- 
-\begin{frame}{Main results}
+\pause
+{\bf {\color{red} Maximum Stein Discrepancy (MSD)}}
+
+\vspace{-0.5cm}
+
 \begin{center}
- Let $F$ be the RKHS associated with the kernel $k$. Consider a friendly looking function
+ %\scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
+ 
 \begin{align*}
+MSD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g} - \ev_{{\color{red} p}} T_{\color{red} p} {\color{mg} g}  = \sup_{ \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g} 
+\end{align*}
+\pause \vspace{0.5cm}
+ \includegraphics[width=0.8\textwidth]{./img/s1.pdf} 
+ \end{center}
+
+\vspace{-1cm}
+   \scriptsize
+    $G = \{ T_{\color{red} p}f | f \in \mathcal{F} \}$.
+\normalsize
+ \end{frame}
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  
+  \begin{frame}{Maximum Stein Discrepancy }
+Define the {\bf Stein operator}
+\[
+ T_{\color{red} p}f =  f'  +  \log' { \color{red} p} \cdot  f
+\]
+
+{\bf {\color{red} Maximum Stein Discrepancy (MSD)}}
+
+\vspace{-0.5cm}
+
+\begin{center}
+ %\scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
+ 
+\begin{align*}
+MSD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g} - \ev_{{\color{red} p}} T_{\color{red} p} {\color{mg} g}  = \sup_{ \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g} 
+\end{align*}
+     \vspace{0.5cm}
+ \includegraphics[width=0.8\textwidth]{./img/s05.pdf} 
+ \end{center}
+
+\vspace{-1cm}
+   \scriptsize
+    $G = \{ T_{\color{red} p}f | f \in \mathcal{F} \}$.
+\normalsize
+ \end{frame}
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+  \begin{frame}{Maximum Stein Discrepancy }
+Define the {\bf Stein operator}
+\[
+ T_{\color{red} p}f =  f'  +  \log' { \color{red} p} \cdot  f
+\]
+
+{\bf {\color{red} Maximum Stein Discrepancy (MSD)}}
+
+\vspace{-0.5cm}
+
+\begin{center}
+ %\scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
+ 
+\begin{align*}
+MSD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g} - \ev_{{\color{red} p}} T_{\color{red} p} {\color{mg} g}  = \sup_{ \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g} 
+\end{align*}
+     \vspace{0.5cm}
+ \includegraphics[width=0.8\textwidth]{./img/s01.pdf} 
+ \end{center}
+
+\vspace{-1cm}
+   \scriptsize
+    $G = \{ T_{\color{red} p}f | f \in \mathcal{F} \}$.
+\normalsize
+ \end{frame}
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   \begin{frame}{Maximum Stein Discrepancy }
+Define the {\bf Stein operator}
+\[
+ T_{\color{red} p}f =  f'  +  \log' { \color{red} p} \cdot  f
+\]
+
+{\bf {\color{red} Maximum Stein Discrepancy (MSD)}}
+
+\vspace{-0.5cm}
+
+\begin{center}
+ %\scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
+ 
+\begin{align*}
+MSD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g} - \ev_{{\color{red} p}} T_{\color{red} p} {\color{mg} g}  = \sup_{ \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g} 
+\end{align*}
+     \vspace{0.5cm}
+ \includegraphics[width=0.8\textwidth]{./img/s0.pdf} 
+ \end{center}
+
+\vspace{-1cm}
+   \scriptsize
+    $G = \{ T_{\color{red} p}f | f \in \mathcal{F} \}$.
+\normalsize
+ \end{frame}
+ 
+ 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+\begin{frame}{Maximum Stein Discrepancy has simple closed-form expression}
+
+Closed-form expression for MSD: given $Z,Z'  \sim { \color{blue} q}$, then
+
+%\underset{\mathrm{i.i.d.}}{\sim}
+
+\Large
+\[MSD({\color{red} p},{ \color{blue} q},G) = \ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z')\]
+\normalsize
+where
+  \begin{align*}
 h_{{\color{red} p}}(x,y) & := \partial_{x} \log {\color{red} p}(x) \partial_{x} \log {\color{red} p}(y) k(x,y)\\
  & \quad+\partial_{y} \log {\color{red} p}(y) \partial_{x}  k(x,y)\\
  & \quad+\partial_{x} \log {\color{red} p}(x) \partial_{y}k(x,y)\\
  & \quad+\partial_{x} \partial_{y} k(x,y).
 \end{align*}
-Let ${ \color{blue} q},{\color{red} p}$ be probability measures and $Z\sim { \color{blue} q}$. 
+and $k$ is RKHS kernel for $F$
 
-\end{center}
-\begin{thm}
-If $\ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z)<\infty$, then $MMD({\color{red} p},{ \color{blue} q},G) = \ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z')$.
-\end{thm}
+
+
+\begin{center}
+ {\large\emph{  Only depends on kernel and $\partial_{x} \log {\color{red} p}(x)$. \\ Do not need
+to normalize {\color{red} p}, or sample from it.   }}
+ \end{center}
+
+
+%  \scriptsize
+%  Condition: $\ev_{{ \color{blue} q}} h_{{\color{red} p}}(Z,Z)<\infty$
+%  \normalsize
+  
 \end{frame}
- 
-\begin{frame}{Main results}
 
-Let ${ \color{blue} q},{\color{red} p}$ be probability measures and $Z\sim { \color{blue} q}$. 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Maximum Stein Discrepancy zero $\iff$ ${ \color{red} p} =  {\color{lightblue} q}$}
+
+%Let ${ \color{blue} q},{\color{red} p}$ be probability measures and $Z\sim { \color{blue} q}$. 
 \begin{thm}
- If the kernel $k$ is cc-universal, $\ev_{{ \color{blue} q}} h_{{ \color{blue} q}}(Z,Z)<\infty$ and $\ev_{{ \color{blue} q}} (\log' \frac{{\color{red} p}(Z)}{{ \color{blue} q}(Z)})^{2}<\infty$
-then $MMD({\color{red} p},{ \color{blue} q},G) =0$ if and only if ${\color{red} p}={ \color{blue} q}$.
+  If the kernel $k$ is $C_0$-universal, $\ev_{{ \color{blue} q}} h_{{ \color{blue} q}}(Z,Z)<\infty$ and\\
+  $\ev_{{ \color{blue} q}} \left( \log' \frac{{\color{red} p}(Z)}{{ \color{blue} q}(Z)} \right)^{2}<\infty$
+ then
+\begin{center}
+\large
+  $MSD({\color{red} p},{ \color{blue} q},G) =0$ if and only if ${\color{red} p}={ \color{blue} q}$.
+\normalsize
+\end{center}
 \end{thm}
 
 \vspace{10mm}
 \footnotesize{
 Kernel is $C_0$-universal if  $f \to \int_X f(x) k(x,\cdot) d\mu(x)$ if is injective for all probability measures $\mu$ and all  $f \in L^p(X,\mu)$, where  $p \in [1,\infty] $. 
 
-The assumption $\ev_{{ \color{blue} q}} (\log' \frac{{\color{red} p}(Z)}{{ \color{blue} q}(Z)})^{2}<\infty$ states that difference between scores $\log' \color{red} p$ and $\log' \color{blue} q$  is square integrable. 
+The assumption $\ev_{{ \color{blue} q}} \left(\log' \frac{{\color{red} p}(Z)}{{ \color{blue} q}(Z)}\right)^{2}<\infty$ states that difference between scores $\log' \color{red} p$ and $\log' \color{blue} q$  is square integrable. 
 }
 
 \end{frame} 
 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
  
- \begin{frame}{$V$-statistics}
-An estimator of $\ev h_{\color{red} p}(X,X')$ is
+ \begin{frame}{Empirical estimate of MSD: $V$-statistic}
+
+Empirical estimate  of $\ev_{\color{blue} q} h_{\color{red} p}(Z,Z')$ is
+a {\em V-statistic}: 
 \[
- V_n(h_{\color{red} p}) = \frac {1} {n^2} \sum_{i,j=1}^n h_{\color{red} p}(X_i,X_j).
+ V_n(h_{\color{red} p}) = \frac {1} {n^2} \sum_{i,j=1}^n h_{\color{red} p}(Z_i,Z_j),
 \]
-Our test statistic is $ n V_n(h_{\color{red} p})$.
+ $\{ Z_1 ,\ldots Z_t \ldots Z_n \}$ time series with marginal distrib.  {\color{blue} q}
+   
+\pause
 
-If $X_i \sim {\color{red} p}$ then $ n V_n(h_{\color{red} p})$  converges weakly. 
+%DEBUG: weak convergence discussion removed
 
-Otherwise it does not,  it explodes, $P(n V_n(h_{\color{red} p}) <C) \to 0$.
+%If ${\color{blue} q} =  {\color{red} p}$ then $ n V_n(h_{\color{red} p})$  converges weakly. 
+
+%Otherwise, if ${\color{blue} q} \neq  {\color{red} p}$, statistic explodes, $P(n V_n(h_{\color{red} p}) <C) \to 0$.
+
+\begin{center}
+ {\large\emph{  What are ``typical'' values of  $\ev_{\color{blue} q} h_{\color{red} p}(Z,Z')$ when ${\color{red} p} = {\color{blue} q}$ ? }}
+ \end{center}
+
+
  \end{frame}
  
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
  
-  \begin{frame}{$V$-statistics}
-To estimate quantiles of $ V_n(h_{\color{red} p})$  
-\[
- V_n(h_{\color{red} p}) = \frac {1} {n^2} \sum_{i,j=1}^n h_{\color{red} p}(X_i,X_j).
-\]
-under the null, we use wild bootstrap
+  \begin{frame}{Distribution of statistic under null (${ \color{red} p} =  {\color{lightblue} q}$)}
+To estimate quantiles of $ V_n(h_{\color{red} p})$ under the null  (when ${ \color{red} p} =  {\color{blue} q}$), we use {\bf wild bootstrap}
 \[
  B_n(h_{\color{red} p}) = \frac {1} {n^2} \sum_{i,j=1}^n W_i W_j h_{\color{red} p}(X_i,X_j).
 \]
@@ -240,9 +382,11 @@ under the null, we use wild bootstrap
  \includegraphics[width=0.9\textwidth]{./img/bootstrapWorks7.pdf}
 \end{frame}
 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+ \iffalse
 
-
-  \begin{frame}{Student's t vs.~Normal}
+  \begin{frame}{Experiment 1: Student's t vs.~Normal}
 \begin{columns}
         \begin{column}{.5\textwidth}
         \begin{figure}
@@ -258,43 +402,84 @@ under the null, we use wild bootstrap
 Student's distributions was generated using MCMC.
 \end{frame}
 
+  \fi
 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-  \begin{frame}{Austerity in MCMC Land}
+ \begin{frame}{Experiment 1: Austerity in MCMC Land}
+ \begin{center}
+   Approximate MCMC: tradeoff between bias and computation\\ (e.g. {\em Austerity in MCMC Land} \cite{korattikara2013austerity})
+   \end{center}
 \begin{columns}
-        \begin{column}{.5\textwidth}
-        \begin{figure}
-           \includegraphics[width=\textwidth]{img/Heiko1} 
-        \end{figure}
-        $\epsilon$ is the bias you wish to accept in your MCMC. 
+        \begin{column}{.7\textwidth}
+   \includegraphics[width=\textwidth]{./img/sgld_trace_and_density.pdf} 
         \end{column}
-        \begin{column}{.5\textwidth}
-            \begin{figure}
-           \includegraphics[width=\textwidth]{./img/sgld_trace_and_density.pdf} 
-        \end{figure}
+        \begin{column}{.3\textwidth}
+$\theta_{1}\sim{\cal N}(0,10);\theta_{2}\sim{\cal N}(0,1)$\\
+$ X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\theta_{2},4) $.
         \end{column}
-    \end{columns}
- \begin{align*}
- \theta_{1}\sim{\cal N}(0,10);\theta_{2}\sim{\cal N}(0,1)\\
- X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\theta_{2},4) & .
-\end{align*}
+\end{columns}
  \end{frame}
 
-    \begin{frame}{Experiment 3: Statistical model criticism}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Experiment 1: Austerity in MCMC Land}
+ \begin{center}
+   Approximate MCMC: tradeoff between bias and computation\\ (e.g. {\em Austerity in MCMC Land} \cite{korattikara2013austerity})
+   \end{center}
+\begin{columns}
+        \begin{column}{.7\textwidth}
+   \includegraphics[width=\textwidth]{img/Heiko1} 
+        \end{column}
+        \begin{column}{.3\textwidth}
+$\theta_{1}\sim{\cal N}(0,10);\theta_{2}\sim{\cal N}(0,1)$\\
+$ X_{i}\sim\frac{1}{2}{\cal N}(\theta_{1},4)+\frac{1}{2}{\cal N}(\theta_{1}+\theta_{2},4) $.
+        \end{column}
+\end{columns}
+ \end{frame}
+ 
+
+ 
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+    \begin{frame}{Experiment 2: Statistical model criticism}
         \begin{figure}
            \includegraphics[width= 0.7\textwidth]{img/gp_regression_data_fit.pdf}  
         \end{figure}
-      We test the hypothesis that a Gaussian process generated {\color{red}training data} using for fitting -- without simulating from the generative model, but only using {\color{blue} test data}.
+We test the hypothesis that a Gaussian process {\color{red} model}, learned from \textbf{training data} $\star$, is a good fit for the {\color{blue} test data} \cite{lloyd2015statistical}.
   \end{frame}
 
 
-   \begin{frame}{Experiment 3: Statistical model criticism}
+   \begin{frame}{Experiment 2: Statistical model criticism}
         \begin{figure}
            \includegraphics[width=0.7\textwidth]{img/gp_regression_bootstrap_hist} 
         \end{figure}
-      We test the hypothesis that a Gaussian process generated {\color{red}training data} using for fitting -- without simulating from the generative model, but only using {\color{blue} test data}.
+We test the hypothesis that a Gaussian process {\color{red} model}, learned from \textbf{training data} $\star$, is a good fit for the {\color{blue} test data} \cite{lloyd2015statistical}.
 
-  \end{frame}
+   \end{frame}
+
+   \begin{frame}{Questions?}
+      \begin{figure}
+\includegraphics[width=0.4\textwidth]{img/theKernel2} %vapnikBayes 0.7\textwidth
+        \end{figure}   
+   \end{frame}
+
+
+   \begin{frame}{References}
+
+
+\begin{minipage}{.9\linewidth}
+{\tiny
+%\begin{multicols}{2}
+\setbeamertemplate{bibliography item}[text] 
+\bibliographystyle{plain} 
+\tiny
+\bibliography{../biblio.bib} 
+%\end{multicols}
+} 
+\end{minipage}
+\end{frame}
 
 
 \end{document}
