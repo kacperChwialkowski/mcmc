@@ -32,7 +32,7 @@ def grad_log_normal( x):
 me = GaussianQuadraticForPlotting(grad_log_normal)
 
 mc =1000
-Xs  = simulate(1500,mc,0.5)
+Xs  = simulate(1500,mc,0.4)
 
 V = []
 B = []
