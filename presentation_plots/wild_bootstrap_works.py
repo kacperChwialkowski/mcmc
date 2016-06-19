@@ -32,7 +32,7 @@ def grad_log_normal( x):
 me = GaussianQuadraticForPlotting(grad_log_normal)
 
 mc =1000
-Xs  = simulate(300,mc,0.5)
+Xs  = simulate(1500,mc,0.5)
 
 V = []
 B = []
@@ -40,16 +40,25 @@ for i in range(mc):
     X = Xs[:,i]
     stat,bootsraped_stat = me.compute_stats_for_processes(X,0.1)
     V.append(stat)
-    B.append(bootsraped_stat)
+    # B.append(bootsraped_stat)
 
 V = np.array(V)
-B = np.array(B)
+# B = np.array(B)
 
 import matplotlib.pyplot as plt
 import seaborn as sns
+sns.set_style("whitegrid")
 
-sns.distplot(B, kde=False , label="B")
-sns.distplot(V, kde=False, label="V")
-plt.legend();
+new_style = {'grid': False}
+plt.rc('axes', **new_style)
+
+# sns.distplot(B, kde=False , label="B")
+sns.kdeplot(V, label="V_n", linewidth=4)
+axes = plt.gca()
+axes.set_xlim([0,23])
+y_lims = axes.get_ylim()
+q = np.percentile(V,90)
+plt.plot([q, q], y_lims,'--b',linewidth=2.5)
+plt.legend(prop={'size':16});
 
 sns.plt.show()
