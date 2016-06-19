@@ -58,7 +58,7 @@ axes = plt.gca()
 axes.set_xlim([0,23])
 y_lims = axes.get_ylim()
 q = np.percentile(V,90)
-plt.plot([q, q], y_lims,'--b',linewidth=2.5)
+plt.plot([q, q], y_lims,'--b',linewidth=2.5,label="quantile V_n")
 plt.legend(prop={'size':16});
-
+plt.savefig('/home/kcx/dev/mcmc/write_up/presentation/img/nullDistributionCorr.pdf')
 sns.plt.show()
