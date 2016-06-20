@@ -6,6 +6,8 @@
 \usepackage{amssymb}
 \usepackage{multicol}
 
+\usepackage{cancel} %to do strikethrough for vanishing terms. Command is \cancel{}
+
 \definecolor{lightblue}{rgb}{0,0.7,0.7}
 
 \global\long\def\ev{\mathbb{E}}
@@ -102,10 +104,126 @@ To get rid of $\ev_{ {\color{red} p} }f$  in $$ \sup_{    \| {\color{mg}f} \|_F<
 %\small \textit{Kacper} 
 %\end{flushright}
 
+\pause
+Define the {\bf Stein operator}
+\[
+ T_{\color{red} p}f =  f'  +  \log' { \color{red} p} \cdot  f
+ \]
+ Then
+ \[
+\ev_{\color{red} p}  T_{\color{red} p} f = 0
+ \]
+ 
+ \end{frame}
 
 
-\end{frame} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+  \begin{frame}{Maximum Stein Discrepancy }
+    \only<1-3>{
+\vspace{-2.5cm}
+      }
+    \only<1-7>{ 
+    {\bf Stein operator}
+\[
+ T_{\color{red} p}f =  f'  +  \log' { \color{red} p} \cdot  f
+ \]
+ }
+ \only<1-1> {
+{\bf {\color{red} Maximum Stein Discrepancy (MSD)}}
+\vspace{-0.5cm}
+\begin{center}
+ %\scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
+ 
+\begin{align*}
+  MSD({\color{red} p},{ \color{blue} q},G)
+  = \sup_{   \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g} - \ev_{{\color{red} p}} T_{\color{red} p} {\color{mg} g}
+\end{align*}
+
+ \end{center}
+ }
+ \only<2-2> {
+{\bf {\color{red} Maximum Stein Discrepancy (MSD)}}
+\vspace{-0.5cm}
+\begin{center}
+ %\scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
+ 
+\begin{align*}
+  MSD({\color{red} p},{ \color{blue} q},G)
+  = \sup_{   \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g} -
+  \cancel{\ev_{{\color{red} p}} T_{\color{red} p} {\color{mg} g} }
+\end{align*}
+
+ \end{center}
+ }
+ \only<3-3> {
+{\bf {\color{red} Maximum Stein Discrepancy (MSD)}}
+\vspace{-0.5cm}
+\begin{center}
+ %\scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
+ 
+\begin{align*}
+  MSD({\color{red} p},{ \color{blue} q},G)
+  = \sup_{   \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g} -
+  \cancel{\ev_{{\color{red} p}} T_{\color{red} p} {\color{mg} g} }
+  = \sup_{ \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g}
+\end{align*}
+
+ \end{center}
+ }
+\only<4-7> {
+{\bf {\color{red} Maximum Stein Discrepancy (MSD)}}
+\vspace{-0.5cm}
+\begin{center}
+ %\scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
+ 
+\begin{align*}
+  MSD({\color{red} p},{ \color{blue} q},G)
+  = \sup_{   \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g} -
+  \cancel{\ev_{{\color{red} p}} T_{\color{red} p} {\color{mg} g} }
+  = \sup_{ \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g}
+\end{align*}
+
+ \end{center}
+ }
+\only<4-4> {
+%\vspace{0.5cm}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{./img/s1.pdf} 
+ \end{center}
+}
+\only<5-5> {
+%\vspace{0.5cm}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{./img/s05.pdf} 
+ \end{center}
+}
+\only<6-6> {
+%\vspace{0.5cm}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{./img/s01.pdf} 
+ \end{center}
+}
+\only<7-7> {
+%\vspace{0.5cm}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{./img/s0.pdf} 
+ \end{center}
+}
+
+ \end{frame}
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+ 
+ \iffalse
+ 
   \begin{frame}{Stein's trick in the RKHS}
 %  \begin{center}
 Consider the  class \large
@@ -246,7 +364,8 @@ MSD({\color{red} p},{ \color{blue} q},G) = \sup_{   \| {\color{mg} g} \|_\mathca
 \normalsize
  \end{frame}
  
- 
+\fi
+   
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
 \begin{frame}{Maximum Stein Discrepancy has simple closed-form expression}
@@ -314,11 +433,16 @@ The assumption $\ev_{{ \color{blue} q}} \left(\log' \frac{{\color{red} p}(Z)}{{ 
 
 Empirical estimate  of $\ev_{\color{blue} q} h_{\color{red} p}(Z,Z')$ is
 a {\em V-statistic}: 
+\begin{columns}
+        \begin{column}{.5\textwidth}
 \[
  V_n(h_{\color{red} p}) = \frac {1} {n^2} \sum_{i,j=1}^n h_{\color{red} p}(Z_i,Z_j),
 \]
- $\{ Z_1 ,\ldots Z_t \ldots Z_n \}$ time series with marginal distrib.  {\color{blue} q}
-   
+         \end{column}
+        \begin{column}{.5\textwidth}
+$\{ Z_1 ,\ldots Z_t \ldots Z_n \}$ time series with marginal distrib.  {\color{blue} q}
+        \end{column}
+\end{columns}
 \pause
 
 %DEBUG: weak convergence discussion removed
@@ -327,11 +451,13 @@ a {\em V-statistic}:
 
 %Otherwise, if ${\color{blue} q} \neq  {\color{red} p}$, statistic explodes, $P(n V_n(h_{\color{red} p}) <C) \to 0$.
 
-\begin{center}
  {\large\emph{  What are ``typical'' values of  $\ev_{\color{blue} q} h_{\color{red} p}(Z,Z')$ when ${\color{red} p} = {\color{blue} q}$ ? }}
- \end{center}
 
-
+\vspace{-0.4cm}
+\begin{center}
+ \includegraphics[width=0.75\textwidth]{./img/nullDistributionCorr.pdf}
+\end{center}
+ 
  \end{frame}
  
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -363,6 +489,9 @@ To estimate quantiles of $ V_n(h_{\color{red} p})$ under the null  (when ${ \col
     $p_n$ is  the probability of the change  and should be set to $o(n)$.
   \end{frame}
 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  
  \begin{frame}{Wild bootstrapping; small correlation }
 \centering
  $$X_t = 0.1 X_{t-1} + \sqrt{1 - 0.1^2}\epsilon_t, \quad \epsilon_t \sim N(0,1)$$
