@@ -137,7 +137,7 @@ Define the {\bf Stein operator}
  %\scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
  
 \begin{align*}
-  MSD({\color{red} p},{ \color{blue} q},G)
+  MSD({\color{red} p},{ \color{blue} q},F)
   = \sup_{   \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g} - \ev_{{\color{red} p}} T_{\color{red} p} {\color{mg} g}
 \end{align*}
 
@@ -150,7 +150,7 @@ Define the {\bf Stein operator}
  %\scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
  
 \begin{align*}
-  MSD({\color{red} p},{ \color{blue} q},G)
+  MSD({\color{red} p},{ \color{blue} q},F)
   = \sup_{   \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g} -
   \cancel{\ev_{{\color{red} p}} T_{\color{red} p} {\color{mg} g} }
 \end{align*}
@@ -164,7 +164,7 @@ Define the {\bf Stein operator}
  %\scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
  
 \begin{align*}
-  MSD({\color{red} p},{ \color{blue} q},G)
+  MSD({\color{red} p},{ \color{blue} q},F)
   = \sup_{   \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g} -
   \cancel{\ev_{{\color{red} p}} T_{\color{red} p} {\color{mg} g} }
   = \sup_{ \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g}
@@ -179,7 +179,7 @@ Define the {\bf Stein operator}
  %\scalebox{0.8}{ $G = \{ f  +  \log' {\color{red} p} f | f \in F \}$}
  
 \begin{align*}
-  MSD({\color{red} p},{ \color{blue} q},G)
+  MSD({\color{red} p},{ \color{blue} q},F)
   = \sup_{   \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g} -
   \cancel{\ev_{{\color{red} p}} T_{\color{red} p} {\color{mg} g} }
   = \sup_{ \| {\color{mg} g} \|_\mathcal{F}<1} \ev_{{ \color{blue} q}} T_{\color{red} p} {\color{mg} g}
@@ -611,4 +611,31 @@ We test the hypothesis that a Gaussian process {\color{red} model}, learned from
 \end{frame}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+ 
+  \begin{frame}{Stein's trick in the RKHS}
+%  \begin{center}
+Consider the  class \large
+$$G = \{ f'  +  \log' { \color{red} p} \cdot  f | f \in \mathcal{F} \}$$
+\normalsize
+
+\pause
+
+Given $g\in G$, then (integration by parts)
+\begin{align*}
+\ev_{\color{red} p} g(X) &=
+\ev_{\color{red} p} \left[ f'(X)  +  \log' {\color{red} p}(X) f(X) \right] \\
+&= \int   f(x)' { \color{red} p}(x)   + f(x){\color{red} p}'(x) dx \\
+&= \int_{-\infty}^{\infty} (f(x) {\color{red} p}(x) )'  dx \\
+&= f(x) {\color{red} p}(x)  \big|_{x=-\infty}^{x=\infty} \\
+&= 0
+\end{align*}
+
+\scriptsize
+See  \cite{gorham2015measuring,OatGirCho15}.
+\normalsize
+%  \end{center}
+ \end{frame} 
+
+   
 \end{document}
