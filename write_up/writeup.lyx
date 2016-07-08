@@ -5218,216 +5218,175 @@ Strong mixing coefficients.
 \end_layout
 
 \begin_layout Standard
-Strong mixing is historically the most frequently studied type of temporal
- dependence -- a lot of models, e.g.
-\begin_inset space ~
-\end_inset
+\begin_inset ERT
+status open
 
- Markov chains, are proved to be strongly mixing, therefore it's useful
- to relate weak mixing to strong mixing.
-\end_layout
+\begin_layout Plain Layout
 
-\begin_layout Standard
-A process is called absolutely regular (
-\begin_inset Formula $\beta$
-\end_inset
-
--mixing) if 
-\begin_inset Formula $\beta(m)\rightarrow0$
-\end_inset
-
-, where 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\beta(m)=\frac{1}{2}\sup_{n}\sup\sum_{i=1}^{I}\sum_{j=1}^{J}|P(A_{i}\cap B_{j})-P(A_{i})P(B_{j})|.
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The second supremum in the 
-\begin_inset Formula $\beta(m)$
-\end_inset
-
- definition is taken over all pairs of finite partitions 
-\begin_inset Formula $\{A_{1},\cdots,A_{I}\}$
-\end_inset
-
- and 
-\begin_inset Formula $\{B_{1},\cdots,B_{J}\}$
-\end_inset
-
- of the sample space such that 
-\begin_inset Formula $A_{i}\in\mathcal{A}_{1}^{n}$
-\end_inset
-
- and 
-\begin_inset Formula $B_{j}\in\mathcal{A}_{n+m}^{\infty}$
-\end_inset
-
-, and 
-\begin_inset Formula $\mathcal{A}_{b}^{c}$
-\end_inset
-
- is a sigma field spanned by a subsequence, 
-\begin_inset Formula $\mathcal{A}_{b}^{c}=\sigma(X_{b},X_{b+1},...,X_{c})$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-A process is called strongly mixing (
-\begin_inset Formula $\alpha$
-\end_inset
-
--mixing) if 
-\begin_inset Formula $\alpha(m)\rightarrow0$
-\end_inset
-
-, where 
-\begin_inset Formula 
-\[
-\alpha(m)=\sup_{n}\sup_{A\in\mathcal{A}_{1}^{n}}\sup_{B\in\mathcal{A}_{n+m}^{\infty}}|P(B\cap A)-P(B)P(A)|.
-\]
-
-\end_inset
-
- By 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "bradley_basic_2005"
-
-\end_inset
-
- we have 
-\begin_inset Formula $\alpha(m)\leq\beta(m)$
-\end_inset
-
-.
+Strong mixing is historically the most studied type of temporal dependence
+ -- a lot of models, example being Markov Chains, are proved to be strongly
+ mixing, therefore it's useful to relate weak mixing  to strong mixing.
+ For a random variable $X$ on a probability space $(
+\backslash
+Omega,
+\backslash
+mathcal{F},P_X)$ and $
+\backslash
+mathcal{M} 
+\backslash
+subset 
+\backslash
+mathcal{F}$ we define  
+\backslash
+begin{equation*} 
+\backslash
+beta(
+\backslash
+mathcal{M},
+\backslash
+sigma(X)) = 
+\backslash
+| 
+\backslash
+sup_{A 
+\backslash
+in 
+\backslash
+mathbb{B}(R)} | P_{X|
+\backslash
+mathcal{M}}(A) - P_X(A)|
+\backslash
+|.
  
+\backslash
+end{equation*} A process  is called $
+\backslash
+beta$-mixing or absolutely regular if   
+\backslash
+begin{align*} 
+\backslash
+beta(r) &= 
+\backslash
+sup_{l 
+\backslash
+in 
+\backslash
+mathbb{N}} 
+\backslash
+frac 1 l 
+\backslash
+sup_{ r 
+\backslash
+leq i_1 
+\backslash
+leq ...
+ 
+\backslash
+leq i_l} 
+\backslash
+beta( 
+\backslash
+mathcal F_0,(X_{i_1},...,X_{i_l}) )  
+\backslash
+overset{r 
+\backslash
+to 
+\backslash
+infty}{
+\backslash
+longrightarrow} 0,
+\backslash
+ 
+\backslash
+end{align*}
 \end_layout
 
-\begin_layout Standard
-Using another weak mixing coefficient 
-\begin_inset Formula $\tilde{\alpha}(m)$
-\end_inset
+\begin_layout Plain Layout
 
- we can relate strong mixing to weak mixing.
- The process is called 
-\begin_inset Formula $\tilde{\alpha}$
-\end_inset
-
--mixing if 
-\begin_inset Formula $\tilde{\alpha}(m)\rightarrow0$
-\end_inset
-
-, where 
-\begin_inset Formula 
-\begin{align*}
-\tilde{\alpha}(m) & =\sup_{l\in\mathbb{N}}\frac{1}{l}\sup_{m\leq i_{1}\leq...\leq i_{l}}\tilde{\alpha}(\mathcal{F}_{0},(X_{i_{1}},...,X_{i_{l}}))\overset{r\to\infty}{\longrightarrow}0,\;\text{where}\\
-\tilde{\alpha}(\mathcal{M},X) & =\sup_{g\in\Lambda}\parallel\ev_{p}(g(X)|\mathcal{M})-\ev_{p}g(X)\parallel_{1},
-\end{align*}
-
-\end_inset
-
- and 
-\begin_inset Formula $\Lambda$
-\end_inset
-
- is the set of all one-Lipschitz continuous real-valued functions on the
- domain of 
-\begin_inset Formula $X$
-\end_inset
-
-.
+  
+\backslash
+cite{dedecker2005new}[Equation  7.6] relates $
+\backslash
+tau$-mixing and $
+\backslash
+beta$-mixing , as follows: if $Q_x$ is the generalized inverse of the tail
+ function 
+\backslash
+[  Q_x(u) = 
+\backslash
+inf_{t 
+\backslash
+in R} 
+\backslash
+{  P(|X| > t) 
+\backslash
+leq u
+\backslash
+},   
+\backslash
+] then 
+\backslash
+[  
+\backslash
+tau(
+\backslash
+mathcal{M},X) 
+\backslash
+leq 2 
+\backslash
+int_{0}^{
+\backslash
+beta(
+\backslash
+mathcal{M},
+\backslash
+sigma(X))}  Q_x(u) du.
  
-\begin_inset CommandInset citation
-LatexCommand citep
-after "Remark 2.4"
-key "dedecker2007weak"
-
-\end_inset
-
- show that 
-\begin_inset Formula $\tilde{\alpha}(m)\leq2\alpha(m)$
-\end_inset
-
-.
+\backslash
+] While this definition can be hard to interpret, it can be simplified in
+ the case $E|X|^p=M$  for some $p>1$, since via Markov's inequality $P(|X|>t)
  
-\begin_inset CommandInset citation
-LatexCommand citep
-after "Proposition 2"
-key "dedecker2005new"
-
-\end_inset
-
- relates 
-\begin_inset Formula $\tau$
-\end_inset
-
--mixing and 
-\begin_inset Formula $\tilde{\alpha}$
-\end_inset
-
- mixing, as follows: if 
-\begin_inset Formula $Q_{x}$
-\end_inset
-
- is the generalised inverse of the tail function 
-\begin_inset Formula 
-\[
-Q_{x}(u)=\inf_{t\in R}\{P(|X|>t)\leq u\},
-\]
-
-\end_inset
-
- then 
-\begin_inset Formula 
-\[
-\tau(\mathcal{M},X)\leq2\int_{0}^{\tilde{\alpha}(\mathcal{M},X)}Q_{x}(u)du.
-\]
-
-\end_inset
-
- While this definition can be hard to interpret, it can be simplified in
- the case 
-\begin_inset Formula $E|X|^{p}=M$
-\end_inset
-
- for some 
-\begin_inset Formula $p>1$
-\end_inset
-
-, since via Markov's inequality 
-\begin_inset Formula $P(|X|>t)\leq\frac{M}{t^{p}}$
-\end_inset
-
-, and thus 
-\begin_inset Formula $\frac{M}{t^{p}}\leq u$
-\end_inset
-
- implies 
-\begin_inset Formula $P(|X|>t)\leq u$
-\end_inset
-
-.
- Therefore 
-\begin_inset Formula $Q'(u)=\frac{M}{\sqrt[p]{u}}\geq Q_{x}(u)$
-\end_inset
-
-.
- As a result, we have the following inequality 
-\begin_inset Formula 
-\[
-\frac{\sqrt[p]{\tilde{\alpha}(\mathcal{M},X)}}{M}\geq C\tau(\mathcal{M},X).
-\]
+\backslash
+leq 
+\backslash
+frac{M}{t^p}$, and thus $
+\backslash
+frac{M}{t^p} 
+\backslash
+leq u $ implies $P(|X|>t) 
+\backslash
+leq u$.
+ Therefore $Q'(u) = 
+\backslash
+frac{M}{
+\backslash
+sqrt[p]{u}} 
+\backslash
+geq Q_x(u)$.
+ As a result, we have the following inequality  
+\backslash
+begin{equation} 
+\backslash
+label{eq:theBeta}  
+\backslash
+frac{ 
+\backslash
+sqrt[p]{ 
+\backslash
+beta(
+\backslash
+mathcal{M},
+\backslash
+sigma(X))} }{ M }  
+\backslash
+geq C  
+\backslash
+tau(
+\backslash
+mathcal{M},X)  
+\backslash
+end{equation} 
+\end_layout
 
 \end_inset
 
@@ -5518,16 +5477,23 @@ Using inequalities between
 \begin_inset Formula $\tau$
 \end_inset
 
--mixing coefficient and strong mixing coefficients one can use those classical
- theorems show that e.g.
-\begin_inset space ~
+-mixing coefficient and strong mixing coefficients 
+\end_layout
+
+\begin_layout Standard
+one can use those classical theorems show that e.g for 
+\begin_inset Formula $p=2$
 \end_inset
 
-Markov chains are 
-\begin_inset Formula $\tau$
+ we have 
+\begin_inset Formula 
+\[
+\sqrt{\beta(\mathcal{M},\sigma(X))}\geq\tau(\mathcal{M},X).
+\]
+
 \end_inset
 
--mixing sequences.
+
 \end_layout
 
 \end_body
