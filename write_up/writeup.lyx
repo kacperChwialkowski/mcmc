@@ -773,7 +773,7 @@ key "stein1972,gorham2015measuring,OatGirCho15"
  
 \begin_inset Formula 
 \[
-T_{p}f:=\sum_{i=1}^{d}\left(\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right).
+(T_{p}f)(x):=\sum_{i=1}^{d}\left(\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right).
 \]
 
 \end_inset
@@ -1120,7 +1120,11 @@ where the
 \begin_inset Formula $U_{t}$
 \end_inset
 
- are uniform i.i.d.
+ are uniform 
+\begin_inset Formula $(0,1)$
+\end_inset
+
+ i.i.d.
  random variables and 
 \begin_inset Formula $a_{n}$
 \end_inset
@@ -2579,7 +2583,7 @@ Large autocovariance, suitable bootstrap.
 \begin_inset Formula $a_{n}$
 \end_inset
 
-is chosen suitably, but due to a large autocorrelation withing the samples,
+is chosen suitably, but due to a large autocorrelation within the samples,
  the power of the test is small (effective sample size is small).
  
 \family default
@@ -4129,8 +4133,7 @@ reference "fig:density_estimation_increasing_features"
 \begin_inset Formula $m=50$
 \end_inset
 
-, the null hypothesis would rarely be rejected, given a reasonable choice
- of test level.
+, the null hypothesis would rarely be rejected.
  Note, however, that the p-values do 
 \emph on
 not
@@ -4448,7 +4451,7 @@ The density function
 
 \end_inset
 
-For the equation (a) we have used integration by parts, fact that 
+For the equation (a) we have used integration by parts, the fact that 
 \begin_inset Formula $p(x)f_{i}(x)$
 \end_inset
 
