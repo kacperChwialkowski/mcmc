@@ -193,14 +193,49 @@ vskip 0.3in ]
 \end_layout
 
 \begin_layout Abstract
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Final edits have the designation 
+\begin_inset Quotes eld
+\end_inset
+
+AG_f:
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 We propose a nonparametric statistical test for goodness-of-fit: given a
  set of samples, the test determines how likely it is that these were generated
  from a target density function.
  The measure of goodness-of-fit is a divergence constructed via Stein's
  method using functions from a reproducing kernel Hilbert space.
  Our test statistic is based on an empirical estimate of this divergence,
- taking the form of a V-statistic in terms of the log gradients of the target
- density and the kernel.
+ taking the form of a V-statistic in terms of the gradients of the log target
+ density 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+AG_f: changed to 
+\begin_inset Quotes eld
+\end_inset
+
+gradient of the log target density
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ and of the kernel.
  We derive a statistical test, both for i.i.d.
  and non-i.i.d.
  samples, where we estimate the null distribution quantiles using a wild
@@ -282,7 +317,25 @@ key "gorham2015measuring"
 \end_inset
 
 if the intention is to perform benchmarks for assessing Markov Chain Monte
- Carlo, since these integrals are certainly not be known to the practitioner.
+ Carlo, since these integrals are certainly not
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+AG_f: removed 
+\begin_inset Quotes eld
+\end_inset
+
+be
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ known to the practitioner.
 \end_layout
 
 \begin_layout Standard
@@ -320,9 +373,43 @@ An important application of a goodness-of-fit measure is in statistical
 
 -Sobolev Stein discrepancies remains a challenging open problem, due to
  the complexity of the function class used.
- It is not clear how one would compute p-values for this statistic, or to
- determine when the goodness of fit test would allow to accept the null
- hypothesis at a user-specified test level.
+ It is not clear how one would compute p-values for this statistic, or 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+AG_f: removed 
+\begin_inset Quotes eld
+\end_inset
+
+to
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ determine when the goodness of fit test 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+AG_f: 
+\begin_inset Quotes eld
+\end_inset
+
+would allow
+\begin_inset Quotes erd
+\end_inset
+
+-> allows
+\end_layout
+
+\end_inset
+
+ allows to accept the null hypothesis at a user-specified test level.
 \end_layout
 
 \begin_layout Standard
@@ -384,17 +471,45 @@ key "gretton_kernel_2008"
 
 \end_inset
 
-, which are based on the integral probability metric 
+, which are based on the 
 \emph on
 maximum mean discrepancy
 \emph default
+, an integral probability metric
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+AG_f: changed order of MMD and integral prob.
+ metric
+\end_layout
+
+\end_inset
+
 .
  As with these earlier tests, our statistic is a simple V-statistic, and
  can be computed in closed form and in quadratic time.
  Moreover, it is an unbiased estimate of the corresponding population discrepanc
 y.
- As with all Stein-based discrepancies, only the gradient of the log-density
- of the target density is needed; we do not require integrals with respect
+ As with all Stein-based discrepancies, only the gradient of the
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+AG_f: 
+\begin_inset Quotes eld
+\end_inset
+
+log target density
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ log target density is needed; we do not require integrals with respect
  to the target density -- including the normalisation constant.
  Given that our test statistic is a V-statistic, we make use of the extensive
  literature on asymptotics of V-statistics to formulate a hypothesis test
@@ -508,9 +623,18 @@ key "SriGreFukLanetal10"
 \end_inset
 
 .
- It is essential in this case that the target distribution is Gaussian,
- since the convolution with the kernel (or in the Fourier domain, the smoothing
- function) must be available in closed form.
+ It is essential in this case that the target distribution 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+AG_f: is->be (subjunctive)
+\end_layout
+
+\end_inset
+
+be Gaussian, since the convolution with the kernel (or in the Fourier domain,
+ the smoothing function) must be available in closed form.
  An 
 \begin_inset Formula $L_{2}$
 \end_inset
@@ -579,7 +703,17 @@ key "lloyd2015statistical"
  second, the choice of number of samples from the model is not obvious,
  since too few samples cause a loss in test power, and too many are computationa
 lly wasteful.
- Neither issue arises in our test, since we do not require model samples.
+ Neither issue arises in our test, 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+AG_f: since->as
+\end_layout
+
+\end_inset
+
+as we do not require model samples.
 \end_layout
 
 \begin_layout Standard
@@ -635,7 +769,25 @@ Paper outline
 \end_layout
 
 \begin_layout Standard
-We begin our presentation in the section 
+We begin in section
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+AG_f: 
+\begin_inset Quotes eld
+\end_inset
+
+we begin in section
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:A-Kernel-Goodness-of-fit"
@@ -680,8 +832,39 @@ name "sec:A-Kernel-Goodness-of-fit"
 \begin_layout Standard
 
 \lang english
-We begin with a high-level construction of our divergence discrepancy and
- the statistical test.
+We begin with a high-level construction of our divergence measure 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: discrepancy->measure
+\end_layout
+
+\end_inset
+
+ and the
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: added 
+\begin_inset Quotes eld
+\end_inset
+
+associated
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ associated statistical test.
  While this section aims to outline the main ideas, we provide details and
  proofs in Section 
 \begin_inset CommandInset ref
@@ -702,7 +885,7 @@ Stein Operator in RKHS
 \begin_layout Standard
 
 \lang english
-Our goal is to write the maximum discrepancy between target distribution
+Our goal is to write the maximum discrepancy between the target distribution
  
 \begin_inset Formula $p$
 \end_inset
@@ -711,7 +894,35 @@ Our goal is to write the maximum discrepancy between target distribution
 \begin_inset Formula $q$
 \end_inset
 
- in a RKHS.
+ in 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: 
+\begin_inset Quotes eld
+\end_inset
+
+a perturbed RKHS, such that functions have zero expectation under p
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ a 
+\emph on
+modified
+\emph default
+ RKHS, such that functions have zero expectation under 
+\begin_inset Formula $p$
+\end_inset
+
+.
  Denote by 
 \begin_inset Formula ${\cal F}$
 \end_inset
@@ -819,7 +1030,19 @@ Throughout the article, all occurrences of
 
 .
  As we will see, the operator can be expressed by defining a function that
- depends on gradients of the log-density and the kernel, 
+ depends on gradient
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: singular gradient
+\end_layout
+
+\end_inset
+
+ of the log-density and the kernel, 
 \begin_inset Formula 
 \begin{equation}
 \xi_{p}(x,\cdot):=\left[\nabla\log p(x)k(x,\cdot)+\nabla k(x,\cdot)\right],\label{eq:xi}
@@ -831,7 +1054,19 @@ whose expected inner product with
 \begin_inset Formula $f$
 \end_inset
 
- gives exactly the expected value of the Stein operator 
+ gives exactly the expected value of the Stein operator,
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: comma
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset Formula 
 \[
 \ev_{q}T_{p}f(Z)=\langle f,\ev_{q}\xi_{p}(Z)\rangle_{{\cal F}^{d}}=\sum_{i=1}^{d}\langle f_{i},\ev_{q}\xi_{p,i}(Z)\rangle_{{\cal F}},
@@ -953,7 +1188,27 @@ name "th:closed_form_discrepancy"
 \begin_inset Formula $S_{p}^{2}(Z)=\|\ev_{q}\xi_{p}(Z)\|_{{\cal F}^{d}}^{2}=\ev_{q}h_{p}(Z,Z')$
 \end_inset
 
-.
+, 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: added explanation of Z'.
+\end_layout
+
+\end_inset
+
+ where 
+\begin_inset Formula $Z'$
+\end_inset
+
+ is independent of 
+\begin_inset Formula $Z$
+\end_inset
+
+ with an identical distribution.
 
 \lang british
  
@@ -1013,11 +1268,11 @@ key "carmeli2010vector"
 \begin_inset Formula $\ev_{q}h_{q}(Z,Z)<\infty$
 \end_inset
 
- and 
+, and 
 \begin_inset Formula $\ev_{q}\left\Vert \nabla\left(\log\frac{p(Z)}{q(Z)}\right)\right\Vert ^{2}<\infty$
 \end_inset
 
- then 
+, then 
 \begin_inset Formula $S_{p}(Z)=0$
 \end_inset
 
@@ -1026,6 +1281,18 @@ key "carmeli2010vector"
 \end_inset
 
 .
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: added comments.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1494,15 +1761,28 @@ Next we show that
 \begin_inset Formula $\xi_{p}(x,\cdot)$
 \end_inset
 
- is Bochner integrable (see 
+ is Bochner integrable
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: cleaned up citation, clarified explanation of Bochner.
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citep
 after "Definition A.5.20"
+before "see"
 key "SteChr08"
 
 \end_inset
 
-), which allows us to change order of the integration 
+, 
 \begin_inset Formula 
 \[
 \ev_{q}\|\xi_{p}(Z)\|_{\mathcal{F}^{d}}\leq\sqrt{\ev_{q}\|\xi_{p}(Z)\|_{\mathcal{F}^{d}}^{2}}=\sqrt{\ev_{q}h_{p}(Z,Z)}<\infty.
@@ -1512,7 +1792,8 @@ key "SteChr08"
 
 
 \lang british
-We 
+This allows us to take the expectation inside the RKHS inner product.
+ We 
 \lang english
 next relate the expected value of the Stein operator to the inner product
  of 
@@ -1531,7 +1812,19 @@ next relate the expected value of the Stein operator to the inner product
 
 \end_inset
 
-We check the claim for all dimensions 
+We check the claim for all dimensions,
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: comma
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset Formula 
 \begin{align*}
  & \left\langle f_{i},\ev_{q}\xi_{p,i}(Z)\right\rangle _{\mathcal{F}}\\
@@ -1562,7 +1855,7 @@ reference "lem:easy"
 
 \end_inset
 
- 
+, 
 \family roman
 \series medium
 \shape up
@@ -1590,6 +1883,18 @@ and Equation
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:expectedVauleT"
+
+\end_inset
+
+,
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: commas
+\end_layout
 
 \end_inset
 
@@ -1629,7 +1934,17 @@ We
 \noun default
 \color inherit
 \lang british
-now calculate closed form formula for 
+now calculate closed form expression
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+AG_f: formula->expression
+\end_layout
+
+\end_inset
+
+ for 
 \family roman
 \series medium
 \shape up
@@ -1842,11 +2157,23 @@ reference "lem:easy"
 \end_inset
 
 , since 
-\begin_inset Formula $\|\ev_{q}\xi_{q}(Z)\|^{2}=S_{q}(Z)=0$
+\begin_inset Formula $\|\ev_{q}\xi_{q}(Z)\|^{2}=S_{q}^{2}(Z)=0$
 \end_inset
 
 .
  
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: added square, since S_q is norm, not squared norm.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Proof
@@ -1869,11 +2196,43 @@ recognise
 \end_inset
 
 .
- By the assumptions function 
+ By the assumptions 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: 
+\begin_inset Quotes eld
+\end_inset
+
+the
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+the function 
 \begin_inset Formula $g$
 \end_inset
 
- is square integrable, therefore, since the kernel 
+ is square integrable;
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f:semicolon
+\end_layout
+
+\end_inset
+
+ therefore, since the kernel 
 \begin_inset Formula $k$
 \end_inset
 
@@ -1928,7 +2287,27 @@ A constant vector field of derivatives can only be generated by a constant
 \begin_inset Formula $C=0$
 \end_inset
 
- then 
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: 
+\begin_inset Quotes eld
+\end_inset
+
+and thus
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ and thus 
 \begin_inset Formula $p=q$
 \end_inset
 
@@ -1968,23 +2347,48 @@ key "dedecker2007weak,leucht_dependent_2013"
 
 , and V-statistics 
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
 key "serfling80"
 
 \end_inset
 
 .
  
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: changed cite style
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 
 \lang english
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: rearranged so as not to start a sentence with a symbol.
+ 
+\end_layout
+
+\end_inset
+
+We assume 
 \begin_inset Formula $\tau$
 \end_inset
 
--mixing is a notion of dependence within the observations, weak enough for
- most practical applications.
+-mixing as our notion of dependence within the observations, since this
+ is weak enough for most practical applications.
  Trivially, i.i.d.
 \begin_inset space ~
 \end_inset
@@ -2000,14 +2404,26 @@ observations are
 \end_inset
 
 -mixing (given that the stationary distribution has a finite moment of some
- order -- see the Appendix for further discussion.
+ order -- see the Appendix for further discussion).
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: close bracket.
+ changed citation styles in next 2 citations
+\end_layout
+
+\end_inset
+
  For further details on 
 \begin_inset Formula $\tau$
 \end_inset
 
 -mixing, see 
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
 key "dedecker2005new,dedecker2007weak"
 
 \end_inset
@@ -2079,9 +2495,10 @@ where
 
 \end_inset
 
- A direct application of Theorem 2.1 
+ A direct application of 
 \begin_inset CommandInset citation
 LatexCommand citep
+after "Theorem 2.1"
 key "leucht2012degenerate"
 
 \end_inset
@@ -2151,8 +2568,31 @@ If
 \begin_inset Formula $\ev_{q}h_{p}(Z,Z)<\infty$
 \end_inset
 
- then, under the null hypothesis 
-\begin_inset Formula $nV_{n},$
+ then, under the null hypothesis, 
+\begin_inset Formula $nV_{n}$
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+AG_f: moved comma
+\end_layout
+
 \end_inset
 
  converges weakly to some distribution.
@@ -2172,8 +2612,38 @@ If
 \noun off
 \color none
 \lang english
-The proof, which is a simple verification of the assumptions, can be found
- in the Appendix.
+The proof, which is a simple verification of the
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+AG_f: 
+\begin_inset Quotes eld
+\end_inset
+
+relevant
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ relevant assumptions, can be found in the Appendix.
  Although a formula for a limit distribution of 
 \family default
 \series bold
@@ -2247,7 +2717,7 @@ reference "sec:A-Kernel-Goodness-of-fit"
 
 .
  The validity of this resampling method is guaranteed by the following propositi
-on (which follows from Theorem 2.1 
+on (which follows from Theorem 2.1 of 
 \family default
 \series default
 \shape default
@@ -2261,12 +2731,24 @@ on (which follows from Theorem 2.1
 \color inherit
 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citeauthor
 key "leucht2012degenerate"
 
 \end_inset
 
- and a modification of the Lemma 5 
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: cite style change.
+\end_layout
+
+\end_inset
+
+ and a modification of the Lemma 5 of 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "chwialkowski2014wild"
@@ -2285,7 +2767,7 @@ key "chwialkowski2014wild"
 \uwave off
 \noun off
 \color none
- ) , proved in the supplement.
+), proved in the supplement.
 \end_layout
 
 \begin_layout Proposition
@@ -2493,9 +2975,21 @@ name "fig:student_bad"
 \begin_layout Standard
 
 \lang english
-In our first task, we modify experiment 4.1 from 
+In our first task, we modify 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: capitalize experiment, change cite
+\end_layout
+
+\end_inset
+
+Experiment 4.1 from 
 \begin_inset CommandInset citation
-LatexCommand citealt
+LatexCommand citet
 key "gorham2015measuring"
 
 \end_inset
@@ -2621,8 +3115,18 @@ name "fig:studentst"
 Our twist on 
 \lang english
 the original experiment 4.1 by 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+AG_f: changed cite style
+\end_layout
+
+\end_inset
+
+
 \begin_inset CommandInset citation
-LatexCommand citealt
+LatexCommand citeauthor
 key "gorham2015measuring"
 
 \end_inset
@@ -2711,7 +3215,30 @@ reference "fig:studentst"
 \end_inset
 
 , which gives a well calibrated distribution of the p-values under the null
- hypothesis, however, the test power is reduced.
+ hypothesis, however
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+AG_f: remove comma
+\end_layout
+
+\end_inset
+
+ the test power is reduced.
  Indeed, p-values for five degrees of freedom are already large.
  The solution that we recommend is a mixture of thinning and adjusting 
 \begin_inset Formula $a_{n},$
@@ -2784,7 +3311,37 @@ Thinned sample, suitable bootstrap.
 \color none
 autocorrelation within the sample is canceled by thinning.
  To guarantee that the remaining autocorrelation is handled properly, the
- flip probability is set at 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+AG_f: clarify 
+\begin_inset Quotes eld
+\end_inset
+
+wild bootstrap flip prob
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ wild bootstrap flip probability is set at 
 \begin_inset Formula $0.1$
 \end_inset
 
@@ -2828,14 +3385,32 @@ Comparing to a parametric test in increasing dimensions
 \end_layout
 
 \begin_layout Standard
-In this experiment, we compare with the test proposed by 
+In this experiment, we compare with the test proposed by
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+AG_f: changed cite, changed to 
+\begin_inset Quotes eld
+\end_inset
+
+which is
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "BaringhausHenze88"
 
 \end_inset
 
-, which essentially is an MMD test for normality, i.e.
+, which is essentially an MMD test for normality, i.e.
 \begin_inset space ~
 \end_inset
 
@@ -2859,7 +3434,7 @@ the null hypothesis is that
 , generate 
 \begin_inset Formula 
 \[
-Z\sim{\cal N}(0,I_{d})\qquad Y\sim U[0,1]
+Z\sim{\cal N}(0,I_{d})\qquad Y\sim U[0,1],
 \]
 
 \end_inset
@@ -3344,7 +3919,7 @@ Test power vs.
 
 sample size for the test by 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "BaringhausHenze88"
 
 \end_inset
@@ -3413,10 +3988,27 @@ We next apply our test to the problem of statistical model criticism for
 \begin_inset space ~
 \end_inset
 
-case of 
+case in 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+AF_f: moved 
+\begin_inset Quotes eld
+\end_inset
+
+section 6
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Section 6 of 
 \begin_inset CommandInset citation
 LatexCommand citet
-before "Section 6"
 key "lloyd2015statistical"
 
 \end_inset
@@ -3464,7 +4056,7 @@ key "lloyd2015statistical"
 
 \end_inset
 
- refer to this setup as non i.i.d., since the predictive distribution is a
+ refer to this setup as non-i.i.d., since the predictive distribution is a
  different univariate Gaussian for every predicted point.
  Our particular 
 \begin_inset Formula $N_{\text{train}},N_{\text{test}}$
@@ -3571,7 +4163,25 @@ We draw 10000 samples from the null distribution by repeatedly sampling
 \end_inset
 
 .
- When averaged over 100 repetitions of randomly partitioning 
+ When averaged over 100 repetitions of randomly partitioned
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+AG_f: 
+\begin_inset Quotes eld
+\end_inset
+
+partitioned
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset Formula $(X,y)$
 \end_inset
 
@@ -3936,12 +4546,24 @@ reference "p-values"
 
 .
  
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: don't start sentences with equation.
+\end_layout
+
+\end_inset
+
+A good approximation of the true stationary distribution is obtained at
+ 
 \begin_inset Formula $\epsilon=0.4$
 \end_inset
 
- yields a good approximation of the true stationary distribution, while
- being parsimonious in terms of likelihood evaluations, as shown in Figure
- 
+, which is still parsimonious in terms of likelihood evaluations, as shown
+ in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "lik-evals"
@@ -4038,7 +4660,25 @@ key "strathmann2015gradient"
 \begin_inset Formula $f$
 \end_inset
 
- lies in a RKHS induced by a Gaussian kernel with bandwidth 
+ lies in
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+AG_f: 
+\begin_inset Quotes eld
+\end_inset
+
+an RKHS
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ an RKHS induced by a Gaussian kernel with bandwidth 
 \begin_inset Formula $1$
 \end_inset
 
@@ -4058,7 +4698,7 @@ key "strathmann2015gradient"
 \end_inset
 
  sufficiently large that the goodness of fit test does not reject the null
- hypothesis (i.e., the model has learned the density sufficiently well, bearning
+ hypothesis (i.e., the model has learned the density sufficiently well, bearing
  in mind that it is guaranteed to converge for sufficiently large 
 \begin_inset Formula $N$
 \end_inset
@@ -4088,7 +4728,7 @@ reference "fig:density_estimation_increasing_data"
 
 \begin_layout Standard
 We next consider the random Fourier feature approximation to this model,
- where the log pdf 
+ where the log pdf, 
 \begin_inset Formula $f$
 \end_inset
 
@@ -4112,7 +4752,25 @@ How many random features are needed?
 \begin_inset Formula $n=500$
 \end_inset
 
- as above, and a large number of available samples 
+ as above, and a large number of
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+AG_f: remove 
+\begin_inset Quotes eld
+\end_inset
+
+available
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ samples, 
 \begin_inset Formula $N=5\cdot10^{4}$
 \end_inset
 
@@ -4140,9 +4798,9 @@ not
 \emph default
  have a uniform distribution, even for a large number of random features.
  This subtle effect is caused by over-smoothing due to the regularisation
- approach taken in 
+ approach taken by 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 after "KMC finite"
 key "strathmann2015gradient"
 
