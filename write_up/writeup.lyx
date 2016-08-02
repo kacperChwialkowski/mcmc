@@ -5085,8 +5085,34 @@ The density function
 \end_inset
 
  vanishes at infinity.
- We check that the expected value 
+ We check that the expected value
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: 
+\begin_inset Quotes eld
+\end_inset
+
+fixed the equation, also in 1st line of block below, where it shouldn't
+ have been: 
+\begin_inset Formula $\ev_{p}\xi_{p}(X)$
+\end_inset
+
+.
+ Removed: 
 \begin_inset Formula $\ev_{q}(T_{q})f(Z)$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\ev_{p}(T_{p})f(X)$
 \end_inset
 
  is zero.
@@ -5094,11 +5120,11 @@ The density function
 \begin_inset Formula $i$
 \end_inset
 
- 
+, 
 \begin_inset Formula 
 \begin{align*}
- & \ev_{p}\xi_{p}(X)\\
- & \ev_{p}\left(\frac{\partial\log p(X)}{\partial x_{i}}f_{i}(X)+\frac{\partial f_{i}(X)}{\partial x_{i}}\right)\\
+ & \ev_{p}(T_{p})f(X)\\
+ & =\ev_{p}\left(\frac{\partial\log p(X)}{\partial x_{i}}f_{i}(X)+\frac{\partial f_{i}(X)}{\partial x_{i}}\right)\\
  & =\int_{R_{d}}\left[\frac{\partial\log p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}\right]p(x)dx\\
  & =\int_{R_{d}}\left[\frac{1}{p(x)}\frac{\partial p(x)}{\partial x_{i}}f(x)+\frac{\partial f(x)}{\partial x_{i}}\right]p(x)dx\\
  & =\int_{R_{d}}\left[\frac{\partial p(x)}{\partial x_{i}}f_{i}(x)+\frac{\partial f_{i}(x)}{\partial x_{i}}p(x)\right]dx\\
@@ -5113,8 +5139,27 @@ For the equation (a) we have used integration by parts, the fact that
 \begin_inset Formula $p(x)f_{i}(x)$
 \end_inset
 
- vanishes at infinity and Fubini-Toneli theorem to show that we can do iterated
- integration.
+ vanishes at infinity,
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: comma, 
+\begin_inset Quotes eld
+\end_inset
+
+the Fubini
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ and the Fubini-Toneli theorem to show that we can do iterated integration.
  The sufficient condition for the Fubini-Toneli theorem is that 
 \begin_inset Formula $\ev_{q}\langle f,\xi_{p}(Z)\rangle^{2}<\infty$
 \end_inset
@@ -5157,7 +5202,27 @@ reference "thm: null_dist"
 
 \end_inset
 
-We check assumptions of the Theorem 2.1 
+We check assumptions of
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f:removed 
+\begin_inset Quotes eld
+\end_inset
+
+the
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ Theorem 2.1 from 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "leucht2012degenerate"
@@ -5165,7 +5230,27 @@ key "leucht2012degenerate"
 \end_inset
 
 .
- The condition A1, 
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f:removed 
+\begin_inset Quotes eld
+\end_inset
+
+the
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ Condition A1, 
 \begin_inset Formula $\sum_{t=1}^{\infty}\sqrt{\tau(t)}\leq\infty$
 \end_inset
 
@@ -5183,6 +5268,18 @@ reference "sec:Details"
 .
  Condition A2 (iv), Lipschitz continuity of 
 \begin_inset Formula $h$
+\end_inset
+
+,
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: comma
+\end_layout
+
 \end_inset
 
  is assumed.
@@ -5231,6 +5328,18 @@ reference "th:closed_form_discrepancy"
 .
  Finally, condition A2 (iii), 
 \begin_inset Formula $\ev_{p}h_{p}(X,X)\leq\infty$
+\end_inset
+
+,
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: comma
+\end_layout
+
 \end_inset
 
  is assumed.
@@ -5287,6 +5396,36 @@ under the null hypothesis,
 \end_inset
 
  converges to zero in probability.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+AG_f: 
+\begin_inset Quotes eld
+\end_inset
+
+the
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 
 \family default
 \series default
@@ -5299,7 +5438,7 @@ under the null hypothesis,
 \uwave default
 \noun default
 \color inherit
- The condition A1, 
+ Condition A1, 
 \begin_inset Formula $\sum_{t=1}^{\infty}\sqrt{\tau(t)}\leq\infty$
 \end_inset
 
@@ -5317,6 +5456,18 @@ reference "sec:Details"
 .
  Condition A2 (iv), Lipschitz continuity of 
 \begin_inset Formula $h$
+\end_inset
+
+,
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f:comma
+\end_layout
+
 \end_inset
 
  is assumed..
@@ -5396,7 +5547,27 @@ reference "sec:Details"
 \end_inset
 
 .
- We show that,under the alternative hypothesis, 
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: remove 
+\begin_inset Quotes eld
+\end_inset
+
+we show that
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+ Under the alternative hypothesis, 
 \begin_inset Formula $B_{n}$
 \end_inset
 
@@ -5408,7 +5579,27 @@ key "chwialkowski2014wild"
 
 \end_inset
 
-, the only assumption 
+, 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+AG_f: 
+\begin_inset Quotes eld
+\end_inset
+
+where
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+where the only assumption 
 \begin_inset Formula $\ensuremath{\tau(r)=o(r^{-4})}$
 \end_inset
 
@@ -5876,6 +6067,16 @@ In the stationary phase there are number of results which might be used
 
 \begin_layout Paragraph
 Strong mixing coefficients.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+AG_f: a few minor changes in the block below, and in the text after it.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5885,7 +6086,7 @@ status open
 \begin_layout Plain Layout
 
 Strong mixing is historically the most studied type of temporal dependence
- -- a lot of models, example being Markov Chains, are proved to be strongly
+ -- a lot of models, including Markov Chains, are proved to be strongly
  mixing, therefore it's useful to relate weak mixing  to strong mixing.
  For a random variable $X$ on a probability space $(
 \backslash
@@ -5955,7 +6156,7 @@ to
 \backslash
 infty}{
 \backslash
-longrightarrow} 0,
+longrightarrow} 0.
 \backslash
  
 \backslash
@@ -5966,7 +6167,7 @@ end{align*}
 
   
 \backslash
-cite{dedecker2005new}[Equation  7.6] relates $
+citet{dedecker2005new}[Equation  7.6] relates $
 \backslash
 tau$-mixing and $
 \backslash
@@ -6024,7 +6225,7 @@ frac{M}{
 sqrt[p]{u}} 
 \backslash
 geq Q_x(u)$.
- As a result, we have the following inequality  
+ As a result, we have the  inequality  
 \backslash
 begin{equation} 
 \backslash
@@ -6044,7 +6245,8 @@ geq C
 \backslash
 tau(
 \backslash
-mathcal{M},X)  
+mathcal{M},X).
+  
 \backslash
 end{equation} 
 \end_layout
@@ -6056,7 +6258,7 @@ end{equation}
 
 \begin_layout Standard
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "dedecker2005new"
 
 \end_inset
@@ -6066,9 +6268,9 @@ key "dedecker2005new"
 \end_inset
 
 -mixing.
- In particular, given that certain assumptions are satisfied causal functions
- of stationary sequences, iterated random functions, Markov chains, expanding
- maps are all 
+ In particular, given that certain assumptions are satisfied, then causal
+ functions of stationary sequences, iterated random functions, Markov chains,
+ and expanding maps are all 
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -6089,7 +6291,7 @@ key "dedecker2005new"
 \begin_inset Formula $\tau$
 \end_inset
 
--mixing are difficult to check.
+-mixing, are difficult to check.
  We can, however, use classical theorems about the absolute regularity (
 \begin_inset Formula $\beta$
 \end_inset
@@ -6104,7 +6306,7 @@ key "bradley_basic_2005"
 \end_inset
 
  states that a Harris recurrent and aperiodic Markov chain satisfies absolute
- regularity and 
+ regularity, and 
 \begin_inset CommandInset citation
 LatexCommand citep
 after "Theorem 3.7"
@@ -6138,11 +6340,8 @@ Using inequalities between
 \begin_inset Formula $\tau$
 \end_inset
 
--mixing coefficient and strong mixing coefficients 
-\end_layout
-
-\begin_layout Standard
-one can use those classical theorems show that e.g for 
+-mixing coefficient and strong mixing coefficients, one can use these classical
+ theorems show that e.g for 
 \begin_inset Formula $p=2$
 \end_inset
 
