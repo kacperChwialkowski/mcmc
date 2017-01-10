@@ -31,44 +31,42 @@ def baringhaus_stat(samples):
 
 if __name__ == "__main__":
 
-    AVERAGE_OVER = 100
-    BOOTSTRAP_SIZE = 300
     def grad_log_normal( x):
         return -x
 
-    def run_simulation(sample_size):
+    def run_simulation(sample_size, bootstrap_size=300, average_over=100):
 
         for d in [2, 5, 10, 15, 20, 25]:
             samples = []
-            for i in range(BOOTSTRAP_SIZE):
+            for i in range(bootstrap_size):
                 samples.append(baringhaus_stat(np.random.randn(sample_size, d)))
             samples = np.array(samples)
-            pvals = []
-            pvals2 = []
-            for i in range(AVERAGE_OVER):
-                X = np.random.randn(SAMPLE_SIZE, d)
-                X[:, 0] += np.random.rand(SAMPLE_SIZE)
+            pvals_brainghaus = []
+            pvals_stein = []
+            for i in range(average_over):
+                X = np.random.randn(sample_size, d)
+                X[:, 0] += np.random.rand(sample_size)
 
                 T = baringhaus_stat(X)
-                pval = len(samples[samples > T]) / BOOTSTRAP_SIZE
-                pvals.append(pval)
+                pval = len(samples[samples > T]) / bootstrap_size
+                pvals_brainghaus.append(pval)
 
                 me = GaussianQuadraticTest(grad_log_normal)
                 qm = QuadraticMultiple2(me)
 
                 p = qm.is_from_null(0.1, X, 0.5)
-                pvals2.append(p)
+                pvals_stein.append(p)
 
             print('d :', d)
-            pvals = np.array(pvals)
-            print('baringhaus :', len(pvals[pvals < 0.1]) / AVERAGE_OVER)
+            pvals_brainghaus = np.array(pvals_brainghaus)
+            print('baringhaus :', len(pvals_brainghaus[pvals_brainghaus < 0.1]) / average_over)
 
-            pvals2 = np.array(pvals2)
-            print('Stein  :', len(pvals2[pvals2 < 0.1]) / AVERAGE_OVER)
+            pvals_stein = np.array(pvals_stein)
+            print('Stein  :', len(pvals_stein[pvals_stein < 0.1]) / average_over)
 
-    SAMPLE_SIZE = 500
-    run_simulation(SAMPLE_SIZE)
+    sample_size = 500
+    run_simulation(sample_size)
     print("===")
-    SAMPLE_SIZE = 1000
-    run_simulation(SAMPLE_SIZE)
+    sample_size = 1000
+    run_simulation(sample_size)
 
